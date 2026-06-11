@@ -111,8 +111,8 @@ const fragmentShader = `
     fresnel = clamp(1.0 - fresnel, 0.0, 1.0);
     fresnel = pow(fresnel, 2.8);
 
-    // Color shift based on normal gradient
-    vec3 baseColor = mix(uColor1, uColor2, fresnel);
+    // Solid vibrant color (no mix / no gradient)
+    vec3 baseColor = uColor1;
 
     // Monochromatic specular shimmer
     float spec = dot(normal, normalize(vec3(1.0, 1.0, 2.0)));
@@ -129,20 +129,28 @@ function BlobMesh() {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  // Set colors: pink and desaturated teal/lavender
-  const color1 = useMemo(() => new THREE.Color("#e0537d"), []);
-  const color2 = useMemo(() => new THREE.Color("#9c8bc8"), []);
+  // Set premium cosmetics colors: vibrant lipstick crimson
+  const color1 = useMemo(() => new THREE.Color("#e03d67"), []);
+  const color2 = useMemo(() => new THREE.Color("#e03d67"), []);
 
-  const uniforms = useMemo(() => ({
-    uTime: { value: 0 },
-    uNoiseSpeed: { value: 0.45 },
-    uNoiseStrength: { value: 0.25 },
-    uNoiseFrequency: { value: 1.2 },
-    uColor1: { value: color1 },
-    uColor2: { value: color2 },
-  }), [color1, color2]);
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uNoiseSpeed: { value: 0.45 },
+      uNoiseStrength: { value: 0.25 },
+      uNoiseFrequency: { value: 1.2 },
+      uColor1: { value: color1 },
+      uColor2: { value: color2 },
+    }),
+    [color1, color2],
+  );
 
   useFrame((state) => {
+    // Skip calculations if scrolled out of the hero view (conserves GPU cycles)
+    if (typeof window !== "undefined" && window.scrollY > window.innerHeight) {
+      return;
+    }
+
     const time = state.clock.getElapsedTime();
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = time;
@@ -161,8 +169,8 @@ function BlobMesh() {
 
   return (
     <mesh ref={meshRef} position={[0, 0, 0]} scale={[1.8, 1.8, 1.8]}>
-      {/* High density sphere for ultra-smooth vertex displacements */}
-      <sphereGeometry args={[1, 128, 128]} />
+      {/* Optimized sphere segments for high performance */}
+      <sphereGeometry args={[1, 64, 64]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -177,10 +185,7 @@ function BlobMesh() {
 export function MorphingBlob() {
   return (
     <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
-      <Canvas
-        camera={{ position: [0, 0, 4.5], fov: 45 }}
-        style={{ pointerEvents: "none" }}
-      >
+      <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }} style={{ pointerEvents: "none" }}>
         <ambientLight intensity={0.45} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
         <BlobMesh />
@@ -188,3 +193,5 @@ export function MorphingBlob() {
     </div>
   );
 }
+
+export default MorphingBlob;

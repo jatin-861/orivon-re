@@ -32,14 +32,20 @@ export function ScrollRevealPanel({ panels }: ScrollRevealPanelProps) {
 
     const ctx = gsap.context(() => {
       cards.forEach((card, index) => {
+        // Set alternating slight skews/rotations for raw organic layout
+        const rotateVal = index % 2 === 0 ? 1.5 : -1.5;
+        gsap.set(card, { rotation: rotateVal, transformOrigin: "center center" });
+
         if (index === total - 1) return; // Do not animate the last card
 
         const nextCard = cards[index + 1];
 
+        // Animate card scale-down, opacity-fade, and straighten rotation to 0 as it stacks
         gsap.to(card, {
-          scale: 0.93 - (total - index) * 0.01,
+          scale: 0.93 - (total - index) * 0.012,
           opacity: 0.6,
           y: -20,
+          rotation: 0, // Align straight when stacked
           ease: "none",
           scrollTrigger: {
             trigger: nextCard,
@@ -61,7 +67,7 @@ export function ScrollRevealPanel({ panels }: ScrollRevealPanelProps) {
         const textColor = p.textDark ? "text-black" : "text-white";
         const iconColor = p.textDark ? "text-black/70" : "text-white/70";
         const subTextColor = p.textDark ? "text-black/60" : "text-white/60";
-        
+
         return (
           <div
             key={p.title}
@@ -84,7 +90,9 @@ export function ScrollRevealPanel({ panels }: ScrollRevealPanelProps) {
 
             {/* Core Body */}
             <div className="my-auto py-4">
-              <h3 className={`font-display text-3xl md:text-5xl font-bold leading-none tracking-tight mb-4 ${textColor}`}>
+              <h3
+                className={`font-display text-3xl md:text-5xl font-bold leading-none tracking-tight mb-4 ${textColor}`}
+              >
                 {p.title}
               </h3>
               <p className={`text-base md:text-lg max-w-xl leading-relaxed ${subTextColor}`}>

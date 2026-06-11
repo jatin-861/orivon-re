@@ -8,10 +8,15 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const mouse = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
+  const stateRef = useRef({
+    isClicked: false,
+    isHovering: false,
+    isVisible: false,
+    targetX: 0,
+    targetY: 0,
+  });
 
   useEffect(() => {
-    // Disable on touch devices
     if (window.innerWidth < 768) return;
 
     const dot = dotRef.current;
@@ -19,74 +24,76 @@ export function CustomCursor() {
     if (!dot || !ring) return;
 
     const onMouseMove = (e: MouseEvent) => {
-      mouse.current.targetX = e.clientX;
-      mouse.current.targetY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+      stateRef.current.targetX = e.clientX;
+      stateRef.current.targetY = e.clientY;
+      if (!stateRef.current.isVisible) {
+        stateRef.current.isVisible = true;
+        setIsVisible(true);
+      }
     };
 
     const onMouseLeave = () => {
+      stateRef.current.isVisible = false;
       setIsVisible(false);
     };
 
     const onMouseDown = () => {
+      stateRef.current.isClicked = true;
       setIsClicked(true);
     };
 
     const onMouseUp = () => {
+      stateRef.current.isClicked = false;
       setIsClicked(false);
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseleave", onMouseLeave);
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    document.addEventListener("mouseleave", onMouseLeave, { passive: true });
+    window.addEventListener("mousedown", onMouseDown, { passive: true });
+    window.addEventListener("mouseup", onMouseUp, { passive: true });
 
-    // Dynamic hover event delegation for links, buttons and custom hover text
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
       const hoverEl = target.closest('[data-cursor-text], a, button, [role="button"]');
       if (hoverEl) {
+        stateRef.current.isHovering = true;
         setIsHovering(true);
         const text = hoverEl.getAttribute("data-cursor-text");
         setCursorText(text || "VIEW");
       } else {
+        stateRef.current.isHovering = false;
         setIsHovering(false);
         setCursorText("");
       }
     };
 
-    document.addEventListener("mouseover", onMouseOver);
+    document.addEventListener("mouseover", onMouseOver, { passive: true });
 
     let rafId = 0;
-    // Current positions for Dot (fast follow)
     let dotX = 0;
     let dotY = 0;
-    // Current positions for Ring (organic lag)
     let ringX = 0;
     let ringY = 0;
 
     const tick = () => {
-      const targetX = mouse.current.targetX;
-      const targetY = mouse.current.targetY;
+      const targetX = stateRef.current.targetX;
+      const targetY = stateRef.current.targetY;
+      const clicked = stateRef.current.isClicked;
 
-      // Fast follow for dot
       dotX += (targetX - dotX) * 0.25;
       dotY += (targetY - dotY) * 0.25;
 
-      // Slow follow with momentum for ring
       ringX += (targetX - ringX) * 0.12;
       ringY += (targetY - ringY) * 0.12;
 
       if (dot) {
-        // Dot clicks feel punchier when scaled down or up
-        const dotScale = isClicked ? "scale(1.8)" : "scale(1)";
+        const dotScale = clicked ? "scale(1.8)" : "scale(1)";
         dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%) ${dotScale}`;
       }
 
       if (ring) {
-        // Squeeze outer ring on click or hover
-        const ringScale = isClicked ? "scale(0.75)" : "scale(1)";
+        const ringScale = clicked ? "scale(0.75)" : "scale(1)";
         ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${ringScale}`;
       }
 
@@ -103,9 +110,10 @@ export function CustomCursor() {
       document.removeEventListener("mouseover", onMouseOver);
       cancelAnimationFrame(rafId);
     };
-  }, [isVisible, isClicked]);
+  }, []);
 
-  if (typeof window === "undefined" || (typeof window !== "undefined" && window.innerWidth < 768)) return null;
+  if (typeof window === "undefined" || (typeof window !== "undefined" && window.innerWidth < 768))
+    return null;
 
   return (
     <>

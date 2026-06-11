@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  useRef,
-  useEffect,
-  useState,
-  createElement,
-  useMemo,
-  useCallback,
-  memo,
-} from "react";
+import { useRef, useEffect, useState, createElement, useMemo, useCallback, memo } from "react";
 
 export enum Tag {
   H1 = "h1",
@@ -179,7 +171,8 @@ function updateParticles(
 ) {
   let allDone = true;
   particles.forEach((p) => {
-    const should = direction === "left-to-right" ? p.originalX <= vaporizeX : p.originalX >= vaporizeX;
+    const should =
+      direction === "left-to-right" ? p.originalX <= vaporizeX : p.originalX >= vaporizeX;
     if (should) {
       if (p.speed === 0) {
         p.angle = Math.random() * Math.PI * 2;
@@ -268,7 +261,16 @@ function renderCanvas(opts: {
   const text = framerProps.texts[currentTextIndex] || "";
   const align = framerProps.alignment || "center";
   const textX = align === "center" ? canvas.width / 2 : align === "left" ? 0 : canvas.width;
-  const { particles, textBoundaries } = createParticles(ctx, canvas, text, textX, textY, font, color, align);
+  const { particles, textBoundaries } = createParticles(
+    ctx,
+    canvas,
+    text,
+    textX,
+    textY,
+    font,
+    color,
+    align,
+  );
   particlesRef.current = particles;
   canvas.textBoundaries = textBoundaries;
 }
@@ -289,13 +291,18 @@ export default function VaporizeTextCycle({
   const isInView = useIsInView(wrapperRef as React.RefObject<HTMLElement>);
   const particlesRef = useRef<Particle[]>([]);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [animationState, setAnimationState] = useState<"static" | "vaporizing" | "fadingIn" | "waiting">("static");
+  const [animationState, setAnimationState] = useState<
+    "static" | "vaporizing" | "fadingIn" | "waiting"
+  >("static");
   const vaporizeProgressRef = useRef(0);
   const fadeOpacityRef = useRef(0);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const transformedDensity = transformValue(density, [0, 10], [0.3, 1], true);
 
-  const globalDpr = useMemo(() => (typeof window !== "undefined" ? window.devicePixelRatio * 1.5 || 1 : 1), []);
+  const globalDpr = useMemo(
+    () => (typeof window !== "undefined" ? window.devicePixelRatio * 1.5 || 1 : 1),
+    [],
+  );
 
   const fontConfig = useMemo(() => {
     const fontSize = parseInt(font.fontSize?.replace("px", "") || "50");
@@ -314,12 +321,26 @@ export default function VaporizeTextCycle({
 
   const memoizedUpdate = useCallback(
     (particles: Particle[], vaporizeX: number, dt: number) =>
-      updateParticles(particles, vaporizeX, dt, fontConfig.VAPORIZE_SPREAD, animationDurations.VAPORIZE_DURATION, direction, transformedDensity),
-    [fontConfig.VAPORIZE_SPREAD, animationDurations.VAPORIZE_DURATION, direction, transformedDensity],
+      updateParticles(
+        particles,
+        vaporizeX,
+        dt,
+        fontConfig.VAPORIZE_SPREAD,
+        animationDurations.VAPORIZE_DURATION,
+        direction,
+        transformedDensity,
+      ),
+    [
+      fontConfig.VAPORIZE_SPREAD,
+      animationDurations.VAPORIZE_DURATION,
+      direction,
+      transformedDensity,
+    ],
   );
 
   const memoizedRender = useCallback(
-    (ctx: CanvasRenderingContext2D, particles: Particle[]) => renderParticles(ctx, particles, globalDpr),
+    (ctx: CanvasRenderingContext2D, particles: Particle[]) =>
+      renderParticles(ctx, particles, globalDpr),
     [globalDpr],
   );
 
@@ -354,7 +375,10 @@ export default function VaporizeTextCycle({
           const tb = canvas.textBoundaries;
           if (!tb) break;
           const progress = Math.min(100, vaporizeProgressRef.current);
-          const vx = direction === "left-to-right" ? tb.left + (tb.width * progress) / 100 : tb.right - (tb.width * progress) / 100;
+          const vx =
+            direction === "left-to-right"
+              ? tb.left + (tb.width * progress) / 100
+              : tb.right - (tb.width * progress) / 100;
           const done = memoizedUpdate(particlesRef.current, vx, dt);
           memoizedRender(ctx, particlesRef.current);
           if (vaporizeProgressRef.current >= 100 && done) {
@@ -394,7 +418,16 @@ export default function VaporizeTextCycle({
     };
     id = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(id);
-  }, [animationState, isInView, texts.length, direction, globalDpr, memoizedUpdate, memoizedRender, animationDurations]);
+  }, [
+    animationState,
+    isInView,
+    texts.length,
+    direction,
+    globalDpr,
+    memoizedUpdate,
+    memoizedRender,
+    animationDurations,
+  ]);
 
   useEffect(() => {
     renderCanvas({
@@ -425,7 +458,10 @@ export default function VaporizeTextCycle({
   return (
     <div ref={wrapperRef} style={{ width: "100%", height: "100%", pointerEvents: "none" }}>
       <SeoElement tag={tag} texts={texts} />
-      <canvas ref={canvasRef} style={{ minWidth: "30px", minHeight: "20px", pointerEvents: "none" }} />
+      <canvas
+        ref={canvasRef}
+        style={{ minWidth: "30px", minHeight: "20px", pointerEvents: "none" }}
+      />
     </div>
   );
 }

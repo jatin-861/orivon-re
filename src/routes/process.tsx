@@ -3,6 +3,9 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { RevealText } from "@/components/RevealText";
+import { FittsSimulator } from "@/components/skills/FittsSimulator";
+import { GestaltVisualizer } from "@/components/skills/GestaltVisualizer";
+import { HierarchySimulator } from "@/components/skills/HierarchySimulator";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -57,7 +60,7 @@ function Process() {
 
   useEffect(() => {
     if (!containerRef.current || !progressLineRef.current) return;
-    
+
     const ctx = gsap.context(() => {
       // 1. Progress line drawing itself on scroll
       gsap.fromTo(
@@ -74,7 +77,7 @@ function Process() {
             scrub: true,
             invalidateOnRefresh: true,
           },
-        }
+        },
       );
 
       // 2. Animate step contents and highlight active steps on scroll
@@ -82,31 +85,31 @@ function Process() {
       steps.forEach((step) => {
         const circle = step.querySelector("[data-step-circle]");
         const text = step.querySelector("[data-step-text]");
-        
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: step,
             start: "top 75%",
             end: "top 35%",
             scrub: true,
-          }
+          },
         });
 
-        tl.fromTo(circle, { scale: 0.8, opacity: 0.4 }, { scale: 1.1, opacity: 1, duration: 0.5 })
-          .fromTo(text, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3");
+        tl.fromTo(
+          circle,
+          { scale: 0.8, opacity: 0.4 },
+          { scale: 1.1, opacity: 1, duration: 0.5 },
+        ).fromTo(text, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3");
       });
-
     }, containerRef);
-    
+
     return () => ctx.revert();
   }, []);
 
   return (
     <div className="pt-40 pb-32 px-6 bg-background text-foreground transition-colors duration-500">
       <div className="mx-auto max-w-5xl">
-        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
-          — Methodology
-        </span>
+        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">— Methodology</span>
         <RevealText
           text="How we work."
           as="h1"
@@ -118,30 +121,28 @@ function Process() {
 
         {/* Steps container */}
         <div ref={containerRef} className="mt-32 relative">
-          
           {/* Base timeline rail */}
           <div className="absolute left-6 md:left-12 top-6 bottom-6 w-[1px] bg-border" />
-          
+
           {/* Animated active progress line */}
-          <div 
-            ref={progressLineRef} 
-            className="absolute left-6 md:left-12 top-6 bottom-6 w-[1px] bg-[var(--brand-pink)]" 
-            style={{ transformOrigin: "top center", scaleY: 0 }}
+          <div
+            ref={progressLineRef}
+            className="absolute left-6 md:left-12 top-6 bottom-6 w-[1px] bg-[var(--brand-pink)]"
+            style={{ transformOrigin: "top center", transform: "scaleY(0)" }}
           />
 
           {STEPS.map((s, idx) => (
-            <div
-              key={s.n}
-              data-step-node
-              className="relative pl-20 md:pl-32 pb-24 last:pb-0"
-            >
+            <div key={s.n} data-step-node className="relative pl-20 md:pl-32 pb-24 last:pb-0">
               {/* Step indicator circle */}
-              <div 
+              <div
                 data-step-circle
                 className="absolute left-0 top-0 flex items-center justify-center h-12 w-12 md:h-24 md:w-24 rounded-xl bg-[var(--card)] border border-border/80 transition-all duration-300 z-10"
                 style={{ borderColor: s.color }}
               >
-                <span className="font-display text-lg md:text-3xl font-bold font-mono" style={{ color: s.color }}>
+                <span
+                  className="font-display text-lg md:text-3xl font-bold font-mono"
+                  style={{ color: s.color }}
+                >
                   {s.n}
                 </span>
               </div>
@@ -160,6 +161,32 @@ function Process() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Validation Sandbox Section */}
+        <div className="mt-48 pt-20 border-t border-border/80">
+          <div className="mb-16" data-cursor-text="PLAY">
+            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
+              — Verification Lab
+            </span>
+            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] tracking-tighter">
+              Bespoke UX <span className="text-[var(--brand-pink)] italic">Validation.</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed">
+              We test our grids and hierarchy ratios against visual psychology guidelines before
+              shipping production code. Play with our validation simulators:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 items-stretch">
+            <div className="flex flex-col gap-6">
+              <FittsSimulator />
+              <GestaltVisualizer />
+            </div>
+            <div>
+              <HierarchySimulator />
+            </div>
+          </div>
         </div>
       </div>
     </div>

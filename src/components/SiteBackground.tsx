@@ -1,105 +1,76 @@
-"use client";
-
 import { useEffect, useRef } from "react";
+import { DottedSurface } from "./ui/dotted-surface";
 
 /**
- * Lightweight cyan "fluid" background that follows the cursor.
- * Single canvas, ~30fps blob field — works on every page without the cost
- * of a full WebGL fluid simulation.
+ * Lightweight, GPU-composited animated mesh gradient background.
+ * Replaces the 30fps canvas rendering loop with hardware-accelerated
+ * CSS transforms and filter blur layers.
  */
 export function SiteBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    // Only track cursor on desktop/hoverable devices to minimize overhead
+    if (window.innerWidth < 768) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    let w = 0;
-    let h = 0;
-    const resize = () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onPointerMove = (e: PointerEvent) => {
+      // Direct CSS custom property updates for GPU-composited cursor translation
+      container.style.setProperty("--mouse-x", `${e.clientX}px`);
+      container.style.setProperty("--mouse-y", `${e.clientY}px`);
     };
-    resize();
-    window.addEventListener("resize", resize);
 
-    const mouse = { x: w / 2, y: h / 2, tx: w / 2, ty: h / 2 };
-    const onMove = (e: PointerEvent) => {
-      mouse.tx = e.clientX;
-      mouse.ty = e.clientY;
-    };
-    window.addEventListener("pointermove", onMove);
-
-    type Blob = { x: number; y: number; vx: number; vy: number; r: number; hue: number };
-    const blobs: Blob[] = Array.from({ length: 5 }, (_, i) => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: 220 + Math.random() * 180,
-      hue: i % 2 === 0 ? 195 : 270,
-    }));
-
-    let raf = 0;
-    let last = 0;
-    const FRAME = 1000 / 30;
-
-    const tick = (t: number) => {
-      raf = requestAnimationFrame(tick);
-      if (t - last < FRAME) return;
-      last = t;
-
-      mouse.x += (mouse.tx - mouse.x) * 0.06;
-      mouse.y += (mouse.ty - mouse.y) * 0.06;
-
-      ctx.clearRect(0, 0, w, h);
-      ctx.globalCompositeOperation = "lighter";
-
-      for (let i = 0; i < blobs.length; i++) {
-        const b = blobs[i];
-        b.x += b.vx;
-        b.y += b.vy;
-        if (b.x < -b.r || b.x > w + b.r) b.vx *= -1;
-        if (b.y < -b.r || b.y > h + b.r) b.vy *= -1;
-
-        // first blob follows the cursor
-        if (i === 0) {
-          b.x += (mouse.x - b.x) * 0.04;
-          b.y += (mouse.y - b.y) * 0.04;
-        }
-
-        const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
-        grad.addColorStop(0, `hsla(${b.hue}, 95%, 60%, 0.18)`);
-        grad.addColorStop(0.5, `hsla(${b.hue}, 95%, 60%, 0.06)`);
-        grad.addColorStop(1, "hsla(220, 60%, 10%, 0)");
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    };
-    raf = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("pointermove", onMove);
-    };
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onPointerMove);
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={containerRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 opacity-80"
-    />
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-50 dark:opacity-40"
+      style={
+        {
+          "--mouse-x": "50vw",
+          "--mouse-y": "50vh",
+        } as React.CSSProperties
+      }
+    >
+      {/* 3D Global Dotted Surface Wave Background */}
+      <DottedSurface className="absolute inset-0 z-[1] pointer-events-none" />
+
+      {/* Interactive cursor blob */}
+      <div
+        className="absolute w-[45vw] h-[45vw] rounded-full bg-[var(--brand-pink)] filter blur-[150px] opacity-15 z-0"
+        style={{
+          left: "var(--mouse-x)",
+          top: "var(--mouse-y)",
+          transform: "translate3d(-50%, -50%, 0)",
+          transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
+          willChange: "transform",
+        }}
+      />
+
+      {/* Floating ambient blobs */}
+      <div
+        className="absolute w-[40vw] h-[40vw] rounded-full bg-[var(--brand-teal)] filter blur-[130px] opacity-15 animate-[aurora-drift-1_25s_ease-in-out_infinite]"
+        style={{
+          right: "15%",
+          top: "10%",
+          willChange: "transform",
+        }}
+      />
+
+      <div
+        className="absolute w-[35vw] h-[35vw] rounded-full bg-[var(--brand-lavender)] filter blur-[140px] opacity-15 animate-[aurora-drift-2_30s_ease-in-out_infinite]"
+        style={{
+          left: "10%",
+          bottom: "10%",
+          willChange: "transform",
+        }}
+      />
+    </div>
   );
 }

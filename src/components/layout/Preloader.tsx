@@ -25,10 +25,7 @@ export function Preloader() {
 
     const timer = setInterval(() => {
       currentStep++;
-      const nextProgress = Math.min(
-        Math.floor((currentStep / steps) * 100),
-        100
-      );
+      const nextProgress = Math.min(Math.floor((currentStep / steps) * 100), 100);
       setProgress(nextProgress);
 
       if (nextProgress >= 100) {

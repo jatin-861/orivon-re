@@ -88,7 +88,8 @@ function PricingPage() {
           delay={300}
         />
         <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-          Transparent fixed-fee partnerships. Pick the cadence that fits — every plan ships with award-grade human-made craft.
+          Transparent fixed-fee partnerships. Pick the cadence that fits — every plan ships with
+          award-grade human-made craft.
         </p>
 
         {/* Billing toggle */}
@@ -104,17 +105,17 @@ function PricingPage() {
                 onClick={() => setYearly(opt.k === "yearly")}
                 className={cn(
                   "relative rounded-full px-5 py-2 text-sm font-semibold transition-colors cursor-pointer",
-                  active ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                  active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {active && (
                   <motion.span
                     layoutId="bill-toggle"
-                    className="absolute inset-0 rounded-full bg-primary shadow-glow-cyan -z-10"
+                    className="absolute inset-0 rounded-full bg-[var(--brand-pink)]/50 border border-[var(--brand-pink)]/20 z-0"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
                 )}
-                <span className="relative">{opt.label}</span>
+                <span className="relative z-10">{opt.label}</span>
               </button>
             );
           })}
@@ -127,10 +128,10 @@ function PricingPage() {
           const cardClass = p.popular
             ? "bg-[var(--brand-teal)] text-white border-transparent shadow-elegant"
             : "bg-[var(--card)] border-border hover:border-[var(--brand-pink)]/40 text-foreground";
-            
+
           const descClass = p.popular ? "text-white/70" : "text-muted-foreground";
           const subLabelClass = p.popular ? "text-white/50" : "text-muted-foreground";
-          
+
           return (
             <motion.div
               key={p.name}
@@ -138,24 +139,29 @@ function PricingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={cn("relative rounded-xl p-8 md:p-10 border transition-all flex flex-col justify-between", cardClass)}
+              className={cn(
+                "relative rounded-xl p-8 md:p-10 border transition-all flex flex-col justify-between",
+                cardClass,
+              )}
             >
               {p.popular && (
                 <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[var(--brand-pink)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest font-mono">
                   Most loved
                 </span>
               )}
-              
+
               <div>
                 <h3 className="font-display text-2xl md:text-3xl font-bold">{p.name}</h3>
-                
+
                 <div className="mt-6 flex items-end gap-1">
                   <span className="font-display text-6xl font-bold text-[var(--brand-pink)]">
                     ${yearly ? p.yearlyPrice : p.price}k
                   </span>
-                  <span className={cn("text-xs font-mono pb-2", subLabelClass)}>/{yearly ? "year" : "engagement"}</span>
+                  <span className={cn("text-xs font-mono pb-2", subLabelClass)}>
+                    /{yearly ? "year" : "month"}
+                  </span>
                 </div>
-                
+
                 <p className={cn("mt-4 text-sm leading-relaxed", descClass)}>{p.description}</p>
               </div>
 
@@ -163,18 +169,32 @@ function PricingPage() {
                 <NeonButton
                   variant={p.popular ? "solid" : "default"}
                   size="lg"
-                  className={cn("mt-8 w-full", p.popular && "bg-white text-black hover:bg-white/90")}
+                  className={cn(
+                    "mt-8 w-full",
+                    p.popular && "bg-white text-black hover:bg-white/90",
+                  )}
                 >
                   {p.cta}
                 </NeonButton>
 
                 <div className="mt-8 space-y-3">
-                  <p className={cn("text-[10px] font-mono uppercase tracking-widest mb-3", subLabelClass)}>
+                  <p
+                    className={cn(
+                      "text-[10px] font-mono uppercase tracking-widest mb-3",
+                      subLabelClass,
+                    )}
+                  >
                     {p.includes[0]}
                   </p>
                   {p.includes.slice(1).map((f) => (
                     <div key={f} className="flex items-start gap-3 text-sm">
-                      <Check size={16} className={cn("mt-0.5 shrink-0", p.popular ? "text-white" : "text-[var(--brand-pink)]")} />
+                      <Check
+                        size={16}
+                        className={cn(
+                          "mt-0.5 shrink-0",
+                          p.popular ? "text-white" : "text-[var(--brand-pink)]",
+                        )}
+                      />
                       <span className="opacity-90">{f}</span>
                     </div>
                   ))}
@@ -186,7 +206,10 @@ function PricingPage() {
       </div>
 
       <div className="relative mt-20 text-center text-sm text-muted-foreground font-mono">
-        Custom scope? <a href="/contact" className="text-[var(--brand-pink)] hover:underline">Tell us about your project →</a>
+        Custom scope?{" "}
+        <a href="/contact" className="text-[var(--brand-pink)] hover:underline">
+          Tell us about your project →
+        </a>
       </div>
     </div>
   );

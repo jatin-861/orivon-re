@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Palette, Code2, Sparkles, Camera, ShoppingBag, LineChart } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { RevealText } from "@/components/RevealText";
+import { ComponentLab } from "@/components/skills/ComponentLab";
 
 export const Route = createFileRoute("/services")({
   component: Services,
@@ -90,10 +91,28 @@ function Services() {
           ))}
         </div>
 
+        {/* Component Lab Micro-interactions Section */}
+        <div className="mt-48 pt-20 border-t border-border/80">
+          <div className="mb-16" data-cursor-text="LAB">
+            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
+              — Verification Lab
+            </span>
+            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] tracking-tighter">
+              Micro-interactions <span className="text-[var(--brand-pink)] italic">Tray.</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed">
+              We design micro-interactions that feel responsive and tactile, respecting physical
+              spring limits to elevate structural layouts. Test some widgets:
+            </p>
+          </div>
+          <ComponentLab />
+        </div>
+
         <div className="mt-24 glass rounded-xl p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <h3 className="font-display text-3xl md:text-4xl font-bold">
-              Got a brief? <span className="text-[var(--brand-pink)]">Let's scope it together.</span>
+              Got a brief?{" "}
+              <span className="text-[var(--brand-pink)]">Let's scope it together.</span>
             </h3>
             <p className="text-muted-foreground mt-3 max-w-md">
               Tell us about the project — we'll come back within 48 hours.

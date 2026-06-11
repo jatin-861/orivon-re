@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { MagneticButton } from "./MagneticButton";
 import { cn } from "@/lib/utils";
 
@@ -20,12 +21,11 @@ export const SiteHeader = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 20);
+  });
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -82,12 +82,16 @@ export const SiteHeader = () => {
                 to={item.to}
                 data-cursor-text={item.label.toUpperCase()}
                 className={cn(
-                  "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors",
-                  active ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                  "relative px-4 py-1.5 text-sm font-semibold rounded-full transition-colors",
+                  active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {active && (
-                  <span className="absolute inset-0 rounded-full bg-primary shadow-glow-cyan -z-10" />
+                  <motion.span
+                    layoutId="active-nav"
+                    className="absolute inset-0 rounded-full bg-[var(--brand-pink)]/35 border border-[var(--brand-pink)]/15 -z-10"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
+                  />
                 )}
                 {item.label}
               </Link>

@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
     category: "Fintech",
     year: "2025",
     image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=70&auto=format&fit=crop",
     description:
       "A radical reinvention of mobile banking with immersive 3D dashboards and a frictionless onboarding flow.",
     services: ["Brand", "UX/UI", "Web", "Motion"],
@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
     category: "Music",
     year: "2024",
     image:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=70&auto=format&fit=crop",
     description:
       "Audio-reactive WebGL artist hub for an underground techno label. Won SOTD on Awwwards.",
     services: ["Web", "WebGL", "Brand"],
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     category: "Aerospace",
     year: "2024",
     image:
-      "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=70&auto=format&fit=crop",
     description:
       "From spacecraft configurator to investor pitch — a complete digital identity for a new-era launch company.",
     services: ["Brand", "Web", "3D"],
@@ -57,9 +57,8 @@ export const PROJECTS: Project[] = [
     category: "Climate",
     year: "2024",
     image:
-      "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=1600&q=80&auto=format&fit=crop",
-    description:
-      "An interactive impact report turned into a scrollable cinematic experience.",
+      "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=800&q=70&auto=format&fit=crop",
+    description: "An interactive impact report turned into a scrollable cinematic experience.",
     services: ["Web", "Motion", "Editorial"],
     color: "#34D399",
   },
@@ -70,7 +69,7 @@ export const PROJECTS: Project[] = [
     category: "Fashion",
     year: "2025",
     image:
-      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=70&auto=format&fit=crop",
     description:
       "A flagship e-commerce experience for a Parisian couture house. Headless, fast, and unmistakably haute.",
     services: ["E-commerce", "UX/UI", "Brand"],
@@ -83,7 +82,7 @@ export const PROJECTS: Project[] = [
     category: "Health",
     year: "2024",
     image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=70&auto=format&fit=crop",
     description:
       "Native-feeling progressive web app for a meditation startup with delightful micro-interactions.",
     services: ["Product", "UX/UI", "Motion"],

@@ -31,7 +31,10 @@ export const AnimatedTestimonials = ({
   }, [autoplay, handleNext]);
 
   const isActive = (i: number) => i === active;
-  const randomRotate = () => `${Math.floor(Math.random() * 16) - 8}deg`;
+  const getStableRotate = (i: number) => {
+    const rotations = [-6, 6, -3, 3, -4, 4];
+    return `${rotations[i % rotations.length]}deg`;
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 font-body">
@@ -42,16 +45,16 @@ export const AnimatedTestimonials = ({
               {testimonials.map((t, index) => (
                 <motion.div
                   key={t.src}
-                  initial={{ opacity: 0, scale: 0.9, z: -100, rotate: randomRotate() }}
+                  initial={{ opacity: 0, scale: 0.9, z: -100, rotate: getStableRotate(index) }}
                   animate={{
                     opacity: isActive(index) ? 1 : 0.6,
                     scale: isActive(index) ? 1 : 0.95,
                     z: isActive(index) ? 0 : -100,
-                    rotate: isActive(index) ? "0deg" : randomRotate(),
+                    rotate: isActive(index) ? "0deg" : getStableRotate(index),
                     zIndex: isActive(index) ? 40 : testimonials.length + 2 - index,
                     y: isActive(index) ? [0, -20, 0] : 0,
                   }}
-                  exit={{ opacity: 0, scale: 0.9, z: 100, rotate: randomRotate() }}
+                  exit={{ opacity: 0, scale: 0.9, z: 100, rotate: getStableRotate(index) }}
                   transition={{ duration: 0.6, ease: "easeInOut" }}
                   className="absolute inset-0 origin-bottom"
                 >

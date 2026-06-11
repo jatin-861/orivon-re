@@ -79,9 +79,5 @@ export function LenisProvider({ children }: LenisProviderProps) {
     };
   }, []);
 
-  return (
-    <LenisContext.Provider value={lenisRef.current}>
-      {children}
-    </LenisContext.Provider>
-  );
+  return <LenisContext.Provider value={lenisRef.current}>{children}</LenisContext.Provider>;
 }

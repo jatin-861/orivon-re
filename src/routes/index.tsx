@@ -1,20 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Zap, Layers, ShoppingBag } from "lucide-react";
-import { RevealText } from "@/components/RevealText";
+import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "@/components/MagneticButton";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Marquee } from "@/components/Marquee";
-import { NeonButton } from "@/components/ui/neon-button";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { ScrollStoryHorizontal } from "@/components/ScrollStoryHorizontal";
-import { ScrollRevealPanel } from "@/components/ScrollRevealPanel";
 import { PROJECTS } from "@/data/projects";
+
+import { CinematicHero } from "@/components/canvas/CinematicHero";
+import { BentoTilt, BentoCard } from "@/components/BentoTilt";
+import { StoryTeller } from "@/components/StoryTeller";
+
 import { LusionSandbox } from "@/components/LusionSandbox";
-import { MorphingBlob } from "@/components/canvas/MorphingBlob";
+import { GestaltVisualizer } from "@/components/skills/GestaltVisualizer";
+import { FittsSimulator } from "@/components/skills/FittsSimulator";
+
+const MorphingBlob = lazy(() => import("@/components/canvas/MorphingBlob"));
+const TechStackCanvas = lazy(() => import("@/components/canvas/TechStackCanvas"));
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -26,28 +31,20 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="relative bg-background text-foreground transition-colors duration-500 font-sans">
-      <Hero />
+    <div className="relative bg-background text-foreground transition-colors duration-500 font-sans overflow-hidden">
+      <CinematicHero />
       <ScrollingTicker />
-      
+
       {/* Horizontal Storytelling Scroll for Selected Work */}
       <section className="relative">
         <ScrollStoryHorizontal projects={PROJECTS} />
       </section>
 
-      {/* Capabilities Vertical Stacking Cards */}
-      <section className="py-32 px-6 bg-background relative z-10">
-        <div className="mx-auto max-w-5xl mb-20" data-cursor-text="SERVICES">
-          <span className="text-xs text-[var(--brand-pink)] font-mono font-medium mb-4 block">
-            — Capabilities
-          </span>
-          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] tracking-tighter">
-            Bespoke capabilities <br />
-            <span className="text-muted-foreground font-sans font-bold text-3xl md:text-5xl block mt-3">engineered for digital impact.</span>
-          </h2>
-        </div>
-        <ScrollRevealPanel panels={CAPABILITIES} />
-      </section>
+      {/* Capabilities Bento Grid & Tilt cards */}
+      <CapabilitiesBentoGrid />
+
+      {/* Storytelling Narrative philosophical block */}
+      <StoryTeller />
 
       <StudioManifesto />
       <Numbers />
@@ -56,79 +53,130 @@ function Index() {
   );
 }
 
-function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    if (!titleRef.current) return;
-    const ctx = gsap.context(() => {
-      // Subtle scroll fade for hero title
-      gsap.to(titleRef.current, {
-        opacity: 0.2,
-        y: -50,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "bottom 90%",
-          end: "bottom 30%",
-          scrub: true,
-        },
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
+function CapabilitiesBentoGrid() {
   return (
-    <section ref={containerRef} className="relative min-h-screen overflow-hidden flex items-center pt-32 pb-24">
-      {/* Interactive Physics Sandbox Backdrop */}
-      <LusionSandbox isHeroBg={true} />
-      
-      {/* Morphing 3D WebGL shape background */}
-      <MorphingBlob />
-      
-      <div className="absolute inset-0 grid-bg pointer-events-none opacity-20" />
-      <div className="absolute inset-0 bg-aurora pointer-events-none opacity-20" />
-
-      <div className="relative z-10 mx-auto max-w-4xl w-full px-6 flex flex-col items-center text-center">
-        <div className="flex justify-center mb-6" data-cursor-text="INFO">
-          <AnimatedBadge text="Crafted by humans · Q3 2026" />
+    <section
+      className="bg-transparent py-32 px-6 relative z-10 border-t border-border/50"
+      data-cursor-text="SERVICES"
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="px-5 mb-24 max-w-3xl">
+          <span className="text-xs text-secondary font-mono tracking-widest uppercase mb-4 block">
+            — Capabilities
+          </span>
+          <h2 className="text-white font-serif text-5xl md:text-7xl font-normal leading-[1.05] tracking-tighter">
+            Bespoke capabilities <br />
+            <span className="text-neutral-500 font-sans font-bold text-3xl md:text-5xl block mt-3">
+              engineered for digital impact.
+            </span>
+          </h2>
         </div>
 
-        <h1
-          ref={titleRef}
-          className="font-serif font-normal tracking-tighter leading-[0.95] text-[clamp(3.5rem,8vw,7.5rem)] text-foreground text-center"
-        >
-          We design <br />
-          <em className="text-[var(--brand-pink)] italic">storytelling</em> <br />
-          websites.
-        </h1>
+        {/* Main large Bento Card */}
+        <BentoTilt className="relative mb-7 h-[500px] w-full overflow-hidden rounded-xl">
+          <BentoCard
+            title={
+              <>
+                Brand Strat
+                <span className="font-serif italic text-secondary font-normal lowercase">e</span>gy
+                & Systems
+              </>
+            }
+            description="Interactive sandbox. We build visual design tokens, solid brand identities, and cohesive layout principles that command attention across every digital viewport."
+            isComingSoon
+          >
+            <LusionSandbox />
+          </BentoCard>
+        </BentoTilt>
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="max-w-2xl text-base md:text-lg text-muted-foreground mt-8 leading-relaxed font-sans font-normal text-center"
-        >
-          Orivon is an independent design studio. We reject template layouts and complex 3D meshes to focus on high-fidelity typography, tactile interfaces, and meaningful storytelling.
-        </motion.p>
+        {/* 2x3 Grid - Responsive layout structure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-7 h-auto md:h-[150vh] w-full">
+          <BentoTilt className="relative col-span-1 md:col-span-1 md:row-span-2 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[400px] md:min-h-[450px]">
+            <BentoCard
+              title={
+                <>
+                  Tactil
+                  <span className="font-serif italic text-secondary font-normal lowercase">e</span>{" "}
+                  Web & Product
+                </>
+              }
+              description="High-fidelity marketing sites, clean dashboard interfaces, and responsive WebGL environments crafted with absolute precision."
+              isComingSoon
+            >
+              <Suspense
+                fallback={<div className="absolute inset-0 bg-neutral-900/50 animate-pulse" />}
+              >
+                <MorphingBlob />
+              </Suspense>
+            </BentoCard>
+          </BentoTilt>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-wrap justify-center items-center gap-4 mt-10"
-        >
-          <Link to="/work" data-cursor-text="WORK">
-            <NeonButton variant="solid" size="lg">
-              Explore the work <ArrowRight size={18} className="ml-1" />
-            </NeonButton>
-          </Link>
-          <Link to="/contact" data-cursor-text="TALK">
-            <NeonButton variant="default" size="lg">
-              Start a project
-            </NeonButton>
-          </Link>
-        </motion.div>
+          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
+            <BentoCard
+              title={
+                <>
+                  Moti
+                  <span className="font-serif italic text-secondary font-normal lowercase">o</span>n
+                  & Visual Grouping
+                </>
+              }
+              description="Gestalt laws: Toggling states illustrates visual groupings, proximity, similarity, and continuity curves."
+              isComingSoon
+            >
+              <div className="absolute right-4 bottom-4 w-72 h-72 scale-75 origin-bottom-right pointer-events-auto">
+                <GestaltVisualizer />
+              </div>
+            </BentoCard>
+          </BentoTilt>
+
+          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
+            <BentoCard
+              title={
+                <>
+                  UX Acquisiti
+                  <span className="font-serif italic text-secondary font-normal lowercase">o</span>n
+                  Trial
+                </>
+              }
+              description="Fitts's Law trial: clicking start calculates targeting speeds relative to CTA distances (D) and size boundaries (W)."
+              isComingSoon
+            >
+              <div className="absolute right-4 bottom-4 w-72 h-72 scale-75 origin-bottom-right pointer-events-auto">
+                <FittsSimulator />
+              </div>
+            </BentoCard>
+          </BentoTilt>
+
+          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[200px]">
+            <div className="flex flex-col justify-between bg-secondary p-6 text-white h-full">
+              <h3 className="text-3xl font-serif leading-none tracking-tight max-w-xs uppercase">
+                M<span className="font-serif italic text-white font-normal lowercase">o</span>re c
+                <span className="font-serif italic text-white font-normal lowercase">r</span>aft in
+                de<span className="font-serif italic text-white font-normal lowercase">v</span>
+                elopment.
+              </h3>
+              <ArrowRight className="h-10 w-10 text-white self-end transition-transform duration-300 hover:translate-x-2" />
+            </div>
+          </BentoTilt>
+
+          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl bg-card border border-border/10 min-h-[200px] transition-transform duration-300 ease-out">
+            <BentoCard
+              title={
+                <>
+                  Tech Stack{" "}
+                  <span className="font-serif italic text-secondary font-normal lowercase">I</span>
+                  nteractive
+                </>
+              }
+              description="Standard development languages and libraries clumping in real-time."
+              isComingSoon
+            >
+              <Suspense fallback={<div className="absolute inset-0 bg-muted/20 animate-pulse" />}>
+                <TechStackCanvas />
+              </Suspense>
+            </BentoCard>
+          </BentoTilt>
+        </div>
       </div>
     </section>
   );
@@ -144,7 +192,10 @@ function ScrollingTicker() {
     "ADC Design Award",
   ];
   return (
-    <section className="border-y border-border py-8 bg-background/50 backdrop-blur-sm relative z-10" data-cursor-text="HONORS">
+    <section
+      className="border-y border-border py-8 bg-background/50 backdrop-blur-sm relative z-10"
+      data-cursor-text="HONORS"
+    >
       <Marquee>
         {items.map((it) => (
           <span key={it} className="flex items-center gap-12 text-2xl font-serif font-normal">
@@ -167,7 +218,10 @@ function ScrollWordParagraph({ text, className = "" }: ScrollWordParagraphProps)
   return (
     <p data-split-words className={`${className} leading-tight`}>
       {words.map((word, i) => (
-        <span key={i} className="manifesto-word inline-block mr-[0.25em] transition-colors duration-150">
+        <span
+          key={i}
+          className="manifesto-word inline-block mr-[0.25em] transition-colors duration-150"
+        >
           {word}
         </span>
       ))}
@@ -184,11 +238,11 @@ function StudioManifesto() {
       const paragraphs = textRef.current!.querySelectorAll("[data-split-words]");
       paragraphs.forEach((p) => {
         const words = p.querySelectorAll(".manifesto-word");
-        
+
         // Highlight words staggered on scroll
         gsap.fromTo(
           words,
-          { 
+          {
             opacity: 0.15,
           },
           {
@@ -202,7 +256,7 @@ function StudioManifesto() {
               scrub: 1.2,
               invalidateOnRefresh: true,
             },
-          }
+          },
         );
       });
     }, textRef);
@@ -210,56 +264,25 @@ function StudioManifesto() {
   }, []);
 
   return (
-    <section className="py-40 px-6 bg-[var(--muted)] relative z-10 border-y border-border" data-cursor-text="CREED">
+    <section
+      className="py-40 px-6 bg-[var(--muted)] relative z-10 border-y border-border"
+      data-cursor-text="CREED"
+    >
       <div className="mx-auto max-w-4xl text-left" ref={textRef}>
-        <span className="text-xs text-[var(--brand-pink)] font-mono mb-6 block">
-          — Philosophy
-        </span>
+        <span className="text-xs text-[var(--brand-pink)] font-mono mb-6 block">— Philosophy</span>
         <div className="font-serif text-3xl md:text-5xl lg:text-6xl font-normal leading-relaxed space-y-8 text-foreground">
           <ScrollWordParagraph text="We believe that templates dilute your brand value." />
           <ScrollWordParagraph text="An award-winning website is not built with 3D spinners or pre-made UI blocks." />
           <ScrollWordParagraph text="It is crafted with bespoke typography scales, custom layouts, and animations that adapt to the user’s scroll cadence." />
-          <ScrollWordParagraph text="Every pixel should feel human-made." className="text-[var(--brand-pink)] font-serif italic font-medium" />
+          <ScrollWordParagraph
+            text="Every pixel should feel human-made."
+            className="text-[var(--brand-pink)] font-serif italic font-medium"
+          />
         </div>
       </div>
     </section>
   );
 }
-
-const CAPABILITIES = [
-  {
-    n: "01",
-    title: "Brand strategy",
-    copy: "Strategy, positioning, and visual systems that scale across every digital viewport.",
-    Icon: Sparkles,
-    color: "var(--brand-pink)",
-    textDark: false,
-  },
-  {
-    n: "02",
-    title: "Web & product design",
-    copy: "Marketing sites, design systems, and complex product interfaces engineered to perform.",
-    Icon: Layers,
-    color: "var(--brand-teal)",
-    textDark: false,
-  },
-  {
-    n: "03",
-    title: "Motion direction",
-    copy: "Bespoke page transitions, scroll-tied events, and subtle micro-interactions.",
-    Icon: Zap,
-    color: "var(--brand-lavender)",
-    textDark: true,
-  },
-  {
-    n: "04",
-    title: "Headless E-commerce",
-    copy: "Fast-loading online storefronts tailored for conversion and premium design feel.",
-    Icon: ShoppingBag,
-    color: "var(--brand-peach)",
-    textDark: true,
-  },
-];
 
 interface StatCounterProps {
   value: string;
@@ -312,16 +335,17 @@ function Numbers() {
     { v: "98%", l: "Client retention" },
   ];
   return (
-    <section className="py-24 px-6 border-b border-border bg-background relative z-10" data-cursor-text="STATS">
+    <section
+      className="py-24 px-6 border-b border-border bg-background relative z-10"
+      data-cursor-text="STATS"
+    >
       <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((s) => (
           <SpotlightCard key={s.l} className="p-6 md:p-8 bg-[var(--card)] border border-border">
             <div className="font-serif text-5xl md:text-7xl font-normal text-[var(--brand-pink)]">
               <StatCounter value={s.v} />
             </div>
-            <div className="mt-2 text-xs text-muted-foreground font-mono font-medium">
-              {s.l}
-            </div>
+            <div className="mt-2 text-xs text-muted-foreground font-mono font-medium">{s.l}</div>
           </SpotlightCard>
         ))}
       </div>
@@ -394,18 +418,24 @@ function BigCTA() {
             end: "bottom bottom",
             scrub: true,
           },
-        }
+        },
       );
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative py-48 px-6 overflow-hidden bg-background border-b border-border">
+    <section
+      ref={containerRef}
+      className="relative py-48 px-6 overflow-hidden bg-background border-b border-border"
+    >
       <div className="absolute inset-0 bg-aurora opacity-30 pointer-events-none" />
       <div className="relative mx-auto max-w-5xl text-center flex flex-col items-center">
         <h2 className="font-serif font-normal leading-[0.95] text-[clamp(3rem,8vw,7rem)] tracking-tighter">
-          <span ref={textRef} className="block text-[var(--brand-pink)] origin-center transition-transform">
+          <span
+            ref={textRef}
+            className="block text-[var(--brand-pink)] origin-center transition-transform"
+          >
             <KineticText text="Let's build" /> <br />
             <em className="font-serif italic text-foreground">
               <KineticText text="something legendary." />
@@ -413,7 +443,8 @@ function BigCTA() {
           </span>
         </h2>
         <p className="mt-8 text-muted-foreground text-base md:text-lg max-w-xl mx-auto leading-relaxed font-sans">
-          We take on a small number of partners each quarter. If you have an idea worth doing right, we'd love to hear it.
+          We take on a small number of partners each quarter. If you have an idea worth doing right,
+          we'd love to hear it.
         </p>
         <div className="mt-12">
           <MagneticButton

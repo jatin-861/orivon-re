@@ -3,7 +3,6 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { NotFoundOrivon } from "../components/NotFoundOrivon";
 import { SiteBackground } from "../components/SiteBackground";
-import { CustomCursor } from "../components/CustomCursor";
 import { LenisProvider } from "../components/layout/LenisProvider";
 import { Preloader } from "../components/layout/Preloader";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,7 +23,6 @@ function RootComponent() {
     <LenisProvider>
       <Preloader />
       <ScrollRestoration />
-      <CustomCursor />
       <SiteBackground />
       <SiteHeader />
       <main className="relative min-h-screen">

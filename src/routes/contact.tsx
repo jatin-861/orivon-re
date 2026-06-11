@@ -19,7 +19,14 @@ const beams = [
         y1: ["80%", "0%", "0%"],
         y2: ["100%", "20%", "20%"],
       },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 2, delay: 0.4 },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 0.4,
+      },
     },
     connectionPoints: [
       { cx: 6.5, cy: 398.5, r: 6 },
@@ -36,7 +43,14 @@ const beams = [
         y1: ["80%", "80%", "-20%"],
         y2: ["100%", "100%", "0%"],
       },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 2, delay: 1.1 },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 1.1,
+      },
     },
     connectionPoints: [
       { cx: 851, cy: 34, r: 6.5 },
@@ -53,7 +67,14 @@ const beams = [
         y1: ["80%", "80%", "-20%"],
         y2: ["100%", "100%", "0%"],
       },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 2, delay: 0.8 },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 0.8,
+      },
     },
     connectionPoints: [
       { cx: 142, cy: 427, r: 6.5 },
@@ -65,7 +86,14 @@ const beams = [
     gradientConfig: {
       initial: { x1: "40%", x2: "50%", y1: "160%", y2: "180%" },
       animate: { x1: "0%", x2: "10%", y1: "-40%", y2: "-20%" },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 2, delay: 1.4 },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 1.4,
+      },
     },
     connectionPoints: [
       { cx: 770, cy: 427, r: 6.5 },
@@ -82,7 +110,14 @@ const beams = [
         y1: ["0%", "0%", "180%"],
         y2: ["20%", "20%", "200%"],
       },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 2, delay: 0.2 },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 0.2,
+      },
     },
     connectionPoints: [
       { cx: 420.5, cy: 6.5, r: 6 },
@@ -116,7 +151,9 @@ function Contact() {
       <div className="mx-auto max-w-6xl">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
           <div>
-            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">— Inquiries</span>
+            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
+              — Inquiries
+            </span>
             <RevealText
               text="Let's make something"
               as="h1"
@@ -172,7 +209,13 @@ function Contact() {
             <form onSubmit={onSubmit} className="space-y-8">
               <div className="grid md:grid-cols-2 gap-6">
                 <Field label="Your name" name="name" placeholder="Ada Lovelace" required />
-                <Field label="Email" name="email" type="email" placeholder="ada@studio.com" required />
+                <Field
+                  label="Email"
+                  name="email"
+                  type="email"
+                  placeholder="ada@studio.com"
+                  required
+                />
               </div>
               <Field label="Company" name="company" placeholder="Acme Inc." />
 
@@ -208,7 +251,7 @@ function Contact() {
                           "rounded-full px-4 py-2 text-sm border transition-all cursor-pointer",
                           active
                             ? "bg-primary text-primary-foreground border-primary shadow-glow-cyan font-semibold"
-                            : "border-border glass hover:border-primary/40 text-foreground"
+                            : "border-border glass hover:border-primary/40 text-foreground",
                         )}
                       >
                         <input
@@ -303,15 +346,7 @@ function Field({
   );
 }
 
-function Info({
-  Icon,
-  label,
-  value,
-}: {
-  Icon: typeof Mail;
-  label: string;
-  value: string;
-}) {
+function Info({ Icon, label, value }: { Icon: typeof Mail; label: string; value: string }) {
   return (
     <div className="flex items-start gap-4">
       <div className="rounded-full glass p-3">

@@ -24,10 +24,30 @@ const helpfulLinks = [
 ];
 
 const dockItems = [
-  { link: "https://github.com/orivon", external: true, label: "GitHub", Icon: <Github size={20} /> },
-  { link: "https://twitter.com/orivon", external: true, label: "Twitter", Icon: <Twitter size={20} /> },
-  { link: "https://instagram.com/orivon", external: true, label: "Instagram", Icon: <Instagram size={20} /> },
-  { link: "https://dribbble.com/orivon", external: true, label: "Dribbble", Icon: <Dribbble size={20} /> },
+  {
+    link: "https://github.com/orivon",
+    external: true,
+    label: "GitHub",
+    Icon: <Github size={20} />,
+  },
+  {
+    link: "https://twitter.com/orivon",
+    external: true,
+    label: "Twitter",
+    Icon: <Twitter size={20} />,
+  },
+  {
+    link: "https://instagram.com/orivon",
+    external: true,
+    label: "Instagram",
+    Icon: <Instagram size={20} />,
+  },
+  {
+    link: "https://dribbble.com/orivon",
+    external: true,
+    label: "Dribbble",
+    Icon: <Dribbble size={20} />,
+  },
   { link: "mailto:hello@orivon.studio", external: true, label: "Email", Icon: <Mail size={20} /> },
 ];
 
@@ -53,16 +73,22 @@ export function SiteFooter() {
               </span>
             </Link>
             <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
-              An independent design studio crafting brands, websites and digital products for ambitious teams.
+              An independent design studio crafting brands, websites and digital products for
+              ambitious teams.
             </p>
           </div>
 
           <div>
-            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">Studio</p>
+            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">
+              Studio
+            </p>
             <ul className="space-y-3">
               {aboutLinks.map((l) => (
                 <li key={l.text}>
-                  <Link to={l.to} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    to={l.to}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     {l.text}
                   </Link>
                 </li>
@@ -71,11 +97,16 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">Services</p>
+            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">
+              Services
+            </p>
             <ul className="space-y-3">
               {serviceLinks.map((l) => (
                 <li key={l.text}>
-                  <Link to={l.to} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    to={l.to}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     {l.text}
                   </Link>
                 </li>
@@ -84,11 +115,16 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">Connect</p>
+            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">
+              Connect
+            </p>
             <ul className="space-y-3">
               {helpfulLinks.map((l) => (
                 <li key={l.text}>
-                  <Link to={l.to} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    to={l.to}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     {l.text}
                   </Link>
                 </li>
@@ -115,7 +151,7 @@ export function SiteFooter() {
             morphTime={1.4}
             cooldownTime={1.6}
             className="h-full w-full"
-            textClassName="text-[var(--brand-pink)] tracking-tighter leading-none text-[clamp(4rem,22vw,16rem)]"
+            textClassName="text-[var(--brand-pink)] tracking-tighter leading-[1.05] text-[clamp(4rem,22vw,16rem)] py-2"
           />
         </div>
 

@@ -120,7 +120,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                 end: "right left",
                 scrub: true,
               },
-            }
+            },
           );
         }
       });
@@ -142,14 +142,17 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   const glowHues = [
     340, // Lumen (Pinkish)
     260, // Noctis (Lavender)
-    20,  // Orbit (Peach)
+    20, // Orbit (Peach)
     150, // Verdant (Mint)
     320, // Atelier (Pinkish)
     190, // Halo (Cyan)
   ];
 
   return (
-    <div ref={containerRef} className="relative h-screen overflow-hidden bg-background transition-colors duration-700">
+    <div
+      ref={containerRef}
+      className="relative h-[100dvh] overflow-hidden bg-background transition-colors duration-700"
+    >
       {/* Dynamic Color Bleed Overlay */}
       <div
         ref={bleedRef}
@@ -175,16 +178,18 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         {/* Intro Slide */}
         <div
           data-panel
-          className="w-screen h-screen flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
+          className="w-screen h-[100dvh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
         >
           <span className="text-sm uppercase tracking-[0.3em] text-[var(--cyan)] mb-4 block font-mono">
             Selected Craft
           </span>
           <h2 className="font-display font-bold leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight">
-            How we solve complex problems with <span className="text-gradient-cyan">beautiful interfaces.</span>
+            How we solve complex problems with{" "}
+            <span className="text-gradient-cyan">beautiful interfaces.</span>
           </h2>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Every website we build is a storytelling engine. We design for clarity, feel, and performance.
+            Every website we build is a storytelling engine. We design for clarity, feel, and
+            performance.
           </p>
           <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-foreground/50">
             <span>Scroll down or scroll wheel</span>
@@ -200,7 +205,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             <div
               key={p.slug}
               data-panel
-              className="w-screen h-screen flex-shrink-0 flex items-center justify-center px-4 md:px-16"
+              className="w-screen h-[100dvh] flex-shrink-0 flex items-center justify-center px-4 md:px-16"
             >
               <div
                 data-skew-card
@@ -210,8 +215,12 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                 <div className="md:col-span-5 flex flex-col h-full justify-between py-2">
                   <div>
                     <div className="flex gap-2 mb-6 font-mono text-xs opacity-75">
-                      <span className="border border-current/30 rounded-full px-3 py-1">{p.category}</span>
-                      <span className="border border-current/30 rounded-full px-3 py-1">{p.year}</span>
+                      <span className="border border-current/30 rounded-full px-3 py-1">
+                        {p.category}
+                      </span>
+                      <span className="border border-current/30 rounded-full px-3 py-1">
+                        {p.year}
+                      </span>
                     </div>
 
                     <h3 className="font-display text-3xl md:text-5xl font-bold leading-[1.05] tracking-tight mb-4">
@@ -223,7 +232,10 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
 
                     <div className="flex flex-wrap gap-1.5 mb-8">
                       {p.services.map((s) => (
-                        <span key={s} className="bg-current/10 rounded px-2.5 py-1 text-xs font-mono font-medium">
+                        <span
+                          key={s}
+                          className="bg-current/10 rounded px-2.5 py-1 text-xs font-mono font-medium"
+                        >
                           {s}
                         </span>
                       ))}
@@ -236,15 +248,21 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                     data-cursor-text="EXPLORE"
                     className="inline-flex items-center gap-2 group self-start border-b-2 border-current pb-1 text-sm font-bold tracking-wider uppercase transition-all hover:gap-3"
                   >
-                    Explore case <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    Explore case{" "}
+                    <ArrowUpRight
+                      size={16}
+                      className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
                   </Link>
                 </div>
 
                 {/* Right side: High-fidelity Vector Mockup Card with Spotlight and Parallax */}
                 <div className="md:col-span-7 h-full flex items-center justify-center relative overflow-hidden rounded-2xl">
-                  <SpotlightCard glowHue={glowHue} className="w-full h-full bg-black/10 border-white/10 p-0 flex flex-col justify-between overflow-hidden shadow-2xl relative">
+                  <SpotlightCard
+                    glowHue={glowHue}
+                    className="w-full h-full bg-black/10 border-white/10 p-0 flex flex-col justify-between overflow-hidden shadow-2xl relative"
+                  >
                     <div className="p-6 h-full flex flex-col justify-between" data-parallax-inner>
-                      
                       {/* Window Controls */}
                       <div className="flex items-center justify-between pb-4 border-b border-white/10">
                         <div className="flex items-center gap-1.5">
@@ -252,7 +270,9 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                           <span className="w-3 h-3 rounded-full bg-white/20" />
                           <span className="w-3 h-3 rounded-full bg-white/20" />
                         </div>
-                        <span className="text-[10px] font-mono tracking-widest opacity-40">ORIVON.STUDIO // {p.slug.toUpperCase()}</span>
+                        <span className="text-[10px] font-mono tracking-widest opacity-40">
+                          ORIVON.STUDIO // {p.slug.toUpperCase()}
+                        </span>
                       </div>
 
                       {/* CSS Vector Content tailored to each case */}
@@ -269,7 +289,10 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                                 <div
                                   key={i}
                                   className="w-full bg-gradient-to-t from-[var(--brand-pink)] to-white/40 rounded-t-sm transition-all duration-500 hover:opacity-100"
-                                  style={{ height: `${(val / 120) * 100}%`, opacity: 0.3 + (i * 0.05) }}
+                                  style={{
+                                    height: `${(val / 120) * 100}%`,
+                                    opacity: 0.3 + i * 0.05,
+                                  }}
                                 />
                               ))}
                             </div>
@@ -300,23 +323,34 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                           <div className="w-full max-w-xs space-y-6 text-left">
                             <div className="flex items-center justify-between">
                               <span className="text-xs font-mono opacity-50">ORBIT_TRACKER</span>
-                              <span className="text-xs font-mono text-[var(--brand-peach)]">L-04:12:05</span>
+                              <span className="text-xs font-mono text-[var(--brand-peach)]">
+                                L-04:12:05
+                              </span>
                             </div>
                             {/* Orbital path */}
                             <div className="relative h-24 border border-white/10 rounded-xl overflow-hidden flex items-center justify-center">
                               <div className="absolute w-40 h-40 rounded-full border border-white/20 -bottom-28 animate-[spin_60s_linear_infinite]" />
                               <div className="absolute w-3 h-3 rounded-full bg-[var(--brand-peach)] shadow-[0_0_15px_#ffb084]" />
-                              <span className="text-[10px] font-mono opacity-30 absolute bottom-2 right-2">ALT. 408KM</span>
+                              <span className="text-[10px] font-mono opacity-30 absolute bottom-2 right-2">
+                                ALT. 408KM
+                              </span>
                             </div>
                           </div>
                         )}
 
                         {p.slug === "verdant-eco" && (
                           <div className="w-full max-w-xs space-y-4">
-                            <div className="text-center font-display text-2xl font-bold opacity-80">98.4%</div>
-                            <p className="text-[10px] font-mono text-center opacity-50 uppercase tracking-widest">ECO_REDUCTION_TARGET</p>
+                            <div className="text-center font-display text-2xl font-bold opacity-80">
+                              98.4%
+                            </div>
+                            <p className="text-[10px] font-mono text-center opacity-50 uppercase tracking-widest">
+                              ECO_REDUCTION_TARGET
+                            </p>
                             <div className="w-full bg-white/10 h-3 rounded-full overflow-hidden p-0.5 border border-white/15">
-                              <div className="bg-white/80 h-full rounded-full" style={{ width: "98.4%" }} />
+                              <div
+                                className="bg-white/80 h-full rounded-full"
+                                style={{ width: "98.4%" }}
+                              />
                             </div>
                           </div>
                         )}
@@ -325,11 +359,15 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                           <div className="w-full max-w-sm grid grid-cols-2 gap-4">
                             <div className="border border-white/10 rounded-lg p-3 flex flex-col justify-between aspect-square bg-white/5">
                               <span className="text-[10px] font-mono opacity-40">01 / CAPE</span>
-                              <span className="font-display text-lg font-medium opacity-80">ATELIER CAFE</span>
+                              <span className="font-display text-lg font-medium opacity-80">
+                                ATELIER CAFE
+                              </span>
                             </div>
                             <div className="border border-white/10 rounded-lg p-3 flex flex-col justify-between aspect-square bg-white/5">
                               <span className="text-[10px] font-mono opacity-40">02 / SILK</span>
-                              <span className="font-display text-lg font-medium opacity-80">COUTURE NOIR</span>
+                              <span className="font-display text-lg font-medium opacity-80">
+                                COUTURE NOIR
+                              </span>
                             </div>
                           </div>
                         )}
@@ -349,11 +387,9 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                         <span>CRAFTED IN ORIVON LABS</span>
                         <span>©2026 // ALL RIGHTS RESERVED</span>
                       </div>
-
                     </div>
                   </SpotlightCard>
                 </div>
-
               </div>
             </div>
           );

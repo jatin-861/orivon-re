@@ -25,8 +25,7 @@ const buttonVariants = cva(
 );
 
 export interface NeonButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   neon?: boolean;
 }
 

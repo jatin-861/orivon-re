@@ -42,10 +42,7 @@ export const PulseBeams = ({
 }: PulseBeamsProps) => {
   return (
     <div
-      className={cn(
-        "relative flex items-center justify-center mx-auto overflow-hidden",
-        className,
-      )}
+      className={cn("relative flex items-center justify-center mx-auto overflow-hidden", className)}
       style={{ minHeight: height }}
     >
       {background}
@@ -91,7 +88,12 @@ const SVGs = ({
       {beams.map((beam, index) => (
         <g key={`base-${index}`}>
           <path d={beam.path} stroke={baseColor} strokeWidth="1" />
-          <path d={beam.path} stroke={`url(#grad-${index})`} strokeWidth="2" strokeLinecap="round" />
+          <path
+            d={beam.path}
+            stroke={`url(#grad-${index})`}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
           {beam.connectionPoints?.map((p, pi) => (
             <circle
               key={pi}

@@ -1,12 +1,6 @@
 import { useRef, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface DockItemData {
