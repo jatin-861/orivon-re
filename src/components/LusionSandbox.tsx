@@ -298,7 +298,9 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
 
       // Dynamic trail background depending on dark/light mode
       const isDark = document.documentElement.classList.contains("dark");
-      ctx.fillStyle = isDark ? "rgba(250, 246, 240, 0.25)" : "rgba(253, 253, 252, 0.25)";
+      ctx.fillStyle = isDark
+        ? (isHeroBg ? "rgba(11, 19, 43, 0.22)" : "rgba(28, 37, 65, 0.22)")
+        : (isHeroBg ? "rgba(244, 246, 250, 0.22)" : "rgba(255, 255, 255, 0.22)");
       ctx.fillRect(0, 0, w, h);
 
       // 1. Process Ripples
@@ -309,9 +311,9 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
           r.active = false;
         }
 
-        // Draw subtle ring
-        ctx.strokeStyle = `rgba(224, 61, 103, ${0.4 * (1 - r.radius / r.maxRadius)})`;
-        ctx.lineWidth = 1;
+        // Draw subtle ring (Cyan theme color instead of pink)
+        ctx.strokeStyle = `rgba(111, 255, 233, ${0.45 * (1 - r.radius / r.maxRadius)})`;
+        ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
         ctx.stroke();

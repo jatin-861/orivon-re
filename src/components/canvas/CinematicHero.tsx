@@ -81,6 +81,35 @@ export const CinematicHero = () => {
           <LusionSandbox isHeroBg />
         </div>
 
+        {/* Floating high-contrast crystal cluster (Teal Hue Inversion) */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 120, rotate: -20, scale: 0.75 }}
+            animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+            transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            className="relative flex items-center justify-center w-full h-full"
+          >
+            <motion.img
+              src="/crystal.png"
+              alt="Orivon Crystal"
+              className="w-[280px] sm:w-[380px] md:w-[420px] aspect-square object-contain"
+              style={{
+                filter:
+                  "hue-rotate(180deg) saturate(1.8) brightness(1.2) drop-shadow(0 20px 60px rgba(111, 255, 233, 0.22))",
+              }}
+              animate={{
+                y: [-12, 12, -12],
+                rotate: [-1.5, 1.5, -1.5],
+              }}
+              transition={{
+                duration: 9,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+        </div>
+
         <h1 className="hero-heading absolute bottom-5 right-5 z-40 text-foreground/95 font-sans font-black uppercase text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none select-none pointer-events-none">
           STU<span className="font-serif italic text-secondary font-normal lowercase">d</span>IO
         </h1>
