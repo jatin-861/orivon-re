@@ -5,6 +5,7 @@ import { NotFoundOrivon } from "../components/NotFoundOrivon";
 import { SiteBackground } from "../components/SiteBackground";
 import { LenisProvider } from "../components/layout/LenisProvider";
 import { Preloader } from "../components/layout/Preloader";
+import { CustomCursor } from "../components/CustomCursor";
 import { motion, AnimatePresence } from "framer-motion";
 
 function NotFoundComponent() {
@@ -21,6 +22,7 @@ function RootComponent() {
 
   return (
     <LenisProvider>
+      <CustomCursor />
       <Preloader />
       <ScrollRestoration />
       <SiteBackground />

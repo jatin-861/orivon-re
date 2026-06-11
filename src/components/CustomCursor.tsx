@@ -72,6 +72,8 @@ export function CustomCursor() {
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
+    document.body.classList.add("custom-cursor-active");
+
     const setCursorOpacity = (opacity: number) => {
       if (dotRef.current) dotRef.current.style.opacity = String(opacity);
       if (ringRef.current) ringRef.current.style.opacity = String(opacity);
@@ -433,6 +435,7 @@ export function CustomCursor() {
     rafId = requestAnimationFrame(tick);
 
     return () => {
+      document.body.classList.remove("custom-cursor-active");
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
       window.removeEventListener("mousedown", onMouseDown);

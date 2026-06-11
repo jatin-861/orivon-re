@@ -331,10 +331,10 @@
 
   /* Custom Awwwards Cursor gated by media hover */
   @media (hover: hover) and (pointer: fine) {
-    body,
-    a,
-    button,
-    [role="button"] {
+    body.custom-cursor-active,
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active [role="button"] {
       cursor: none !important;
     }
     input,

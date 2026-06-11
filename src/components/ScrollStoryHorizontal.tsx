@@ -79,9 +79,10 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       ];
 
       const panels = gsap.utils.toArray("[data-panel]");
-      panels.forEach((panel: Element, i: number) => {
+      panels.forEach((panel: unknown, i: number) => {
+        const el = panel as Element;
         ScrollTrigger.create({
-          trigger: panel,
+          trigger: el,
           containerAnimation: horizontalTween,
           start: "left center",
           end: "right center",
@@ -105,7 +106,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         });
 
         // 4. Mockup Content Inner Parallax
-        const parallaxInner = panel.querySelector("[data-parallax-inner]");
+        const parallaxInner = el.querySelector("[data-parallax-inner]");
         if (parallaxInner) {
           gsap.fromTo(
             parallaxInner,
@@ -114,7 +115,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
               x: 35,
               ease: "none",
               scrollTrigger: {
-                trigger: panel,
+                trigger: el,
                 containerAnimation: horizontalTween,
                 start: "left right",
                 end: "right left",
