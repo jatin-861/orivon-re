@@ -166,7 +166,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
   const initParticles = useCallback(
     (width: number, height: number) => {
       const arr: Particle[] = [];
-      const colors = ["#e03d67", "#1a5b5c", "#d84b36", "#a45f94", "#111111"];
+      const colors = ["#6fffe9", "#5bc0be", "#3a506b", "#1c2541", "#ffffff"];
 
       for (let i = 0; i < particleCount; i++) {
         const rx = Math.random() * width;
@@ -482,7 +482,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
                   onClick={() => setShape(s)}
                   className={`px-2.5 py-1 rounded-full text-[9px] font-mono tracking-wider font-semibold uppercase transition-all cursor-pointer ${
                     shape === s
-                      ? "bg-[var(--brand-pink)] text-white"
+                      ? "bg-[var(--primary)] text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }`}
                 >
@@ -579,7 +579,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
                 onClick={() => setShape(s)}
                 className={`px-2.5 py-1 rounded text-[9px] font-mono tracking-wider font-semibold uppercase transition-all cursor-pointer ${
                   shape === s
-                    ? "bg-[var(--brand-pink)] text-white font-bold"
+                    ? "bg-[var(--primary)] text-primary-foreground font-bold"
                     : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 }`}
               >

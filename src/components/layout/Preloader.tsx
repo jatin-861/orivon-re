@@ -92,7 +92,7 @@ export function Preloader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.4 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--brand-peach)] font-bold"
+              className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--primary)] font-bold"
             >
               Independent Digital Craft
             </motion.p>
@@ -119,7 +119,7 @@ export function Preloader() {
             {/* Premium, micro-thin loading bar */}
             <div className="h-[2px] w-full bg-white/10 relative overflow-hidden rounded-full">
               <motion.div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-[var(--brand-pink)] via-[var(--brand-peach)] to-[var(--brand-lavender)]"
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.1, ease: "easeOut" }}

@@ -19,8 +19,8 @@ import { GestaltVisualizer } from "@/components/skills/GestaltVisualizer";
 import { FittsSimulator } from "@/components/skills/FittsSimulator";
 import { SEO } from "@/components/SEO";
 
-const MorphingBlob = lazy(() => import("@/components/canvas/MorphingBlob"));
-const TechStackCanvas = lazy(() => import("@/components/canvas/TechStackCanvas"));
+import { InteractiveBlob2D } from "@/components/canvas/InteractiveBlob2D";
+import { InteractiveTechStack2D } from "@/components/canvas/InteractiveTechStack2D";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -149,11 +149,7 @@ function CapabilitiesBentoGrid() {
               description="High-fidelity marketing sites, clean dashboard interfaces, and responsive WebGL environments crafted with absolute precision."
               isComingSoon
             >
-              <Suspense
-                fallback={<div className="absolute inset-0 bg-neutral-900/50 animate-pulse" />}
-              >
-                <MorphingBlob />
-              </Suspense>
+              <InteractiveBlob2D />
             </BentoCard>
           </BentoTilt>
 
@@ -217,9 +213,7 @@ function CapabilitiesBentoGrid() {
               description="Standard development languages and libraries clumping in real-time."
               isComingSoon
             >
-              <Suspense fallback={<div className="absolute inset-0 bg-muted/20 animate-pulse" />}>
-                <TechStackCanvas />
-              </Suspense>
+              <InteractiveTechStack2D />
             </BentoCard>
           </BentoTilt>
         </div>

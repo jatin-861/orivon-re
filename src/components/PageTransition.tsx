@@ -69,7 +69,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
-          <path ref={pathRef} d={initialPath} fill="#e03d67" />
+          <path ref={pathRef} d={initialPath} fill="var(--primary)" />
         </svg>
       </div>
       <div>{displayChildren}</div>

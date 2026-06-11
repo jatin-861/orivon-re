@@ -26,7 +26,7 @@ export function InteractiveParticles2D() {
     let animationFrameId = 0;
     let particles: Particle[] = [];
     const count = 120;
-    const colors = ["rgba(224, 83, 125, ", "rgba(30, 200, 200, ", "rgba(156, 139, 200, "];
+    const colors = ["rgba(111, 255, 233, ", "rgba(91, 192, 190, ", "rgba(58, 80, 107, "];
 
     const resize = () => {
       if (!canvas) return;
