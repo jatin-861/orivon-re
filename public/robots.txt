@@ -1,0 +1,7 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Disallow: /login
+
+# Sitemap
+Sitemap: https://orivon.com/sitemap.xml

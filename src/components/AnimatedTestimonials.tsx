@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -17,6 +17,7 @@ export const AnimatedTestimonials = ({
   autoplay?: boolean;
 }) => {
   const [active, setActive] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const handleNext = useCallback(() => {
     setActive((p) => (p + 1) % testimonials.length);
@@ -25,10 +26,10 @@ export const AnimatedTestimonials = ({
   const handlePrev = () => setActive((p) => (p - 1 + testimonials.length) % testimonials.length);
 
   useEffect(() => {
-    if (!autoplay) return;
+    if (!autoplay || isPaused) return;
     const id = setInterval(handleNext, 5000);
     return () => clearInterval(id);
-  }, [autoplay, handleNext]);
+  }, [autoplay, handleNext, isPaused]);
 
   const isActive = (i: number) => i === active;
   const getStableRotate = (i: number) => {
@@ -37,7 +38,20 @@ export const AnimatedTestimonials = ({
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 font-body">
+    <div
+      className="mx-auto max-w-5xl px-4 py-12 font-body"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          setIsPaused(false);
+        }
+      }}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Testimonials"
+    >
       <div className="relative grid grid-cols-1 gap-16 md:grid-cols-2">
         <div>
           <div className="relative h-80 w-full">
@@ -62,6 +76,7 @@ export const AnimatedTestimonials = ({
                     src={t.src}
                     alt={t.name}
                     draggable={false}
+                    loading={index === 0 ? "eager" : "lazy"}
                     className="h-full w-full rounded-xl object-cover object-center border border-border/80 shadow-elegant grayscale saturate-50 hover:grayscale-0 hover:saturate-100 transition-all duration-500"
                   />
                 </motion.div>
@@ -77,6 +92,7 @@ export const AnimatedTestimonials = ({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
+            aria-live="polite"
           >
             <h3 className="font-display text-3xl font-bold text-foreground">
               {testimonials[active].name}

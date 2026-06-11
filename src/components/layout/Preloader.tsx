@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Preloader() {
+  const [shouldRender, setShouldRender] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !sessionStorage.getItem("orivon-preloader-seen");
+    }
+    return true;
+  });
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
-  const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Check if the user has already seen the preloader in this session
-    const hasSeenPreloader = sessionStorage.getItem("orivon-preloader-seen");
-    if (hasSeenPreloader && import.meta.env.PROD) {
-      setShouldRender(false);
-      return;
-    }
+    if (!shouldRender) return;
 
     // Lock body scroll during load
     document.body.style.overflow = "hidden";
@@ -43,7 +43,7 @@ export function Preloader() {
       clearInterval(timer);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, [shouldRender]);
 
   if (!shouldRender) return null;
 
@@ -69,21 +69,24 @@ export function Preloader() {
           {/* Centered Orivon Logo Lettering */}
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="overflow-hidden flex gap-[0.1em] text-[clamp(2.5rem,10vw,8rem)] font-display font-bold leading-none tracking-tight">
-              {brandWords.map((letter, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: [0.215, 0.61, 0.355, 1],
-                  }}
-                  className="inline-block"
-                >
-                  {letter}
-                </motion.span>
-              ))}
+              <span className="sr-only">ORIVON</span>
+              <span aria-hidden="true" className="flex gap-[0.1em]">
+                {brandWords.map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: i * 0.1,
+                      ease: [0.215, 0.61, 0.355, 1],
+                    }}
+                    className="inline-block"
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </span>
             </div>
             <motion.p
               initial={{ opacity: 0 }}
@@ -96,7 +99,14 @@ export function Preloader() {
           </div>
 
           {/* Bottom loading bar & progress */}
-          <div className="space-y-4">
+          <div
+            className="space-y-4"
+            role="progressbar"
+            aria-valuenow={progress}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label="Loading progress"
+          >
             <div className="flex justify-between items-end">
               <span className="text-[10px] font-mono tracking-widest text-muted-foreground opacity-50 uppercase">
                 Initializing immersive engine

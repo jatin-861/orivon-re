@@ -50,6 +50,7 @@ export const MagneticButton = forwardRef<HTMLElement, Props>(
           else if (fwdRef) (fwdRef as any).current = node;
         }}
         className={cn("inline-block cursor-pointer will-change-transform", className)}
+        data-magnetic="true"
         {...rest}
       >
         {children}

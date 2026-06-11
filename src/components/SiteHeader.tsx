@@ -64,7 +64,12 @@ export const SiteHeader = () => {
       )}
     >
       <div className="mx-auto max-w-7xl px-6 flex items-center justify-between">
-        <Link to="/" className="group flex items-center gap-2" data-cursor-text="HOME">
+        <Link
+          to="/"
+          className="group flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          data-cursor-text="HOME"
+          data-magnetic="true"
+        >
           <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 border border-primary/30">
             <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
           </span>
@@ -82,7 +87,7 @@ export const SiteHeader = () => {
                 to={item.to}
                 data-cursor-text={item.label.toUpperCase()}
                 className={cn(
-                  "relative px-4 py-1.5 text-sm font-semibold rounded-full transition-colors",
+                  "relative px-4 py-1.5 text-sm font-semibold rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                   active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -102,9 +107,11 @@ export const SiteHeader = () => {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full glass hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            className="w-11 h-11 flex items-center justify-center rounded-full glass hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             aria-label="Toggle theme"
+            type="button"
             data-cursor-text={theme === "light" ? "DARK" : "LIGHT"}
+            data-magnetic="true"
           >
             {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
@@ -112,24 +119,27 @@ export const SiteHeader = () => {
             as={Link}
             to="/contact"
             data-cursor-text="CHAT"
-            className="rounded-full bg-foreground text-background px-5 py-2.5 text-sm font-semibold"
+            className="rounded-full bg-foreground text-background px-6 py-3 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             Let's talk →
           </MagneticButton>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-3 md:hidden">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full glass hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            className="w-11 h-11 flex items-center justify-center rounded-full glass hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             aria-label="Toggle theme"
+            type="button"
           >
-            {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
           <button
-            aria-label="Menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="glass rounded-full p-2.5"
+            className="w-11 h-11 flex items-center justify-center glass rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            type="button"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -142,8 +152,9 @@ export const SiteHeader = () => {
             <Link
               key={item.to}
               to={item.to}
+              onClick={() => setOpen(false)}
               className={cn(
-                "px-4 py-3 rounded-xl text-base font-medium transition-colors",
+                "px-4 py-3 rounded-xl text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                 pathname === item.to
                   ? "bg-primary/15 text-primary"
                   : "text-foreground/80 hover:bg-muted hover:text-foreground",

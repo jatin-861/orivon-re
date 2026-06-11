@@ -11,15 +11,22 @@ export const SpotlightCard = ({ children, className = "", glowHue = 200 }: Props
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Disable on touch viewports (pointer: coarse)
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
+    const el = cardRef.current;
+    if (!el) return;
+
     const sync = (e: PointerEvent) => {
-      const el = cardRef.current;
-      if (!el) return;
       const rect = el.getBoundingClientRect();
       el.style.setProperty("--x", (e.clientX - rect.left).toFixed(2));
       el.style.setProperty("--y", (e.clientY - rect.top).toFixed(2));
     };
-    document.addEventListener("pointermove", sync);
-    return () => document.removeEventListener("pointermove", sync);
+
+    el.addEventListener("pointermove", sync);
+    return () => el.removeEventListener("pointermove", sync);
   }, []);
 
   const style: CSSProperties & Record<string, string | number> = {

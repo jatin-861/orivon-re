@@ -17,6 +17,7 @@ import { StoryTeller } from "@/components/StoryTeller";
 import { LusionSandbox } from "@/components/LusionSandbox";
 import { GestaltVisualizer } from "@/components/skills/GestaltVisualizer";
 import { FittsSimulator } from "@/components/skills/FittsSimulator";
+import { SEO } from "@/components/SEO";
 
 const MorphingBlob = lazy(() => import("@/components/canvas/MorphingBlob"));
 const TechStackCanvas = lazy(() => import("@/components/canvas/TechStackCanvas"));
@@ -30,8 +31,30 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Orivon",
+    url: "https://orivon.com",
+    description:
+      "Orivon is an independent design studio crafting award-winning brands, websites and digital products.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://orivon.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <div className="relative bg-background text-foreground transition-colors duration-500 font-sans overflow-hidden">
+      <SEO
+        title="Orivon — Award-winning digital design studio"
+        description="Orivon is an independent design studio crafting award-winning brands, websites and digital products."
+        canonical="https://orivon.com"
+        keywords="design studio, digital agency, branding, website design, headless e-commerce, custom layout"
+        ogType="website"
+        schema={homeSchema}
+      />
       <CinematicHero />
       <ScrollingTicker />
 
@@ -283,6 +306,7 @@ function StudioManifesto() {
     </section>
   );
 }
+
 
 interface StatCounterProps {
   value: string;

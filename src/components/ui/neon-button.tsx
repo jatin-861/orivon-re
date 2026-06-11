@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -25,14 +26,23 @@ const buttonVariants = cva(
 );
 
 export interface NeonButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<any>, VariantProps<typeof buttonVariants> {
   neon?: boolean;
+  as?: React.ElementType;
 }
 
-export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>(
-  ({ className, neon = true, size, variant, children, ...props }, ref) => {
+export const NeonButton = React.forwardRef<any, NeonButtonProps>(
+  (
+    { className, neon = true, size, variant, children, as: Component = "button", ...props },
+    ref,
+  ) => {
     return (
-      <button ref={ref} className={cn(buttonVariants({ variant, size }), className)} {...props}>
+      <Component
+        ref={ref}
+        className={cn(buttonVariants({ variant, size }), className)}
+        data-magnetic="true"
+        {...props}
+      >
         <span
           className={cn(
             "absolute h-px opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out inset-x-0 top-0 bg-gradient-to-r w-3/4 mx-auto from-transparent via-primary to-transparent hidden",
@@ -46,7 +56,7 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>(
             neon && "block",
           )}
         />
-      </button>
+      </Component>
     );
   },
 );

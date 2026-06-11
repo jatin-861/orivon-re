@@ -47,16 +47,6 @@ const DockItem = ({ mouseX, item }: { mouseX: MotionValue<number>; item: DockIte
   const iconScale = useTransform(width, [40, 80], [1, 1.5]);
   const iconSpring = useSpring(iconScale, { mass: 0.1, stiffness: 150, damping: 12 });
 
-  const inner = (
-    <motion.div
-      style={{ scale: iconSpring }}
-      className="flex items-center justify-center w-full h-full text-primary-foreground"
-      aria-label={item.label}
-    >
-      {item.Icon}
-    </motion.div>
-  );
-
   return (
     <motion.div
       ref={ref}
@@ -69,15 +59,29 @@ const DockItem = ({ mouseX, item }: { mouseX: MotionValue<number>; item: DockIte
           target="_blank"
           rel="noreferrer noopener"
           className="grow flex items-center justify-center w-full h-full"
+          aria-label={item.label}
         >
-          {inner}
+          <motion.div
+            style={{ scale: iconSpring }}
+            className="flex items-center justify-center w-full h-full text-primary-foreground"
+            aria-hidden="true"
+          >
+            {item.Icon}
+          </motion.div>
         </a>
       ) : (
         <Link
           to={item.link as string}
           className="grow flex items-center justify-center w-full h-full"
+          aria-label={item.label}
         >
-          {inner}
+          <motion.div
+            style={{ scale: iconSpring }}
+            className="flex items-center justify-center w-full h-full text-primary-foreground"
+            aria-hidden="true"
+          >
+            {item.Icon}
+          </motion.div>
         </Link>
       )}
     </motion.div>

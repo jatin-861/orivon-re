@@ -192,18 +192,15 @@
   * {
     border-color: var(--color-border);
   }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
     overflow-x: hidden;
   }
-
   h1 {
     font-family: var(--font-sans);
     font-weight: 700;
@@ -259,7 +256,6 @@
   .text-gradient {
     color: var(--color-foreground);
   }
-
   .bg-aurora {
     background: var(--gradient-aurora);
   }
@@ -271,7 +267,6 @@
   .font-display {
     font-family: var(--font-display);
   }
-
   .font-body {
     font-family: var(--font-body);
   }
@@ -302,7 +297,6 @@
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-
   @keyframes float {
     0%,
     100% {
@@ -333,6 +327,84 @@
 
   .font-mono {
     font-family: var(--font-mono);
+  }
+
+  /* Custom Awwwards Cursor gated by media hover */
+  @media (hover: hover) and (pointer: fine) {
+    body,
+    a,
+    button,
+    [role="button"] {
+      cursor: none !important;
+    }
+    input,
+    select,
+    textarea {
+      cursor: auto !important;
+    }
+  }
+
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--brand-pink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition:
+      transform 0.1s ease-out,
+      width 0.2s,
+      height 0.2s,
+      background-color 0.2s;
+  }
+
+  .custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--color-foreground);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition:
+      width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+      height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+      border-color 0.3s,
+      background-color 0.3s;
+  }
+
+  .custom-cursor-ring.hover-active {
+    width: 80px;
+    height: 80px;
+    border-color: transparent;
+    background-color: oklch(1 0 0 / 0.95);
+    mix-blend-mode: normal;
+  }
+
+  .custom-cursor-text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #0c0d10;
+    opacity: 0;
+    transform: scale(0.6);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-transform: uppercase;
   }
 
   .animated-title {
@@ -488,5 +560,50 @@
   50% {
     transform: translateY(66%) scale(0.65);
     opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  body,
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: auto !important;
+  }
+
+  .marquee {
+    animation: none !important;
+    width: auto !important;
+    display: block !important;
+  }
+
+  .animate-float {
+    animation: none !important;
+  }
+
+  a:active,
+  button:active,
+  [role="button"]:active,
+  [data-clickable]:active {
+    transform: none !important;
   }
 }

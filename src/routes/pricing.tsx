@@ -158,7 +158,7 @@ function PricingPage() {
                     ${yearly ? p.yearlyPrice : p.price}k
                   </span>
                   <span className={cn("text-xs font-mono pb-2", subLabelClass)}>
-                    /{yearly ? "year" : "month"}
+                    /{yearly ? "year" : "engagement"}
                   </span>
                 </div>
 

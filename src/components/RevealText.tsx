@@ -49,20 +49,24 @@ export const RevealText = ({ text, className, delay = 0, as: Tag = "h2" }: Props
   }, [text, delay]);
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <Tag ref={ref as any} className={cn("inline-block", className)}>
-      {text.split(" ").map((word, wi) => (
-        <span key={wi} className="inline-block overflow-hidden mr-[0.2em] align-bottom pb-[0.05em]">
-          {word.split("").map((c, ci) => (
-            <span
-              key={ci}
-              className="reveal-char inline-block"
-              style={{ willChange: "transform, opacity" }}
-            >
-              {c}
-            </span>
-          ))}
-        </span>
-      ))}
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
+        {text.split(" ").map((word, wi) => (
+          <span key={wi} className="inline-block overflow-hidden mr-[0.2em] align-bottom pb-[0.05em]">
+            {word.split("").map((c, ci) => (
+              <span
+                key={ci}
+                className="reveal-char inline-block"
+                style={{ willChange: "transform, opacity" }}
+              >
+                {c}
+              </span>
+            ))}
+          </span>
+        ))}
+      </span>
     </Tag>
   );
 };
