@@ -4,6 +4,7 @@ import { ArrowRight, Palette, Code2, Sparkles, Camera, ShoppingBag, LineChart } 
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { RevealText } from "@/components/RevealText";
 import { ComponentLab } from "@/components/skills/ComponentLab";
+import { BentoTilt } from "@/components/BentoTilt";
 
 export const Route = createFileRoute("/services")({
   component: Services,
@@ -73,20 +74,23 @@ function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="h-full"
             >
-              <SpotlightCard className="p-8 h-full">
-                <Icon size={28} className="text-[var(--brand-pink)] mb-6" />
-                <h3 className="font-display text-2xl font-bold mb-3">{title}</h3>
-                <p className="text-muted-foreground mb-6">{copy}</p>
-                <ul className="space-y-2 text-sm">
-                  {items.map((it) => (
-                    <li key={it} className="flex items-center gap-2">
-                      <span className="h-1 w-1 rounded-full bg-[var(--brand-pink)]" />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </SpotlightCard>
+              <BentoTilt className="h-full w-full">
+                <SpotlightCard className="p-8 h-full w-full">
+                  <Icon size={28} className="text-[var(--brand-pink)] mb-6" />
+                  <h3 className="font-display text-2xl font-bold mb-3">{title}</h3>
+                  <p className="text-muted-foreground mb-6">{copy}</p>
+                  <ul className="space-y-2 text-sm">
+                    {items.map((it) => (
+                      <li key={it} className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-[var(--brand-pink)]" />
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </SpotlightCard>
+              </BentoTilt>
             </motion.div>
           ))}
         </div>

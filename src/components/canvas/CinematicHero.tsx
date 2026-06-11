@@ -26,6 +26,36 @@ export const CinematicHero = () => {
           scrub: true,
         },
       });
+
+      // Entry text reveal animation
+      const hasSeenPreloader =
+        typeof window !== "undefined" && sessionStorage.getItem("orivon-preloader-seen");
+      const delay = hasSeenPreloader ? 0.2 : 2.5;
+
+      gsap.from(".hero-heading", {
+        y: 120,
+        opacity: 0,
+        duration: 1.4,
+        stagger: 0.15,
+        ease: "power4.out",
+        delay: delay,
+      });
+
+      gsap.from(".hero-desc", {
+        opacity: 0,
+        y: 20,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: delay + 0.45,
+      });
+
+      gsap.from(".hero-btn", {
+        opacity: 0,
+        y: 20,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: delay + 0.6,
+      });
     });
 
     return () => ctx.revert();
@@ -62,21 +92,23 @@ export const CinematicHero = () => {
               <span className="font-serif italic text-secondary font-normal lowercase">n</span>E
             </h1>
 
-            <p className="mb-8 mt-4 max-w-sm font-sans text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="hero-desc mb-8 mt-4 max-w-sm font-sans text-muted-foreground text-sm sm:text-base leading-relaxed">
               Crafting tactile digital products <br /> Shaping aesthetic brand narratives
             </p>
 
-            <Button
-              id="watch-work"
-              title="Explore Work"
-              leftIcon={
-                <Compass
-                  className="h-4 w-4 text-secondary animate-spin"
-                  style={{ animationDuration: "6s" }}
-                />
-              }
-              containerClass="bg-primary text-primary-foreground hover:opacity-90 flex items-center gap-1.5 pointer-events-auto shadow-glow-cyan"
-            />
+            <div className="hero-btn inline-block">
+              <Button
+                id="watch-work"
+                title="Explore Work"
+                leftIcon={
+                  <Compass
+                    className="h-4 w-4 text-secondary animate-spin"
+                    style={{ animationDuration: "6s" }}
+                  />
+                }
+                containerClass="bg-primary text-primary-foreground hover:opacity-90 flex items-center gap-1.5 pointer-events-auto shadow-glow-cyan"
+              />
+            </div>
           </div>
         </div>
       </div>

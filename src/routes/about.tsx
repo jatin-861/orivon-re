@@ -7,6 +7,7 @@ import { RevealText } from "@/components/RevealText";
 import { Marquee } from "@/components/Marquee";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { AnimatedTestimonials } from "@/components/AnimatedTestimonials";
+import { BentoTilt } from "@/components/BentoTilt";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -311,12 +312,14 @@ function About() {
             { t: "Transparency", c: "Direct conversations, clear scopes, and zero jargon." },
             { t: "Conviction", c: "We believe in what we build and design for longevity." },
           ].map((v) => (
-            <SpotlightCard key={v.t} className="p-8 bg-[var(--card)] border border-border">
-              <h3 className="font-serif text-2xl font-normal mb-3 text-[var(--brand-pink)]">
-                {v.t}
-              </h3>
-              <p className="text-muted-foreground text-sm font-sans leading-relaxed">{v.c}</p>
-            </SpotlightCard>
+            <BentoTilt key={v.t} className="h-full w-full">
+              <SpotlightCard className="p-8 bg-[var(--card)] border border-border h-full w-full">
+                <h3 className="font-serif text-2xl font-normal mb-3 text-[var(--brand-pink)]">
+                  {v.t}
+                </h3>
+                <p className="text-muted-foreground text-sm font-sans leading-relaxed">{v.c}</p>
+              </SpotlightCard>
+            </BentoTilt>
           ))}
         </div>
       </div>

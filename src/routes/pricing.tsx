@@ -5,6 +5,7 @@ import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { RevealText } from "@/components/RevealText";
 import { NeonButton } from "@/components/ui/neon-button";
+import { BentoTilt } from "@/components/BentoTilt";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -139,67 +140,73 @@ function PricingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={cn(
-                "relative rounded-xl p-8 md:p-10 border transition-all flex flex-col justify-between",
-                cardClass,
-              )}
+              className="h-full flex flex-col"
             >
-              {p.popular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[var(--brand-pink)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest font-mono">
-                  Most loved
-                </span>
-              )}
-
-              <div>
-                <h3 className="font-display text-2xl md:text-3xl font-bold">{p.name}</h3>
-
-                <div className="mt-6 flex items-end gap-1">
-                  <span className="font-display text-6xl font-bold text-[var(--brand-pink)]">
-                    ${yearly ? p.yearlyPrice : p.price}k
-                  </span>
-                  <span className={cn("text-xs font-mono pb-2", subLabelClass)}>
-                    /{yearly ? "year" : "engagement"}
-                  </span>
-                </div>
-
-                <p className={cn("mt-4 text-sm leading-relaxed", descClass)}>{p.description}</p>
-              </div>
-
-              <div>
-                <NeonButton
-                  variant={p.popular ? "solid" : "default"}
-                  size="lg"
+              <BentoTilt className="h-full flex flex-col w-full">
+                <div
                   className={cn(
-                    "mt-8 w-full",
-                    p.popular && "bg-white text-black hover:bg-white/90",
+                    "relative rounded-xl p-8 md:p-10 border transition-all flex flex-col justify-between h-full w-full",
+                    cardClass,
                   )}
                 >
-                  {p.cta}
-                </NeonButton>
+                  {p.popular && (
+                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[var(--brand-pink)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest font-mono">
+                      Most loved
+                    </span>
+                  )}
 
-                <div className="mt-8 space-y-3">
-                  <p
-                    className={cn(
-                      "text-[10px] font-mono uppercase tracking-widest mb-3",
-                      subLabelClass,
-                    )}
-                  >
-                    {p.includes[0]}
-                  </p>
-                  {p.includes.slice(1).map((f) => (
-                    <div key={f} className="flex items-start gap-3 text-sm">
-                      <Check
-                        size={16}
-                        className={cn(
-                          "mt-0.5 shrink-0",
-                          p.popular ? "text-white" : "text-[var(--brand-pink)]",
-                        )}
-                      />
-                      <span className="opacity-90">{f}</span>
+                  <div>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold">{p.name}</h3>
+
+                    <div className="mt-6 flex items-end gap-1">
+                      <span className="font-display text-6xl font-bold text-[var(--brand-pink)]">
+                        ${yearly ? p.yearlyPrice : p.price}k
+                      </span>
+                      <span className={cn("text-xs font-mono pb-2", subLabelClass)}>
+                        /{yearly ? "year" : "engagement"}
+                      </span>
                     </div>
-                  ))}
+
+                    <p className={cn("mt-4 text-sm leading-relaxed", descClass)}>{p.description}</p>
+                  </div>
+
+                  <div>
+                    <NeonButton
+                      variant={p.popular ? "solid" : "default"}
+                      size="lg"
+                      className={cn(
+                        "mt-8 w-full",
+                        p.popular && "bg-white text-black hover:bg-white/90",
+                      )}
+                    >
+                      {p.cta}
+                    </NeonButton>
+
+                    <div className="mt-8 space-y-3">
+                      <p
+                        className={cn(
+                          "text-[10px] font-mono uppercase tracking-widest mb-3",
+                          subLabelClass,
+                        )}
+                      >
+                        {p.includes[0]}
+                      </p>
+                      {p.includes.slice(1).map((f) => (
+                        <div key={f} className="flex items-start gap-3 text-sm">
+                          <Check
+                            size={16}
+                            className={cn(
+                              "mt-0.5 shrink-0",
+                              p.popular ? "text-white" : "text-[var(--brand-pink)]",
+                            )}
+                          />
+                          <span className="opacity-90">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </BentoTilt>
             </motion.div>
           );
         })}
