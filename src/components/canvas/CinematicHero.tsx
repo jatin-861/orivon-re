@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Compass } from "lucide-react";
 import { Button } from "../Button";
 import { motion } from "framer-motion";
-import { InteractiveGrid2D } from "../InteractiveGrid2D";
+import { LusionSandbox } from "../LusionSandbox";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,9 +76,9 @@ export const CinematicHero = () => {
           />
         </div>
 
-        {/* Floating interactive 2D coordinates grid */}
-        <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-          <InteractiveGrid2D />
+        {/* Lusion Sandbox interactive particles background */}
+        <div className="absolute inset-0 z-10">
+          <LusionSandbox isHeroBg />
         </div>
 
         <h1 className="hero-heading absolute bottom-5 right-5 z-40 text-foreground/95 font-sans font-black uppercase text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none select-none pointer-events-none">
