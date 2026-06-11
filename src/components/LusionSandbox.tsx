@@ -133,7 +133,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isVisible = useRef(true);
   const [mode, setMode] = useState<"repel" | "attract" | "gravity">("repel");
-  const [shape, setShape] = useState<ShapeType>("orivon");
+  const [shape, setShape] = useState<ShapeType>(isHeroBg ? "grid" : "orivon");
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -442,66 +442,6 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
         className="absolute inset-0 w-full h-full -z-10 overflow-hidden bg-background"
       >
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full cursor-crosshair" />
-
-        {/* Floating HUD controls at the bottom center of the hero section */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col md:flex-row items-center gap-3 md:gap-4 bg-background/60 backdrop-blur-xl border border-border p-2 md:px-4 md:py-2 rounded-2xl md:rounded-full shadow-elegant hud-control max-w-[90vw] md:max-w-none">
-          <div className="flex items-center gap-1.5">
-            <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest mr-1">
-              PHYS:
-            </span>
-            <div className="flex gap-0.5">
-              {(["repel", "attract", "gravity"] as const).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setMode(m)}
-                  className={`px-2.5 py-1 rounded-full text-[9px] font-mono tracking-wider font-semibold uppercase transition-all flex items-center gap-1 cursor-pointer ${
-                    mode === m
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {m === "repel" && <Shield size={8} />}
-                  {m === "attract" && <Zap size={8} />}
-                  {m === "gravity" && <Play size={8} />}
-                  {m}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <span className="hidden md:block w-px h-4 bg-border" />
-
-          <div className="flex items-center gap-1.5">
-            <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest mr-1">
-              SHAPE:
-            </span>
-            <div className="flex gap-0.5">
-              {(["orivon", "craft", "grid", "free"] as const).map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setShape(s)}
-                  className={`px-2.5 py-1 rounded-full text-[9px] font-mono tracking-wider font-semibold uppercase transition-all cursor-pointer ${
-                    shape === s
-                      ? "bg-[var(--primary)] text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <span className="hidden md:block w-px h-4 bg-border" />
-
-          <button
-            onClick={handleReset}
-            className="p-1.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
-            aria-label="Reset simulation"
-          >
-            <RotateCcw size={10} />
-          </button>
-        </div>
       </div>
     );
   }
