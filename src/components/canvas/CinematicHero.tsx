@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Compass } from "lucide-react";
 import { Button } from "../Button";
 import { motion } from "framer-motion";
-import { InteractiveCrystal } from "./InteractiveCrystal";
+import { InteractiveParticles2D } from "../InteractiveParticles2D";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,16 +46,9 @@ export const CinematicHero = () => {
           />
         </div>
 
-        {/* Floating WebGL interactive crystal */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.75 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] pointer-events-auto"
-          >
-            <InteractiveCrystal />
-          </motion.div>
+        {/* Floating interactive 2D constellation particles */}
+        <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+          <InteractiveParticles2D />
         </div>
 
         <h1 className="hero-heading absolute bottom-5 right-5 z-40 text-foreground/95 font-sans font-black uppercase text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none select-none pointer-events-none">

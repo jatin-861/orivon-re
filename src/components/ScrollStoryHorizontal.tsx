@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
 import { Project } from "@/data/projects";
 import { SpotlightCard } from "./SpotlightCard";
-import { InteractiveJacks } from "./canvas/InteractiveJacks";
+import { InteractiveGrid2D } from "./InteractiveGrid2D";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -155,9 +155,9 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       ref={containerRef}
       className="relative h-[100dvh] overflow-hidden bg-background transition-colors duration-700"
     >
-      {/* WebGL interactive background jacks */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none z-0">
-        <InteractiveJacks />
+      {/* 2D interactive background grid */}
+      <div className="absolute inset-0 opacity-25 pointer-events-none z-0">
+        <InteractiveGrid2D />
       </div>
 
       {/* Dynamic Color Bleed Overlay */}
