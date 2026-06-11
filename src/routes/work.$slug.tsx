@@ -94,6 +94,7 @@ const brandColors: Record<string, { bg: string; text: string; details: string }>
 };
 
 const brandCovers: Record<string, string> = {
+  "lumen-finance":
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=65",
   "noctis-music":
     "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=800&q=65",

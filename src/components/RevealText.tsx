@@ -54,7 +54,10 @@ export const RevealText = ({ text, className, delay = 0, as: Tag = "h2" }: Props
       <span className="sr-only">{text}</span>
       <span aria-hidden="true">
         {text.split(" ").map((word, wi) => (
-          <span key={wi} className="inline-block overflow-hidden mr-[0.2em] align-bottom pb-[0.05em]">
+          <span
+            key={wi}
+            className="inline-block overflow-hidden mr-[0.2em] align-bottom pb-[0.05em]"
+          >
             {word.split("").map((c, ci) => (
               <span
                 key={ci}

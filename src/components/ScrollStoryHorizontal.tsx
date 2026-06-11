@@ -43,7 +43,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       });
 
       // 2. Card Skew based on Scroll Velocity
-      let skewProxy = { skew: 0 };
+      const skewProxy = { skew: 0 };
       const skewSetter = gsap.quickSetter("[data-skew-card]", "skewX", "deg");
       const clamp = gsap.utils.clamp(-6, 6);
 
@@ -79,7 +79,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       ];
 
       const panels = gsap.utils.toArray("[data-panel]");
-      panels.forEach((panel: any, i: number) => {
+      panels.forEach((panel: Element, i: number) => {
         ScrollTrigger.create({
           trigger: panel,
           containerAnimation: horizontalTween,

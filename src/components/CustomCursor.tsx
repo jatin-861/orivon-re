@@ -267,7 +267,7 @@ export function CustomCursor() {
       let closest: HTMLElement | null = null;
       let minDst = Infinity;
 
-      magneticElements.forEach((el) => {
+      for (const el of magneticElements) {
         const htmlEl = el as HTMLElement;
         const rect = htmlEl.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
@@ -277,7 +277,7 @@ export function CustomCursor() {
           minDst = dst;
           closest = htmlEl;
         }
-      });
+      }
 
       if (closest !== activeTarget) {
         activeTarget = closest;

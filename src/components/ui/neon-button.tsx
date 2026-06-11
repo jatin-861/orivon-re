@@ -28,7 +28,7 @@ const buttonVariants = cva(
 export interface NeonButtonProps
   extends React.ButtonHTMLAttributes<any>, VariantProps<typeof buttonVariants> {
   neon?: boolean;
-  as?: React.ElementType;
+  as?: any;
 }
 
 export const NeonButton = React.forwardRef<any, NeonButtonProps>(

@@ -22,7 +22,9 @@ function LoginPage() {
           if (username === "admin" && password === "1234") {
             try {
               localStorage.setItem("orivon_auth", "1");
-            } catch {}
+            } catch {
+              // Ignore localStorage quota or accessibility errors
+            }
             navigate({ to: "/" });
           } else {
             setError("Invalid credentials. Try admin / 1234.");

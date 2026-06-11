@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef, useEffect, useRef, type ReactNode, type ElementType } from "react";
 import { gsap } from "gsap";
 import { cn } from "@/lib/utils";

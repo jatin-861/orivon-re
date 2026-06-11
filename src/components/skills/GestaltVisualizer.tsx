@@ -20,12 +20,13 @@ export function GestaltVisualizer() {
     const col = idx % 4;
 
     switch (mode) {
-      case "proximity":
+      case "proximity": {
         // Shift columns and rows closer into two groups
         const shiftX = col >= 2 ? 14 : -6;
         const shiftY = row >= 2 ? 14 : -6;
         style.transform = `translate(${shiftX}px, ${shiftY}px)`;
         break;
+      }
 
       case "similarity":
         // Alternate shapes and colors
@@ -37,7 +38,7 @@ export function GestaltVisualizer() {
         }
         break;
 
-      case "continuity":
+      case "continuity": {
         // Highlight diagonal alignment curve, dim other points
         const isDiagonal = row === col;
         if (isDiagonal) {
@@ -48,6 +49,7 @@ export function GestaltVisualizer() {
           style.opacity = 0.25;
         }
         break;
+      }
 
       default:
         // normal

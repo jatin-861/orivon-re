@@ -163,20 +163,10 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
   }, []);
 
   // Initialize particles
-<<<<<<< HEAD
-  const initParticles = (width: number, height: number) => {
-    const arr: Particle[] = [];
-    const colors = ["#e03d67", "#1a5b5c", "#d84b36", "#a45f94", "#111111"];
-
-    for (let i = 0; i < particleCount; i++) {
-      const rx = Math.random() * width;
-      const ry = Math.random() * height;
-      arr.push({
-        x: rx,
   const initParticles = useCallback(
     (width: number, height: number) => {
       const arr: Particle[] = [];
-      const colors = ["#e0537d", "#9c8bc8", "#e59f7b", "#91c4b5", "#eaeaea"];
+      const colors = ["#e03d67", "#1a5b5c", "#d84b36", "#a45f94", "#111111"];
 
       for (let i = 0; i < particleCount; i++) {
         const rx = Math.random() * width;

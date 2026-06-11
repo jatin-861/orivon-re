@@ -119,7 +119,9 @@ function CapabilitiesBentoGrid() {
               title={
                 <>
                   Tactil
-                  <span className="font-serif italic text-secondary font-normal lowercase">e</span>{" "}
+                  <span className="font-serif italic text-secondary font-normal lowercase">
+                    e
+                  </span>{" "}
                   Web & Product
                 </>
               }
@@ -306,7 +308,6 @@ function StudioManifesto() {
     </section>
   );
 }
-
 
 interface StatCounterProps {
   value: string;
