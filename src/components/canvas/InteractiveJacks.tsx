@@ -181,7 +181,7 @@ function Scene({ count }: { count: number }) {
 export function InteractiveJacks() {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-transparent z-0">
-      <Canvas camera={{ position: [0, 0, 5], fov: 55 }} style={{ pointerEvents: "auto" }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 55 }} style={{ pointerEvents: "none" }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[6, 6, 4]} intensity={1.5} />
         <pointLight position={[-6, -6, -2]} intensity={0.4} />

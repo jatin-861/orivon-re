@@ -77,12 +77,33 @@ function Index() {
 }
 
 function CapabilitiesBentoGrid() {
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Staggered fade-in & 3D tilt floating up for bento cards
+      gsap.from(".bento-animate-item", {
+        y: 70,
+        opacity: 0,
+        rotateX: 8,
+        transformPerspective: 1000,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".bento-grid-trigger",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       className="bg-transparent py-32 px-6 relative z-10 border-t border-border/50"
       data-cursor-text="SERVICES"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="bento-grid-trigger mx-auto max-w-7xl">
         <div className="px-5 mb-24 max-w-3xl">
           <span className="text-xs text-secondary font-mono tracking-widest uppercase mb-4 block">
             — Capabilities
@@ -96,7 +117,7 @@ function CapabilitiesBentoGrid() {
         </div>
 
         {/* Main large Bento Card */}
-        <BentoTilt className="relative mb-7 h-[500px] w-full overflow-hidden rounded-xl">
+        <BentoTilt className="bento-animate-item relative mb-7 h-[500px] w-full overflow-hidden rounded-xl">
           <BentoCard
             title={
               <>
@@ -114,7 +135,7 @@ function CapabilitiesBentoGrid() {
 
         {/* 2x3 Grid - Responsive layout structure */}
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-7 h-auto md:h-[150vh] w-full">
-          <BentoTilt className="relative col-span-1 md:col-span-1 md:row-span-2 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[400px] md:min-h-[450px]">
+          <BentoTilt className="bento-animate-item relative col-span-1 md:col-span-1 md:row-span-2 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[400px] md:min-h-[450px]">
             <BentoCard
               title={
                 <>
@@ -136,7 +157,7 @@ function CapabilitiesBentoGrid() {
             </BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
             <BentoCard
               title={
                 <>
@@ -154,7 +175,7 @@ function CapabilitiesBentoGrid() {
             </BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
             <BentoCard
               title={
                 <>
@@ -172,7 +193,7 @@ function CapabilitiesBentoGrid() {
             </BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[200px]">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl min-h-[200px]">
             <div className="flex flex-col justify-between bg-secondary p-6 text-white h-full">
               <h3 className="text-3xl font-serif leading-none tracking-tight max-w-xs uppercase">
                 M<span className="font-serif italic text-white font-normal lowercase">o</span>re c
@@ -184,7 +205,7 @@ function CapabilitiesBentoGrid() {
             </div>
           </BentoTilt>
 
-          <BentoTilt className="relative col-span-1 overflow-hidden rounded-xl bg-card border border-border/10 min-h-[200px] transition-transform duration-300 ease-out">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl bg-card border border-border/10 min-h-[200px] transition-transform duration-300 ease-out">
             <BentoCard
               title={
                 <>
