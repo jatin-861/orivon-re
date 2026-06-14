@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 
 interface TechNode {
   label: string;
@@ -26,8 +27,13 @@ const TECH_LABELS = [
 ];
 
 export function InteractiveTechStack2D() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [canvasRef, isInView] = useInView({ threshold: 0.01 });
   const mouse = useRef({ x: -1000, y: -1000, active: false });
+  const isInViewRef = useRef(isInView);
+
+  useEffect(() => {
+    isInViewRef.current = isInView;
+  }, [isInView]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -61,8 +67,8 @@ export function InteractiveTechStack2D() {
         const x = w / 2 + Math.cos(angle) * dist;
         const y = h / 2 + Math.sin(angle) * dist;
 
-        // Alternate neon colors from our theme
-        const glowColor = i % 2 === 0 ? "rgba(111, 255, 233, " : "rgba(91, 192, 190, ";
+        // Alternate colors: Terracotta and Amber
+        const glowColor = i % 2 === 0 ? "rgba(199, 91, 58, " : "rgba(139, 94, 60, ";
 
         nodes.push({
           label,
@@ -77,6 +83,10 @@ export function InteractiveTechStack2D() {
     };
 
     const animate = () => {
+      if (!isInViewRef.current) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const w = canvas.width;
       const h = canvas.height;
@@ -133,13 +143,13 @@ export function InteractiveTechStack2D() {
             n1.y -= ny * overlap * 0.5;
             n2.x += nx * overlap * 0.5;
             n2.y += ny * overlap * 0.5;
-
-            // Reflect velocities
-            const bounce = 0.35;
-            n1.vx -= nx * overlap * bounce;
-            n1.vy -= ny * overlap * bounce;
-            n2.vx += nx * overlap * bounce;
-            n2.vy += ny * overlap * bounce;
+            nresolveVelocityReflect: {
+              const bounce = 0.35;
+              n1.vx -= nx * overlap * bounce;
+              n1.vy -= ny * overlap * bounce;
+              n2.vx += nx * overlap * bounce;
+              n2.vy += ny * overlap * bounce;
+            }
           }
         }
       }
@@ -175,8 +185,8 @@ export function InteractiveTechStack2D() {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
 
-        // Background fill matching theme indigo cards
-        ctx.fillStyle = "rgba(28, 37, 65, 0.75)";
+        // Background fill matching warm linen
+        ctx.fillStyle = "rgba(240, 234, 224, 0.9)";
         ctx.fill();
 
         // Outline glow
@@ -185,7 +195,7 @@ export function InteractiveTechStack2D() {
         ctx.stroke();
 
         // Label text render
-        ctx.fillStyle = idx % 2 === 0 ? "#6fffe9" : "#5bc0be"; // Cyan/Teal
+        ctx.fillStyle = idx % 2 === 0 ? "#C75B3A" : "#1A1A1A"; // Terracotta/Charcoal
         ctx.font = "bold 11px monospace";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";

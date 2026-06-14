@@ -103,7 +103,7 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
         className="pointer-events-none absolute inset-0 transition-opacity duration-500 z-10"
         style={{
           opacity: hoverOpacity * 0.12,
-          background: `radial-gradient(400px circle at ${cursorPosition.x}px ${cursorPosition.y}px, var(--cyan-glow, #00ffff), transparent)`,
+          background: `radial-gradient(400px circle at ${cursorPosition.x}px ${cursorPosition.y}px, var(--cyan-glow, rgba(199, 91, 58, 0.08)), transparent)`,
         }}
       />
 
@@ -132,7 +132,7 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
               className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
               style={{
                 opacity: buttonHoverOpacity,
-                background: `radial-gradient(80px circle at ${buttonCursorPosition.x}px ${buttonCursorPosition.y}px, var(--cyan-glow), transparent)`,
+                background: `radial-gradient(80px circle at ${buttonCursorPosition.x}px ${buttonCursorPosition.y}px, var(--cyan-glow, rgba(199, 91, 58, 0.08)), transparent)`,
               }}
             />
             <ArrowUpRight className="relative z-20 h-3.5 w-3.5 text-secondary" />

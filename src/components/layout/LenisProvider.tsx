@@ -31,6 +31,7 @@ export function LenisProvider({ children }: LenisProviderProps) {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
+      autoRaf: false, // Prevent double-RAF syncing
     });
 
     lenisRef.current = lenis;
@@ -38,26 +39,6 @@ export function LenisProvider({ children }: LenisProviderProps) {
     // Synchronize Lenis scroll event with ScrollTrigger updates
     lenis.on("scroll", () => {
       ScrollTrigger.update();
-    });
-
-    // Tell ScrollTrigger to use Lenis for scrolling (connecting the two)
-    ScrollTrigger.scrollerProxy(document.body, {
-      scrollTop(value) {
-        if (arguments.length) {
-          lenis.scrollTo(value as number, { immediate: true });
-          return value;
-        }
-        return lenis.scroll;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: document.body.style.transform ? "transform" : "fixed",
     });
 
     // Sync GSAP ticker with Lenis requestAnimationFrame loop

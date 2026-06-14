@@ -20,6 +20,9 @@ export default defineConfig({
     },
     dedupe: ["react", "react-dom", "@tanstack/react-router"],
   },
+  optimizeDeps: {
+    include: ["react", "react-dom", "gsap", "lenis", "framer-motion", "animejs"],
+  },
   build: {
     rollupOptions: {
       output: {
@@ -27,6 +30,7 @@ export default defineConfig({
           three: ["three", "@react-three/fiber", "@react-three/drei"],
           gsap: ["gsap"],
           framer: ["framer-motion"],
+          anime: ["animejs"],
         },
       },
     },

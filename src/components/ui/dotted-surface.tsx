@@ -1,199 +1,194 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 type DottedSurfaceProps = Omit<React.ComponentProps<"div">, "ref">;
 
 export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
-  // Safe hook evaluation if ThemeProvider is not registered
-  const themeContext = useTheme();
-  const theme = themeContext ? themeContext.theme : "dark";
-
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<{
-    scene: THREE.Scene;
-    camera: THREE.PerspectiveCamera;
-    renderer: THREE.WebGLRenderer;
-    particles: THREE.Points[];
-    animationId: number;
-    count: number;
-  } | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const SEPARATION = 150;
-    const AMOUNTX = 40;
-    const AMOUNTY = 60;
+    // Optimized sizing & density parameters
+    const SEPARATION = 160;
+    const AMOUNTX = 30; // Reduced from 40 for optimal performance
+    const AMOUNTY = 45; // Reduced from 60 for optimal performance
 
-    // Scene setup
+    // 1. Scene & Fog Setup
     const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xf4f6fa, 1500, 6000);
 
-    // Initial theme state check
-    let isDark = document.documentElement.classList.contains("dark");
-    scene.fog = new THREE.Fog(isDark ? 0x0b132b : 0xf4f6fa, 2000, 10000);
-
+    // Camera setup
     const camera = new THREE.PerspectiveCamera(
       60,
       window.innerWidth / window.innerHeight,
       1,
-      10000,
+      10000
     );
-    camera.position.set(0, 355, 1220);
+    camera.position.set(0, 360, 1100);
 
+    // Renderer setup (clamped pixel ratio for performance on retina screens)
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
+      powerPreference: "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(scene.fog.color, 0);
+    renderer.setClearColor(0x000000, 0); // transparent background
 
-    containerRef.current.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
 
-    // Create particles geometry
-    const positions: number[] = [];
-    const colors: number[] = [];
-    const geometry = new THREE.BufferGeometry();
+    // 2. Geometry creation
+    const positions = new Float32Array(AMOUNTX * AMOUNTY * 3);
+    const colors = new Float32Array(AMOUNTX * AMOUNTY * 3);
 
-    // Normalized color buffers
-    const neonIceColor = [111 / 255, 255 / 255, 233 / 255]; // Dark theme Cyan glow
-    const lightModeColor = [11 / 255, 19 / 255, 43 / 255]; // Light theme Dark Blue dots
+    // Brand colors mapping: Warm Terracotta (#C75B3A)
+    const terracottaColor = new THREE.Color("#C75B3A");
 
+    let i = 0;
     for (let ix = 0; ix < AMOUNTX; ix++) {
       for (let iy = 0; iy < AMOUNTY; iy++) {
         const x = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
-        const y = 0;
         const z = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
 
-        positions.push(x, y, z);
-        const activeColor = isDark ? neonIceColor : lightModeColor;
-        colors.push(activeColor[0], activeColor[1], activeColor[2]);
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = 0; // Will be animated on GPU
+        positions[i * 3 + 2] = z;
+
+        colors[i * 3] = terracottaColor.r;
+        colors[i * 3 + 1] = terracottaColor.g;
+        colors[i * 3 + 2] = terracottaColor.b;
+        i++;
       }
     }
 
-    geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-    geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-    const material = new THREE.PointsMaterial({
-      size: 5.5,
-      vertexColors: true,
+    // 3. Custom Vertex Shader for GPU-based wave animation
+    const vertexShader = `
+      uniform float uTime;
+      varying vec3 vColor;
+      void main() {
+        vColor = color;
+        vec3 pos = position;
+        
+        // Compute waves in parallel on GPU using trigonometric functions
+        float wave1 = sin(pos.x * 0.0025 + uTime * 0.8) * 45.0;
+        float wave2 = cos(pos.z * 0.0035 + uTime * 0.6) * 40.0;
+        pos.y = wave1 + wave2;
+        
+        vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+        gl_Position = projectionMatrix * mvPosition;
+        
+        // Attenuate dot size based on distance from camera
+        gl_PointSize = 6.0 * (350.0 / -mvPosition.z);
+      }
+    `;
+
+    // Custom Fragment Shader to render clean circular dots
+    const fragmentShader = `
+      varying vec3 vColor;
+      void main() {
+        // Draw round particles instead of squares
+        vec2 center = gl_PointCoord - vec2(0.5);
+        if (length(center) > 0.5) discard;
+        
+        // Circular soft fall-off edge
+        float strength = 1.0 - (length(center) * 2.0);
+        gl_FragColor = vec4(vColor, strength * 0.22); // Subtle 22% opacity
+      }
+    `;
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+      },
+      vertexShader,
+      fragmentShader,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.2, // Subtle opacity differences for dark/light modes
-      sizeAttenuation: true,
+      depthWrite: false,
+      blending: THREE.NormalBlending,
+      vertexColors: true,
     });
 
     const points = new THREE.Points(geometry, material);
     scene.add(points);
 
-    let count = 0;
-    let animationId = 0;
+    // 4. Animation Loop & Lifecycle
+    let animId = 0;
+    const clock = new THREE.Clock();
+    let isPageFocused = true;
+    let isScrolledDeep = false;
 
-    const animate = () => {
-      animationId = requestAnimationFrame(animate);
+    const tick = () => {
+      animId = requestAnimationFrame(tick);
+      
+      // OPTIMIZATION: Only render if tab is focused and page is not scrolled deep
+      if (!isPageFocused || isScrolledDeep) return;
 
-      const positionAttribute = geometry.attributes.position;
-      const posArray = positionAttribute.array as Float32Array;
-
-      let i = 0;
-      for (let ix = 0; ix < AMOUNTX; ix++) {
-        for (let iy = 0; iy < AMOUNTY; iy++) {
-          const index = i * 3;
-          posArray[index + 1] =
-            Math.sin((ix + count) * 0.3) * 50 + Math.sin((iy + count) * 0.5) * 50;
-          i++;
-        }
-      }
-
-      positionAttribute.needsUpdate = true;
+      const elapsedTime = clock.getElapsedTime();
+      material.uniforms.uTime.value = elapsedTime;
       renderer.render(scene, camera);
-      count += 0.08;
     };
 
-    // Watch document element for light/dark theme class shifts
-    const observer = new MutationObserver(() => {
-      const currentDark = document.documentElement.classList.contains("dark");
-      if (currentDark !== isDark) {
-        isDark = currentDark;
+    // 5. Visibility and Scroll Listeners
+    const handleScroll = () => {
+      // Pause drawing if scrolled deep (e.g. past first viewport fold and solid panels cover backdrop)
+      isScrolledDeep = window.scrollY > window.innerHeight * 1.2;
+    };
 
-        // Update particle colors in buffer array
-        const colorAttribute = geometry.attributes.color;
-        const colorsArray = colorAttribute.array as Float32Array;
-        const targetColor = isDark ? neonIceColor : lightModeColor;
+    const handleFocus = () => { isPageFocused = true; };
+    const handleBlur = () => { isPageFocused = false; };
+    const handleVisibility = () => {
+      isPageFocused = document.visibilityState === "visible";
+    };
 
-        for (let k = 0; k < colorsArray.length; k += 3) {
-          colorsArray[k] = targetColor[0];
-          colorsArray[k + 1] = targetColor[1];
-          colorsArray[k + 2] = targetColor[2];
-        }
-        colorAttribute.needsUpdate = true;
-        material.opacity = isDark ? 0.35 : 0.2;
-        material.needsUpdate = true;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("blur", handleBlur);
+    document.addEventListener("visibilitychange", handleVisibility);
 
-        // Update fog and renderer clear colors
-        const bgColor = isDark ? 0x0b132b : 0xf4f6fa;
-        scene.fog = new THREE.Fog(bgColor, 2000, 10000);
-        renderer.setClearColor(bgColor, 0);
-      }
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
+    // 6. Window Resize Handler
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
-
     window.addEventListener("resize", handleResize);
-    animate();
 
-    sceneRef.current = {
-      scene,
-      camera,
-      renderer,
-      particles: [points],
-      animationId,
-      count,
-    };
+    // Start loop
+    tick();
 
+    // Clean up
     return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("blur", handleBlur);
+      document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
-      observer.disconnect();
 
-      if (sceneRef.current) {
-        cancelAnimationFrame(sceneRef.current.animationId);
-
-        sceneRef.current.scene.traverse((object) => {
-          if (object instanceof THREE.Points) {
-            object.geometry.dispose();
-            if (Array.isArray(object.material)) {
-              object.material.forEach((mat) => mat.dispose());
-            } else {
-              object.material.dispose();
-            }
-          }
-        });
-
-        sceneRef.current.renderer.dispose();
-
-        if (containerRef.current && sceneRef.current.renderer.domElement) {
-          containerRef.current.removeChild(sceneRef.current.renderer.domElement);
-        }
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
       }
+
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
     };
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className={cn("pointer-events-none fixed inset-0 -z-10", className)}
+      className={cn("pointer-events-none fixed inset-0 -z-10 bg-transparent overflow-hidden", className)}
       {...props}
     />
   );

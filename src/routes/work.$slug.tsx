@@ -66,7 +66,7 @@ export const Route = createFileRoute("/work/$slug")({
     return project;
   },
   notFoundComponent: () => (
-    <div className="min-h-screen pt-40 px-6 text-center bg-background">
+    <div className="min-h-screen pt-40 px-6 text-center">
       <h1 className="font-display text-5xl font-bold">Project not found</h1>
       <Link to="/work" className="mt-6 inline-flex text-primary">
         ← Back to work
@@ -119,7 +119,7 @@ function CaseStudy() {
   const coverUrl = brandCovers[p.slug];
 
   return (
-    <div className="pt-32 pb-24 bg-background text-foreground transition-colors duration-500">
+    <div className="pt-32 pb-24 text-foreground transition-colors duration-500">
       <div className="mx-auto max-w-7xl px-6">
         <Link
           to="/work"

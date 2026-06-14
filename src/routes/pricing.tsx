@@ -69,7 +69,7 @@ function PricingPage() {
   const [yearly, setYearly] = useState(false);
 
   return (
-    <div className="relative pt-40 pb-32 px-6 overflow-hidden bg-background text-foreground transition-colors duration-500">
+    <div className="relative pt-40 pb-32 px-6 overflow-hidden text-foreground transition-colors duration-500">
       <div className="absolute inset-0 bg-aurora opacity-40 pointer-events-none" />
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
 
@@ -159,7 +159,10 @@ function PricingPage() {
                     <h3 className="font-display text-2xl md:text-3xl font-bold">{p.name}</h3>
 
                     <div className="mt-6 flex items-end gap-1">
-                      <span className="font-display text-6xl font-bold text-[var(--brand-pink)]">
+                      <span className={cn(
+                        "font-display text-6xl font-bold",
+                        p.popular ? "text-white" : "text-[var(--brand-pink)]"
+                      )}>
                         ${yearly ? p.yearlyPrice : p.price}k
                       </span>
                       <span className={cn("text-xs font-mono pb-2", subLabelClass)}>

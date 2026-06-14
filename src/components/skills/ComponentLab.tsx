@@ -1,8 +1,39 @@
-import { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { MagneticButton } from "../MagneticButton";
 
 const TechStackCanvas = lazy(() => import("../canvas/TechStackCanvas"));
+
+class WebGLErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback?: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error("WebGL error caught by boundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        this.props.fallback || (
+          <div className="absolute inset-0 flex items-center justify-center bg-muted/20 text-xs font-mono text-muted-foreground p-4 text-center select-none">
+            WebGL interaction unavailable (context lost)
+          </div>
+        )
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export function ComponentLab() {
   // Glassmorphic states
@@ -182,9 +213,11 @@ export function ComponentLab() {
           </p>
         </div>
 
-        <div className="relative flex items-center justify-center min-h-48 border border-border/40 rounded-xl bg-neutral-950 overflow-hidden">
-          <Suspense fallback={<div className="absolute inset-0 bg-neutral-950/20 animate-pulse" />}>
-            <TechStackCanvas />
+        <div className="relative flex items-center justify-center min-h-48 border border-border/40 rounded-xl bg-muted/40 overflow-hidden">
+          <Suspense fallback={<div className="absolute inset-0 bg-muted/20 animate-pulse" />}>
+            <WebGLErrorBoundary>
+              <TechStackCanvas />
+            </WebGLErrorBoundary>
           </Suspense>
         </div>
 

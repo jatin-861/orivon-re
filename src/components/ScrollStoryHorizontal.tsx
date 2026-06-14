@@ -31,14 +31,14 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
     const ctx = gsap.context(() => {
       // 1. Horizontal Scroll Animation
       const horizontalTween = gsap.to(scrollSection, {
-        x: -scrollAmount,
+        x: () => -(scrollSection.scrollWidth - window.innerWidth),
         ease: "none",
         scrollTrigger: {
           trigger: container,
           pin: true,
           scrub: 1.2,
           start: "top top",
-          end: () => `+=${scrollAmount * 1.5}`,
+          end: () => `+=${(scrollSection.scrollWidth - window.innerWidth) * 1.5}`,
           invalidateOnRefresh: true,
         },
       });
@@ -131,14 +131,14 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
     return () => ctx.revert();
   }, [projects]);
 
-  // Premium, saturated brand backgrounds for individual cards
+  // Premium glassmorphic brand backgrounds with high-contrast text color combinations
   const bgClasses = [
-    "bg-[var(--brand-pink)] text-white border-pink-500/10",
-    "bg-[var(--brand-teal)] text-white border-teal-500/10",
-    "bg-[var(--brand-lavender)] text-black border-purple-500/10",
-    "bg-[var(--brand-peach)] text-black border-orange-500/10",
-    "bg-[var(--brand-ochre)] text-black border-yellow-500/10",
-    "bg-[var(--brand-coral)] text-white border-red-500/10",
+    "backdrop-blur-xl bg-[#C75B3A]/10 text-[#6E2A18] border-[#C75B3A]/20 shadow-[0_30px_60px_-15px_rgba(199,91,58,0.08)]",
+    "backdrop-blur-xl bg-[#4B6E6A]/10 text-[#213533] border-[#4B6E6A]/20 shadow-[0_30px_60px_-15px_rgba(75,110,106,0.08)]",
+    "backdrop-blur-xl bg-[#6A5B7B]/10 text-[#362B41] border-[#6A5B7B]/20 shadow-[0_30px_60px_-15px_rgba(106,91,123,0.08)]",
+    "backdrop-blur-xl bg-[#C37B68]/12 text-[#683427] border-[#C37B68]/20 shadow-[0_30px_60px_-15px_rgba(195,123,104,0.08)]",
+    "backdrop-blur-xl bg-[#B87830]/10 text-[#54330B] border-[#B87830]/20 shadow-[0_30px_60px_-15px_rgba(184,120,48,0.08)]",
+    "backdrop-blur-xl bg-[#D25E42]/10 text-[#712818] border-[#D25E42]/20 shadow-[0_30px_60px_-15px_rgba(210,94,66,0.08)]",
   ];
 
   const glowHues = [
@@ -163,7 +163,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       {/* Dynamic Color Bleed Overlay */}
       <div
         ref={bleedRef}
-        className="absolute inset-0 pointer-events-none transition-all duration-700 mix-blend-multiply dark:mix-blend-screen z-[1]"
+        className="absolute inset-0 pointer-events-none transition-all duration-700 mix-blend-multiply z-[1]"
       />
 
       {/* Slide Navigation & Info indicator */}
@@ -187,12 +187,12 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           data-panel
           className="w-screen h-[100dvh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
         >
-          <span className="text-sm uppercase tracking-[0.3em] text-[var(--cyan)] mb-4 block font-mono">
+          <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
             Selected Craft
           </span>
           <h2 className="font-display font-bold leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight">
             How we solve complex problems with{" "}
-            <span className="text-gradient-cyan">beautiful interfaces.</span>
+            <span className="text-secondary font-serif italic font-normal">beautiful interfaces.</span>
           </h2>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
             Every website we build is a storytelling engine. We design for clarity, feel, and
@@ -200,7 +200,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           </p>
           <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-foreground/50">
             <span>Scroll down or scroll wheel</span>
-            <span className="text-[var(--cyan)] text-lg animate-bounce-horizontal">→</span>
+            <span className="text-secondary text-lg animate-bounce-horizontal">→</span>
           </div>
         </div>
 

@@ -8,7 +8,7 @@ function ElegantShape({
   width = 400,
   height = 100,
   rotate = 0,
-  gradient = "from-white/[0.08]",
+  gradient = "from-foreground/[0.03]",
 }: {
   className?: string;
   delay?: number;
@@ -57,10 +57,10 @@ function ElegantShape({
             "absolute inset-0 rounded-full",
             "bg-gradient-to-r to-transparent",
             gradient,
-            "backdrop-blur-[2px] border-2 border-white/[0.12]",
-            "shadow-[0_8px_32px_0_rgba(111,255,233,0.06)]",
+            "backdrop-blur-[2px] border-2 border-foreground/[0.06]",
+            "shadow-[0_8px_32px_0_rgba(199,91,58,0.03)]",
             "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_70%)]",
+            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(26,26,26,0.03),transparent_70%)]",
           )}
         />
       </motion.div>
@@ -97,7 +97,7 @@ export function HeroGeometric({
   return (
     <div className="relative min-h-[75vh] w-full flex items-center justify-center overflow-hidden bg-background">
       {/* Soft color bleed background blobs */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.04] via-transparent to-indigo-500/[0.06] blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)]/[0.02] via-transparent to-[var(--brand-teal)]/[0.03] blur-3xl pointer-events-none" />
 
       {/* Floating interactive geometries */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -106,7 +106,7 @@ export function HeroGeometric({
           width={600}
           height={140}
           rotate={12}
-          gradient="from-cyan-500/[0.12]"
+          gradient="from-[var(--secondary)]/[0.06]"
           className="left-[-10%] md:left-[-5%] top-[12%] md:top-[16%]"
         />
 
@@ -115,7 +115,7 @@ export function HeroGeometric({
           width={500}
           height={120}
           rotate={-15}
-          gradient="from-teal-500/[0.12]"
+          gradient="from-[var(--brand-teal)]/[0.06]"
           className="right-[-5%] md:right-[0%] top-[60%] md:top-[65%]"
         />
 
@@ -124,7 +124,7 @@ export function HeroGeometric({
           width={300}
           height={80}
           rotate={-8}
-          gradient="from-indigo-500/[0.12]"
+          gradient="from-[var(--secondary)]/[0.04]"
           className="left-[5%] md:left-[10%] bottom-[8%] md:bottom-[12%]"
         />
 
@@ -133,7 +133,7 @@ export function HeroGeometric({
           width={200}
           height={60}
           rotate={20}
-          gradient="from-sky-500/[0.12]"
+          gradient="from-[var(--brand-teal)]/[0.04]"
           className="right-[15%] md:right-[20%] top-[8%] md:top-[12%]"
         />
 
@@ -142,7 +142,7 @@ export function HeroGeometric({
           width={150}
           height={40}
           rotate={-25}
-          gradient="from-teal-400/[0.12]"
+          gradient="from-[var(--secondary)]/[0.05]"
           className="left-[20%] md:left-[25%] top-[5%] md:top-[8%]"
         />
       </div>
@@ -170,7 +170,7 @@ export function HeroGeometric({
                 {title1}
               </span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 via-cyan-700 to-indigo-600 dark:from-teal-300 dark:via-cyan-200 dark:to-sky-300">
+              <span className="text-[var(--secondary)]">
                 {title2}
               </span>
             </h1>

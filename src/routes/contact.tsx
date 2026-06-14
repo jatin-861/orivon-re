@@ -131,7 +131,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const BUDGETS = ["< $25k", "$25–75k", "$75–150k", "$150k+"];
-const SERVICES = ["Brand", "Web", "Product", "Motion / 3D", "E-commerce"];
+const SERVICES = ["Frontend Design", "Full-Stack Dev", "Mobile Apps", "E-commerce"];
 
 function Contact() {
   const [sent, setSent] = useState(false);
@@ -177,6 +177,8 @@ function Contact() {
               width={600}
               height={420}
               className="w-full"
+              gradientColors={{ start: "#D4845A", middle: "#C75B3A", end: "#8B5E3C" }}
+              accentColor="oklch(0.70 0.14 35 / 0.6)"
               background={
                 <div className="absolute inset-0 bg-aurora opacity-30 pointer-events-none" />
               }
@@ -291,7 +293,7 @@ function Contact() {
 
           <aside className="space-y-8">
             <Info Icon={Mail} label="Email" value="hello@orivon.studio" />
-            <Info Icon={MapPin} label="Studios" value="London · Lisbon" />
+            <Info Icon={MapPin} label="Studio" value="India" />
             <BookingCalendar />
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Response time</h3>
@@ -300,11 +302,11 @@ function Contact() {
               </p>
             </div>
             <div className="glass rounded-2xl p-6">
-              <h3 className="font-display text-lg font-bold mb-2">Press & speaking</h3>
+              <h3 className="font-display text-lg font-bold mb-2">Collaboration inquiries</h3>
               <p className="text-sm text-muted-foreground">
-                For interviews and event invitations:{" "}
-                <a className="text-primary" href="mailto:press@orivon.studio">
-                  press@orivon.studio
+                For custom partnerships:{" "}
+                <a className="text-primary" href="mailto:hello@orivon.studio">
+                  hello@orivon.studio
                 </a>
               </p>
             </div>

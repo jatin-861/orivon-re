@@ -30,7 +30,7 @@ export function SiteBackground() {
     <div
       ref={containerRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-50 dark:opacity-40"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-50"
       style={
         {
           "--mouse-x": "50vw",

@@ -37,8 +37,8 @@ export const PulseBeams = ({
   width = 858,
   height = 434,
   baseColor = "oklch(1 0 0 / 0.08)",
-  accentColor = "oklch(0.85 0.16 200 / 0.6)",
-  gradientColors = { start: "#5EE7FF", middle: "#22D3EE", end: "#A78BFA" },
+  accentColor = "oklch(0.70 0.14 35 / 0.6)",
+  gradientColors = { start: "#D4845A", middle: "#C75B3A", end: "#8B5E3C" },
 }: PulseBeamsProps) => {
   return (
     <div
@@ -100,7 +100,7 @@ const SVGs = ({
               cx={p.cx}
               cy={p.cy}
               r={p.r}
-              fill="oklch(0.13 0.02 240)"
+              fill="oklch(0.13 0.02 35)"
               stroke={accentColor}
               strokeWidth="1.5"
             />

@@ -1,13 +1,13 @@
 ---
 name: Orivon
-description: Stark off-white gallery & desaturated accent tokens
+description: Warm Editorial color system & typography specifications
 colors:
-  primary: "#111111"
-  secondary: "#e03d67"
-  accent: "#1a5b5c"
-  neutral-bg: "#ffffff"
-  muted: "#f5ede9"
-  border: "#ebe4e0"
+  primary: "#1A1A1A"
+  secondary: "#C75B3A"
+  accent: "#C75B3A"
+  neutral-bg: "#FAF7F2"
+  muted: "#F0EAE0"
+  border: "#E5DDD3"
 typography:
   display:
     fontFamily: "Bodoni Moda, Georgia, serif"
@@ -46,15 +46,15 @@ components:
 
 ## 1. Overview
 
-**Creative North Star: "The Stark Editorial Gallery"**
+**Creative North Star: "The Warm Editorial Gallery"**
 
-Orivon is a visual showcase that rejects standard tech-startup templates and generic 3D meshes in favor of classical typographic grids, tactile interfaces, and meaningful visual storytelling. Spacing is generous, mimicking physical art galleries where white space allows the content to breathe. The system is light-first, utilizing off-white and cream linen backgrounds contrasted with high-fidelity graphite ink and vibrant solid accent highlights (lipstick crimson, forest teal, orchid mauve).
+Orivon is a visual showcase that rejects standard tech-startup templates and generic 3D meshes in favor of classical typographic grids, tactile interfaces, and meaningful visual storytelling. Spacing is generous, mimicking physical art galleries where white space allows the content to breathe. The system is light-only, utilizing warm cream backgrounds contrasted with high-fidelity charcoal ink and vibrant solid accent highlights (burnt terracotta, warm amber).
 
 **Key Characteristics:**
 
 - **Asymmetric Pacing:** Offsets grids and uneven column divisions establish reading direction and interest.
 - **Material Tactility:** Transitions are driven by active-press scaling (`scale(0.97)`), physical button clicks, and subtle spring micro-animations.
-- **Operational Warmth:** Copy is concrete, conversational, and direct, supported by physical addresses and hours.
+- **Operational Warmth:** Copy is concrete, conversational, and direct, supported by physical address and hours.
 
 ## 2. Colors
 
@@ -62,21 +62,21 @@ The color palette consists of high-contrast solid tones that avoid gradients or 
 
 ### Primary
 
-- **Graphite Ink** (#111111): Used for body text, primary interface elements, and high-contrast button surfaces.
+- **Warm Charcoal** (#1A1A1A): Used for body text, primary interface elements, and high-contrast button surfaces.
 
 ### Secondary
 
-- **Lipstick Crimson** (#e03d67): The primary accent color for active states, highlighting, and key interactive CTAs.
+- **Burnt Terracotta** (#C75B3A): The primary accent color for active states, highlighting, and key interactive CTAs.
 
 ### Neutral
 
-- **Gallery White** (#ffffff): Root page background for light mode.
-- **Warm Linen** (#fbf9f6): Background surface for dark mode.
-- **Soft Oat** (#f5ede9): Used for borders, divider hairlines, and card containers.
+- **Warm Cream** (#FAF7F2): Root page background for light mode.
+- **Warm Linen** (#F0EAE0): Background surface for alternate sections and cards.
+- **Oatmeal** (#E5DDD3): Used for borders, divider hairlines, and card boundaries.
 
 ### Named Rules
 
-**The Singular Accent Rule.** Only one major accent color (e.g. Lipstick Crimson or Forest Teal) should dominate any given viewport. Accent colors must never compete.
+**The Singular Accent Rule.** Only one major accent color (Burnt Terracotta) should dominate any given viewport. Accent colors must never compete.
 
 ## 3. Typography
 
@@ -100,33 +100,17 @@ The system is flat-by-default, relying on structural grid lines and background c
 
 ### Shadow Vocabulary
 
-- **Elegant Ambient** (`box-shadow: 0 10px 30px -10px rgba(17, 17, 17, 0.05)`): Subtle ambient shadow applied only to interactive card containers.
-- **Glow Highlight** (`box-shadow: 0 4px 12px rgba(224, 61, 103, 0.08)`): Active accent state outline shadow.
+- **Elegant Ambient** (`box-shadow: 0 10px 30px -10px rgba(26, 26, 26, 0.05)`): Subtle ambient shadow applied only to interactive card containers.
+- **Glow Highlight** (`box-shadow: 0 4px 12px rgba(199, 91, 58, 0.08)`): Active accent state outline shadow.
 
 ### Named Rules
 
-- **The Flat Rest Rule:** Cards, inputs, and components sit flat on the linen surface. They only elevate slightly (`translateY(-2px)`) on mouse hover, unless active tilt is applied.
-- **3D Mouse Tilt Rule:** Select interactive elements (such as `BentoCard` and the philosophy entrance image) may use dynamic 3D perspective tilts (`rotateX` and `rotateY` scale3d) of up to 5-15 degrees relative to cursor coordinates to enhance depth.
+- **The Flat Rest Rule:** Cards, inputs, and components sit flat on the surface. They only elevate slightly (`translateY(-2px)`) on mouse hover, unless active tilt is applied.
+- **3D Mouse Tilt Rule:** Select interactive elements (such as `BentoCard`) may use dynamic 3D perspective tilts (`rotateX` and `rotateY` scale3d) of up to 5-15 degrees relative to cursor coordinates to enhance depth.
 - **Storytelling Clip-path Scrub Rule:** Large layout backgrounds can transition using clip-path polygons mapped to GSAP ScrollTrigger scrubbing to reveal hidden layout layers on scroll.
 - **Text Reveal Stagger Rule:** High-impact text blocks can split into lines and words, animating with stagger delays and 3D rotations from `translate3d(10px, 51px, -60px)` to simulate typography coming into focus.
 
 ## 5. Components
-
-### Buttons
-
-- **Shape:** Rounded full pill (rounded-full) or crisp rounded corners (rounded-lg).
-- **Primary:** Graphite Ink background with Gallery White text. Full press scale feedback (`scale(0.97)`).
-- **Secondary / Ghost:** Transparent background with Graphite Ink border and text.
-
-### Cards / Containers
-
-- **Corner Style:** Medium radius (12px / rounded-xl).
-- **Background:** Soft Oat (#f5ede9) or Gallery White (#ffffff).
-- **Shadow:** Elegant Ambient.
-
-### Navigation
-
-- **Header Navigation:** Rendered on a single line at desktop. Height capped at 72px. Height transitions smoothly.
 
 ## 6. Do's and Don'ts
 

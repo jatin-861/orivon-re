@@ -3,9 +3,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { RevealText } from "@/components/RevealText";
-import { FittsSimulator } from "@/components/skills/FittsSimulator";
-import { GestaltVisualizer } from "@/components/skills/GestaltVisualizer";
-import { HierarchySimulator } from "@/components/skills/HierarchySimulator";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -99,7 +96,7 @@ function Process() {
           circle,
           { scale: 0.8, opacity: 0.4 },
           { scale: 1.1, opacity: 1, duration: 0.5 },
-        ).fromTo(text, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3");
+        ).fromTo(text, { opacity: 0.5, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3");
       });
     }, containerRef);
 
@@ -107,7 +104,7 @@ function Process() {
   }, []);
 
   return (
-    <div className="pt-40 pb-32 px-6 bg-background text-foreground transition-colors duration-500">
+    <div className="pt-40 pb-32 px-6 text-foreground transition-colors duration-500">
       <div className="mx-auto max-w-5xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">— Methodology</span>
         <RevealText
@@ -118,21 +115,22 @@ function Process() {
         <p className="mt-8 max-w-xl text-lg text-muted-foreground">
           A clean, repeatable framework that makes ambitious, human-made digital projects feel calm.
         </p>
+        <div className="animated-divider mt-24" />
 
         {/* Steps container */}
-        <div ref={containerRef} className="mt-32 relative">
+        <div ref={containerRef} className="mt-24 relative">
           {/* Base timeline rail */}
-          <div className="absolute left-6 md:left-12 top-6 bottom-6 w-[1px] bg-border" />
+          <div className="absolute left-6 md:left-12 top-6 bottom-6 w-[2px] bg-border" />
 
           {/* Animated active progress line */}
           <div
             ref={progressLineRef}
-            className="absolute left-6 md:left-12 top-6 bottom-6 w-[1px] bg-[var(--brand-pink)]"
+            className="absolute left-6 md:left-12 top-6 bottom-6 w-[2px] bg-[var(--brand-pink)] shadow-[0_0_8px_rgba(199,91,58,0.5)]"
             style={{ transformOrigin: "top center", transform: "scaleY(0)" }}
           />
 
           {STEPS.map((s, idx) => (
-            <div key={s.n} data-step-node className="relative pl-20 md:pl-32 pb-24 last:pb-0">
+            <div key={s.n} data-step-node className="relative pl-20 md:pl-36 pb-24 last:pb-0">
               {/* Step indicator circle */}
               <div
                 data-step-circle
@@ -148,45 +146,22 @@ function Process() {
               </div>
 
               {/* Step description content */}
-              <div data-step-text className="opacity-40 transition-all duration-500">
-                <span className="text-xs text-[var(--brand-pink)] font-mono block mb-1">
+              <div 
+                data-step-text 
+                className="opacity-50 transition-all duration-500 bg-[var(--card)] text-foreground p-8 rounded-2xl shadow-elegant border border-border"
+              >
+                <span className="text-xs text-[var(--brand-pink)] font-mono block mb-2">
                   Phase 0{idx + 1}
                 </span>
-                <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-4 text-foreground">
+                <h2 className="font-display text-2xl md:text-4xl font-bold leading-tight mb-4 text-foreground">
                   {s.title}
                 </h2>
-                <p className="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+                <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
                   {s.copy}
                 </p>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Validation Sandbox Section */}
-        <div className="mt-48 pt-20 border-t border-border/80">
-          <div className="mb-16" data-cursor-text="PLAY">
-            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
-              — Verification Lab
-            </span>
-            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] tracking-tighter">
-              Bespoke UX <span className="text-[var(--brand-pink)] italic">Validation.</span>
-            </h2>
-            <p className="mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed">
-              We test our grids and hierarchy ratios against visual psychology guidelines before
-              shipping production code. Play with our validation simulators:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 items-stretch">
-            <div className="flex flex-col gap-6">
-              <FittsSimulator />
-              <GestaltVisualizer />
-            </div>
-            <div>
-              <HierarchySimulator />
-            </div>
-          </div>
         </div>
       </div>
     </div>

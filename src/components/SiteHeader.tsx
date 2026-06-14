@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { MagneticButton } from "./MagneticButton";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,6 @@ const NAV = [
 export const SiteHeader = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const { pathname } = useLocation();
 
   const { scrollY } = useScroll();
@@ -28,27 +27,10 @@ export const SiteHeader = () => {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (saved === "dark" || (!saved && prefersDark)) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
+    // Force clean light-mode editorial look
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
   }, []);
-
-  const toggleTheme = () => {
-    const target = theme === "light" ? "dark" : "light";
-    setTheme(target);
-    if (target === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", target);
-  };
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -87,7 +69,7 @@ export const SiteHeader = () => {
                 to={item.to}
                 data-cursor-text={item.label.toUpperCase()}
                 className={cn(
-                  "relative px-4 py-1.5 text-sm font-semibold rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                  "relative px-4 py-1.5 text-sm font-semibold rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 text-variable-hover",
                   active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -105,16 +87,6 @@ export const SiteHeader = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={toggleTheme}
-            className="w-11 h-11 flex items-center justify-center rounded-full glass hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            aria-label="Toggle theme"
-            type="button"
-            data-cursor-text={theme === "light" ? "DARK" : "LIGHT"}
-            data-magnetic="true"
-          >
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
           <MagneticButton
             as={Link}
             to="/contact"
@@ -126,14 +98,6 @@ export const SiteHeader = () => {
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
-          <button
-            onClick={toggleTheme}
-            className="w-11 h-11 flex items-center justify-center rounded-full glass hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            aria-label="Toggle theme"
-            type="button"
-          >
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}

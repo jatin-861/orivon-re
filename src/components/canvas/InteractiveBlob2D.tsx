@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 
 interface BlobPoint {
   x: number;
@@ -10,8 +11,13 @@ interface BlobPoint {
 }
 
 export function InteractiveBlob2D() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [canvasRef, isInView] = useInView({ threshold: 0.01 });
   const mouse = useRef({ x: -1000, y: -1000, active: false });
+  const isInViewRef = useRef(isInView);
+
+  useEffect(() => {
+    isInViewRef.current = isInView;
+  }, [isInView]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -54,6 +60,10 @@ export function InteractiveBlob2D() {
     };
 
     const animate = () => {
+      if (!isInViewRef.current) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const w = canvas.width;
       const h = canvas.height;
@@ -126,15 +136,15 @@ export function InteractiveBlob2D() {
           centerY,
           points[0].baseRadius * 1.5,
         );
-        gradient.addColorStop(0, "rgba(111, 255, 233, 0.85)"); // var(--primary) Neon Ice
-        gradient.addColorStop(0.4, "rgba(91, 192, 190, 0.7)"); // var(--secondary) Tropical Teal
-        gradient.addColorStop(1, "rgba(58, 80, 107, 0)"); // var(--brand-lavender) transparent
+        gradient.addColorStop(0, "rgba(199, 91, 58, 0.85)"); // Terracotta
+        gradient.addColorStop(0.4, "rgba(139, 94, 60, 0.7)"); // Amber
+        gradient.addColorStop(1, "rgba(26, 26, 26, 0)"); // Charcoal transparent
 
         ctx.fillStyle = gradient;
         ctx.fill();
 
         // Glowing outer border
-        ctx.strokeStyle = "rgba(111, 255, 233, 0.4)";
+        ctx.strokeStyle = "rgba(199, 91, 58, 0.4)";
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
@@ -147,7 +157,7 @@ export function InteractiveBlob2D() {
           0,
           Math.PI * 2,
         );
-        ctx.fillStyle = "rgba(111, 255, 233, 0.2)";
+        ctx.fillStyle = "rgba(199, 91, 58, 0.2)";
         ctx.fill();
       }
 

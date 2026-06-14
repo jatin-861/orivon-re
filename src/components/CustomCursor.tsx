@@ -215,7 +215,7 @@ export function CustomCursor() {
 
     const getMagneticElements = () => {
       const now = Date.now();
-      if (now - lastQueryTime > 1000) {
+      if (now - lastQueryTime > 5000) { // Throttled from 1000ms to 5000ms
         lastQueryTime = now;
         cachedMagneticElements = Array.from(
           document.querySelectorAll(
@@ -401,9 +401,9 @@ export function CustomCursor() {
         ringRef.current.style.mixBlendMode = ringMixBlend;
       }
 
-      // Canvas particle physics simulation
+      // Canvas particle physics simulation - Only run clearing/rendering if particles exist
       const canvas = canvasRef.current;
-      if (canvas) {
+      if (canvas && particlesRef.current.length > 0) {
         const ctx = canvas.getContext("2d");
         if (ctx) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -426,6 +426,12 @@ export function CustomCursor() {
             ctx.restore();
             return true;
           });
+        }
+      } else if (canvas && particlesRef.current.length === 0) {
+        // Double-check and clear the canvas once when empty to ensure no leftovers
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
       }
 

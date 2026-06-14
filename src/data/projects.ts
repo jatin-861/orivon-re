@@ -22,7 +22,7 @@ export const PROJECTS: Project[] = [
     description:
       "A radical reinvention of mobile banking with immersive 3D dashboards and a frictionless onboarding flow.",
     services: ["Brand", "UX/UI", "Web", "Motion"],
-    color: "#5EE7FF",
+    color: "#C75B3A",
   },
   {
     slug: "noctis-music",
@@ -35,7 +35,7 @@ export const PROJECTS: Project[] = [
     description:
       "Audio-reactive WebGL artist hub for an underground techno label. Won SOTD on Awwwards.",
     services: ["Web", "WebGL", "Brand"],
-    color: "#A78BFA",
+    color: "#8B5E3C",
   },
   {
     slug: "orbit-aerospace",
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     description:
       "From spacecraft configurator to investor pitch — a complete digital identity for a new-era launch company.",
     services: ["Brand", "Web", "3D"],
-    color: "#5EE7FF",
+    color: "#D4845A",
   },
   {
     slug: "verdant-eco",
@@ -60,7 +60,7 @@ export const PROJECTS: Project[] = [
       "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=800&q=70&auto=format&fit=crop",
     description: "An interactive impact report turned into a scrollable cinematic experience.",
     services: ["Web", "Motion", "Editorial"],
-    color: "#34D399",
+    color: "#6B8F5E",
   },
   {
     slug: "atelier-fashion",
@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
     description:
       "A flagship e-commerce experience for a Parisian couture house. Headless, fast, and unmistakably haute.",
     services: ["E-commerce", "UX/UI", "Brand"],
-    color: "#F472B6",
+    color: "#C75B3A",
   },
   {
     slug: "halo-health",
@@ -86,6 +86,6 @@ export const PROJECTS: Project[] = [
     description:
       "Native-feeling progressive web app for a meditation startup with delightful micro-interactions.",
     services: ["Product", "UX/UI", "Motion"],
-    color: "#5EE7FF",
+    color: "#B87D4B",
   },
 ];

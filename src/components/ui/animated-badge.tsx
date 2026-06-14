@@ -32,7 +32,7 @@ export const AnimatedBadge = ({
         className="pointer-events-none absolute inset-0 rounded-full"
         style={{
           background:
-            "conic-gradient(from var(--angle), transparent 60%, oklch(0.85 0.16 200 / 0.8) 80%, transparent 100%)",
+            "conic-gradient(from var(--angle), transparent 60%, oklch(0.70 0.14 35 / 0.8) 80%, transparent 100%)",
           animation: "badge-rotate 4s linear infinite",
           mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
           WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",

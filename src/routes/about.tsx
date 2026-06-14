@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Download } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { RevealText } from "@/components/RevealText";
@@ -17,72 +18,144 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
+function CodeTypingSimulator() {
+  const [code, setCode] = useState("");
+  const codeSnippet = `const studio = craftSystem({
+  taste: "editorial",
+  precision: "absolute",
+  performance: "60fps",
+});
+
+await studio.deploy({
+  design: "Figma",
+  code: ["React", "GSAP"],
+  launch: true,
+});`;
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setCode(codeSnippet.slice(0, index));
+      index++;
+      if (index > codeSnippet.length) {
+        setTimeout(() => {
+          index = 0;
+        }, 2500); // Pause before looping
+      }
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <pre className="font-mono text-[10px] md:text-xs text-white bg-black/55 p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
+      <code className="text-emerald-400">{code}</code>
+      <span className="animate-pulse bg-emerald-400 h-3.5 w-1.5 inline-block align-middle ml-0.5" />
+    </pre>
+  );
+}
+
+function TerminalLogSimulator() {
+  const [logs, setLogs] = useState<string[]>([]);
+  const logPool = [
+    "$ npm run build",
+    "vite v7.3.1 building for production...",
+    "transforming...",
+    "✓ 285 modules transformed.",
+    "rendering chunks...",
+    "✓ built in 1.45s",
+    "$ node server.js",
+    "server running on port 8080",
+    "database: connected successfully [MySQL]",
+    "redis cache: initialized",
+    "GET /api/v1/projects 200 OK - 12ms",
+    "POST /api/v1/inquiries 201 Created - 48ms",
+    "backup system: cron scheduled",
+    "status: operational (100%)",
+  ];
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setLogs((prev) => {
+        const next = [...prev, logPool[index]];
+        if (next.length > 5) next.shift(); // Keep last 5 lines
+        return next;
+      });
+      index = (index + 1) % logPool.length;
+    }, 1100);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <pre className="font-mono text-[10px] md:text-xs text-white bg-black/55 p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
+      {logs.map((log, i) => (
+        <div key={i} className={log.startsWith("$") ? "text-amber-400" : log.includes("✓") || log.includes("200") ? "text-emerald-400" : "text-white/70"}>
+          {log}
+        </div>
+      ))}
+      <div className="flex items-center gap-1.5 text-white/50">
+        <span>sys-log: active</span>
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+      </div>
+    </pre>
+  );
+}
+
 const SKILLS = [
-  "Brand Strategy",
-  "UX/UI",
-  "Tailwind CSS",
-  "TanStack",
-  "Typography",
+  "React",
+  "Next.js",
+  "TypeScript",
   "GSAP",
   "Framer Motion",
+  "Tailwind CSS",
+  "WebGL / Three.js",
+  "Node.js / Express",
+  "Python / Django",
   "Shopify",
+  "WordPress",
   "Figma",
-  "Editorial Layouts",
-  "Vector Systems",
-  "Performance Optimization",
+  "Flutter",
 ];
 
 const TEAM = [
   {
-    name: "Maya Iro",
-    designation: "Founder · Executive Creative Director",
+    name: "Jatin Basantani",
+    designation: "Co-Founder · Designer & Frontend Developer",
     quote:
-      "We started Orivon to prove that small, focused studios can outship and outdream the giants. Our obsession with typography and layouts only grows.",
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=500&q=60",
+      "We believe that a website should be more than just a template. It should feel like a physical, tactile editorial book — custom crafted, fast, and responsive to the user's focus.",
+    src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23F0EAE0'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%231A1A1A' text-anchor='middle' dominant-baseline='middle'>J</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>DESIGN</text></svg>",
   },
   {
-    name: "Theo Vance",
-    designation: "Design Director",
+    name: "Saral Banker",
+    designation: "Co-Founder · Backend Developer",
     quote:
-      "Layout is a contract with the reader. Every spacing ratio, every font weight choice, every margin size — they all communicate how much you care.",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=500&q=60",
-  },
-  {
-    name: "Sasha Lin",
-    designation: "Tech Director",
-    quote:
-      "Performance is a design feature. A page that loads instantly and responds to scroll interactively feels premium and respects the user.",
-    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=500&q=60",
-  },
-  {
-    name: "Noor Abadi",
-    designation: "Motion Lead",
-    quote:
-      "Motion is our invisible signature. We build scroll-driven animations that highlight content reveals rather than creating distracting noise.",
-    src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&h=500&q=60",
+      "Performance and architecture are design features. We build scalable, highly optimized server systems and clean APIs that power zero-friction digital applications.",
+    src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%231A1A1A'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%23FAF7F2' text-anchor='middle' dominant-baseline='middle'>S</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>ENGINE</text></svg>",
   },
 ];
 
 const HISTORY = [
   {
-    year: "2013",
-    title: "Origins",
-    desc: "Founded as a London-based typography collective focused on editorial book design and custom layouts.",
+    year: "2023",
+    title: "The Genesis",
+    desc: "Founded as a design-first collective in India, dedicated to bespoke digital interfaces and editorial layouts.",
   },
   {
-    year: "2017",
-    title: "Going Digital",
-    desc: "Expanded to Lisbon, translating our classic print grids and structural standards into interactive WebGL and React experiences.",
+    year: "2024",
+    title: "Engineering Scalability",
+    desc: "Expanded into high-performance full-stack web and mobile apps, building robust backends paired with high-fidelity frontends.",
   },
   {
-    year: "2021",
-    title: "Accolades",
-    desc: "Received multiple Awwwards Site of the Day and CSSDA honors, proving that performance-first websites win global recognition.",
+    year: "2025",
+    title: "Creative Engineering",
+    desc: "Integrating WebGL, canvas physics, and custom animation engines to build premium storytelling websites.",
   },
   {
     year: "2026",
-    title: "The Human Era",
-    desc: "Refocused our studio ethos on the 'human-made' movement — eliminating stock template elements and generic 3D frameworks.",
+    title: "The Editorial Era",
+    desc: "Establishing Orivon Studio as a premier 2-person team crafting human-made, high-end digital experiences for global clients.",
   },
 ];
 
@@ -150,7 +223,7 @@ function About() {
   }, []);
 
   return (
-    <div className="pt-48 pb-48 px-6 bg-background text-foreground transition-colors duration-500 font-sans">
+    <div className="pt-48 pb-48 px-6 text-foreground transition-colors duration-500 font-sans">
       <div className="mx-auto max-w-7xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
           — Studio Profile
@@ -170,18 +243,16 @@ function About() {
         <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
             <p className="font-serif text-2xl md:text-3xl font-light italic leading-normal text-foreground/90">
-              Orivon is an independent design studio of seven obsessives based between London and
-              Lisbon. We partner with founders to build products that move people.
+              Orivon is a boutique design & engineering studio of two co-founders based in India. We partner with ambitious founders to build products that stand out.
             </p>
             <div className="text-base text-muted-foreground space-y-6 leading-relaxed font-sans pt-4 border-t border-border/60">
               <p>
                 We believe great work is the result of taste, craft, and conviction — held in
-                tension with curiosity and discipline. We design layouts that act as storytelling
-                narratives, rejecting standard stock layouts.
+                tension with direct, honest communication. We design custom layouts that act as storytelling
+                narratives, rejecting templates.
               </p>
               <p>
-                Since 2013, we've shipped 180+ projects for clients across fintech, fashion,
-                aerospace, climate, and beyond.
+                We handle the entire stack ourselves — from brand strategy and typography design to robust API development and creative frontends.
               </p>
             </div>
           </div>
@@ -206,13 +277,14 @@ function About() {
             </div>
             <div className="relative z-10 flex justify-between items-center text-[10px] font-mono opacity-60">
               <span>ORIVON STUDIO</span>
-              <span>EST. 2013</span>
+              <span>EST. 2023</span>
             </div>
           </motion.div>
         </div>
+        <div className="animated-divider mt-24" />
 
         {/* Dynamic Stacking Team testimonials */}
-        <div className="mt-48">
+        <div className="mt-24">
           <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
             — The Minds
           </span>
@@ -220,7 +292,7 @@ function About() {
             Meet the <span className="text-[var(--brand-pink)] font-serif italic">team.</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-12">
-            Seven obsessives, one studio. Standard typographic layout cards represent our leads.
+            Two founders, one unified workflow. Standard typographic layout cards represent our roles.
           </p>
           <div
             className="rounded-xl border border-border bg-[var(--card)] overflow-hidden"
@@ -229,10 +301,11 @@ function About() {
             <AnimatedTestimonials testimonials={TEAM} autoplay />
           </div>
         </div>
+        <div className="animated-divider mt-24" />
 
         {/* Timeline Section */}
         <div
-          className="mt-48 grid lg:grid-cols-[1fr_2fr] gap-16 items-start"
+          className="mt-24 grid lg:grid-cols-[1fr_2fr] gap-16 items-start"
           ref={historyRef}
           data-cursor-text="TIMELINE"
         >
@@ -269,7 +342,7 @@ function About() {
                   <div className="h-3.5 w-3.5 rounded-full border-2 border-border bg-background group-[.is-active]:border-[var(--brand-pink)] group-[.is-active]:bg-[var(--brand-pink)] transition-colors duration-300 shadow-sm" />
                 </div>
 
-                <div className="font-serif text-4xl md:text-5xl font-light text-[var(--brand-ochre)] leading-none transition-colors duration-300 group-[.is-active]:text-[var(--brand-pink)]">
+                <div className="font-serif text-4xl md:text-5xl font-light text-muted-foreground leading-none transition-colors duration-300 group-[.is-active]:text-[var(--brand-pink)]">
                   {h.year}
                 </div>
                 <div>
@@ -284,9 +357,118 @@ function About() {
             ))}
           </div>
         </div>
+        <div className="animated-divider mt-24" />
+
+        {/* Founders Profiles Detailed Section */}
+        <div className="mt-24">
+          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+            — Interactive Profiles
+          </span>
+          <h2 className="font-serif text-4xl md:text-7xl font-normal mb-12">
+            Founder <span className="text-[var(--brand-pink)] font-serif italic">spotlights.</span>
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Jatin Card */}
+            <BentoTilt className="h-full w-full">
+              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
+                <div>
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="font-display text-3xl font-bold text-foreground">Jatin Basantani</h3>
+                      <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
+                        Full-Stack Engineer & AI Systems Builder
+                      </p>
+                    </div>
+                    <a
+                      href="/Jatin_Basantani_Resume.pdf"
+                      download
+                      onClick={(e) => {
+                        // If file doesn't exist, trigger web printable resume
+                        e.preventDefault();
+                        window.print();
+                      }}
+                      className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
+                      title="Print / Download Resume"
+                    >
+                      <Download size={16} />
+                    </a>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                    Specializing in AI-centric application development, agent architectures, and automated research systems. Creator of Knowledge Hub. I leverage frontier AI models (Gemini, Claude, GPT) and modern stacks to build scalable, highly performant products. <br/><br/>
+                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">Academic Excellence:</strong> 8.61 / 10 GPA
+                  </p>
+
+                  <div className="mb-6">
+                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Core Tech Stack</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["React", "Next.js", "Tailwind CSS", "shadcn/ui", "Supabase", "PostgreSQL", "TypeScript", "LLM Agents"].map((sk) => (
+                        <span key={sk} className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80">
+                          {sk}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Live Craft Simulator</span>
+                  <CodeTypingSimulator />
+                </div>
+              </SpotlightCard>
+            </BentoTilt>
+
+            {/* Saral Card */}
+            <BentoTilt className="h-full w-full">
+              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
+                <div>
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="font-display text-3xl font-bold text-foreground">Saral Banker</h3>
+                      <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
+                        Full-Stack Developer & Backend Architect
+                      </p>
+                    </div>
+                    <a
+                      href="/Saral_Banker_Resume (1).pdf"
+                      download
+                      className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
+                      title="Download Resume"
+                    >
+                      <Download size={16} />
+                    </a>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                    A backend-focused full-stack engineer obsessed with scalable architectures, performance optimization, and robust API development. I design the server systems and cross-platform mobile applications that power zero-friction digital experiences. <br/><br/>
+                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">Academic Excellence:</strong> 8.61 / 10 GPA
+                  </p>
+
+                  <div className="mb-6">
+                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Core Tech Stack</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Node.js", "Express", "MongoDB", "MySQL", "React Native", "Flutter", "Docker"].map((sk) => (
+                        <span key={sk} className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80">
+                          {sk}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">System Deployment Log</span>
+                  <TerminalLogSimulator />
+                </div>
+              </SpotlightCard>
+            </BentoTilt>
+          </div>
+        </div>
+        <div className="animated-divider mt-24" />
 
         {/* Skills Marquee */}
-        <div className="mt-48">
+        <div className="mt-24">
           <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
             — Capabilities
           </span>
@@ -304,16 +486,17 @@ function About() {
             ))}
           </Marquee>
         </div>
+        <div className="animated-divider mt-24" />
 
         {/* Core Values */}
-        <div className="mt-48 grid md:grid-cols-3 gap-8">
+        <div className="mt-24 grid md:grid-cols-3 gap-8">
           {[
             { t: "Craft", c: "We obsess over the last 10%. It's where the design lives." },
             { t: "Transparency", c: "Direct conversations, clear scopes, and zero jargon." },
             { t: "Conviction", c: "We believe in what we build and design for longevity." },
           ].map((v) => (
             <BentoTilt key={v.t} className="h-full w-full">
-              <SpotlightCard className="p-8 bg-[var(--card)] border border-border h-full w-full">
+              <SpotlightCard glowHue={15} className="p-8 bg-[var(--card)] border border-border h-full w-full">
                 <h3 className="font-serif text-2xl font-normal mb-3 text-[var(--brand-pink)]">
                   {v.t}
                 </h3>
@@ -326,3 +509,5 @@ function About() {
     </div>
   );
 }
+
+export default About;

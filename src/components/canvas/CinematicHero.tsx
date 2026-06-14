@@ -1,150 +1,359 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Compass } from "lucide-react";
-import { Button } from "../Button";
-import { motion } from "framer-motion";
-import { LusionSandbox } from "../LusionSandbox";
+import { ArrowDown } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { useInView } from "@/hooks/useInView";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const CinematicHero = () => {
+export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: number }) {
+  const [displayText, setDisplayText] = useState("");
+  
   useEffect(() => {
+    let frameId: number;
+    let timeoutId: number;
+    
+    const chars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    const targetText = text;
+    const length = targetText.length;
+    let iteration = 0;
+    
+    const scramble = () => {
+      setDisplayText(
+        targetText
+          .split("")
+          .map((char, index) => {
+            if (char === " ") return " ";
+            if (index < Math.floor(iteration)) {
+              return targetText[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+      
+      if (iteration < length) {
+        iteration += 0.35; // smooth settle speed
+        frameId = requestAnimationFrame(scramble);
+      } else {
+        setDisplayText(targetText);
+      }
+    };
+    
+    timeoutId = window.setTimeout(() => {
+      frameId = requestAnimationFrame(scramble);
+    }, delay * 1000);
+    
+    return () => {
+      clearTimeout(timeoutId);
+      cancelAnimationFrame(frameId);
+    };
+  }, [text, delay]);
+  
+  return <span>{displayText || text}</span>;
+}
+
+class Particle {
+  x: number;
+  y: number;
+  ox: number;
+  oy: number;
+  vx: number = 0;
+  vy: number = 0;
+  color: string;
+  size: number;
+
+  constructor(x: number, y: number, color: string, size: number) {
+    this.x = x;
+    this.y = y;
+    this.ox = x;
+    this.oy = y;
+    this.color = color;
+    this.size = size;
+  }
+
+  update(mx: number, my: number, radius: number, time: number) {
+    const dx = mx - this.x;
+    const dy = my - this.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < radius) {
+      const force = (radius - dist) / radius;
+      const angle = Math.atan2(this.y - my, this.x - mx);
+      // Increased repel force to 14 for a more playful, responsive effect
+      const repelX = Math.cos(angle) * force * 14;
+      const repelY = Math.sin(angle) * force * 14;
+
+      this.vx += repelX;
+      this.vy += repelY;
+    }
+
+    // Home position targets with breathing sinusoidal offsets when mouse is idle
+    let targetX = this.ox;
+    let targetY = this.oy;
+
+    if (mx === -9999 && my === -9999) {
+      // ripple wave phase shift based on coordinates
+      const phase = this.ox * 0.008 + this.oy * 0.012;
+      targetX += Math.sin(time + phase) * 3.5;
+      targetY += Math.cos(time * 0.8 + phase) * 3.5;
+    }
+
+    const springX = (targetX - this.x) * 0.055;
+    const springY = (targetY - this.y) * 0.055;
+
+    this.vx += springX;
+    this.vy += springY;
+
+    this.vx *= 0.83; // lighter friction for smoother bounce
+    this.vy *= 0.83;
+
+    this.x += this.vx;
+    this.y += this.vy;
+  }
+}
+
+export const CinematicHero = () => {
+  const [canvasRef, isInView] = useInView({ threshold: 0.01 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const particles = useRef<Particle[]>([]);
+  const mouse = useRef({ x: -9999, y: -9999 });
+  const isInViewRef = useRef(isInView);
+
+  useEffect(() => {
+    isInViewRef.current = isInView;
+  }, [isInView]);
+
+  const hasSeenPreloader =
+    typeof window !== "undefined" && sessionStorage.getItem("orivon-preloader-seen");
+  const delayBase = hasSeenPreloader ? 0.2 : 2.5;
+
+  useEffect(() => {
+    // GSAP ScrollTrigger for clipping frame
     const ctx = gsap.context(() => {
-      gsap.set("#video-frame", {
-        clipPath: "polygon(14% 0%, 72% 0%, 88% 90%, 0% 95%)",
-        borderRadius: "0% 0% 40% 10%",
+      gsap.set("#hero-frame", {
+        clipPath: "polygon(10% 0%, 90% 0%, 95% 85%, 5% 90%)",
+        borderRadius: "0% 0% 20px 20px",
       });
-      gsap.from("#video-frame", {
+      gsap.from("#hero-frame", {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         borderRadius: "0% 0% 0% 0%",
-        ease: "power1.inOut",
+        ease: "power2.inOut",
         scrollTrigger: {
-          trigger: "#video-frame",
+          trigger: "#hero-frame",
           start: "center center",
           end: "bottom center",
           scrub: true,
         },
       });
 
-      // Entry text reveal animation
-      const hasSeenPreloader =
-        typeof window !== "undefined" && sessionStorage.getItem("orivon-preloader-seen");
-      const delay = hasSeenPreloader ? 0.2 : 2.5;
-
-      gsap.from(".hero-heading", {
-        y: 120,
+      // Entry elements reveal animations
+      gsap.from(".hero-element", {
+        y: 40,
         opacity: 0,
-        duration: 1.4,
-        stagger: 0.15,
-        ease: "power4.out",
-        delay: delay,
-      });
-
-      gsap.from(".hero-desc", {
-        opacity: 0,
-        y: 20,
         duration: 1.2,
+        stagger: 0.1,
         ease: "power3.out",
-        delay: delay + 0.45,
+        delay: delayBase,
       });
+    }, containerRef);
 
-      gsap.from(".hero-btn", {
-        opacity: 0,
-        y: 20,
-        duration: 1.2,
-        ease: "power3.out",
-        delay: delay + 0.6,
-      });
-    });
+    // Canvas particle engine
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const canvasCtx = canvas.getContext("2d");
+    if (!canvasCtx) return;
 
-    return () => ctx.revert();
-  }, []);
+    const initParticles = () => {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+
+      const tempCanvas = document.createElement("canvas");
+      const tempCtx = tempCanvas.getContext("2d");
+      if (!tempCtx) return;
+
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+
+      // Draw large word "ORIVON" dynamically scaled
+      const isMobile = canvas.width < 768;
+      const fontSize = Math.min(canvas.width * 0.17, 240);
+      tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
+      tempCtx.fillStyle = "#000000";
+      tempCtx.textAlign = "center";
+      tempCtx.textBaseline = "middle";
+
+      // Draw text centered (slightly higher on screen to leave space for bottom title)
+      const textY = isMobile ? tempCanvas.height * 0.4 : tempCanvas.height * 0.45;
+      tempCtx.fillText("ORIVON", tempCanvas.width / 2, textY);
+
+      const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+      const data = imgData.data;
+      const newParticles: Particle[] = [];
+
+      // Densities: tighter on larger screens (optimized density from 4/5 to 5/7)
+      const step = isMobile ? 7 : 5;
+
+      for (let y = 0; y < tempCanvas.height; y += step) {
+        for (let x = 0; x < tempCanvas.width; x += step) {
+          const index = (y * tempCanvas.width + x) * 4;
+          const alpha = data[index + 3];
+          if (alpha > 128) {
+            const rand = Math.random();
+            let color = "#1A1A1A"; // Charcoal base
+            if (rand > 0.88) {
+              color = "#C75B3A"; // Burnt Terracotta accent
+            } else if (rand > 0.80) {
+              color = "#8B5E3C"; // Warm Amber
+            }
+
+            const size = (isMobile ? 0.8 : 1.2) + Math.random() * 1.5;
+            newParticles.push(new Particle(x, y, color, size));
+          }
+        }
+      }
+      particles.current = newParticles;
+    };
+
+    initParticles();
+
+    // Loop
+    let animId: number;
+    let time = 0;
+    const renderLoop = () => {
+      // Pause computation if canvas is out of view
+      if (!isInViewRef.current) {
+        animId = requestAnimationFrame(renderLoop);
+        return;
+      }
+
+      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+      time += 0.02;
+
+      const parts = particles.current;
+      const len = parts.length;
+      const mx = mouse.current.x;
+      const my = mouse.current.y;
+      const radius = canvas.width < 768 ? 95 : 155;
+
+      for (let i = 0; i < len; i++) {
+        const p = parts[i];
+        p.update(mx, my, radius, time);
+
+        canvasCtx.fillStyle = p.color;
+        canvasCtx.beginPath();
+        canvasCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        canvasCtx.fill();
+      }
+
+      animId = requestAnimationFrame(renderLoop);
+    };
+    animId = requestAnimationFrame(renderLoop);
+
+    // Listeners
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.current.x = e.clientX - rect.left;
+      mouse.current.y = e.clientY - rect.top;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.current.x = e.touches[0].clientX - rect.left;
+        mouse.current.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleMouseLeave = () => {
+      mouse.current.x = -9999;
+      mouse.current.y = -9999;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    window.addEventListener("touchend", handleMouseLeave, { passive: true });
+
+    let resizeTimeout: number;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        initParticles();
+      }, 200);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      ctx.revert();
+      cancelAnimationFrame(animId);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("touchend", handleMouseLeave);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [delayBase]);
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-background">
+    <div ref={containerRef} className="relative h-[100dvh] w-full overflow-hidden bg-background">
       <div
-        id="video-frame"
+        id="hero-frame"
         className="relative z-10 h-[100dvh] w-full overflow-hidden bg-background"
       >
-        {/* Textured background crystal cave layer */}
-        <div className="absolute inset-0 z-0 opacity-[0.12] dark:opacity-[0.16] pointer-events-none select-none">
-          <img
-            src="/img/entrance.webp"
-            alt="Cave backdrop"
-            className="w-full h-full object-cover filter grayscale contrast-125 scale-[1.05]"
-          />
+        {/* Full Viewport Canvas for Particle Text */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 z-0 w-full h-full block pointer-events-none"
+        />
+
+        {/* Minimal grid lines in the background for structural feeling */}
+        <div className="absolute inset-0 z-[1] grid grid-cols-12 gap-6 px-6 sm:px-12 pointer-events-none opacity-20">
+          <div className="col-span-3 border-r border-border" />
+          <div className="col-span-3 border-r border-border" />
+          <div className="col-span-3 border-r border-border" />
+          <div className="col-span-3" />
         </div>
 
-        {/* Lusion Sandbox interactive particles background */}
-        <div className="absolute inset-0 z-10">
-          <LusionSandbox isHeroBg />
-        </div>
+        {/* Crisp Editorial Layout Text Overlays */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-between p-6 sm:p-12 pt-28">
+          {/* Top Metadata */}
+          <div className="flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
+            <div>ORIVON Studio // India</div>
+            <div className="hidden sm:block">Digital Design & Engineering</div>
+          </div>
 
-        {/* Floating high-contrast crystal cluster (Teal Hue Inversion) */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 120, rotate: -20, scale: 0.75 }}
-            animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-            transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="relative flex items-center justify-center w-full h-full"
-          >
-            <motion.img
-              src="/crystal.png"
-              alt="Orivon Crystal"
-              className="w-[280px] sm:w-[380px] md:w-[420px] aspect-square object-contain"
-              style={{
-                filter:
-                  "hue-rotate(180deg) saturate(1.8) brightness(1.2) drop-shadow(0 20px 60px rgba(111, 255, 233, 0.22))",
-              }}
-              animate={{
-                y: [-12, 12, -12],
-                rotate: [-1.5, 1.5, -1.5],
-              }}
-              transition={{
-                duration: 9,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            />
-          </motion.div>
-        </div>
-
-        <h1 className="hero-heading absolute bottom-5 right-5 z-40 text-foreground/95 font-sans font-black uppercase text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none select-none pointer-events-none">
-          STU<span className="font-serif italic text-secondary font-normal lowercase">d</span>IO
-        </h1>
-
-        <div className="absolute left-0 top-0 z-40 w-full h-full pointer-events-none">
-          <div className="mt-28 px-5 sm:px-10">
-            <h1 className="hero-heading text-foreground/95 font-sans font-black uppercase text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none select-none">
-              REDEFI
-              <span className="font-serif italic text-secondary font-normal lowercase">n</span>E
-            </h1>
-
-            <p className="hero-desc mb-8 mt-4 max-w-sm font-sans text-muted-foreground text-sm sm:text-base leading-relaxed">
-              Crafting tactile digital products <br /> Shaping aesthetic brand narratives
-            </p>
-
-            <div className="hero-btn inline-block">
-              <Button
-                id="watch-work"
-                title="Explore Work"
-                leftIcon={
-                  <Compass
-                    className="h-4 w-4 text-secondary animate-spin"
-                    style={{ animationDuration: "6s" }}
-                  />
-                }
-                containerClass="bg-primary text-primary-foreground hover:opacity-90 flex items-center gap-1.5 pointer-events-auto shadow-glow-cyan"
-              />
+          {/* Bottom Layout Content */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+            <div className="md:col-span-7 hero-element">
+              <h2 className="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.05] tracking-tight text-foreground">
+                <ScrambleText text="Tactile interactions," delay={delayBase + 0.1} /><br />
+                <span className="text-[var(--secondary)]">
+                  <ScrambleText text="editorial engineering." delay={delayBase + 0.35} />
+                </span>
+              </h2>
+            </div>
+            <div className="md:col-span-5 flex flex-col items-start gap-6 hero-element">
+              <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-md">
+                We are Jatin and Saral — a two-person studio design-engineering fast, bespoke digital products with absolute care and attention to detail.
+              </p>
+              <div className="flex items-center gap-4">
+                <Link
+                  to="/work"
+                  className="rounded-full bg-foreground text-background hover:bg-[var(--secondary)] hover:text-white px-6 py-3 text-sm font-semibold tracking-wide uppercase transition-colors"
+                >
+                  View Selected Work
+                </Link>
+                <div className="flex items-center gap-1.5 text-xs font-mono text-muted-foreground animate-[float_4s_ease-in-out_infinite]">
+                  <span>Scroll</span>
+                  <ArrowDown size={14} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <h1 className="hero-heading absolute bottom-5 right-5 text-foreground/80 font-sans font-black uppercase text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none select-none pointer-events-none">
-        STU<span className="font-serif italic text-secondary font-normal lowercase">d</span>IO
-      </h1>
     </div>
   );
 };

@@ -68,9 +68,9 @@ export const Route = createFileRoute("/work")({
 // Color mapping for project showcases
 const brandColors: Record<string, { bg: string; text: string; details: string }> = {
   "lumen-finance": { bg: "bg-[var(--brand-pink)]", text: "text-white", details: "FINANCE_UI" },
-  "noctis-music": { bg: "bg-[var(--brand-lavender)]", text: "text-black", details: "AUDIO_WAVE" },
-  "orbit-aerospace": { bg: "bg-[var(--brand-peach)]", text: "text-black", details: "ORBIT_MAP" },
-  "verdant-eco": { bg: "bg-[var(--brand-ochre)]", text: "text-black", details: "ECO_REPORT" },
+  "noctis-music": { bg: "bg-[var(--brand-lavender)]", text: "text-white", details: "AUDIO_WAVE" },
+  "orbit-aerospace": { bg: "bg-[var(--brand-peach)]", text: "text-white", details: "ORBIT_MAP" },
+  "verdant-eco": { bg: "bg-[var(--brand-ochre)]", text: "text-white", details: "ECO_REPORT" },
   "atelier-fashion": { bg: "bg-[var(--brand-teal)]", text: "text-white", details: "COUTURE_GRID" },
   "halo-health": { bg: "bg-[var(--brand-coral)]", text: "text-white", details: "BREATHE_APP" },
 };
@@ -96,7 +96,7 @@ function WorkPage() {
   const items = filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
 
   return (
-    <div className="pb-32 bg-background text-foreground transition-colors duration-500">
+    <div className="pb-32 text-foreground transition-colors duration-500">
       <HeroGeometric
         badge="Case Studies"
         title1="Things we've"

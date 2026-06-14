@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 
 interface GridNode {
   x: number;
@@ -10,8 +11,13 @@ interface GridNode {
 }
 
 export function InteractiveGrid2D() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [canvasRef, isInView] = useInView({ threshold: 0.01 });
   const mouse = useRef({ x: -1000, y: -1000, active: false });
+  const isInViewRef = useRef(isInView);
+
+  useEffect(() => {
+    isInViewRef.current = isInView;
+  }, [isInView]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,7 +28,7 @@ export function InteractiveGrid2D() {
 
     let animationFrameId = 0;
     let gridNodes: GridNode[][] = [];
-    const spacing = 45; // Space between grid lines in pixels
+    const spacing = 60; // Space between grid lines in pixels (increased from 45 to 60 to reduce node count)
 
     const resize = () => {
       if (!canvas) return;
@@ -56,6 +62,11 @@ export function InteractiveGrid2D() {
     };
 
     const animate = () => {
+      if (!isInViewRef.current) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const cols = gridNodes.length;
       if (cols === 0) {
@@ -103,12 +114,11 @@ export function InteractiveGrid2D() {
         }
       }
 
-      // Draw Grid Lines (Columns)
+      // Draw Grid Lines (Columns) - Batched into a single stroke call
       ctx.strokeStyle = "rgba(255, 255, 255, 0.06)";
       ctx.lineWidth = 0.5;
-
+      ctx.beginPath();
       for (let c = 0; c < cols; c++) {
-        ctx.beginPath();
         for (let r = 0; r < rows; r++) {
           const n = gridNodes[c][r];
           if (r === 0) {
@@ -117,12 +127,12 @@ export function InteractiveGrid2D() {
             ctx.lineTo(n.x, n.y);
           }
         }
-        ctx.stroke();
       }
+      ctx.stroke();
 
-      // Draw Grid Lines (Rows)
+      // Draw Grid Lines (Rows) - Batched into a single stroke call
+      ctx.beginPath();
       for (let r = 0; r < rows; r++) {
-        ctx.beginPath();
         for (let c = 0; c < cols; c++) {
           const n = gridNodes[c][r];
           if (c === 0) {
@@ -131,19 +141,20 @@ export function InteractiveGrid2D() {
             ctx.lineTo(n.x, n.y);
           }
         }
-        ctx.stroke();
       }
+      ctx.stroke();
 
-      // Draw Grid Intersection Nodes
+      // Draw Grid Intersection Nodes - Batched into a single fill call
       ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+      ctx.beginPath();
       for (let c = 0; c < cols; c++) {
         for (let r = 0; r < rows; r++) {
           const n = gridNodes[c][r];
-          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
           ctx.arc(n.x, n.y, 0.8, 0, Math.PI * 2);
-          ctx.fill();
         }
       }
+      ctx.fill();
 
       animationFrameId = requestAnimationFrame(animate);
     };

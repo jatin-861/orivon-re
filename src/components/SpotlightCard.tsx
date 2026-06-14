@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 interface Props {
   children: ReactNode;
   className?: string;
-  glowHue?: number; // 200 = cyan
+  glowHue?: number; // 15 = terracotta
 }
 
-export const SpotlightCard = ({ children, className = "", glowHue = 200 }: Props) => {
+export const SpotlightCard = ({ children, className = "", glowHue = 15 }: Props) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
