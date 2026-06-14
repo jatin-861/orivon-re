@@ -80,8 +80,20 @@ function Index() {
 function StudioShowreel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     if (!containerRef.current || !scrollRef.current) return;
 
     const scrollEl = scrollRef.current;
@@ -126,7 +138,7 @@ function StudioShowreel() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   const items = [
     {
@@ -148,6 +160,92 @@ function StudioShowreel() {
       desc: "Speed-focused headless storefronts designed for zero checkout friction.",
     },
   ];
+
+  if (isMobile) {
+    return (
+      <div className="relative bg-[var(--brand-pink)] text-white overflow-hidden z-10 border-y border-white/10 py-16 px-6">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
+        
+        <div className="space-y-12">
+          {/* Intro Panel */}
+          <div className="max-w-xl">
+            <span className="text-xs font-mono text-[var(--brand-peach)] tracking-widest uppercase mb-4 block">
+              — Studio Showreel
+            </span>
+            <h2 className="font-serif text-4xl sm:text-6xl font-normal leading-[1.1] tracking-tighter">
+              Cinematic <br />
+              <span className="text-secondary italic">narratives</span> in motion.
+            </h2>
+            <p className="mt-4 text-sm text-white/60 leading-relaxed">
+              We blend raw engineering with editorial design.
+            </p>
+          </div>
+
+          {/* Video Panels stacked vertically */}
+          <div className="space-y-8">
+            {items.map((item, idx) => (
+              <div 
+                key={idx} 
+                className="relative h-96 w-full overflow-hidden rounded-2xl bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 group"
+              >
+                {/* Background Video */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <video
+                    src={item.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover opacity-35"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-pink)] via-transparent to-black/10" />
+                </div>
+
+                {/* Video Label */}
+                <div className="relative z-10 flex justify-between items-center text-xs font-mono tracking-widest uppercase text-white/50">
+                  <span>{item.tag}</span>
+                  <span className="text-[var(--brand-pink)]">✦</span>
+                </div>
+
+                {/* Details */}
+                <div className="relative z-10 mt-auto">
+                  <h3 className="font-serif text-2xl font-normal tracking-tight leading-tight mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-white/60 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Outro Panel */}
+          <div className="rounded-2xl p-8 bg-[var(--muted)] text-foreground relative border border-border">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
+            <div>
+              <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
+                — Capabilities
+              </span>
+              <h2 className="font-serif text-3xl sm:text-5xl font-normal leading-tight tracking-tighter mb-4">
+                Our complete <br />
+                <span className="text-[var(--brand-pink)] font-sans font-bold italic">Verification Lab.</span>
+              </h2>
+              <p className="text-xs text-muted-foreground leading-relaxed mb-6">
+                We validate all components against Fitts's law target acquisition speeds and Gestalt visual grouping metrics.
+              </p>
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold shadow-glow-cyan"
+              >
+                Explore Services <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="relative bg-[var(--brand-pink)] text-white overflow-hidden z-10 border-y border-white/10">
