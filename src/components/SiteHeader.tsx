@@ -48,7 +48,7 @@ export const SiteHeader = () => {
             <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
           </span>
           <span className="font-display text-xl font-bold tracking-tight">
-            SARAL BANKER
+            SARAL X JATIN
           </span>
         </Link>
 

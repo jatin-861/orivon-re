@@ -27,22 +27,24 @@ function Index() {
   const homeSchema = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    name: "Saral Banker — Product Engineer",
+    name: "Saral x Jatin — Product Engineers",
     description:
-      "Saral Banker is a product engineer who builds complete, production systems — from database to deployment.",
+      "Saral x Jatin are product engineers who build complete, production systems — from database to deployment.",
     mainEntity: {
-      "@type": "Person",
-      name: "Saral Banker",
-      jobTitle: "Product Engineer",
-      sameAs: ["https://github.com/saralbanker"],
+      "@type": "Organization",
+      name: "Saral x Jatin",
+      member: [
+        { "@type": "Person", name: "Saral Banker", jobTitle: "Product Engineer", sameAs: ["https://github.com/saralbanker"] },
+        { "@type": "Person", name: "Jatin Basantani", jobTitle: "Frontend & AI Systems Developer", sameAs: ["https://github.com/jatin-861"] },
+      ],
     },
   };
 
   return (
     <div className="relative text-foreground transition-colors duration-500 font-sans overflow-x-clip">
       <SEO
-        title="Saral Banker — Product Engineer"
-        description="Saral Banker is a product engineer who builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
+        title="Saral x Jatin — Product Engineers"
+        description="Saral x Jatin are product engineers who build complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
         canonical="/"
         keywords="product engineer, full-stack developer, AI applications, React, Node.js, software engineer portfolio"
         ogType="website"
@@ -68,6 +70,8 @@ function Index() {
       <div className="animated-divider" />
 
       <StudioManifesto />
+      <div className="animated-divider" />
+      <SkillsMarquee />
       <div className="animated-divider" />
       <Numbers />
       <div className="animated-divider" />
@@ -481,6 +485,43 @@ function StudioManifesto() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+const SKILLS = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js / Express",
+  "PostgreSQL",
+  "GSAP",
+  "Framer Motion",
+  "Tailwind CSS",
+  "Redis",
+  "Socket.IO",
+  "RAG / pgvector",
+  "Docker",
+];
+
+function SkillsMarquee() {
+  return (
+    <section className="relative z-10 py-12 sm:py-16 border-y border-border bg-background/50 backdrop-blur-sm" data-cursor-text="STACK">
+      <div className="mx-auto max-w-7xl px-6 mb-6">
+        <span className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground">
+          — Tools we build with
+        </span>
+      </div>
+      <Marquee className="-mx-6">
+        {SKILLS.map((s) => (
+          <span
+            key={s}
+            className="text-2xl sm:text-4xl font-serif font-normal flex items-center gap-8 sm:gap-12 text-foreground/60 hover:text-primary transition-colors"
+          >
+            {s} <span className="text-[var(--brand-pink)] font-sans">✦</span>
+          </span>
+        ))}
+      </Marquee>
     </section>
   );
 }

@@ -156,22 +156,26 @@ export const CinematicHero = () => {
     if (!canvasCtx) return;
 
     const initParticles = () => {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const cssWidth = canvas.clientWidth;
+      const cssHeight = canvas.clientHeight;
+      canvas.width = cssWidth * dpr;
+      canvas.height = cssHeight * dpr;
+      canvasCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const tempCanvas = document.createElement("canvas");
       const tempCtx = tempCanvas.getContext("2d");
       if (!tempCtx) return;
 
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
+      tempCanvas.width = cssWidth;
+      tempCanvas.height = cssHeight;
 
       // Draw the belief statement, dynamically scaled to fit width, across two lines
-      const isMobile = canvas.width < 768;
+      const isMobile = cssWidth < 768;
       const lines = ["USEFUL OVER", "IMPRESSIVE"];
-      let fontSize = Math.min(canvas.width * (isMobile ? 0.16 : 0.125), 190);
+      let fontSize = Math.min(cssWidth * (isMobile ? 0.16 : 0.125), 190);
       tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
-      const maxWidth = canvas.width * 0.94;
+      const maxWidth = cssWidth * 0.94;
       const widest = Math.max(...lines.map((line) => tempCtx.measureText(line).width));
       if (widest > maxWidth) {
         fontSize = fontSize * (maxWidth / widest);
@@ -225,6 +229,14 @@ export const CinematicHero = () => {
 
     initParticles();
 
+    // Re-build particles once the display font has actually loaded — measuring/drawing
+    // text with a fallback font produces a mis-shaped, hard-to-read result on first paint
+    if (typeof document !== "undefined" && "fonts" in document) {
+      document.fonts.ready.then(() => {
+        initParticles();
+      });
+    }
+
     // Loop
     let animId: number;
     let time = 0;
@@ -242,7 +254,7 @@ export const CinematicHero = () => {
       const len = parts.length;
       const mx = mouse.current.x;
       const my = mouse.current.y;
-      const radius = canvas.width < 768 ? 95 : 155;
+      const radius = canvas.clientWidth < 768 ? 95 : 155;
 
       for (let i = 0; i < len; i++) {
         const p = parts[i];
@@ -309,7 +321,7 @@ export const CinematicHero = () => {
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
       {/* Real DOM heading — canvas text is invisible to crawlers */}
       <h1 className="sr-only">
-        Saral Banker — Product Engineer. Useful over impressive: I build software that solves
+        Saral x Jatin — Product Engineers. Useful over impressive: we build software that solves
         real problems — from business automation to AI-powered platforms. Built NeuroDashboard,
         a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental
         units.
@@ -317,7 +329,7 @@ export const CinematicHero = () => {
 
       {/* Top identity bar */}
       <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
-        <div>Saral Banker — Product Engineer // India</div>
+        <div>Saral x Jatin — Product Engineers // India</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
           Open to new projects
@@ -337,7 +349,7 @@ export const CinematicHero = () => {
       <div className="relative z-10 px-6 sm:px-12 pb-16 sm:pb-24 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         <div className="lg:col-span-7 hero-element flex flex-col gap-6">
           <h2 className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground" style={{ textRendering: "optimizeLegibility" }}>
-            Hi, I'm <ScrambleText text="Saral Banker." delay={delayBase + 0.1} />
+            Hi, we're <ScrambleText text="Saral x Jatin." delay={delayBase + 0.1} />
           </h2>
 
           <p className="font-sans text-lg sm:text-xl text-foreground/90 font-semibold max-w-xl">

@@ -428,13 +428,8 @@ function About() {
                     <a
                       href="/Jatin_Basantani_Resume.pdf"
                       download
-                      onClick={(e) => {
-                        // If file doesn't exist, trigger web printable resume
-                        e.preventDefault();
-                        window.print();
-                      }}
                       className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
-                      title="Print / Download Resume"
+                      title="Download Resume"
                     >
                       <Download size={16} />
                     </a>

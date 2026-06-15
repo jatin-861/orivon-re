@@ -41,7 +41,7 @@ export function SiteFooter() {
                 <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
               </span>
               <span className="font-display text-2xl font-bold tracking-tight">
-                SARAL BANKER
+                SARAL X JATIN
               </span>
             </Link>
             <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
@@ -97,7 +97,7 @@ export function SiteFooter() {
         {/* Giant gooey wordmark */}
         <div className="relative mt-12 select-none overflow-hidden h-[clamp(4rem,15vw,10rem)]">
           <GooeyText
-            texts={["SARAL", "BUILD", "SHIP", "SARAL"]}
+            texts={["SARAL", "X", "JATIN", "SARAL X JATIN"]}
             morphTime={1.4}
             cooldownTime={1.6}
             className="h-full w-full"
@@ -106,7 +106,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Saral Banker.</p>
+          <p>© {new Date().getFullYear()} Saral x Jatin.</p>
           <p>If it doesn't run in production, it doesn't count.</p>
         </div>
       </div>

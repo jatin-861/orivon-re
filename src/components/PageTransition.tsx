@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "./layout/LenisProvider";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -9,6 +10,7 @@ if (typeof window !== "undefined") {
 
 export function PageTransition({ children }: { children: ReactNode }) {
   const location = useLocation();
+  const lenis = useLenis();
   const [displayChildren, setDisplayChildren] = useState(children);
   const [currentPath, setCurrentPath] = useState(location.pathname);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -26,13 +28,19 @@ export function PageTransition({ children }: { children: ReactNode }) {
     if (location.pathname !== currentPath) {
       const tl = gsap.timeline({
         onComplete: () => {
+          // Reset scroll to top before the new page mounts, so pinned/scroll-linked
+          // sections on the new page don't start mid-progress and render blank
+          lenis?.scrollTo(0, { immediate: true });
+          window.scrollTo(0, 0);
+
           setCurrentPath(location.pathname);
           setDisplayChildren(children);
 
           // Animate curtain opening up
           const tlOut = gsap.timeline({
             onComplete: () => {
-              // Recalculate ScrollTrigger parameters on the new page
+              // Recalculate Lenis dimensions and ScrollTrigger parameters on the new page
+              lenis?.resize();
               ScrollTrigger.refresh();
             }
           });
@@ -126,7 +134,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
           className="relative z-10 text-[var(--background)] font-serif font-normal text-5xl md:text-7xl tracking-[0.35em] uppercase select-none pointer-events-none pl-[0.35em]"
           style={{ opacity: 0 }}
         >
-          Saral Banker
+          Saral x Jatin
         </div>
       </div>
       <div ref={contentRef} className="origin-center w-full min-h-screen">
