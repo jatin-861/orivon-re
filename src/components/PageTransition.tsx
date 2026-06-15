@@ -126,7 +126,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
           className="relative z-10 text-[var(--background)] font-serif font-normal text-5xl md:text-7xl tracking-[0.35em] uppercase select-none pointer-events-none pl-[0.35em]"
           style={{ opacity: 0 }}
         >
-          Orivon
+          Saral Banker
         </div>
       </div>
       <div ref={contentRef} className="origin-center w-full min-h-screen">

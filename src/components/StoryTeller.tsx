@@ -287,12 +287,12 @@ export const StoryTeller = () => {
     >
       <div className="flex w-full flex-col items-center pb-24 relative z-10">
         <p className="font-mono text-xs uppercase tracking-widest text-secondary">
-          THE ORIVON PHILOSOPHY
+          THE CORE BELIEF
         </p>
 
         <div className="relative w-full h-full">
           <AnimatedTitle
-            title="the narrative <br /> of custom craft"
+            title="if it doesn't run <br /> in production"
             containerClass="mt-5 pointer-events-none mix-blend-difference relative z-20"
           />
 
@@ -313,7 +313,7 @@ export const StoryTeller = () => {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <div className="absolute top-6 left-6 text-[10px] font-mono text-white/40 tracking-[0.2em] uppercase select-none">
-                    Generative System // Spec. 01
+                    Production System // Log. 01
                   </div>
                 </div>
               </div>
@@ -340,13 +340,13 @@ export const StoryTeller = () => {
         <div className="-mt-80 sm:-mt-60 md:-mt-48 flex w-full justify-center md:me-44 md:justify-end relative z-20">
           <div className="flex h-full w-fit flex-col items-center md:items-start px-6">
             <p className="mt-3 max-w-sm text-center font-sans text-muted-foreground text-sm sm:text-base md:text-start leading-relaxed">
-              We reject standard grid templates to guide users through custom scroll narratives.
-              Discover how our physical-digital synergy turns clients into long-term partners.
+              Most software stays a prototype. The systems here are different — they're live, in
+              use, and solving real problems for real people, today.
             </p>
 
             <Button
               id="realm-btn"
-              title="read methodology"
+              title="see what's running"
               containerClass="mt-6 bg-primary text-primary-foreground hover:bg-primary/90"
             />
           </div>

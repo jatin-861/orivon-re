@@ -6,7 +6,6 @@ import { RevealText } from "@/components/RevealText";
 import { MagneticButton } from "@/components/MagneticButton";
 import { PulseBeams } from "@/components/PulseBeams";
 import { BookingCalendar } from "@/components/ui/booking-calendar";
-import { cn } from "@/lib/utils";
 
 const beams = [
   {
@@ -130,13 +129,11 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const BUDGETS = ["< $25k", "$25–75k", "$75–150k", "$150k+"];
-const SERVICES = ["Frontend Design", "Full-Stack Dev", "Mobile Apps", "E-commerce"];
+const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Something Else"];
 
 function Contact() {
   const [sent, setSent] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
-  const [budget, setBudget] = useState<string>("");
 
   const toggle = (s: string) =>
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
@@ -152,21 +149,21 @@ function Contact() {
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
           <div>
             <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
-              — Inquiries
+              — Get In Touch
             </span>
             <RevealText
-              text="Let's make something"
+              text="Let's talk about"
               as="h1"
               className="font-display text-5xl md:text-7xl font-bold leading-[0.9] block"
             />
             <RevealText
-              text="unforgettable."
+              text="what you're building."
               as="h1"
               className="font-display text-5xl md:text-7xl font-bold leading-[0.9] block text-[var(--brand-pink)]"
               delay={300}
             />
             <p className="mt-6 text-muted-foreground max-w-md">
-              Tell us about your idea — we reply to every brief within 48 hours.
+              Tell me about the project or role — I reply within 48 hours.
             </p>
           </div>
 
@@ -204,7 +201,7 @@ function Contact() {
               </div>
               <h2 className="font-display text-3xl font-bold mb-3">Message received.</h2>
               <p className="text-muted-foreground">
-                Thanks for reaching out. We'll be in touch within 48 hours.
+                Thanks for reaching out. I'll be in touch within 48 hours.
               </p>
             </motion.div>
           ) : (
@@ -215,16 +212,16 @@ function Contact() {
                   label="Email"
                   name="email"
                   type="email"
-                  placeholder="ada@studio.com"
+                  placeholder="you@example.com"
                   required
                 />
               </div>
               <Field label="Company" name="company" placeholder="Acme Inc." />
 
               <div>
-                <Label>What can we help with?</Label>
+                <Label>What's this about?</Label>
                 <div className="flex flex-wrap gap-2">
-                  {SERVICES.map((s) => (
+                  {REASONS.map((s) => (
                     <button
                       type="button"
                       key={s}
@@ -242,37 +239,7 @@ function Contact() {
               </div>
 
               <div>
-                <Label>Budget</Label>
-                <div className="flex flex-wrap gap-2">
-                  {BUDGETS.map((b) => {
-                    const active = budget === b;
-                    return (
-                      <label
-                        key={b}
-                        className={cn(
-                          "rounded-full px-4 py-2 text-sm border transition-all cursor-pointer",
-                          active
-                            ? "bg-primary text-primary-foreground border-primary shadow-glow-cyan font-semibold"
-                            : "border-border glass hover:border-primary/40 text-foreground",
-                        )}
-                      >
-                        <input
-                          type="radio"
-                          name="budget"
-                          value={b}
-                          checked={active}
-                          onChange={() => setBudget(b)}
-                          className="sr-only"
-                        />
-                        {b}
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="message">Tell us more</Label>
+                <Label htmlFor="message">Tell me more</Label>
                 <textarea
                   id="message"
                   name="message"
@@ -293,21 +260,21 @@ function Contact() {
           )}
 
           <aside className="space-y-8">
-            <Info Icon={Mail} label="Email" value="hello@orivon.studio" />
-            <Info Icon={MapPin} label="Studio" value="India" />
+            <Info Icon={Mail} label="Email" value="saralbanker1@gmail.com" />
+            <Info Icon={MapPin} label="Location" value="India" />
             <BookingCalendar />
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Response time</h3>
               <p className="text-sm text-muted-foreground">
-                We reply to every brief within 48 hours, Monday to Friday.
+                I reply to every message within 48 hours, Monday to Friday.
               </p>
             </div>
             <div className="glass rounded-2xl p-6">
-              <h3 className="font-display text-lg font-bold mb-2">Collaboration inquiries</h3>
+              <h3 className="font-display text-lg font-bold mb-2">Open to</h3>
               <p className="text-sm text-muted-foreground">
-                For custom partnerships:{" "}
-                <a className="text-primary" href="mailto:hello@orivon.studio">
-                  hello@orivon.studio
+                Full-time roles, contract work, and freelance projects:{" "}
+                <a className="text-primary" href="mailto:saralbanker1@gmail.com">
+                  saralbanker1@gmail.com
                 </a>
               </p>
             </div>

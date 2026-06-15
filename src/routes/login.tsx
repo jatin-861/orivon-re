@@ -21,7 +21,7 @@ function LoginPage() {
         setTimeout(() => {
           if (username === "admin" && password === "1234") {
             try {
-              localStorage.setItem("orivon_auth", "1");
+              localStorage.setItem("portfolio_auth", "1");
             } catch {
               // Ignore localStorage quota or accessibility errors
             }

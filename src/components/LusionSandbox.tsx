@@ -22,7 +22,7 @@ type Ripple = {
   active: boolean;
 };
 
-const SHAPES = ["orivon", "craft", "grid", "free"] as const;
+const SHAPES = ["home", "craft", "grid", "free"] as const;
 type ShapeType = (typeof SHAPES)[number];
 
 interface LusionSandboxProps {
@@ -73,7 +73,7 @@ const getTargetPositions = (
     return points;
   }
 
-  // Text shapes: ORIVON or CRAFT
+  // Text shapes: HOME or CRAFT
   const text = shapeName.toUpperCase();
   const tempCanvas = document.createElement("canvas");
   const tempCtx = tempCanvas.getContext("2d");
@@ -133,7 +133,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isVisible = useRef(true);
   const [mode, setMode] = useState<"repel" | "attract" | "gravity">("repel");
-  const [shape, setShape] = useState<ShapeType>(isHeroBg ? "grid" : "orivon");
+  const [shape, setShape] = useState<ShapeType>(isHeroBg ? "grid" : "home");
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -461,7 +461,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
       <div className="relative z-10 flex items-center justify-between font-mono text-[9px] tracking-widest text-muted-foreground">
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
-          ORIVON_LABS // LUSION_ENGINE
+          PORTFOLIO // PARTICLE_ENGINE
         </span>
         <span>PARTICLES: {particleCount}</span>
       </div>
@@ -517,7 +517,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
             SHAPE:
           </span>
           <div className="flex flex-wrap gap-1">
-            {(["orivon", "craft", "grid", "free"] as const).map((s) => (
+            {(["home", "craft", "grid", "free"] as const).map((s) => (
               <button
                 key={s}
                 onClick={() => setShape(s)}

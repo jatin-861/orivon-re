@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowDown } from "lucide-react";
+import { Download } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useInView } from "@/hooks/useInView";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: number }) {
-  const [displayText, setDisplayText] = useState("");
-  
+  const [displayText, setDisplayText] = useState(text);
+
   useEffect(() => {
     let frameId: number;
     let timeoutId: number;
-    
+
     const chars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
     const targetText = text;
     const length = targetText.length;
     let iteration = 0;
-    
+
     const scramble = () => {
       setDisplayText(
         targetText
@@ -32,7 +32,7 @@ export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: numb
           })
           .join("")
       );
-      
+
       if (iteration < length) {
         iteration += 0.35; // smooth settle speed
         frameId = requestAnimationFrame(scramble);
@@ -40,17 +40,17 @@ export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: numb
         setDisplayText(targetText);
       }
     };
-    
+
     timeoutId = window.setTimeout(() => {
       frameId = requestAnimationFrame(scramble);
     }, delay * 1000);
-    
+
     return () => {
       clearTimeout(timeoutId);
       cancelAnimationFrame(frameId);
     };
   }, [text, delay]);
-  
+
   return <span>{displayText || text}</span>;
 }
 
@@ -114,6 +114,13 @@ class Particle {
   }
 }
 
+const METRICS = [
+  { v: "2", l: "Production systems shipped" },
+  { v: "220+", l: "Rental units automated" },
+  { v: "40+", l: "Hours saved every month" },
+  { v: "100%", l: "Built for production" },
+];
+
 export const CinematicHero = () => {
   const [canvasRef, isInView] = useInView({ threshold: 0.01 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -126,29 +133,12 @@ export const CinematicHero = () => {
   }, [isInView]);
 
   const hasSeenPreloader =
-    typeof window !== "undefined" && sessionStorage.getItem("orivon-preloader-seen");
+    typeof window !== "undefined" && sessionStorage.getItem("portfolio-preloader-seen");
   const delayBase = hasSeenPreloader ? 0.2 : 2.5;
 
   useEffect(() => {
-    // GSAP ScrollTrigger for clipping frame
+    // Entry elements reveal animations
     const ctx = gsap.context(() => {
-      gsap.set("#hero-frame", {
-        clipPath: "polygon(10% 0%, 90% 0%, 95% 85%, 5% 90%)",
-        borderRadius: "0% 0% 20px 20px",
-      });
-      gsap.from("#hero-frame", {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        borderRadius: "0% 0% 0% 0%",
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: "#hero-frame",
-          start: "center center",
-          end: "bottom center",
-          scrub: true,
-        },
-      });
-
-      // Entry elements reveal animations
       gsap.from(".hero-element", {
         y: 40,
         opacity: 0,
@@ -176,21 +166,38 @@ export const CinematicHero = () => {
       tempCanvas.width = canvas.width;
       tempCanvas.height = canvas.height;
 
-      // Draw large word "ORIVON" dynamically scaled
+      // Draw the belief statement, dynamically scaled to fit width, across two lines
       const isMobile = canvas.width < 768;
-      const fontSize = Math.min(canvas.width * 0.17, 240);
+      const lines = ["USEFUL OVER", "IMPRESSIVE"];
+      let fontSize = Math.min(canvas.width * (isMobile ? 0.16 : 0.125), 190);
       tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
+      const maxWidth = canvas.width * 0.94;
+      const widest = Math.max(...lines.map((line) => tempCtx.measureText(line).width));
+      if (widest > maxWidth) {
+        fontSize = fontSize * (maxWidth / widest);
+        tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
+      }
       tempCtx.fillStyle = "#000000";
       tempCtx.textAlign = "center";
       tempCtx.textBaseline = "middle";
 
-      // Draw text centered (slightly higher on screen to leave space for bottom title)
-      const textY = isMobile ? tempCanvas.height * 0.4 : tempCanvas.height * 0.45;
-      tempCtx.fillText("ORIVON", tempCanvas.width / 2, textY);
+      const lineHeight = fontSize * 1.08;
+      const totalHeight = lineHeight * lines.length;
+      const startY = tempCanvas.height / 2 - totalHeight / 2 + lineHeight / 2;
+
+      lines.forEach((line, i) => {
+        tempCtx.fillText(line, tempCanvas.width / 2, startY + i * lineHeight);
+      });
 
       const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
       const data = imgData.data;
       const newParticles: Particle[] = [];
+
+      // Theme-aware particle palette
+      const isDark = document.documentElement.classList.contains("dark");
+      const baseColor = isDark ? "#F5F1EA" : "#1A1A1A";
+      const accentColor = "#C75B3A"; // Burnt Terracotta — consistent across themes
+      const tertiaryColor = isDark ? "#C37B68" : "#8B5E3C";
 
       // Densities: tighter on larger screens (optimized density from 4/5 to 5/7)
       const step = isMobile ? 7 : 5;
@@ -201,11 +208,11 @@ export const CinematicHero = () => {
           const alpha = data[index + 3];
           if (alpha > 128) {
             const rand = Math.random();
-            let color = "#1A1A1A"; // Charcoal base
+            let color = baseColor;
             if (rand > 0.88) {
-              color = "#C75B3A"; // Burnt Terracotta accent
-            } else if (rand > 0.80) {
-              color = "#8B5E3C"; // Warm Amber
+              color = accentColor;
+            } else if (rand > 0.8) {
+              color = tertiaryColor;
             }
 
             const size = (isMobile ? 0.8 : 1.2) + Math.random() * 1.5;
@@ -284,6 +291,7 @@ export const CinematicHero = () => {
       }, 200);
     };
     window.addEventListener("resize", handleResize);
+    window.addEventListener("themechange", initParticles);
 
     return () => {
       ctx.revert();
@@ -293,69 +301,177 @@ export const CinematicHero = () => {
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("touchend", handleMouseLeave);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("themechange", initParticles);
     };
   }, [delayBase]);
 
   return (
-    <div ref={containerRef} className="relative h-[100dvh] w-full overflow-hidden bg-transparent">
-      <div
-        id="hero-frame"
-        className="relative z-10 h-[100dvh] w-full overflow-hidden bg-transparent"
-      >
-        {/* Full Viewport Canvas for Particle Text */}
+    <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
+      {/* Real DOM heading — canvas text is invisible to crawlers */}
+      <h1 className="sr-only">
+        Saral Banker — Product Engineer. Useful over impressive: I build software that solves
+        real problems — from business automation to AI-powered platforms. Built NeuroDashboard,
+        a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental
+        units.
+      </h1>
+
+      {/* Top identity bar */}
+      <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
+        <div>Saral Banker — Product Engineer // India</div>
+        <div className="hidden sm:flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
+          Open to new projects
+        </div>
+      </div>
+
+      {/* Belief statement canvas */}
+      <div className="relative h-[34vh] sm:h-[42vh] lg:h-[46vh] w-full">
         <canvas
           ref={canvasRef}
+          aria-hidden="true"
           className="absolute inset-0 z-0 w-full h-full block pointer-events-none"
         />
+      </div>
 
-        {/* Minimal grid lines in the background for structural feeling */}
-        <div className="absolute inset-0 z-[1] grid grid-cols-12 gap-6 px-6 sm:px-12 pointer-events-none opacity-20">
-          <div className="col-span-3 border-r border-border" />
-          <div className="col-span-3 border-r border-border" />
-          <div className="col-span-3 border-r border-border" />
-          <div className="col-span-3" />
-        </div>
+      {/* Identity / Value / CTA / Proof / Product Preview */}
+      <div className="relative z-10 px-6 sm:px-12 pb-16 sm:pb-24 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="lg:col-span-7 hero-element flex flex-col gap-6">
+          <h2 className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground" style={{ textRendering: "optimizeLegibility" }}>
+            Hi, I'm <ScrambleText text="Saral Banker." delay={delayBase + 0.1} />
+          </h2>
 
-        {/* Crisp Editorial Layout Text Overlays */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-between p-6 sm:p-12 pt-28">
-          {/* Top Metadata */}
-          <div className="flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
-            <div>ORIVON Studio // India</div>
-            <div className="hidden sm:block">Digital Design & Engineering</div>
+          <p className="font-sans text-lg sm:text-xl text-foreground/90 font-semibold max-w-xl">
+            I build software that solves real problems.
+          </p>
+
+          <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-xl">
+            From business automation to AI-powered platforms — I design, build, and ship
+            production systems that people actually use. Database to deployment, no shortcuts.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 mt-2">
+            <Link
+              to="/work"
+              className="rounded-full bg-foreground text-background hover:bg-[var(--secondary)] hover:text-white px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors"
+            >
+              View Projects
+            </Link>
+            <a
+              href="/Saral_Banker_Resume.pdf"
+              download
+              className="rounded-full border border-border hover:border-foreground px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors inline-flex items-center gap-2"
+            >
+              Resume <Download size={14} />
+            </a>
           </div>
 
-          {/* Bottom Layout Content */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
-            <div className="md:col-span-7 hero-element">
-              <h2 className="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.05] tracking-tight text-foreground">
-                <ScrambleText text="Tactile interactions," delay={delayBase + 0.1} /><br />
-                <span className="text-[var(--secondary)]">
-                  <ScrambleText text="editorial engineering." delay={delayBase + 0.35} />
-                </span>
-              </h2>
-            </div>
-            <div className="md:col-span-5 flex flex-col items-start gap-6 hero-element">
-              <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-md">
-                We are Jatin and Saral — a two-person studio design-engineering fast, bespoke digital products with absolute care and attention to detail.
-              </p>
-              <div className="flex items-center gap-4">
-                <Link
-                  to="/work"
-                  className="rounded-full bg-foreground text-background hover:bg-[var(--secondary)] hover:text-white px-6 py-3 text-sm font-semibold tracking-wide uppercase transition-colors"
-                >
-                  View Selected Work
-                </Link>
-                <div className="flex items-center gap-1.5 text-xs font-mono text-muted-foreground animate-[float_4s_ease-in-out_infinite]">
-                  <span>Scroll</span>
-                  <ArrowDown size={14} />
+          {/* Proof metrics */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+            {METRICS.map((m) => (
+              <div key={m.l} className="border-l border-border pl-4">
+                <div className="font-serif text-3xl sm:text-4xl text-[var(--brand-pink)] leading-none">
+                  {m.v}
+                </div>
+                <div className="mt-2 text-xs text-muted-foreground font-mono leading-snug">
+                  {m.l}
                 </div>
               </div>
-            </div>
+            ))}
           </div>
+        </div>
+
+        <div className="lg:col-span-5 hero-element">
+          <ProductPreview />
         </div>
       </div>
     </div>
   );
 };
+
+function ProductPreview() {
+  const activity = [
+    { label: "Knowledge Hub indexed 312 documents", time: "2m ago" },
+    { label: "Shade Ledger sent 18 invoices", time: "1h ago" },
+    { label: "Workflow automation run completed", time: "3h ago" },
+  ];
+
+  return (
+    <div className="hero-panel rounded-2xl border border-border overflow-hidden shadow-elegant">
+      {/* Window chrome */}
+      <div className="flex items-center justify-between px-5 py-3 border-b border-border">
+        <div className="flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-[var(--brand-pink)]" />
+          <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+            NeuroDashboard
+          </span>
+        </div>
+        <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border rounded-full px-2.5 py-1">
+          Currently Building
+        </span>
+      </div>
+
+      <div className="p-5 sm:p-6">
+        <p className="text-sm text-muted-foreground mb-5">
+          Welcome back, Saral. Here's what's running right now.
+        </p>
+
+        {/* Stat tiles */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="rounded-xl border border-border p-3">
+            <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">12,543</div>
+            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              Docs indexed
+            </div>
+          </div>
+          <div className="rounded-xl border border-border p-3">
+            <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">1,247</div>
+            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              Queries / day
+            </div>
+          </div>
+          <div className="rounded-xl border border-border p-3">
+            <div className="font-serif text-xl sm:text-2xl text-[var(--brand-pink)] leading-none">99.6%</div>
+            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              Uptime
+            </div>
+          </div>
+        </div>
+
+        {/* Chart */}
+        <div className="rounded-xl border border-border p-3 mb-6">
+          <svg viewBox="0 0 300 80" className="w-full h-20" preserveAspectRatio="none" aria-hidden="true">
+            <polyline
+              points="0,60 30,55 60,58 90,40 120,45 150,30 180,35 210,18 240,24 270,12 300,16"
+              fill="none"
+              stroke="var(--brand-pink)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <polyline
+              points="0,60 30,55 60,58 90,40 120,45 150,30 180,35 210,18 240,24 270,12 300,16 300,80 0,80"
+              fill="var(--brand-pink)"
+              opacity="0.08"
+              stroke="none"
+            />
+          </svg>
+        </div>
+
+        {/* Activity */}
+        <div className="flex flex-col gap-2.5">
+          {activity.map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center justify-between text-xs gap-4 border-b border-border/60 pb-2.5 last:border-0 last:pb-0"
+            >
+              <span className="text-foreground/80">{item.label}</span>
+              <span className="text-muted-foreground font-mono shrink-0">{item.time}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default CinematicHero;

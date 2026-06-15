@@ -92,7 +92,7 @@ export function GooeyText({
     <div className={cn("relative", className)}>
       <svg className="absolute h-0 w-0" aria-hidden>
         <defs>
-          <filter id="threshold-orivon">
+          <filter id="threshold-portfolio">
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
@@ -106,7 +106,7 @@ export function GooeyText({
       </svg>
       <div
         className="flex items-center justify-center"
-        style={{ filter: "url(#threshold-orivon)" }}
+        style={{ filter: "url(#threshold-portfolio)" }}
       >
         <span
           ref={text1Ref}

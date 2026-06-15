@@ -1,22 +1,29 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("theme");
+          if (theme === "dark") document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orivon — Award-winning digital design studio</title>
+    <title>Saral Banker — Product Engineer</title>
     <meta
       name="description"
-      content="Orivon is an independent design studio crafting award-winning brands, websites and digital products."
+      content="Saral Banker is a product engineer who builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
     />
-    <meta name="author" content="Orivon Studio" />
+    <meta name="author" content="Saral Banker" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Orivon — Award-winning digital design studio" />
+    <meta property="og:title" content="Saral Banker — Product Engineer" />
     <meta
       property="og:description"
-      content="Orivon is an independent design studio crafting award-winning brands, websites and digital products."
+      content="Saral Banker is a product engineer who builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@orivon" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,11 +34,10 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Orivon",
-        "url": "https://orivon.com",
-        "logo": "https://orivon.com/logo.png",
-        "sameAs": ["https://twitter.com/orivon", "https://www.instagram.com/orivon"]
+        "@type": "Person",
+        "name": "Saral Banker",
+        "jobTitle": "Product Engineer",
+        "sameAs": ["https://github.com/saralbanker"]
       }
     </script>
   </head>

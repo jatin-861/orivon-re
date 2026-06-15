@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function Preloader() {
   const [shouldRender, setShouldRender] = useState(() => {
     if (typeof window !== "undefined") {
-      return !sessionStorage.getItem("orivon-preloader-seen");
+      return !sessionStorage.getItem("portfolio-preloader-seen");
     }
     return true;
   });
@@ -32,7 +32,7 @@ export function Preloader() {
         clearInterval(timer);
         setTimeout(() => {
           setIsComplete(true);
-          sessionStorage.setItem("orivon-preloader-seen", "true");
+          sessionStorage.setItem("portfolio-preloader-seen", "true");
           // Unlock body scroll
           document.body.style.overflow = "";
         }, 600); // Hold at 100% for a brief moment
@@ -47,7 +47,7 @@ export function Preloader() {
 
   if (!shouldRender) return null;
 
-  const brandWords = "ORIVON".split("");
+  const brandWords = "SARAL".split("");
 
   return (
     <AnimatePresence>
@@ -62,14 +62,14 @@ export function Preloader() {
         >
           {/* Top text */}
           <div className="flex justify-between items-center text-xs font-mono tracking-widest text-muted-foreground uppercase opacity-60">
-            <span>ORIVON CREATIVE STUDIO</span>
+            <span>SARAL BANKER // PRODUCT ENGINEER</span>
             <span>STG // 2026</span>
           </div>
 
-          {/* Centered Orivon Logo Lettering */}
+          {/* Centered Logo Lettering */}
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="overflow-hidden flex gap-[0.1em] text-[clamp(2.5rem,10vw,8rem)] font-serif font-normal leading-none tracking-tight">
-              <span className="sr-only">ORIVON</span>
+              <span className="sr-only">Saral Banker</span>
               <span aria-hidden="true" className="flex gap-[0.1em]">
                 {brandWords.map((letter, i) => (
                   <motion.span
@@ -94,7 +94,7 @@ export function Preloader() {
               transition={{ delay: 0.8, duration: 0.5 }}
               className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--secondary)] font-bold"
             >
-              Independent Digital Craft
+              Built To Run In Production
             </motion.p>
           </div>
 

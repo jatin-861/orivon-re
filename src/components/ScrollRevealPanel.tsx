@@ -107,7 +107,7 @@ export function ScrollRevealPanel({ panels }: ScrollRevealPanelProps) {
             {/* Bottom Row */}
             <div className="flex items-center justify-between border-t border-current/15 pt-6">
               <span className={`font-mono text-[10px] tracking-widest ${subTextColor}`}>
-                ORIVON // HUMAN-MADE SYSTEM
+                SARAL BANKER // PRODUCTION SYSTEM
               </span>
               <span className={`text-xs font-bold font-mono tracking-wider ${textColor}`}>
                 WEEKLY ITERATIONS

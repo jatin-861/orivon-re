@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { MagneticButton } from "./MagneticButton";
+import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { to: "/", label: "Home" },
   { to: "/work", label: "Work" },
-  { to: "/services", label: "Services" },
   { to: "/process", label: "Process" },
-  { to: "/pricing", label: "Pricing" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -25,12 +23,6 @@ export const SiteHeader = () => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 20);
   });
-
-  useEffect(() => {
-    // Force clean light-mode editorial look
-    document.documentElement.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-  }, []);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -56,7 +48,7 @@ export const SiteHeader = () => {
             <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
           </span>
           <span className="font-display text-xl font-bold tracking-tight">
-            ORIVON<span className="text-primary">.</span>
+            SARAL BANKER
           </span>
         </Link>
 
@@ -87,6 +79,7 @@ export const SiteHeader = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <MagneticButton
             as={Link}
             to="/contact"
@@ -98,6 +91,7 @@ export const SiteHeader = () => {
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
+          <ThemeToggle />
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}

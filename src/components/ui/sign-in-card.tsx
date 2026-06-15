@@ -52,11 +52,11 @@ export function SignInCard({ onSubmit, error, loading }: Props) {
           {/* Header */}
           <div className="mb-8 flex flex-col items-center text-center">
             <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-border bg-[var(--muted)]">
-              <span className="font-serif text-2xl text-foreground">O</span>
+              <span className="font-serif text-2xl text-foreground">S</span>
             </div>
             <h1 className="font-serif text-3xl font-normal">Welcome back</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Sign in to continue to <span className="text-foreground">Orivon Studio</span>
+              Sign in to continue to <span className="text-foreground">the portfolio admin</span>
             </p>
           </div>
 

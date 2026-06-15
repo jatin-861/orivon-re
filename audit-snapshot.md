@@ -1,0 +1,493 @@
+- generic [ref=e2]:
+  - link "Skip to content" [ref=e3]:
+    - /url: "#main-content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "ORIVON." [ref=e6]:
+        - /url: /
+        - generic [ref=e9]: ORIVON.
+      - navigation [ref=e10]:
+        - link "Home" [ref=e11]:
+          - /url: /
+          - text: Home
+        - link "Work" [ref=e13]:
+          - /url: /work
+        - link "Services" [ref=e14]:
+          - /url: /services
+        - link "Process" [ref=e15]:
+          - /url: /process
+        - link "Pricing" [ref=e16]:
+          - /url: /pricing
+        - link "About" [ref=e17]:
+          - /url: /about
+        - link "Contact" [ref=e18]:
+          - /url: /contact
+      - link "Let's talk →" [ref=e20]:
+        - /url: /contact
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - generic [ref=e25]:
+        - heading "Orivon — Independent Design Studio for Brands, Websites & Digital Products" [level=1] [ref=e26]
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: ORIVON Studio // India
+            - generic [ref=e30]: Digital Design & Engineering
+          - generic [ref=e31]:
+            - generic [ref=e32]:
+              - heading "Tactile interactions, editorial engineering." [level=2] [ref=e33]:
+                - text: Tactile interactions,
+                - generic [ref=e34]: editorial engineering.
+              - paragraph [ref=e35]: Tactile interactions, editorial engineering — a design studio crafting award-winning brands, websites and digital products.
+            - generic [ref=e36]:
+              - paragraph [ref=e37]: We are Jatin and Saral — a two-person studio design-engineering fast, bespoke digital products with absolute care and attention to detail.
+              - generic [ref=e38]:
+                - link "View Selected Work" [ref=e39]:
+                  - /url: /work
+                - generic [ref=e40]:
+                  - generic [ref=e41]: Scroll
+                  - img [ref=e42]
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: Frontend Design
+            - generic [ref=e51]: ✦
+          - generic [ref=e52]:
+            - generic [ref=e53]: Bespoke Web Development
+            - generic [ref=e54]: ✦
+          - generic [ref=e55]:
+            - generic [ref=e56]: Tactile Interactions
+            - generic [ref=e57]: ✦
+          - generic [ref=e58]:
+            - generic [ref=e59]: Editorial Aesthetics
+            - generic [ref=e60]: ✦
+          - generic [ref=e61]:
+            - generic [ref=e62]: Clean Performance
+            - generic [ref=e63]: ✦
+          - generic [ref=e64]:
+            - generic [ref=e65]: Creative Engineering
+            - generic [ref=e66]: ✦
+          - generic [ref=e67]:
+            - generic [ref=e68]: TypeScript & React
+            - generic [ref=e69]: ✦
+          - generic [ref=e70]:
+            - generic [ref=e71]: GSAP Motion Graphics
+            - generic [ref=e72]: ✦
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: Frontend Design
+            - generic [ref=e76]: ✦
+          - generic [ref=e77]:
+            - generic [ref=e78]: Bespoke Web Development
+            - generic [ref=e79]: ✦
+          - generic [ref=e80]:
+            - generic [ref=e81]: Tactile Interactions
+            - generic [ref=e82]: ✦
+          - generic [ref=e83]:
+            - generic [ref=e84]: Editorial Aesthetics
+            - generic [ref=e85]: ✦
+          - generic [ref=e86]:
+            - generic [ref=e87]: Clean Performance
+            - generic [ref=e88]: ✦
+          - generic [ref=e89]:
+            - generic [ref=e90]: Creative Engineering
+            - generic [ref=e91]: ✦
+          - generic [ref=e92]:
+            - generic [ref=e93]: TypeScript & React
+            - generic [ref=e94]: ✦
+          - generic [ref=e95]:
+            - generic [ref=e96]: GSAP Motion Graphics
+            - generic [ref=e97]: ✦
+      - generic [ref=e101]:
+        - generic [ref=e104]: Selected Work
+        - generic [ref=e105]: "PROJECT: 01 / 06"
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - generic [ref=e108]: Selected Craft
+            - heading "How we solve complex problems with beautiful interfaces." [level=2] [ref=e109]
+            - paragraph [ref=e110]: Every website we build is a storytelling engine. We design for clarity, feel, and performance.
+            - generic [ref=e111]:
+              - generic [ref=e112]: Scroll down or scroll wheel
+              - generic [ref=e113]: →
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - generic [ref=e117]:
+                - generic [ref=e118]:
+                  - generic [ref=e119]: Fintech
+                  - generic [ref=e120]: "2025"
+                - heading "Lumen" [level=3] [ref=e121]
+                - paragraph [ref=e122]: A radical reinvention of mobile banking with immersive 3D dashboards and a frictionless onboarding flow.
+                - generic [ref=e123]:
+                  - generic [ref=e124]: Brand
+                  - generic [ref=e125]: UX/UI
+                  - generic [ref=e126]: Web
+                  - generic [ref=e127]: Motion
+              - link "Explore case" [ref=e128]:
+                - /url: /work/lumen-finance
+                - text: Explore case
+                - img [ref=e129]
+            - generic [ref=e135]:
+              - generic [ref=e141]: ORIVON.STUDIO // LUMEN-FINANCE
+              - generic [ref=e144]:
+                - generic [ref=e145]: FINANCE_CAPITAL
+                - generic [ref=e146]: $842,912.00
+              - generic [ref=e159]:
+                - generic [ref=e160]: CRAFTED IN ORIVON LABS
+                - generic [ref=e161]: ©2026 // ALL RIGHTS RESERVED
+          - generic [ref=e163]:
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - generic [ref=e166]:
+                  - generic [ref=e167]: Music
+                  - generic [ref=e168]: "2024"
+                - heading "Noctis" [level=3] [ref=e169]
+                - paragraph [ref=e170]: Audio-reactive WebGL artist hub for an underground techno label. Won SOTD on Awwwards.
+                - generic [ref=e171]:
+                  - generic [ref=e172]: Web
+                  - generic [ref=e173]: WebGL
+                  - generic [ref=e174]: Brand
+              - link "Explore case" [ref=e175]:
+                - /url: /work/noctis-music
+                - text: Explore case
+                - img [ref=e176]
+            - generic [ref=e182]:
+              - generic [ref=e188]: ORIVON.STUDIO // NOCTIS-MUSIC
+              - generic [ref=e203]:
+                - generic [ref=e204]: CRAFTED IN ORIVON LABS
+                - generic [ref=e205]: ©2026 // ALL RIGHTS RESERVED
+          - generic [ref=e207]:
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - generic [ref=e210]:
+                  - generic [ref=e211]: Aerospace
+                  - generic [ref=e212]: "2024"
+                - heading "Orbit" [level=3] [ref=e213]
+                - paragraph [ref=e214]: From spacecraft configurator to investor pitch — a complete digital identity for a new-era launch company.
+                - generic [ref=e215]:
+                  - generic [ref=e216]: Brand
+                  - generic [ref=e217]: Web
+                  - generic [ref=e218]: 3D
+              - link "Explore case" [ref=e219]:
+                - /url: /work/orbit-aerospace
+                - text: Explore case
+                - img [ref=e220]
+            - generic [ref=e226]:
+              - generic [ref=e232]: ORIVON.STUDIO // ORBIT-AEROSPACE
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]: ORBIT_TRACKER
+                  - generic [ref=e237]: L-04:12:05
+                - generic [ref=e241]: ALT. 408KM
+              - generic [ref=e242]:
+                - generic [ref=e243]: CRAFTED IN ORIVON LABS
+                - generic [ref=e244]: ©2026 // ALL RIGHTS RESERVED
+          - generic [ref=e246]:
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - generic [ref=e249]:
+                  - generic [ref=e250]: Climate
+                  - generic [ref=e251]: "2024"
+                - heading "Verdant" [level=3] [ref=e252]
+                - paragraph [ref=e253]: An interactive impact report turned into a scrollable cinematic experience.
+                - generic [ref=e254]:
+                  - generic [ref=e255]: Web
+                  - generic [ref=e256]: Motion
+                  - generic [ref=e257]: Editorial
+              - link "Explore case" [ref=e258]:
+                - /url: /work/verdant-eco
+                - text: Explore case
+                - img [ref=e259]
+            - generic [ref=e265]:
+              - generic [ref=e271]: ORIVON.STUDIO // VERDANT-ECO
+              - generic [ref=e273]:
+                - generic [ref=e274]: 98.4%
+                - paragraph [ref=e275]: ECO_REDUCTION_TARGET
+              - generic [ref=e278]:
+                - generic [ref=e279]: CRAFTED IN ORIVON LABS
+                - generic [ref=e280]: ©2026 // ALL RIGHTS RESERVED
+          - generic [ref=e282]:
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - generic [ref=e286]: Fashion
+                  - generic [ref=e287]: "2025"
+                - heading "Atelier" [level=3] [ref=e288]
+                - paragraph [ref=e289]: A flagship e-commerce experience for a Parisian couture house. Headless, fast, and unmistakably haute.
+                - generic [ref=e290]:
+                  - generic [ref=e291]: E-commerce
+                  - generic [ref=e292]: UX/UI
+                  - generic [ref=e293]: Brand
+              - link "Explore case" [ref=e294]:
+                - /url: /work/atelier-fashion
+                - text: Explore case
+                - img [ref=e295]
+            - generic [ref=e301]:
+              - generic [ref=e307]: ORIVON.STUDIO // ATELIER-FASHION
+              - generic [ref=e309]:
+                - generic [ref=e310]:
+                  - generic [ref=e311]: CAPE
+                  - generic [ref=e312]: ATELIER CAFE
+                - generic [ref=e313]:
+                  - generic [ref=e314]: SILK
+                  - generic [ref=e315]: COUTURE NOIR
+              - generic [ref=e316]:
+                - generic [ref=e317]: CRAFTED IN ORIVON LABS
+                - generic [ref=e318]: ©2026 // ALL RIGHTS RESERVED
+          - generic [ref=e320]:
+            - generic [ref=e321]:
+              - generic [ref=e322]:
+                - generic [ref=e323]:
+                  - generic [ref=e324]: Health
+                  - generic [ref=e325]: "2024"
+                - heading "Halo" [level=3] [ref=e326]
+                - paragraph [ref=e327]: Native-feeling progressive web app for a meditation startup with delightful micro-interactions.
+                - generic [ref=e328]:
+                  - generic [ref=e329]: Product
+                  - generic [ref=e330]: UX/UI
+                  - generic [ref=e331]: Motion
+              - link "Explore case" [ref=e332]:
+                - /url: /work/halo-health
+                - text: Explore case
+                - img [ref=e333]
+            - generic [ref=e339]:
+              - generic [ref=e345]: ORIVON.STUDIO // HALO-HEALTH
+              - generic [ref=e350]: INHALE ... EXHALE
+              - generic [ref=e351]:
+                - generic [ref=e352]: CRAFTED IN ORIVON LABS
+                - generic [ref=e353]: ©2026 // ALL RIGHTS RESERVED
+      - generic [ref=e357]:
+        - generic [ref=e358]:
+          - generic [ref=e359]: — Studio Showreel
+          - heading "Cinematic narratives in motion." [level=2] [ref=e360]:
+            - text: Cinematic
+            - text: narratives in motion.
+          - paragraph [ref=e361]: Scroll horizontally to see snippets of our interactive products. We blend raw engineering with editorial design.
+        - generic [ref=e362]:
+          - generic [ref=e366]:
+            - generic [ref=e367]: Motion Design
+            - generic [ref=e368]: ✦
+          - generic [ref=e369]:
+            - heading "Elevating digital rhythm." [level=3] [ref=e370]
+            - paragraph [ref=e371]: Bespoke animations and kinetic transitions crafted to capture focus.
+        - generic [ref=e372]:
+          - generic [ref=e376]:
+            - generic [ref=e377]: Systems
+            - generic [ref=e378]: ✦
+          - generic [ref=e379]:
+            - heading "Structured design scales." [level=3] [ref=e380]
+            - paragraph [ref=e381]: A library of custom layouts engineered for optimal brand consistency.
+        - generic [ref=e382]:
+          - generic [ref=e386]:
+            - generic [ref=e387]: E-commerce
+            - generic [ref=e388]: ✦
+          - generic [ref=e389]:
+            - heading "Flow tailored to convert." [level=3] [ref=e390]
+            - paragraph [ref=e391]: Speed-focused headless storefronts designed for zero checkout friction.
+        - generic [ref=e393]:
+          - generic [ref=e394]: — Capabilities
+          - heading "Our complete Verification Lab." [level=2] [ref=e395]:
+            - text: Our complete
+            - text: Verification Lab.
+          - paragraph [ref=e396]: We validate all components against Fitts's law target acquisition speeds and Gestalt visual grouping metrics.
+          - link "Explore Services" [ref=e397]:
+            - /url: /services
+            - text: Explore Services
+            - img [ref=e398]
+      - generic [ref=e402]:
+        - paragraph [ref=e403]: THE ORIVON PHILOSOPHY
+        - generic [ref=e404]:
+          - generic:
+            - generic:
+              - generic: the
+              - generic: narrative
+            - generic:
+              - generic: of
+              - generic: custom
+              - generic: craft
+          - generic [ref=e410]: Generative System // Spec. 01
+        - generic [ref=e412]:
+          - paragraph [ref=e413]: We reject standard grid templates to guide users through custom scroll narratives. Discover how our physical-digital synergy turns clients into long-term partners.
+          - button "read methodology read methodology" [ref=e414]:
+            - generic [ref=e416]:
+              - generic [ref=e417]: read methodology
+              - generic [ref=e418]: read methodology
+      - generic [ref=e421]:
+        - generic [ref=e422]:
+          - generic [ref=e423]: "01"
+          - generic [ref=e424]: — Philosophy
+        - generic [ref=e425]:
+          - generic [ref=e427]:
+            - generic [ref=e428]: We
+            - generic [ref=e429]: believe
+            - generic [ref=e430]: that
+            - generic [ref=e431]: templates
+            - generic [ref=e432]: dilute
+            - generic [ref=e433]: your
+            - generic [ref=e434]: brand
+            - generic [ref=e435]: value.
+          - generic [ref=e437]:
+            - generic [ref=e438]: An
+            - generic [ref=e439]: award-winning
+            - generic [ref=e440]: website
+            - generic [ref=e441]: is
+            - generic [ref=e442]: not
+            - generic [ref=e443]: built
+            - generic [ref=e444]: with
+            - generic [ref=e445]: 3D
+            - generic [ref=e446]: spinners
+            - generic [ref=e447]: or
+            - generic [ref=e448]: pre-made
+            - generic [ref=e449]: UI
+            - generic [ref=e450]: blocks.
+          - generic [ref=e452]:
+            - generic [ref=e453]: It
+            - generic [ref=e454]: is
+            - generic [ref=e455]: crafted
+            - generic [ref=e456]: with
+            - generic [ref=e457]: bespoke
+            - generic [ref=e458]: typography
+            - generic [ref=e459]: scales,
+            - generic [ref=e460]: custom
+            - generic [ref=e461]: layouts,
+            - generic [ref=e462]: and
+            - generic [ref=e463]: animations
+            - generic [ref=e464]: that
+            - generic [ref=e465]: adapt
+            - generic [ref=e466]: to
+            - generic [ref=e467]: the
+            - generic [ref=e468]: user’s
+            - generic [ref=e469]: scroll
+            - generic [ref=e470]: cadence.
+          - paragraph [ref=e472]:
+            - generic [ref=e473]:
+              - generic [ref=e474]: Every
+              - generic [ref=e475]: pixel
+              - generic [ref=e476]: should
+              - generic [ref=e477]: feel
+              - generic [ref=e478]: human-made.
+      - generic [ref=e481]:
+        - generic [ref=e483]:
+          - generic [ref=e485]: 0+
+          - generic [ref=e486]: Years of studio craft
+        - generic [ref=e488]:
+          - generic [ref=e490]: 0+
+          - generic [ref=e491]: Bespoke projects
+        - generic [ref=e493]:
+          - generic [ref=e495]: 0%
+          - generic [ref=e496]: Dedicated engineering
+        - generic [ref=e498]:
+          - generic [ref=e500]: 0+
+          - generic [ref=e501]: Happy clients
+      - generic [ref=e504]:
+        - heading "L e t ' s b u i l d s o m e t h i n g l e g e n d a r y ." [level=2] [ref=e505]:
+          - generic [ref=e506]:
+            - generic [ref=e507]:
+              - generic [ref=e508]:
+                - generic [ref=e509]: L
+                - generic [ref=e510]: e
+                - generic [ref=e511]: t
+                - generic [ref=e512]: "'"
+                - generic [ref=e513]: s
+              - generic [ref=e514]:
+                - generic [ref=e515]: b
+                - generic [ref=e516]: u
+                - generic [ref=e517]: i
+                - generic [ref=e518]: l
+                - generic [ref=e519]: d
+            - emphasis [ref=e520]:
+              - generic [ref=e521]:
+                - generic [ref=e522]:
+                  - generic [ref=e523]: s
+                  - generic [ref=e524]: o
+                  - generic [ref=e525]: m
+                  - generic [ref=e526]: e
+                  - generic [ref=e527]: t
+                  - generic [ref=e528]: h
+                  - generic [ref=e529]: i
+                  - generic [ref=e530]: "n"
+                  - generic [ref=e531]: g
+                - generic [ref=e532]:
+                  - generic [ref=e533]: l
+                  - generic [ref=e534]: e
+                  - generic [ref=e535]: g
+                  - generic [ref=e536]: e
+                  - generic [ref=e537]: "n"
+                  - generic [ref=e538]: d
+                  - generic [ref=e539]: a
+                  - generic [ref=e540]: r
+                  - generic [ref=e541]: "y"
+                  - generic [ref=e542]: .
+        - paragraph [ref=e543]: We take on a small number of partners each quarter. If you have an idea worth doing right, we'd love to hear it.
+        - link "Start a project" [ref=e545]:
+          - /url: /contact
+          - text: Start a project
+          - img [ref=e546]
+  - contentinfo [ref=e548]:
+    - generic [ref=e549]:
+      - generic [ref=e551]:
+        - link "GitHub" [ref=e553]:
+          - /url: https://github.com/orivon
+          - img [ref=e555]
+        - link "Twitter" [ref=e559]:
+          - /url: https://twitter.com/orivon
+          - img [ref=e561]
+        - link "Instagram" [ref=e564]:
+          - /url: https://instagram.com/orivon
+          - img [ref=e566]
+        - link "Dribbble" [ref=e570]:
+          - /url: https://dribbble.com/orivon
+          - img [ref=e572]
+        - link "Email" [ref=e578]:
+          - /url: mailto:hello@orivon.studio
+          - img [ref=e580]
+      - generic [ref=e583]:
+        - generic [ref=e584]:
+          - link "ORIVON." [ref=e585]:
+            - /url: /
+            - generic [ref=e588]: ORIVON.
+          - paragraph [ref=e589]: A bespoke design & engineering studio crafting tactile, fast, and beautiful digital products.
+        - generic [ref=e590]:
+          - paragraph [ref=e591]: Studio
+          - list [ref=e592]:
+            - listitem [ref=e593]:
+              - link "About Studio" [ref=e594]:
+                - /url: /about
+            - listitem [ref=e595]:
+              - link "Process" [ref=e596]:
+                - /url: /process
+        - generic [ref=e597]:
+          - paragraph [ref=e598]: Services
+          - list [ref=e599]:
+            - listitem [ref=e600]:
+              - link "Frontend Design" [ref=e601]:
+                - /url: /services
+            - listitem [ref=e602]:
+              - link "Full-Stack Dev" [ref=e603]:
+                - /url: /services
+        - generic [ref=e604]:
+          - paragraph [ref=e605]: Connect
+          - list [ref=e606]:
+            - listitem [ref=e607]:
+              - link "Selected Work" [ref=e608]:
+                - /url: /work
+            - listitem [ref=e609]:
+              - link "Pricing" [ref=e610]:
+                - /url: /pricing
+            - listitem [ref=e611]:
+              - link "Contact" [ref=e612]:
+                - /url: /contact
+          - list [ref=e613]:
+            - listitem [ref=e614]:
+              - img [ref=e615]
+              - text: hello@orivon.studio
+            - listitem [ref=e618]:
+              - img [ref=e619]
+              - text: +91 98765 43210
+            - listitem [ref=e621]:
+              - img [ref=e622]
+              - text: India
+      - generic [ref=e627]:
+        - generic [ref=e628]: ORIVON
+        - generic [ref=e629]: ORIVON
+      - generic [ref=e630]:
+        - paragraph [ref=e631]: © 2026 Orivon Studio. All rights reserved.
+        - paragraph [ref=e632]: Crafted with obsessive detail.

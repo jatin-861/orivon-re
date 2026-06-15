@@ -175,14 +175,14 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           {/* Intro Slide */}
           <div className="max-w-3xl">
             <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
-              Selected Craft
+              Selected Work
             </span>
             <h2 className="font-display font-bold leading-[1.05] text-[clamp(2.2rem,6vw,4.5rem)] tracking-tight">
-              How we solve complex problems with{" "}
-              <span className="text-secondary font-serif italic font-normal">beautiful interfaces.</span>
+              Real systems, built{" "}
+              <span className="text-secondary font-serif italic font-normal">and shipped.</span>
             </h2>
             <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
-              Every website we build is a storytelling engine. We design for clarity, feel, and performance.
+              A multi-module AI platform, production billing automation, and more — each one solving a real problem for real users.
             </p>
           </div>
 
@@ -254,12 +254,19 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                             <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
                           </div>
                           <span className="text-[9px] font-mono tracking-widest opacity-40">
-                            ORIVON.STUDIO // {p.slug.toUpperCase()}
+                            SARAL BANKER // {p.slug.toUpperCase()}
                           </span>
                         </div>
 
                         {/* Content */}
                         <div className="flex-1 flex items-center justify-center py-4 relative">
+                          {p.image && (
+                            <img
+                              src={p.image}
+                              alt={p.title}
+                              className="w-full h-48 object-cover rounded-lg"
+                            />
+                          )}
                           {p.slug === "lumen-finance" && (
                             <div className="w-full max-w-[240px] space-y-3 text-left">
                               <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between">
@@ -344,7 +351,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
 
                         {/* Footer Row */}
                         <div className="flex justify-between items-center text-[8px] font-mono opacity-40">
-                          <span>ORIVON LABS</span>
+                          <span>SARAL BANKER</span>
                           <span>©2026</span>
                         </div>
                       </div>
@@ -397,15 +404,15 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           className="w-screen h-[100dvh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
         >
           <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
-            Selected Craft
+            Selected Work
           </span>
           <h2 className="font-display font-bold leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight">
-            How we solve complex problems with{" "}
-            <span className="text-secondary font-serif italic font-normal">beautiful interfaces.</span>
+            Real systems, built{" "}
+            <span className="text-secondary font-serif italic font-normal">and shipped.</span>
           </h2>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Every website we build is a storytelling engine. We design for clarity, feel, and
-            performance.
+            A multi-module AI platform, production billing automation, and more — each one
+            solving a real problem for real users.
           </p>
           <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-foreground/50">
             <span>Scroll down or scroll wheel</span>
@@ -487,12 +494,19 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                           <span className="w-3 h-3 rounded-full bg-white/20" />
                         </div>
                         <span className="text-[10px] font-mono tracking-widest opacity-40">
-                          ORIVON.STUDIO // {p.slug.toUpperCase()}
+                          SARAL BANKER // {p.slug.toUpperCase()}
                         </span>
                       </div>
 
                       {/* CSS Vector Content tailored to each case */}
                       <div className="flex-1 flex items-center justify-center py-6 relative">
+                        {p.image && (
+                          <img
+                            src={p.image}
+                            alt={p.title}
+                            className="w-full h-64 md:h-80 object-cover rounded-xl"
+                          />
+                        )}
                         {p.slug === "lumen-finance" && (
                           <div className="w-full max-w-sm space-y-4">
                             <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
@@ -600,7 +614,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
 
                       {/* Footer Row */}
                       <div className="flex justify-between items-center text-[9px] font-mono opacity-40">
-                        <span>CRAFTED IN ORIVON LABS</span>
+                        <span>BUILT BY SARAL BANKER</span>
                         <span>©2026 // ALL RIGHTS RESERVED</span>
                       </div>
                     </div>

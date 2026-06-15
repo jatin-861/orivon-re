@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Home } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-export function NotFoundOrivon() {
+export function NotFoundPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -92,8 +92,7 @@ export function NotFoundOrivon() {
           transition={{ delay: 0.5 }}
           className="mt-5 text-muted-foreground max-w-md mx-auto"
         >
-          This page must have been filed under a different name. Let's get you back to the
-          studio.
+          This page doesn't exist. Let's get you back home.
         </motion.p>
 
         <motion.div

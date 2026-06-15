@@ -61,7 +61,7 @@
   --color-brand-coral: var(--brand-coral);
 }
 
-/* ORIVON — Warm Editorial Color System & Typography */
+/* Warm Editorial Color System & Typography */
 :root {
   --radius: 0.75rem;
 
@@ -118,7 +118,6 @@
 
   --cyan: #C75B3A;
   --cyan-glow: rgba(199, 91, 58, 0.08);
-  --violet: #8B5E3C;
 
   --gradient-cyan: var(--brand-pink);
   --gradient-aurora: radial-gradient(circle at 50% 50%, rgba(199, 91, 58, 0.08), transparent 70%);
@@ -129,6 +128,56 @@
   --shadow-elegant: 0 10px 30px -10px rgba(26, 26, 26, 0.08);
 
   --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Black / White Theme — toggled via .dark class on <html> */
+.dark {
+  --background: #0A0A0A;
+  --foreground: #F5F1EA;
+
+  --card: #141414;
+  --card-foreground: #F5F1EA;
+  --popover: #141414;
+  --popover-foreground: #F5F1EA;
+
+  --primary: #F5F1EA;
+  --primary-foreground: #0A0A0A;
+
+  --secondary: #C75B3A;
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #1C1C1C;
+  --muted-foreground: #A39C92;
+
+  --accent: #C75B3A;
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #ff6b52;
+  --destructive-foreground: #0A0A0A;
+
+  --border: #2A2A2A;
+  --input: #141414;
+  --ring: #C75B3A;
+
+  --chart-1: #F5F1EA;
+  --chart-2: #C75B3A;
+  --chart-3: #C37B68;
+  --chart-4: #0A0A0A;
+  --chart-5: #A39C92;
+
+  --sidebar: #141414;
+  --sidebar-foreground: #F5F1EA;
+  --sidebar-primary: #F5F1EA;
+  --sidebar-primary-foreground: #0A0A0A;
+  --sidebar-accent: #1C1C1C;
+  --sidebar-accent-foreground: #F5F1EA;
+  --sidebar-border: #2A2A2A;
+  --sidebar-ring: #C75B3A;
+
+  --gradient-aurora: radial-gradient(circle at 50% 50%, rgba(199, 91, 58, 0.14), transparent 70%);
+
+  --shadow-glow-cyan: 0 4px 16px rgba(199, 91, 58, 0.18);
+  --shadow-elegant: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
 }
 
 @layer base {
@@ -170,6 +219,9 @@
     font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.15;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   h3,
@@ -185,6 +237,10 @@
   ::selection {
     background-color: rgba(199, 91, 58, 0.2);
     color: #1A1A1A;
+  }
+
+  .dark ::selection {
+    color: #F5F1EA;
   }
 
   /* Global active press feedback (Emil Kowalski rule) */
@@ -243,6 +299,11 @@
     border: 1px solid rgba(26, 26, 26, 0.05);
   }
 
+  .dark .hero-panel {
+    background: rgba(20, 20, 20, 0.82);
+    border: 1px solid rgba(245, 241, 234, 0.08);
+  }
+
   .shadow-glow-cyan {
     box-shadow: var(--shadow-glow-cyan);
   }
@@ -259,6 +320,11 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(26, 26, 26, 0.06);
+  }
+
+  .dark .glass {
+    background: rgba(20, 20, 20, 0.5);
+    border: 1px solid rgba(245, 241, 234, 0.08);
   }
 
   .marquee {

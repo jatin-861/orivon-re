@@ -26,25 +26,25 @@ export const Route = createFileRoute("/")({
 function Index() {
   const homeSchema = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Orivon",
-    url: "https://orivon.com",
+    "@type": "ProfilePage",
+    name: "Saral Banker — Product Engineer",
     description:
-      "Orivon is an independent design studio crafting award-winning brands, websites and digital products.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://orivon.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string",
+      "Saral Banker is a product engineer who builds complete, production systems — from database to deployment.",
+    mainEntity: {
+      "@type": "Person",
+      name: "Saral Banker",
+      jobTitle: "Product Engineer",
+      sameAs: ["https://github.com/saralbanker"],
     },
   };
 
   return (
     <div className="relative text-foreground transition-colors duration-500 font-sans overflow-x-clip">
       <SEO
-        title="Orivon — Award-winning digital design studio"
-        description="Orivon is an independent design studio crafting award-winning brands, websites and digital products."
-        canonical="https://orivon.com"
-        keywords="design studio, digital agency, branding, website design, headless e-commerce, custom layout"
+        title="Saral Banker — Product Engineer"
+        description="Saral Banker is a product engineer who builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
+        canonical="/"
+        keywords="product engineer, full-stack developer, AI applications, React, Node.js, software engineer portfolio"
         ogType="website"
         schema={homeSchema}
       />
@@ -143,21 +143,21 @@ function StudioShowreel() {
   const items = [
     {
       video: "/videos/hero-2.mp4",
-      tag: "Motion Design",
-      title: "Elevating digital rhythm.",
-      desc: "Bespoke animations and kinetic transitions crafted to capture focus.",
+      tag: "Knowledge Hub",
+      title: "Find answers instantly.",
+      desc: "Semantic search across all your documents and notes — the flagship module inside NeuroDashboard.",
     },
     {
       video: "/videos/feature-2.mp4",
-      tag: "Systems",
-      title: "Structured design scales.",
-      desc: "A library of custom layouts engineered for optimal brand consistency.",
+      tag: "Shade Ledger",
+      title: "Billing that runs itself.",
+      desc: "Automatic invoices, reminders, and penalty tracking — running live for 220 rental units.",
     },
     {
       video: "/videos/feature-3.mp4",
-      tag: "E-commerce",
-      title: "Flow tailored to convert.",
-      desc: "Speed-focused headless storefronts designed for zero checkout friction.",
+      tag: "Smart Parking",
+      title: "Real-time, on demand.",
+      desc: "Drivers see open spots in real time and book one instantly.",
     },
   ];
 
@@ -170,14 +170,14 @@ function StudioShowreel() {
           {/* Intro Panel */}
           <div className="max-w-xl">
             <span className="text-xs font-mono text-[var(--brand-peach)] tracking-widest uppercase mb-4 block">
-              — Studio Showreel
+              — Systems In Motion
             </span>
             <h2 className="font-serif text-4xl sm:text-6xl font-normal leading-[1.1] tracking-tighter">
-              Cinematic <br />
-              <span className="text-secondary italic">narratives</span> in motion.
+              Real projects, <br />
+              <span className="text-secondary italic">running</span> in production.
             </h2>
             <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              We blend raw engineering with editorial design.
+              A closer look at what's actually live.
             </p>
           </div>
 
@@ -225,20 +225,20 @@ function StudioShowreel() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
             <div>
               <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
-                — Capabilities
+                — Want To See More?
               </span>
               <h2 className="font-serif text-3xl sm:text-5xl font-normal leading-tight tracking-tighter mb-4">
-                Our complete <br />
-                <span className="text-[var(--brand-pink)] font-sans font-bold italic">Verification Lab.</span>
+                See what's <br />
+                <span className="text-[var(--brand-pink)] font-sans font-bold italic">running.</span>
               </h2>
               <p className="text-xs text-muted-foreground leading-relaxed mb-6">
-                We validate all components against Fitts's law target acquisition speeds and Gestalt visual grouping metrics.
+                Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture, decisions, and what's still on the roadmap.
               </p>
               <Link
-                to="/services"
+                to="/work"
                 className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold shadow-glow-cyan"
               >
-                Explore Services <ArrowRight size={16} />
+                See Selected Work <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -260,14 +260,14 @@ function StudioShowreel() {
         {/* Intro Panel */}
         <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-12 md:px-24 max-w-4xl">
           <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4">
-            — Studio Showreel
+            — Systems In Motion
           </span>
           <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tighter">
-            Cinematic <br />
-            <span className="text-secondary italic">narratives</span> in motion.
+            Real projects, <br />
+            <span className="text-secondary italic">running</span> in production.
           </h2>
           <p className="mt-6 text-sm md:text-base text-white/60 max-w-md leading-relaxed">
-            Scroll horizontally to see snippets of our interactive products. We blend raw engineering with editorial design.
+            Scroll horizontally for a closer look at what's actually live.
           </p>
         </div>
 
@@ -314,20 +314,20 @@ function StudioShowreel() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
           <div className="max-w-xl">
             <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
-              — Capabilities
+              — Want To See More?
             </span>
             <h2 className="font-serif text-5xl md:text-7xl font-normal leading-none tracking-tighter mb-6">
-              Our complete <br />
-              <span className="text-[var(--brand-pink)] font-sans font-bold italic">Verification Lab.</span>
+              See what's <br />
+              <span className="text-[var(--brand-pink)] font-sans font-bold italic">running.</span>
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-md">
-              We validate all components against Fitts's law target acquisition speeds and Gestalt visual grouping metrics.
+              Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture, decisions, and what's still on the roadmap.
             </p>
             <Link
-              to="/services"
+              to="/work"
               className="inline-flex items-center gap-3 rounded-full bg-primary text-primary-foreground px-8 py-4 text-base font-semibold shadow-glow-cyan"
             >
-              Explore Services <ArrowRight size={18} />
+              See Selected Work <ArrowRight size={18} />
             </Link>
           </div>
         </div>
@@ -338,14 +338,14 @@ function StudioShowreel() {
 
 function ScrollingTicker() {
   const items = [
-    "Frontend Design",
-    "Bespoke Web Development",
-    "Tactile Interactions",
-    "Editorial Aesthetics",
-    "Clean Performance",
-    "Creative Engineering",
-    "TypeScript & React",
-    "GSAP Motion Graphics",
+    "Find Answers Instantly",
+    "Automate Manual Work",
+    "Real-Time Collaboration",
+    "Production-Ready Systems",
+    "Full-Stack Engineering",
+    "AI & Automation",
+    "Reliable by Design",
+    "Shipped & Running",
   ];
   return (
     <section
@@ -437,40 +437,44 @@ function StudioManifesto() {
   return (
     <section
       className="py-40 px-6 bg-[var(--muted)] relative z-10 border-y border-border"
-      data-cursor-text="CREED"
+      data-cursor-text="BELIEF"
     >
       <div className="mx-auto max-w-6xl grid md:grid-cols-12 gap-8 md:gap-16 items-start" ref={textRef}>
         {/* Sticky editorial left header */}
         <div className="md:col-span-3 md:sticky md:top-40 select-none">
           <div className="font-serif text-[7rem] md:text-[10rem] font-bold leading-none text-secondary/15">01</div>
-          <span className="text-xs text-secondary font-mono tracking-widest uppercase block mt-2">— Philosophy</span>
+          <span className="text-xs text-secondary font-mono tracking-widest uppercase block mt-2">— Core Belief</span>
         </div>
 
         {/* Right content area */}
         <div className="md:col-span-9 font-serif text-3xl md:text-5xl lg:text-6xl font-normal leading-relaxed space-y-12 text-foreground">
           <div data-para-block data-para-speed="-0.3">
-            <TextRevealByWord text="We believe that templates dilute your brand value." />
+            <TextRevealByWord text="Most software stays a demo — a prototype that never reaches a real user." />
           </div>
           <div className="h-px bg-border/40 w-full origin-left scale-x-0" data-hr-line />
 
           <div data-para-block data-para-speed="0.2">
-            <TextRevealByWord text="An award-winning website is not built with 3D spinners or pre-made UI blocks." />
+            <TextRevealByWord text="Shipping the whole stack, database to deployment, is what turns a prototype into a product." />
           </div>
           <div className="h-px bg-border/40 w-full origin-left scale-x-0" data-hr-line />
 
           <div data-para-block data-para-speed="-0.4">
-            <TextRevealByWord text="It is crafted with bespoke typography scales, custom layouts, and animations that adapt to the user’s scroll cadence." />
+            <TextRevealByWord text="Real systems run for real people, every day — Shade Ledger has billed 220 rental units, automatically, every month, for over a year." />
           </div>
           <div className="h-px bg-border/40 w-full origin-left scale-x-0" data-hr-line />
 
           <div data-para-block data-para-speed="0.3" className="pt-4">
             <p className="text-[var(--brand-pink)] font-serif italic font-medium leading-tight">
               <span className="relative inline-block pb-3">
-                <span className="reveal-word inline-block mr-[0.25em]">Every</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">pixel</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">should</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">feel</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">human-made.</span>
+                <span className="reveal-word inline-block mr-[0.25em]">If</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">it</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">doesn't</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">run</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">in</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">production,</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">it</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">doesn't</span>{" "}
+                <span className="reveal-word inline-block mr-[0.25em]">count.</span>
                 <span ref={underlineRef} className="absolute left-0 bottom-0 h-1.5 bg-secondary origin-left" style={{ width: "0%" }} />
               </span>
             </p>
@@ -505,7 +509,7 @@ function StatCounter({ value }: StatCounterProps) {
             round: 1,
             duration: 2200,
             ease: "easeOutElastic(1, 0.65)",
-            update: () => {
+            onUpdate: () => {
               setDisplayValue(Math.floor(obj.val));
             },
           });
@@ -531,10 +535,10 @@ function StatCounter({ value }: StatCounterProps) {
 
 function Numbers() {
   const stats = [
-    { v: "3+", l: "Years of studio craft" },
-    { v: "20+", l: "Bespoke projects" },
-    { v: "100%", l: "Dedicated engineering" },
-    { v: "10+", l: "Happy clients" },
+    { v: "2", l: "Production systems, built end to end" },
+    { v: "220", l: "Rental units on automated billing" },
+    { v: "40+", l: "Hours of manual work saved monthly" },
+    { v: "1", l: "Paid contract, delivered duo" },
   ];
   return (
     <section
@@ -643,13 +647,13 @@ function BigCTA() {
           >
             <KineticText text="Let's build" /> <br />
             <em className="font-serif italic text-foreground">
-              <KineticText text="something legendary." />
+              <KineticText text="something that ships." />
             </em>
           </span>
         </h2>
         <p className="mt-8 text-muted-foreground text-base md:text-lg max-w-xl mx-auto leading-relaxed font-sans">
-          We take on a small number of partners each quarter. If you have an idea worth doing right,
-          we'd love to hear it.
+          If you've got something worth building, I'd like to hear about it — and help take it
+          from idea to something running in production.
         </p>
         <div className="mt-12">
           <MagneticButton
@@ -658,7 +662,7 @@ function BigCTA() {
             data-cursor-text="TALK"
             className="inline-flex items-center gap-3 rounded-full bg-primary text-primary-foreground px-8 py-4.5 text-base font-semibold shadow-glow-cyan"
           >
-            Start a project <ArrowRight size={18} />
+            Get in touch <ArrowRight size={18} />
           </MagneticButton>
         </div>
       </div>

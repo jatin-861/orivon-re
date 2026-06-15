@@ -1,50 +1,26 @@
 import { Link } from "@tanstack/react-router";
-import { Github, Instagram, Twitter, Dribbble, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Mail, MapPin } from "lucide-react";
 import { AnimatedDock } from "./AnimatedDock";
 import { GooeyText } from "./ui/gooey-text-morphing";
 
 const aboutLinks = [
-  { text: "About Studio", to: "/about" },
+  { text: "About", to: "/about" },
   { text: "Process", to: "/process" },
-];
-
-const serviceLinks = [
-  { text: "Frontend Design", to: "/services" },
-  { text: "Full-Stack Dev", to: "/services" },
 ];
 
 const helpfulLinks = [
   { text: "Selected Work", to: "/work" },
-  { text: "Pricing", to: "/pricing" },
   { text: "Contact", to: "/contact" },
 ];
 
 const dockItems = [
   {
-    link: "https://github.com/orivon",
+    link: "https://github.com/saralbanker",
     external: true,
     label: "GitHub",
     Icon: <Github size={20} />,
   },
-  {
-    link: "https://twitter.com/orivon",
-    external: true,
-    label: "Twitter",
-    Icon: <Twitter size={20} />,
-  },
-  {
-    link: "https://instagram.com/orivon",
-    external: true,
-    label: "Instagram",
-    Icon: <Instagram size={20} />,
-  },
-  {
-    link: "https://dribbble.com/orivon",
-    external: true,
-    label: "Dribbble",
-    Icon: <Dribbble size={20} />,
-  },
-  { link: "mailto:hello@orivon.studio", external: true, label: "Email", Icon: <Mail size={20} /> },
+  { link: "mailto:saralbanker1@gmail.com", external: true, label: "Email", Icon: <Mail size={20} /> },
 ];
 
 export function SiteFooter() {
@@ -57,7 +33,7 @@ export function SiteFooter() {
           <AnimatedDock items={dockItems} />
         </div>
 
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2">
@@ -65,38 +41,20 @@ export function SiteFooter() {
                 <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
               </span>
               <span className="font-display text-2xl font-bold tracking-tight">
-                ORIVON<span className="text-primary">.</span>
+                SARAL BANKER
               </span>
             </Link>
             <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
-              A bespoke design & engineering studio crafting tactile, fast, and beautiful digital products.
+              Product engineer. I design, build, and ship complete systems — database to deployment.
             </p>
           </div>
 
           <div>
             <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">
-              Studio
+              Work
             </p>
             <ul className="space-y-3">
               {aboutLinks.map((l) => (
-                <li key={l.text}>
-                  <Link
-                    to={l.to}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors text-variable-hover"
-                  >
-                    {l.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="font-display text-sm uppercase tracking-[0.2em] text-foreground mb-5">
-              Services
-            </p>
-            <ul className="space-y-3">
-              {serviceLinks.map((l) => (
                 <li key={l.text}>
                   <Link
                     to={l.to}
@@ -127,10 +85,7 @@ export function SiteFooter() {
             </ul>
             <ul className="mt-6 space-y-3">
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Mail size={14} className="text-primary" /> hello@orivon.studio
-              </li>
-              <li className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Phone size={14} className="text-primary" /> +91 98765 43210
+                <Mail size={14} className="text-primary" /> saralbanker1@gmail.com
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin size={14} className="text-primary mt-0.5" /> India
@@ -142,7 +97,7 @@ export function SiteFooter() {
         {/* Giant gooey wordmark */}
         <div className="relative mt-12 select-none overflow-hidden h-[clamp(4rem,15vw,10rem)]">
           <GooeyText
-            texts={["ORIVON", "STUDIO", "CRAFT", "ORIVON"]}
+            texts={["SARAL", "BUILD", "SHIP", "SARAL"]}
             morphTime={1.4}
             cooldownTime={1.6}
             className="h-full w-full"
@@ -151,8 +106,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Orivon Studio. All rights reserved.</p>
-          <p>Crafted with obsessive detail.</p>
+          <p>© {new Date().getFullYear()} Saral Banker.</p>
+          <p>If it doesn't run in production, it doesn't count.</p>
         </div>
       </div>
     </footer>

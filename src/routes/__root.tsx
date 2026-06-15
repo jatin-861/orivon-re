@@ -1,7 +1,7 @@
 import { Outlet, createRootRoute, ScrollRestoration } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
-import { NotFoundOrivon } from "../components/NotFoundOrivon";
+import { NotFoundPage } from "../components/NotFoundPage";
 import { SiteBackground } from "../components/SiteBackground";
 import { LenisProvider } from "../components/layout/LenisProvider";
 import { Preloader } from "../components/layout/Preloader";
@@ -9,7 +9,7 @@ import { CustomCursor } from "../components/CustomCursor";
 import { PageTransition } from "../components/PageTransition";
 
 function NotFoundComponent() {
-  return <NotFoundOrivon />;
+  return <NotFoundPage />;
 }
 
 export const Route = createRootRoute({

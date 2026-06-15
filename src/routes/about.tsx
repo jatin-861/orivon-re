@@ -20,15 +20,15 @@ export const Route = createFileRoute("/about")({
 
 function CodeTypingSimulator() {
   const [code, setCode] = useState("");
-  const codeSnippet = `const studio = craftSystem({
-  taste: "editorial",
-  precision: "absolute",
-  performance: "60fps",
+  const codeSnippet = `const system = buildSystem({
+  stack: "full",
+  scope: "db-to-deploy",
+  reliability: "production",
 });
 
-await studio.deploy({
-  design: "Figma",
-  code: ["React", "GSAP"],
+await system.deploy({
+  ci: "GitHub Actions",
+  monitoring: true,
   launch: true,
 });`;
 
@@ -121,41 +121,41 @@ const SKILLS = [
 
 const TEAM = [
   {
+    name: "Saral Banker",
+    designation: "Product Engineer · Full-Stack & AI Applications",
+    quote:
+      "If it doesn't run in production, it doesn't count. I design, build, and ship complete systems — database to deployment — not just the demo.",
+    src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%231A1A1A'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%23FAF7F2' text-anchor='middle' dominant-baseline='middle'>S</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>ENGINE</text></svg>",
+  },
+  {
     name: "Jatin Basantani",
     designation: "Co-Founder · Designer & Frontend Developer",
     quote:
       "We believe that a website should be more than just a template. It should feel like a physical, tactile editorial book — custom crafted, fast, and responsive to the user's focus.",
     src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23F0EAE0'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%231A1A1A' text-anchor='middle' dominant-baseline='middle'>J</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>DESIGN</text></svg>",
   },
-  {
-    name: "Saral Banker",
-    designation: "Co-Founder · Backend Developer",
-    quote:
-      "Performance and architecture are design features. We build scalable, highly optimized server systems and clean APIs that power zero-friction digital applications.",
-    src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%231A1A1A'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%23FAF7F2' text-anchor='middle' dominant-baseline='middle'>S</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>ENGINE</text></svg>",
-  },
 ];
 
 const HISTORY = [
   {
     year: "2023",
-    title: "The Genesis",
-    desc: "Founded as a design-first collective in India, dedicated to bespoke digital interfaces and editorial layouts.",
+    title: "Started Shipping",
+    desc: "Built and deployed Smart Parking Management System and Carbon Compass — first full-stack systems taken from idea to a working, hosted product.",
   },
   {
     year: "2024",
-    title: "Engineering Scalability",
-    desc: "Expanded into high-performance full-stack web and mobile apps, building robust backends paired with high-fidelity frontends.",
+    title: "NeuroDashboard",
+    desc: "Started building NeuroDashboard, a multi-module AI platform — Knowledge Hub, analytics, automation, and more — now 70k+ lines of production code.",
   },
   {
     year: "2025",
-    title: "Creative Engineering",
-    desc: "Integrating WebGL, canvas physics, and custom animation engines to build premium storytelling websites.",
+    title: "First Paid Contract",
+    desc: "Shipped Shade Ledger, an automated billing system for a real client — now running for 220 rental units, saving 40+ hours of manual work every month.",
   },
   {
     year: "2026",
-    title: "The Editorial Era",
-    desc: "Establishing Orivon Studio as a premier 2-person team crafting human-made, high-end digital experiences for global clients.",
+    title: "Today",
+    desc: "Saral Banker & Jatin Basantani — two engineers who design, build, and ship complete systems, end to end.",
   },
 ];
 
@@ -226,15 +226,15 @@ function About() {
     <div className="pt-48 pb-48 px-6 text-foreground transition-colors duration-500 font-sans">
       <div className="mx-auto max-w-7xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
-          — Studio Profile
+          — About
         </span>
         <RevealText
-          text="A small studio,"
+          text="Two engineers,"
           as="h1"
           className="font-serif text-5xl md:text-9xl font-normal leading-[1.1] pb-1 block"
         />
         <RevealText
-          text="big convictions."
+          text="real systems."
           as="h1"
           className="font-serif text-5xl md:text-9xl font-normal leading-[1.1] pb-1 block text-[var(--brand-pink)] italic"
           delay={300}
@@ -243,16 +243,16 @@ function About() {
         <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
             <p className="font-serif text-2xl md:text-3xl font-light italic leading-normal text-foreground/90">
-              Orivon is a boutique design & engineering studio of two co-founders based in India. We partner with ambitious founders to build products that stand out.
+              Saral Banker & Jatin Basantani — two engineers based in India who design, build, and ship complete systems, from database to deployment.
             </p>
             <div className="text-base text-muted-foreground space-y-6 leading-relaxed font-sans pt-4 border-t border-border/60">
               <p>
-                We believe great work is the result of taste, craft, and conviction — held in
-                tension with direct, honest communication. We design custom layouts that act as storytelling
-                narratives, rejecting templates.
+                We believe a project isn't done when the demo works — it's done when it's running in
+                production, for real users, every day. That's the bar we hold our own work to.
               </p>
               <p>
-                We handle the entire stack ourselves — from brand strategy and typography design to robust API development and creative frontends.
+                Between us we cover the full stack — backend architecture, APIs, AI integrations, and
+                the frontends that sit on top of them.
               </p>
             </div>
           </div>
@@ -268,15 +268,15 @@ function About() {
           >
             <div className="relative z-10">
               <span className="text-[10px] font-mono opacity-60 uppercase tracking-widest block mb-4">
-                OUR PRINCIPLE // 01
+                CORE BELIEF // 01
               </span>
               <h3 className="font-serif text-3xl font-normal leading-tight">
-                "We say no to a lot, so we can say{" "}
-                <em className="italic text-[var(--brand-peach)]">yes well</em>."
+                "If it doesn't run in{" "}
+                <em className="italic text-[var(--brand-peach)]">production</em>, it doesn't count."
               </h3>
             </div>
             <div className="relative z-10 flex justify-between items-center text-[10px] font-mono opacity-60">
-              <span>ORIVON STUDIO</span>
+              <span>SARAL BANKER & JATIN BASANTANI</span>
               <span>EST. 2023</span>
             </div>
           </motion.div>
@@ -286,13 +286,13 @@ function About() {
         {/* Dynamic Stacking Team testimonials */}
         <div className="mt-24">
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
-            The minds behind the work
+            The people behind the work
           </span>
           <h2 className="font-serif text-4xl md:text-7xl font-normal mb-4">
             Meet the <span className="text-[var(--brand-pink)] font-serif italic">team.</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-12">
-            Two founders, one unified workflow. Standard typographic layout cards represent our roles.
+            Two engineers, one shared standard: if it doesn't run in production, it doesn't count.
           </p>
           <div
             className="rounded-xl border border-border bg-[var(--card)] overflow-hidden"
@@ -311,15 +311,15 @@ function About() {
         >
           <div>
             <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
-              — Our Journey
+              — Background
             </span>
             <h2 className="font-serif text-4xl md:text-7xl font-normal leading-tight">
               Our{" "}
               <span className="text-[var(--brand-pink)] font-serif italic block">Milestones.</span>
             </h2>
             <p className="text-muted-foreground text-sm font-sans mt-6 leading-relaxed max-w-sm">
-              From our origins as a print collective to an award-winning interactive studio, we stay
-              true to structural layouts and human-made craft.
+              From first deployed projects to a multi-module AI platform and a paying client —
+              a short history of things we've shipped and kept running.
             </p>
           </div>
           <div className="relative space-y-16 lg:pl-16">
@@ -362,13 +362,58 @@ function About() {
         {/* Founders Profiles Detailed Section */}
         <div className="mt-24">
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
-            Two desks, one studio
+            Two focuses, one standard
           </span>
           <h2 className="font-serif text-4xl md:text-7xl font-normal mb-12">
             Founder <span className="text-[var(--brand-pink)] font-serif italic">spotlights.</span>
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
+            {/* Saral Card */}
+            <BentoTilt className="h-full w-full">
+              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
+                <div>
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="font-display text-3xl font-bold text-foreground">Saral Banker</h3>
+                      <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
+                        Full Stack Engineer · AI Application Developer
+                      </p>
+                    </div>
+                    <a
+                      href="/Saral_Banker_Resume.pdf"
+                      download
+                      className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
+                      title="Download Resume"
+                    >
+                      <Download size={16} />
+                    </a>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                    I design, build, and ship complete systems — database to deployment. Built NeuroDashboard, a multi-module AI platform (Knowledge Hub finds answers instantly across your information, plus analytics, automation, and more), and Shade Ledger, an automated billing system running for 220 rental units today. <br/><br/>
+                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">Academic Excellence:</strong> 8.36 / 10 GPA
+                  </p>
+
+                  <div className="mb-6">
+                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Core Tech Stack</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["React 18", "Next.js", "Node.js / Express", "FastAPI", "PostgreSQL", "Supabase", "Redis", "Docker", "GitHub Actions", "RAG / pgvector", "Socket.IO"].map((sk) => (
+                        <span key={sk} className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80">
+                          {sk}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">System Deployment Log</span>
+                  <TerminalLogSimulator />
+                </div>
+              </SpotlightCard>
+            </BentoTilt>
+
             {/* Jatin Card */}
             <BentoTilt className="h-full w-full">
               <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
@@ -413,53 +458,8 @@ function About() {
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Live Craft Simulator</span>
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Live Code Preview</span>
                   <CodeTypingSimulator />
-                </div>
-              </SpotlightCard>
-            </BentoTilt>
-
-            {/* Saral Card */}
-            <BentoTilt className="h-full w-full">
-              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
-                <div>
-                  <div className="flex justify-between items-start mb-6">
-                    <div>
-                      <h3 className="font-display text-3xl font-bold text-foreground">Saral Banker</h3>
-                      <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
-                        Full-Stack Developer & Backend Architect
-                      </p>
-                    </div>
-                    <a
-                      href="/Saral_Banker_Resume.pdf"
-                      download
-                      className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
-                      title="Download Resume"
-                    >
-                      <Download size={16} />
-                    </a>
-                  </div>
-
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                    A backend-focused full-stack engineer obsessed with scalable architectures, performance optimization, and robust API development. I design the server systems and cross-platform mobile applications that power zero-friction digital experiences. <br/><br/>
-                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">Academic Excellence:</strong> 8.61 / 10 GPA
-                  </p>
-
-                  <div className="mb-6">
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Core Tech Stack</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {["Node.js", "Express", "MongoDB", "MySQL", "React Native", "Flutter", "Docker"].map((sk) => (
-                        <span key={sk} className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80">
-                          {sk}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">System Deployment Log</span>
-                  <TerminalLogSimulator />
                 </div>
               </SpotlightCard>
             </BentoTilt>
@@ -491,9 +491,9 @@ function About() {
         {/* Core Values */}
         <div className="mt-24 grid md:grid-cols-3 gap-8">
           {[
-            { t: "Craft", c: "We obsess over the last 10%. It's where the design lives." },
-            { t: "Transparency", c: "Direct conversations, clear scopes, and zero jargon." },
-            { t: "Conviction", c: "We believe in what we build and design for longevity." },
+            { t: "Ownership", c: "We see things through — idea to production, not just the fun parts." },
+            { t: "Transparency", c: "Direct communication, clear scope, no fluff." },
+            { t: "Reliability", c: "If it ships, it has to keep working — not just on day one." },
           ].map((v) => (
             <BentoTilt key={v.t} className="h-full w-full">
               <SpotlightCard glowHue={15} className="p-8 bg-[var(--card)] border border-border h-full w-full">

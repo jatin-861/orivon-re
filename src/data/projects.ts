@@ -4,88 +4,72 @@ export type Project = {
   client: string;
   category: string;
   year: string;
-  image: string;
   description: string;
   services: string[];
   color: string;
+  link?: string;
+  modules?: string[];
+  image?: string;
 };
 
 export const PROJECTS: Project[] = [
   {
-    slug: "lumen-finance",
-    title: "Lumen — Reimagining digital banking",
-    client: "Lumen",
-    category: "Fintech",
-    year: "2025",
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=70&auto=format&fit=crop",
+    slug: "neurodashboard",
+    title: "NeuroDashboard — find answers instantly across your work",
+    client: "Independent",
+    category: "AI Platform",
+    year: "2024–2025",
     description:
-      "A radical reinvention of mobile banking with immersive 3D dashboards and a frictionless onboarding flow.",
-    services: ["Brand", "UX/UI", "Web", "Motion"],
+      "A multi-module AI platform that finds answers instantly across your documents and notes — plus analytics, automation, and real-time collaboration. 70k+ lines, built and shipped end to end.",
+    services: ["React", "Node.js / Express", "PostgreSQL", "Redis", "RAG / pgvector", "Socket.IO"],
     color: "#C75B3A",
+    link: "https://github.com/saralbanker/neuro-zenith",
+    modules: [
+      "Knowledge Hub",
+      "Analytics Dashboard",
+      "AI Insights Engine",
+      "Workflow Automation",
+      "Notes System",
+      "Document Processing Pipeline",
+    ],
+    image: "/images/neurodashboard.png",
   },
   {
-    slug: "noctis-music",
-    title: "Noctis — A label site that sings",
-    client: "Noctis Records",
-    category: "Music",
-    year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=70&auto=format&fit=crop",
+    slug: "shade-ledger",
+    title: "Shade Ledger — automated billing for 220 rental units",
+    client: "Confidential Client",
+    category: "Automation",
+    year: "2025–2026",
     description:
-      "Audio-reactive WebGL artist hub for an underground techno label. Won SOTD on Awwwards.",
-    services: ["Web", "WebGL", "Brand"],
+      "Replaced manual Excel billing and phone calls with automatic invoices, reminders, and penalty tracking — running live for 220 rental units, saving 40+ hours of manual work every month.",
+    services: ["React", "Node.js", "react-pdf", "WhatsApp Business API"],
     color: "#8B5E3C",
+    image: "/images/shade-ledger.png",
   },
   {
-    slug: "orbit-aerospace",
-    title: "Orbit — Booking the next frontier",
-    client: "Orbit Aerospace",
-    category: "Aerospace",
-    year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=70&auto=format&fit=crop",
+    slug: "smart-parking",
+    title: "Smart Parking Management System",
+    client: "Independent",
+    category: "Systems",
+    year: "2023",
     description:
-      "From spacecraft configurator to investor pitch — a complete digital identity for a new-era launch company.",
-    services: ["Brand", "Web", "3D"],
+      "Drivers see open spots in real time and book one instantly — a full-stack system for managing live parking availability and bookings.",
+    services: ["React", "Node.js", "Express", "MongoDB"],
     color: "#D4845A",
+    link: "https://github.com/saralbanker/smart-parking",
+    image: "/images/smart-parking.png",
   },
   {
-    slug: "verdant-eco",
-    title: "Verdant — Sustainability storytelling",
-    client: "Verdant",
-    category: "Climate",
-    year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=800&q=70&auto=format&fit=crop",
-    description: "An interactive impact report turned into a scrollable cinematic experience.",
-    services: ["Web", "Motion", "Editorial"],
+    slug: "carbon-compass",
+    title: "Carbon Compass",
+    client: "Independent",
+    category: "Product",
+    year: "2023",
+    description:
+      "Tracks your environmental footprint and shows where to cut back — a personal carbon-tracking app with actionable insights.",
+    services: ["React", "Node.js", "Express", "MongoDB"],
     color: "#6B8F5E",
-  },
-  {
-    slug: "atelier-fashion",
-    title: "Atelier — Couture meets code",
-    client: "Atelier Maison",
-    category: "Fashion",
-    year: "2025",
-    image:
-      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=70&auto=format&fit=crop",
-    description:
-      "A flagship e-commerce experience for a Parisian couture house. Headless, fast, and unmistakably haute.",
-    services: ["E-commerce", "UX/UI", "Brand"],
-    color: "#C75B3A",
-  },
-  {
-    slug: "halo-health",
-    title: "Halo — Wellness, simplified",
-    client: "Halo Health",
-    category: "Health",
-    year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=70&auto=format&fit=crop",
-    description:
-      "Native-feeling progressive web app for a meditation startup with delightful micro-interactions.",
-    services: ["Product", "UX/UI", "Motion"],
-    color: "#B87D4B",
+    link: "https://github.com/saralbanker/carbon-compass",
+    image: "/images/carbon-compass.png",
   },
 ];
