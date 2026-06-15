@@ -201,7 +201,7 @@ function CaseStudy() {
           >
             <div>
               <span className="text-[10px] font-mono text-[var(--brand-pink)] uppercase tracking-wider block mb-4">
-                Mockup 01 // Typography System
+                Typography System
               </span>
               <h4 className="font-display text-2xl font-bold mb-3">Modular Typography Scale</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -225,7 +225,7 @@ function CaseStudy() {
           >
             <div>
               <span className="text-[10px] font-mono text-[var(--brand-pink)] uppercase tracking-wider block mb-4">
-                Mockup 02 // Interface Grid
+                Interface Grid
               </span>
               <h4 className="font-display text-2xl font-bold mb-3">Fluid Interface Layout</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">

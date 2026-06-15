@@ -130,9 +130,9 @@ function BlobMesh() {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  // Set premium cosmetics colors: vibrant lipstick crimson
-  const color1 = useMemo(() => new THREE.Color("#e03d67"), []);
-  const color2 = useMemo(() => new THREE.Color("#e03d67"), []);
+  // Solid brand terracotta accent (singular accent rule - no gradients)
+  const color1 = useMemo(() => new THREE.Color("#C75B3A"), []);
+  const color2 = useMemo(() => new THREE.Color("#C75B3A"), []);
 
   const uniforms = useMemo(
     () => ({

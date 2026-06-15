@@ -272,8 +272,9 @@ function Contact() {
               </div>
 
               <div>
-                <Label>Tell us more</Label>
+                <Label htmlFor="message">Tell us more</Label>
                 <textarea
+                  id="message"
                   name="message"
                   rows={5}
                   placeholder="What are you trying to build? When do you want to launch?"
@@ -317,8 +318,10 @@ function Contact() {
   );
 }
 
-const Label = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{children}</div>
+const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
+  <label htmlFor={htmlFor} className="block text-xs uppercase tracking-widest text-muted-foreground mb-3">
+    {children}
+  </label>
 );
 
 function Field({
@@ -336,8 +339,9 @@ function Field({
 }) {
   return (
     <div>
-      <Label>{label}</Label>
+      <Label htmlFor={name}>{label}</Label>
       <input
+        id={name}
         name={name}
         type={type}
         required={required}

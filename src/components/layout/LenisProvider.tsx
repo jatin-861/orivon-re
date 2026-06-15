@@ -22,13 +22,15 @@ export function LenisProvider({ children }: LenisProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Instantiate Lenis
+    // Respect prefers-reduced-motion: fall back to native scroll instead of smoothed momentum
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: prefersReducedMotion ? 0 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for premium momentum
       orientation: "vertical",
       gestureOrientation: "vertical",
-      smoothWheel: true,
+      smoothWheel: !prefersReducedMotion,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
       autoRaf: false, // Prevent double-RAF syncing

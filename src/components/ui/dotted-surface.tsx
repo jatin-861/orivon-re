@@ -41,6 +41,14 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0); // transparent background
 
+    // Style the canvas to ensure correct absolute positioning inside the container
+    renderer.domElement.style.position = "absolute";
+    renderer.domElement.style.top = "0";
+    renderer.domElement.style.left = "0";
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.pointerEvents = "none";
+
     container.appendChild(renderer.domElement);
 
     // 2. Geometry creation

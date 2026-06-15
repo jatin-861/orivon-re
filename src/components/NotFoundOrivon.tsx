@@ -40,7 +40,7 @@ export function NotFoundOrivon() {
         if (s.y < 0) s.y = canvas.height;
         if (s.y > canvas.height) s.y = 0;
         ctx.beginPath();
-        ctx.fillStyle = `rgba(224, 83, 125, ${s.a})`;
+        ctx.fillStyle = `rgba(199, 91, 58, ${s.a})`;
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       });
@@ -65,14 +65,14 @@ export function NotFoundOrivon() {
           animate={{ opacity: 1 }}
           className="text-xs uppercase tracking-[0.4em] text-primary mb-6"
         >
-          Lost in the void
+          Off the map
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, scale: 0.8, filter: "blur(20px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-bold leading-none text-[clamp(7rem,22vw,18rem)] text-[var(--brand-pink)]"
+          className="font-serif font-normal leading-none text-[clamp(7rem,22vw,18rem)] text-[var(--brand-pink)]"
         >
           404
         </motion.h1>
@@ -81,7 +81,7 @@ export function NotFoundOrivon() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="font-display text-3xl md:text-5xl font-bold mt-4"
+          className="font-serif text-3xl md:text-5xl font-normal mt-4"
         >
           Page not found.
         </motion.h2>
@@ -92,8 +92,8 @@ export function NotFoundOrivon() {
           transition={{ delay: 0.5 }}
           className="mt-5 text-muted-foreground max-w-md mx-auto"
         >
-          The page you're looking for has drifted into the cosmos. Let's get you back to safer
-          orbit.
+          This page must have been filed under a different name. Let's get you back to the
+          studio.
         </motion.p>
 
         <motion.div
@@ -104,13 +104,13 @@ export function NotFoundOrivon() {
         >
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center gap-2 rounded-full glass border border-border px-6 py-3 text-sm font-semibold hover:border-primary/50 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full glass border border-border px-6 py-3 text-sm font-semibold hover:border-primary/50 transition-colors active:scale-[0.97]"
           >
             <ArrowLeft size={16} /> Go back
           </button>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold shadow-glow-cyan hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold shadow-glow-cyan transition-all duration-200 ease-out hover:bg-secondary active:scale-[0.97]"
           >
             <Home size={16} /> Take me home
           </Link>

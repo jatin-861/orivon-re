@@ -143,13 +143,12 @@ export function InteractiveTechStack2D() {
             n1.y -= ny * overlap * 0.5;
             n2.x += nx * overlap * 0.5;
             n2.y += ny * overlap * 0.5;
-            nresolveVelocityReflect: {
-              const bounce = 0.35;
-              n1.vx -= nx * overlap * bounce;
-              n1.vy -= ny * overlap * bounce;
-              n2.vx += nx * overlap * bounce;
-              n2.vy += ny * overlap * bounce;
-            }
+            // Reflect velocities along collision normal for elastic bounce
+            const bounce = 0.35;
+            n1.vx -= nx * overlap * bounce;
+            n1.vy -= ny * overlap * bounce;
+            n2.vx += nx * overlap * bounce;
+            n2.vy += ny * overlap * bounce;
           }
         }
       }

@@ -297,10 +297,10 @@ export const CinematicHero = () => {
   }, [delayBase]);
 
   return (
-    <div ref={containerRef} className="relative h-[100dvh] w-full overflow-hidden bg-background">
+    <div ref={containerRef} className="relative h-[100dvh] w-full overflow-hidden bg-transparent">
       <div
         id="hero-frame"
-        className="relative z-10 h-[100dvh] w-full overflow-hidden bg-background"
+        className="relative z-10 h-[100dvh] w-full overflow-hidden bg-transparent"
       >
         {/* Full Viewport Canvas for Particle Text */}
         <canvas

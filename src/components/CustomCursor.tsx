@@ -80,10 +80,10 @@ export function CustomCursor() {
     };
 
     const getBrandColor = (isHovering: boolean) => {
-      if (typeof window === "undefined") return "#e0537d";
+      if (typeof window === "undefined") return "#C75B3A";
       const rootStyle = getComputedStyle(document.documentElement);
       const varName = isHovering ? "--brand-teal" : "--brand-pink";
-      return rootStyle.getPropertyValue(varName).trim() || (isHovering ? "#1e3535" : "#e0537d");
+      return rootStyle.getPropertyValue(varName).trim() || (isHovering ? "#4B6E6A" : "#C75B3A");
     };
 
     const createBurst = (x: number, y: number) => {

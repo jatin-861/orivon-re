@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { animate } from "animejs";
 import { MagneticButton } from "@/components/MagneticButton";
@@ -101,6 +100,7 @@ function StudioShowreel() {
 
     const ctx = gsap.context(() => {
       gsap.to(scrollEl, {
+        id: "scroll-showreel",
         x: () => -(scrollEl.scrollWidth - window.innerWidth),
         ease: "none",
         scrollTrigger: {
@@ -114,8 +114,8 @@ function StudioShowreel() {
       });
 
       // Subtle parallax shift for video panels
-      const panels = gsap.utils.toArray(".showreel-panel-card");
-      panels.forEach((panel: any) => {
+      const panels = gsap.utils.toArray<HTMLElement>(".showreel-panel-card");
+      panels.forEach((panel) => {
         const video = panel.querySelector("video");
         if (video) {
           gsap.fromTo(
@@ -126,7 +126,7 @@ function StudioShowreel() {
               ease: "none",
               scrollTrigger: {
                 trigger: panel,
-                containerAnimation: gsap.getById("scroll-showreel"), // references scroll animation if mapped
+                containerAnimation: gsap.getById("scroll-showreel") as gsap.core.Tween | undefined, // ties parallax to the horizontal scroll track
                 start: "left right",
                 end: "right left",
                 scrub: true,
@@ -143,19 +143,19 @@ function StudioShowreel() {
   const items = [
     {
       video: "/videos/hero-2.mp4",
-      tag: "01 / Motion Design",
+      tag: "Motion Design",
       title: "Elevating digital rhythm.",
       desc: "Bespoke animations and kinetic transitions crafted to capture focus.",
     },
     {
       video: "/videos/feature-2.mp4",
-      tag: "02 / Systems",
+      tag: "Systems",
       title: "Structured design scales.",
       desc: "A library of custom layouts engineered for optimal brand consistency.",
     },
     {
       video: "/videos/feature-3.mp4",
-      tag: "03 / E-commerce",
+      tag: "E-commerce",
       title: "Flow tailored to convert.",
       desc: "Speed-focused headless storefronts designed for zero checkout friction.",
     },
@@ -586,15 +586,18 @@ function KineticText({ text }: KineticTextProps) {
 
   return (
     <span className="inline-block">
-      {text.split("").map((char, i) => (
-        <span
-          key={i}
-          className="inline-block cursor-default select-none transition-colors duration-150"
-          style={{ display: char === " " ? "inline" : "inline-block" }}
-          onMouseEnter={onLetterHover}
-          onMouseLeave={onLetterLeave}
-        >
-          {char === " " ? "\u00A0" : char}
+      {text.split(" ").map((word, wi) => (
+        <span key={wi} className="inline-block whitespace-nowrap mr-[0.25em]">
+          {word.split("").map((char, ci) => (
+            <span
+              key={ci}
+              className="inline-block cursor-default select-none transition-colors duration-150"
+              onMouseEnter={onLetterHover}
+              onMouseLeave={onLetterLeave}
+            >
+              {char}
+            </span>
+          ))}
         </span>
       ))}
     </span>

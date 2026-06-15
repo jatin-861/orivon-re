@@ -42,7 +42,7 @@ export function GestaltVisualizer() {
         // Highlight diagonal alignment curve, dim other points
         const isDiagonal = row === col;
         if (isDiagonal) {
-          style.backgroundColor = "var(--brand-lavender)";
+          style.backgroundColor = "var(--brand-teal)";
           style.transform = "scale(1.25)";
           style.opacity = 1;
         } else {

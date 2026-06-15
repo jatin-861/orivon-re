@@ -39,3 +39,10 @@ awesome-frontend-skills/
 frontend-slides/
 winter-box/
 
+# design-sync
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+

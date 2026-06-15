@@ -41,15 +41,10 @@ export function BookingCalendar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-border glass p-6",
+        "relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-elegant",
         className,
       )}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl"
-      />
-
       <div className="relative flex items-center justify-between mb-5">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-primary mb-1">Book a call</p>
@@ -114,9 +109,9 @@ export function BookingCalendar({ className }: { className?: string }) {
         <button
           disabled={!selected}
           className={cn(
-            "rounded-full px-5 py-2 text-sm font-semibold transition-all",
+            "rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 ease-out",
             selected
-              ? "bg-primary text-primary-foreground shadow-glow-cyan hover:scale-105"
+              ? "bg-primary text-primary-foreground hover:bg-[var(--secondary)] active:scale-[0.97]"
               : "bg-muted text-muted-foreground cursor-not-allowed",
           )}
         >

@@ -8,8 +8,13 @@
       "command": "npx",
       "args": ["shadcn@latest", "mcp"]
     }
-    //other mcp servers
+    // other mcp servers
   }
 }
 
-// setup mcp server in  ~/.gemini\antigravity\mcp_config.json
+// setup mcp server in ~/.gemini\antigravity\mcp_config.json
+// Fix notes:
+// 1. Replace YOUR_API_KEY with a valid Context7/Upstash API key.
+// 2. Start the Claude/MCP service before using the agent.
+//    Example: npx @upstash/context7-mcp --api-key YOUR_API_KEY
+// 3. If you still get ConnectionRefused, verify the local host/port and firewall.

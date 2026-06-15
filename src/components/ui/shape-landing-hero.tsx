@@ -8,14 +8,14 @@ function ElegantShape({
   width = 400,
   height = 100,
   rotate = 0,
-  gradient = "from-foreground/[0.03]",
+  tint = "bg-[var(--secondary)]/[0.04]",
 }: {
   className?: string;
   delay?: number;
   width?: number;
   height?: number;
   rotate?: number;
-  gradient?: string;
+  tint?: string;
 }) {
   return (
     <motion.div
@@ -55,12 +55,9 @@ function ElegantShape({
         <div
           className={cn(
             "absolute inset-0 rounded-full",
-            "bg-gradient-to-r to-transparent",
-            gradient,
-            "backdrop-blur-[2px] border-2 border-foreground/[0.06]",
+            tint,
+            "border-2 border-foreground/[0.06]",
             "shadow-[0_8px_32px_0_rgba(199,91,58,0.03)]",
-            "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(26,26,26,0.03),transparent_70%)]",
           )}
         />
       </motion.div>
@@ -96,17 +93,14 @@ export function HeroGeometric({
 
   return (
     <div className="relative min-h-[75vh] w-full flex items-center justify-center overflow-hidden bg-background">
-      {/* Soft color bleed background blobs */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)]/[0.02] via-transparent to-[var(--brand-teal)]/[0.03] blur-3xl pointer-events-none" />
-
-      {/* Floating interactive geometries */}
+      {/* Floating interactive geometries (flat terracotta tints, no gradients) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <ElegantShape
           delay={0.3}
           width={600}
           height={140}
           rotate={12}
-          gradient="from-[var(--secondary)]/[0.06]"
+          tint="bg-[var(--secondary)]/[0.06]"
           className="left-[-10%] md:left-[-5%] top-[12%] md:top-[16%]"
         />
 
@@ -115,7 +109,7 @@ export function HeroGeometric({
           width={500}
           height={120}
           rotate={-15}
-          gradient="from-[var(--brand-teal)]/[0.06]"
+          tint="bg-[var(--secondary)]/[0.05]"
           className="right-[-5%] md:right-[0%] top-[60%] md:top-[65%]"
         />
 
@@ -124,7 +118,7 @@ export function HeroGeometric({
           width={300}
           height={80}
           rotate={-8}
-          gradient="from-[var(--secondary)]/[0.04]"
+          tint="bg-[var(--secondary)]/[0.04]"
           className="left-[5%] md:left-[10%] bottom-[8%] md:bottom-[12%]"
         />
 
@@ -133,7 +127,7 @@ export function HeroGeometric({
           width={200}
           height={60}
           rotate={20}
-          gradient="from-[var(--brand-teal)]/[0.04]"
+          tint="bg-[var(--secondary)]/[0.04]"
           className="right-[15%] md:right-[20%] top-[8%] md:top-[12%]"
         />
 
@@ -142,7 +136,7 @@ export function HeroGeometric({
           width={150}
           height={40}
           rotate={-25}
-          gradient="from-[var(--secondary)]/[0.05]"
+          tint="bg-[var(--secondary)]/[0.05]"
           className="left-[20%] md:left-[25%] top-[5%] md:top-[8%]"
         />
       </div>
@@ -157,7 +151,7 @@ export function HeroGeometric({
             animate="visible"
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/[0.02] border border-foreground/[0.06] mb-6 md:mb-8"
           >
-            <Circle className="h-2 w-2 fill-[var(--brand-pink)] animate-pulse" />
+            <Circle className="h-2 w-2 fill-[var(--secondary)] animate-pulse" />
             <span className="text-xs text-muted-foreground tracking-wider font-mono uppercase">
               {badge}
             </span>
@@ -165,14 +159,10 @@ export function HeroGeometric({
 
           {/* Heading */}
           <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight leading-[0.95]">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/80">
-                {title1}
-              </span>
+            <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl font-normal mb-6 md:mb-8 tracking-tight leading-[0.95]">
+              <span className="text-foreground">{title1}</span>
               <br />
-              <span className="text-[var(--secondary)]">
-                {title2}
-              </span>
+              <span className="text-[var(--secondary)]">{title2}</span>
             </h1>
           </motion.div>
 
@@ -185,8 +175,6 @@ export function HeroGeometric({
         </div>
       </div>
 
-      {/* Shadow gradient bottom overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none" />
     </div>
   );
 }

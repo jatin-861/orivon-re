@@ -58,7 +58,7 @@ export function Preloader() {
             y: "-100%",
             transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col justify-between bg-[#0c0d10] p-8 md:p-16 text-white"
+          className="fixed inset-0 z-[99999] flex flex-col justify-between bg-[var(--background)] p-8 md:p-16 text-[var(--foreground)]"
         >
           {/* Top text */}
           <div className="flex justify-between items-center text-xs font-mono tracking-widest text-muted-foreground uppercase opacity-60">
@@ -68,7 +68,7 @@ export function Preloader() {
 
           {/* Centered Orivon Logo Lettering */}
           <div className="flex flex-col items-center justify-center flex-1">
-            <div className="overflow-hidden flex gap-[0.1em] text-[clamp(2.5rem,10vw,8rem)] font-display font-bold leading-none tracking-tight">
+            <div className="overflow-hidden flex gap-[0.1em] text-[clamp(2.5rem,10vw,8rem)] font-serif font-normal leading-none tracking-tight">
               <span className="sr-only">ORIVON</span>
               <span aria-hidden="true" className="flex gap-[0.1em]">
                 {brandWords.map((letter, i) => (
@@ -92,7 +92,7 @@ export function Preloader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.4 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--primary)] font-bold"
+              className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--secondary)] font-bold"
             >
               Independent Digital Craft
             </motion.p>
@@ -111,15 +111,15 @@ export function Preloader() {
               <span className="text-[10px] font-mono tracking-widest text-muted-foreground opacity-50 uppercase">
                 Initializing immersive engine
               </span>
-              <span className="font-mono text-4xl md:text-6xl font-bold text-white/90">
+              <span className="font-mono text-4xl md:text-6xl font-bold text-[var(--foreground)]/90">
                 {progress.toString().padStart(3, "0")}
               </span>
             </div>
 
             {/* Premium, micro-thin loading bar */}
-            <div className="h-[2px] w-full bg-white/10 relative overflow-hidden rounded-full">
+            <div className="h-[2px] w-full bg-[var(--border)] relative overflow-hidden rounded-full">
               <motion.div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]"
+                className="absolute top-0 left-0 h-full bg-[var(--secondary)]"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.1, ease: "easeOut" }}

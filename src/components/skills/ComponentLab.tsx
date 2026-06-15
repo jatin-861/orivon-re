@@ -8,16 +8,13 @@ class WebGLErrorBoundary extends React.Component<
   { children: React.ReactNode; fallback?: React.ReactNode },
   { hasError: boolean }
 > {
-  constructor(props: any) {
-    super(props);
-    this.state = { hasError: false };
-  }
+  state = { hasError: false };
 
   static getDerivedStateFromError() {
     return { hasError: true };
   }
 
-  componentDidCatch(error: any, errorInfo: any) {
+  componentDidCatch(error: unknown, errorInfo: React.ErrorInfo) {
     console.error("WebGL error caught by boundary:", error, errorInfo);
   }
 
@@ -175,19 +172,23 @@ export function ComponentLab() {
         </div>
 
         <div className="flex flex-col gap-4 items-center justify-center min-h-48 border border-border/40 rounded-xl bg-muted/20">
-          <div
+          <button
+            type="button"
+            role="switch"
+            aria-checked={elasticCheck}
+            aria-label="Toggle system status"
             onClick={handleSwitchChange}
             style={{ transform: `scale(${switchScale})` }}
-            className={`relative w-16 h-9 rounded-full border border-border/80 cursor-pointer transition-all duration-300 p-1 flex items-center ${
+            className={`relative w-16 h-9 rounded-full border border-border/80 cursor-pointer transition-all duration-300 p-1 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--secondary)] ${
               elasticCheck ? "bg-[var(--brand-pink)] border-transparent" : "bg-muted/60"
             }`}
           >
-            <div
-              className={`w-7 h-7 rounded-full bg-white shadow-sm transition-transform duration-300 ${
+            <span
+              className={`block w-7 h-7 rounded-full bg-white shadow-sm transition-transform duration-300 ${
                 elasticCheck ? "translate-x-7" : "translate-x-0"
               }`}
             />
-          </div>
+          </button>
           <span className="text-[10px] font-mono font-bold tracking-wider text-muted-foreground">
             SYSTEM STATUS: {elasticCheck ? "ACTIVE" : "STANDBY"}
           </span>

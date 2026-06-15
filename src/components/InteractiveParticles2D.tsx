@@ -26,7 +26,7 @@ export function InteractiveParticles2D() {
     let animationFrameId = 0;
     let particles: Particle[] = [];
     const count = 120;
-    const colors = ["rgba(111, 255, 233, ", "rgba(91, 192, 190, ", "rgba(58, 80, 107, "];
+    const colors = ["rgba(199, 91, 58, ", "rgba(26, 26, 26, ", "rgba(75, 110, 106, "];
 
     const resize = () => {
       if (!canvas) return;
@@ -56,6 +56,10 @@ export function InteractiveParticles2D() {
         });
       }
     };
+
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -113,14 +117,17 @@ export function InteractiveParticles2D() {
             ctx.beginPath();
             ctx.moveTo(pi.x, pi.y);
             ctx.lineTo(pj.x, pj.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alphaVal})`;
+            ctx.strokeStyle = `rgba(26, 26, 26, ${alphaVal})`;
             ctx.lineWidth = 0.55;
             ctx.stroke();
           }
         }
       }
 
-      animationFrameId = requestAnimationFrame(animate);
+      // Respect prefers-reduced-motion: render one static frame and stop looping
+      if (!reduceMotion) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {

@@ -61,6 +61,10 @@ export function InteractiveGrid2D() {
       }
     };
 
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const animate = () => {
       if (!isInViewRef.current) {
         animationFrameId = requestAnimationFrame(animate);
@@ -115,7 +119,7 @@ export function InteractiveGrid2D() {
       }
 
       // Draw Grid Lines (Columns) - Batched into a single stroke call
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.06)";
+      ctx.strokeStyle = "rgba(26, 26, 26, 0.06)";
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       for (let c = 0; c < cols; c++) {
@@ -145,7 +149,7 @@ export function InteractiveGrid2D() {
       ctx.stroke();
 
       // Draw Grid Intersection Nodes - Batched into a single fill call
-      ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+      ctx.fillStyle = "rgba(199, 91, 58, 0.35)";
       ctx.beginPath();
       for (let c = 0; c < cols; c++) {
         for (let r = 0; r < rows; r++) {
@@ -156,7 +160,10 @@ export function InteractiveGrid2D() {
       }
       ctx.fill();
 
-      animationFrameId = requestAnimationFrame(animate);
+      // Respect prefers-reduced-motion: render one static frame and stop looping
+      if (!reduceMotion) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {

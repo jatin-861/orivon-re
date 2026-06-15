@@ -379,7 +379,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       <div className="absolute top-28 left-6 md:left-12 z-20 flex items-center gap-3">
         <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
         <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-mono">
-          Scroll vertically to slide cases
+          Selected Work
         </span>
       </div>
 
@@ -574,13 +574,13 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                         {p.slug === "atelier-fashion" && (
                           <div className="w-full max-w-sm grid grid-cols-2 gap-4">
                             <div className="border border-white/10 rounded-lg p-3 flex flex-col justify-between aspect-square bg-white/5">
-                              <span className="text-[10px] font-mono opacity-40">01 / CAPE</span>
+                              <span className="text-[10px] font-mono opacity-40">CAPE</span>
                               <span className="font-display text-lg font-medium opacity-80">
                                 ATELIER CAFE
                               </span>
                             </div>
                             <div className="border border-white/10 rounded-lg p-3 flex flex-col justify-between aspect-square bg-white/5">
-                              <span className="text-[10px] font-mono opacity-40">02 / SILK</span>
+                              <span className="text-[10px] font-mono opacity-40">SILK</span>
                               <span className="font-display text-lg font-medium opacity-80">
                                 COUTURE NOIR
                               </span>

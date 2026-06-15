@@ -97,6 +97,11 @@ export function PageTransition({ children }: { children: ReactNode }) {
           ease: "power3.in",
           delay: 0.15
         });
+
+      // Clean up the curtain timeline if the component unmounts mid-transition
+      return () => {
+        tl.kill();
+      };
     } else {
       setDisplayChildren(children);
     }
@@ -118,7 +123,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
         </svg>
         <div 
           ref={textRef} 
-          className="relative z-10 text-white font-display font-black text-5xl md:text-7xl tracking-[0.35em] uppercase select-none pointer-events-none pl-[0.35em]"
+          className="relative z-10 text-[var(--background)] font-serif font-normal text-5xl md:text-7xl tracking-[0.35em] uppercase select-none pointer-events-none pl-[0.35em]"
           style={{ opacity: 0 }}
         >
           Orivon

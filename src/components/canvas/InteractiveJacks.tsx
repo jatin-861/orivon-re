@@ -118,7 +118,7 @@ function JackMesh({ data }: { data: JackData }) {
 function Scene({ count }: { count: number }) {
   const jacks = useMemo(() => {
     const arr: JackData[] = [];
-    const colors = ["#ffffff", "#002df2", "#111111", "#1a5b5c", "#e03d67"];
+    const colors = ["#FAF7F2", "#1A1A1A", "#C75B3A", "#8B5E3C", "#E5DDD3"];
 
     for (let i = 0; i < count; i++) {
       // Position jacks in a grid-like cloud
@@ -128,19 +128,19 @@ function Scene({ count }: { count: number }) {
         (Math.random() - 0.5) * 2.5,
       );
 
-      // Select colors based on user's references: White, Electric Blue, Shiny Black, accents of Pink/Teal
+      // Brand palette distribution: cream, charcoal, terracotta accent, amber, oatmeal
       let color = colors[0];
       const rand = Math.random();
       if (rand < 0.3) {
-        color = "#ffffff"; // glossy white
+        color = "#FAF7F2"; // warm cream
       } else if (rand < 0.6) {
-        color = "#0a2df2"; // glossy electric blue
+        color = "#1A1A1A"; // charcoal
       } else if (rand < 0.8) {
-        color = "#0a0a0a"; // shiny pitch black
+        color = "#8B5E3C"; // warm amber
       } else if (rand < 0.9) {
-        color = "#e03d67"; // brand lipstick crimson
+        color = "#C75B3A"; // burnt terracotta accent
       } else {
-        color = "#1a5b5c"; // brand teal
+        color = "#E5DDD3"; // oatmeal
       }
 
       arr.push({
@@ -163,7 +163,7 @@ function Scene({ count }: { count: number }) {
         color,
         scale: Math.random() * 0.7 + 0.6,
         roughness: 0.08,
-        metalness: color === "#ffffff" ? 0.1 : 0.85, // reflective metallic properties
+        metalness: color === "#FAF7F2" ? 0.1 : 0.85, // reflective metallic properties
       });
     }
     return arr;

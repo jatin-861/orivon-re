@@ -48,9 +48,9 @@ await studio.deploy({
   }, []);
 
   return (
-    <pre className="font-mono text-[10px] md:text-xs text-white bg-black/55 p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
-      <code className="text-emerald-400">{code}</code>
-      <span className="animate-pulse bg-emerald-400 h-3.5 w-1.5 inline-block align-middle ml-0.5" />
+    <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
+      <code className="text-[var(--brand-pink)]">{code}</code>
+      <span className="animate-pulse bg-[var(--brand-pink)] h-3.5 w-1.5 inline-block align-middle ml-0.5" />
     </pre>
   );
 }
@@ -89,15 +89,15 @@ function TerminalLogSimulator() {
   }, []);
 
   return (
-    <pre className="font-mono text-[10px] md:text-xs text-white bg-black/55 p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
+    <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
       {logs.map((log, i) => (
-        <div key={i} className={log.startsWith("$") ? "text-amber-400" : log.includes("✓") || log.includes("200") ? "text-emerald-400" : "text-white/70"}>
+        <div key={i} className={log.startsWith("$") ? "text-[var(--brand-peach)]" : log.includes("✓") || log.includes("200") ? "text-[var(--brand-pink)]" : "text-[#FAF7F2]/70"}>
           {log}
         </div>
       ))}
-      <div className="flex items-center gap-1.5 text-white/50">
+      <div className="flex items-center gap-1.5 text-[#FAF7F2]/50">
         <span>sys-log: active</span>
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-ping" />
       </div>
     </pre>
   );
@@ -285,8 +285,8 @@ function About() {
 
         {/* Dynamic Stacking Team testimonials */}
         <div className="mt-24">
-          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
-            — The Minds
+          <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
+            The minds behind the work
           </span>
           <h2 className="font-serif text-4xl md:text-7xl font-normal mb-4">
             Meet the <span className="text-[var(--brand-pink)] font-serif italic">team.</span>
@@ -361,8 +361,8 @@ function About() {
 
         {/* Founders Profiles Detailed Section */}
         <div className="mt-24">
-          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
-            — Interactive Profiles
+          <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
+            Two desks, one studio
           </span>
           <h2 className="font-serif text-4xl md:text-7xl font-normal mb-12">
             Founder <span className="text-[var(--brand-pink)] font-serif italic">spotlights.</span>
@@ -431,7 +431,7 @@ function About() {
                       </p>
                     </div>
                     <a
-                      href="/Saral_Banker_Resume (1).pdf"
+                      href="/Saral_Banker_Resume.pdf"
                       download
                       className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
                       title="Download Resume"
@@ -469,8 +469,8 @@ function About() {
 
         {/* Skills Marquee */}
         <div className="mt-24">
-          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
-            — Capabilities
+          <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
+            Tools of the trade
           </span>
           <h2 className="font-serif text-4xl md:text-7xl font-normal mb-12">
             What <span className="text-[var(--brand-pink)] font-serif italic">we use.</span>

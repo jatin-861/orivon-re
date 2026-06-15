@@ -20,14 +20,19 @@ export function MagneticText({
     const el = containerRef.current;
     if (!el) return;
 
-    // Split text into characters
-    const chars = text.split("");
-    el.innerHTML = chars
-      .map((char) => {
-        if (char === " ") return " ";
-        return `<span class="mag-char inline-block" style="will-change: transform; transition: color 0.3s ease;">${char}</span>`;
+    // Split text into words, then characters to prevent vertical word wrapping on mobile
+    const words = text.split(" ");
+    el.innerHTML = words
+      .map((word) => {
+        const wordChars = word
+          .split("")
+          .map((char) => {
+            return `<span class="mag-char inline-block" style="will-change: transform; transition: color 0.3s ease;">${char}</span>`;
+          })
+          .join("");
+        return `<span class="inline-block whitespace-nowrap">${wordChars}</span>`;
       })
-      .join("");
+      .join(" ");
 
     const charSpans = el.querySelectorAll(".mag-char");
 

@@ -24,7 +24,7 @@ export function useTextSplit(
       const words = text.split(/\s+/);
       container.innerHTML = words
         .map(
-          (word) =>
+          (word: string) =>
             `<span class="${className} split-word inline-block">${word}</span>`
         )
         .join(" ");
@@ -32,7 +32,7 @@ export function useTextSplit(
     } else if (type === "chars") {
       const chars = text.split("");
       container.innerHTML = chars
-        .map((char) => {
+        .map((char: string) => {
           if (char === " ") return " ";
           return `<span class="${className} split-char inline-block">${char}</span>`;
         })
@@ -41,11 +41,11 @@ export function useTextSplit(
     } else if (type === "both") {
       const words = text.split(/\s+/);
       container.innerHTML = words
-        .map((word) => {
+        .map((word: string) => {
           const chars = word
             .split("")
             .map(
-              (char) =>
+              (char: string) =>
                 `<span class="${className} split-char inline-block">${char}</span>`
             )
             .join("");

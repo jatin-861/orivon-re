@@ -166,7 +166,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
   const initParticles = useCallback(
     (width: number, height: number) => {
       const arr: Particle[] = [];
-      const colors = ["#6fffe9", "#5bc0be", "#3a506b", "#1c2541", "#ffffff"];
+      const colors = ["#C75B3A", "#1A1A1A", "#4B6E6A", "#8B5E3C", "#E5DDD3"];
 
       for (let i = 0; i < particleCount; i++) {
         const rx = Math.random() * width;
@@ -288,6 +288,8 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
     document.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mousedown", handleMouseClick);
 
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     let rafId = 0;
 
     const tick = () => {
@@ -296,11 +298,8 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
         return;
       }
 
-      // Dynamic trail background depending on dark/light mode
-      const isDark = document.documentElement.classList.contains("dark");
-      ctx.fillStyle = isDark
-        ? (isHeroBg ? "rgba(11, 19, 43, 0.22)" : "rgba(28, 37, 65, 0.22)")
-        : (isHeroBg ? "rgba(244, 246, 250, 0.22)" : "rgba(255, 255, 255, 0.22)");
+      // Warm cream trail background (light-only brand)
+      ctx.fillStyle = isHeroBg ? "rgba(250, 247, 242, 0.22)" : "rgba(255, 255, 255, 0.22)";
       ctx.fillRect(0, 0, w, h);
 
       // 1. Process Ripples
@@ -311,8 +310,8 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
           r.active = false;
         }
 
-        // Draw subtle ring (Cyan theme color instead of pink)
-        ctx.strokeStyle = `rgba(111, 255, 233, ${0.45 * (1 - r.radius / r.maxRadius)})`;
+        // Draw subtle ring (burnt terracotta accent)
+        ctx.strokeStyle = `rgba(199, 91, 58, ${0.45 * (1 - r.radius / r.maxRadius)})`;
         ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
@@ -413,7 +412,10 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
         ctx.globalAlpha = 1.0;
       }
 
-      rafId = requestAnimationFrame(tick);
+      // Respect prefers-reduced-motion: render one static frame and stop looping
+      if (!reduceMotion) {
+        rafId = requestAnimationFrame(tick);
+      }
     };
 
     tick();
@@ -458,7 +460,7 @@ export function LusionSandbox({ isHeroBg = false }: LusionSandboxProps) {
       {/* Top Overlay HUD */}
       <div className="relative z-10 flex items-center justify-between font-mono text-[9px] tracking-widest text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
           ORIVON_LABS // LUSION_ENGINE
         </span>
         <span>PARTICLES: {particleCount}</span>

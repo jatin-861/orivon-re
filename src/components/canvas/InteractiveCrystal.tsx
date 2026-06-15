@@ -16,7 +16,7 @@ function SingleCrystal({ position, scale, rotation }: CrystalProps) {
       <mesh scale={[0.55, 0.65, 0.55]}>
         <octahedronGeometry args={[1, 0]} />
         <meshBasicMaterial
-          color="#6fffe9" // Neon Ice core
+          color="#C75B3A" // Burnt Terracotta core
           toneMapped={false}
         />
       </mesh>
@@ -25,11 +25,11 @@ function SingleCrystal({ position, scale, rotation }: CrystalProps) {
       <mesh castShadow receiveShadow>
         <octahedronGeometry args={[1, 0]} />
         <meshPhysicalMaterial
-          color="#0b132b" // Prussian Blue base
-          emissive="#5bc0be" // Tropical Teal secondary glow
-          emissiveIntensity={1.5}
+          color="#FAF7F2" // Warm Cream base
+          emissive="#C75B3A" // Terracotta secondary glow
+          emissiveIntensity={0.6}
           roughness={0.05} // Highly polished
-          metalness={0.35}
+          metalness={0.2}
           transmission={0.45} // Semi-transparent to reveal internal core
           thickness={1.2}
           ior={1.9} // High index of refraction for intense light bending
@@ -43,10 +43,10 @@ function SingleCrystal({ position, scale, rotation }: CrystalProps) {
       <mesh scale={[1.01, 1.01, 1.01]}>
         <octahedronGeometry args={[1, 0]} />
         <meshBasicMaterial
-          color="#6fffe9" // Vibrant Neon Ice highlight
+          color="#C75B3A" // Terracotta highlight
           wireframe
           transparent
-          opacity={0.55}
+          opacity={0.4}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
@@ -144,7 +144,7 @@ export function InteractiveCrystal() {
           angle={0.4}
           penumbra={1}
           intensity={12}
-          color="#6fffe9" // Neon Ice key light
+          color="#FAF7F2" // Warm cream key light
           castShadow
         />
 
@@ -152,23 +152,23 @@ export function InteractiveCrystal() {
         <directionalLight
           position={[-5, 5, -5]}
           intensity={8}
-          color="#5bc0be" // Tropical Teal rim light
+          color="#C75B3A" // Terracotta rim light
         />
 
         {/* 3. Deep fill light from bottom-left to keep shadow details rich & colored */}
         <directionalLight
           position={[-5, -3, 3]}
           intensity={4}
-          color="#1c2541" // Space Indigo fill light
+          color="#1A1A1A" // Charcoal fill light
         />
 
         {/* 4. Core point light inside the crystal cluster space */}
-        <pointLight position={[0, -1, 1]} color="#6fffe9" intensity={6} />
+        <pointLight position={[0, -1, 1]} color="#C75B3A" intensity={6} />
 
         <CrystalCluster />
 
-        {/* Ambient floating neon sparkles */}
-        <Sparkles count={75} scale={5.0} size={2.5} speed={0.2} color="#6fffe9" opacity={0.7} />
+        {/* Ambient floating sparkles in brand terracotta */}
+        <Sparkles count={75} scale={5.0} size={2.5} speed={0.2} color="#C75B3A" opacity={0.5} />
 
         {/* Studio reflections */}
         <Environment preset="studio" environmentIntensity={1.0} />
