@@ -58,7 +58,12 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: {},
-    scrollRestoration: true,
+    // Scroll handling is owned by PageTransition (curtain transition + Lenis),
+    // which always resets to top on navigation. The router's own scroll
+    // restoration re-restores a route's last scroll position even on a fresh
+    // forward navigation, fighting that reset and leaving pinned GSAP
+    // sections measured against the wrong scroll position.
+    scrollRestoration: false,
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,

@@ -47,7 +47,7 @@ export function Preloader() {
 
   if (!shouldRender) return null;
 
-  const brandWords = "SARAL".split("");
+  const brandWords = "ORVION.CO".split("");
 
   return (
     <AnimatePresence>
@@ -62,14 +62,14 @@ export function Preloader() {
         >
           {/* Top text */}
           <div className="flex justify-between items-center text-xs font-mono tracking-widest text-muted-foreground uppercase opacity-60">
-            <span>SARAL BANKER // PRODUCT ENGINEER</span>
+            <span>ORVION.CO // PRODUCT ENGINEERS</span>
             <span>STG // 2026</span>
           </div>
 
           {/* Centered Logo Lettering */}
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="overflow-hidden flex gap-[0.1em] text-[clamp(2.5rem,10vw,8rem)] font-serif font-normal leading-none tracking-tight">
-              <span className="sr-only">Saral Banker</span>
+              <span className="sr-only">Orvion.co</span>
               <span aria-hidden="true" className="flex gap-[0.1em]">
                 {brandWords.map((letter, i) => (
                   <motion.span

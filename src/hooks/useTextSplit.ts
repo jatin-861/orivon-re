@@ -6,10 +6,10 @@ interface UseTextSplitOptions {
 }
 
 export function useTextSplit(
-  options: UseTextSplitOptions = {}
-): [RefObject<any>, RefObject<HTMLElement[]>] {
+  options: UseTextSplitOptions = {},
+): [RefObject<HTMLElement | null>, RefObject<HTMLElement[]>] {
   const { type = "words", className = "" } = options;
-  const containerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const elementsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
@@ -23,10 +23,7 @@ export function useTextSplit(
     if (type === "words") {
       const words = text.split(/\s+/);
       container.innerHTML = words
-        .map(
-          (word: string) =>
-            `<span class="${className} split-word inline-block">${word}</span>`
-        )
+        .map((word: string) => `<span class="${className} split-word inline-block">${word}</span>`)
         .join(" ");
       elementsRef.current = Array.from(container.querySelectorAll(".split-word"));
     } else if (type === "chars") {
@@ -45,8 +42,7 @@ export function useTextSplit(
           const chars = word
             .split("")
             .map(
-              (char: string) =>
-                `<span class="${className} split-char inline-block">${char}</span>`
+              (char: string) => `<span class="${className} split-char inline-block">${char}</span>`,
             )
             .join("");
           return `<span class="split-word inline-block" style="white-space: nowrap;">${chars}</span>`;

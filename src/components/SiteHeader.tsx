@@ -47,9 +47,7 @@ export const SiteHeader = () => {
           <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 border border-primary/30">
             <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
           </span>
-          <span className="font-display text-xl font-bold tracking-tight">
-            SARAL X JATIN
-          </span>
+          <span className="font-display text-xl font-bold tracking-tight">ORVION.CO</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1.5">

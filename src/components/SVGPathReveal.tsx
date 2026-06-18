@@ -45,7 +45,7 @@ export function SVGPathReveal({
 
     // Calculate total path length
     const length = pathEl.getTotalLength();
-    
+
     // Set initial dash attributes
     gsap.set(pathEl, {
       strokeDasharray: length,
@@ -53,7 +53,7 @@ export function SVGPathReveal({
     });
 
     const ctx = gsap.context(() => {
-      const scrollTriggerConfig: any = {
+      const scrollTriggerConfig: ScrollTrigger.Vars = {
         trigger: svgEl,
         start,
         toggleActions: triggerOnce ? "play none none none" : "play reverse play reverse",

@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute, ScrollRestoration } from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { NotFoundPage } from "../components/NotFoundPage";
@@ -28,7 +28,6 @@ function RootComponent() {
       </a>
       <CustomCursor />
       <Preloader />
-      <ScrollRestoration />
       <SiteBackground />
       <SiteHeader />
       <main id="main-content" className="relative min-h-screen">

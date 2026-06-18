@@ -22,13 +22,13 @@ export const StoryTeller = () => {
     let animationFrameId: number;
     let width = (canvas.width = canvas.offsetWidth * window.devicePixelRatio);
     let height = (canvas.height = canvas.offsetHeight * window.devicePixelRatio);
-    
+
     const handleResize = () => {
       if (!canvas) return;
       width = canvas.width = canvas.offsetWidth * window.devicePixelRatio;
       height = canvas.height = canvas.offsetHeight * window.devicePixelRatio;
     };
-    
+
     window.addEventListener("resize", handleResize);
 
     // Particles/Nodes for flow field
@@ -127,7 +127,7 @@ export const StoryTeller = () => {
         const y1 = centerY + Math.sin(tickAngle) * midRadius;
         const x2 = centerX + Math.cos(tickAngle) * (midRadius - 6);
         const y2 = centerY + Math.sin(tickAngle) * (midRadius - 6);
-        
+
         ctx.strokeStyle = i % 5 === 0 ? "rgba(199, 91, 58, 0.5)" : "rgba(240, 234, 224, 0.15)";
         ctx.lineWidth = i % 5 === 0 ? 1.5 : 1;
         ctx.beginPath();
@@ -148,11 +148,12 @@ export const StoryTeller = () => {
         // Introduce wave displacement using sine/cosine waves and mouse distance influence
         const distToMouse = Math.hypot(
           centerX + Math.cos(morphAngle) * morphRadius - mouseX,
-          centerY + Math.sin(morphAngle) * morphRadius - mouseY
+          centerY + Math.sin(morphAngle) * morphRadius - mouseY,
         );
         const mouseInfluence = Math.max(0, 1 - distToMouse / 250) * 15;
-        
-        const noise = Math.sin(angle * 4 + i * 2) * 8 + Math.cos(angle * 2 - i) * 4 + mouseInfluence;
+
+        const noise =
+          Math.sin(angle * 4 + i * 2) * 8 + Math.cos(angle * 2 - i) * 4 + mouseInfluence;
         const r = morphRadius + noise;
         const x = centerX + Math.cos(morphAngle) * r;
         const y = centerY + Math.sin(morphAngle) * r;
@@ -180,7 +181,8 @@ export const StoryTeller = () => {
       ctx.strokeStyle = "rgba(199, 91, 58, 0.12)"; // Terracotta
       ctx.beginPath();
       for (let x = 0; x < width; x += 3) {
-        const y = centerY + Math.sin(x * 0.004 - angle * 2) * 45 + Math.cos(x * 0.003 + angle * 1.5) * 20;
+        const y =
+          centerY + Math.sin(x * 0.004 - angle * 2) * 45 + Math.cos(x * 0.003 + angle * 1.5) * 20;
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
@@ -308,10 +310,7 @@ export const StoryTeller = () => {
                   className="w-full h-full max-h-[75vh] md:max-h-[85vh] aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-xl bg-[#1A1A1A] relative shadow-2xl cursor-crosshair"
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
+                  <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
                   <div className="absolute top-6 left-6 text-[10px] font-mono text-white/40 tracking-[0.2em] uppercase select-none">
                     Production System // Log. 01
                   </div>

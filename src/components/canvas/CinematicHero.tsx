@@ -12,7 +12,6 @@ export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: numb
 
   useEffect(() => {
     let frameId: number;
-    let timeoutId: number;
 
     const chars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
     const targetText = text;
@@ -30,7 +29,7 @@ export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: numb
             }
             return chars[Math.floor(Math.random() * chars.length)];
           })
-          .join("")
+          .join(""),
       );
 
       if (iteration < length) {
@@ -41,7 +40,7 @@ export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: numb
       }
     };
 
-    timeoutId = window.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       frameId = requestAnimationFrame(scramble);
     }, delay * 1000);
 
@@ -173,7 +172,7 @@ export const CinematicHero = () => {
       // Draw the belief statement, dynamically scaled to fit width, across two lines
       const isMobile = cssWidth < 768;
       const lines = ["USEFUL OVER", "IMPRESSIVE"];
-      let fontSize = Math.min(cssWidth * (isMobile ? 0.16 : 0.125), 190);
+      let fontSize = Math.min(cssWidth * (isMobile ? 0.21 : 0.125), 190);
       tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
       const maxWidth = cssWidth * 0.94;
       const widest = Math.max(...lines.map((line) => tempCtx.measureText(line).width));
@@ -203,8 +202,9 @@ export const CinematicHero = () => {
       const accentColor = "#C75B3A"; // Burnt Terracotta — consistent across themes
       const tertiaryColor = isDark ? "#C37B68" : "#8B5E3C";
 
-      // Densities: tighter on larger screens (optimized density from 4/5 to 5/7)
-      const step = isMobile ? 7 : 5;
+      // Densities: mobile letters render smaller in absolute px, so they need a
+      // finer (smaller) sampling step than desktop to stay legible, not a coarser one
+      const step = isMobile ? 3 : 5;
 
       for (let y = 0; y < tempCanvas.height; y += step) {
         for (let x = 0; x < tempCanvas.width; x += step) {
@@ -321,15 +321,14 @@ export const CinematicHero = () => {
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
       {/* Real DOM heading — canvas text is invisible to crawlers */}
       <h1 className="sr-only">
-        Saral x Jatin — Product Engineers. Useful over impressive: we build software that solves
-        real problems — from business automation to AI-powered platforms. Built NeuroDashboard,
-        a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental
-        units.
+        Orvion.co — Product Engineers. Useful over impressive: we build software that solves real
+        problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
+        multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units.
       </h1>
 
       {/* Top identity bar */}
       <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
-        <div>Saral x Jatin — Product Engineers // India</div>
+        <div>Orvion.co — Product Engineers // India</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
           Open to new projects
@@ -337,7 +336,7 @@ export const CinematicHero = () => {
       </div>
 
       {/* Belief statement canvas */}
-      <div className="relative h-[34vh] sm:h-[42vh] lg:h-[46vh] w-full">
+      <div className="relative h-[38vh] sm:h-[42vh] lg:h-[46vh] w-full">
         <canvas
           ref={canvasRef}
           aria-hidden="true"
@@ -348,7 +347,10 @@ export const CinematicHero = () => {
       {/* Identity / Value / CTA / Proof / Product Preview */}
       <div className="relative z-10 px-6 sm:px-12 pb-16 sm:pb-24 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         <div className="lg:col-span-7 hero-element flex flex-col gap-6">
-          <h2 className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground" style={{ textRendering: "optimizeLegibility" }}>
+          <h2
+            className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground"
+            style={{ textRendering: "optimizeLegibility" }}
+          >
             Hi, we're <ScrambleText text="Saral x Jatin." delay={delayBase + 0.1} />
           </h2>
 
@@ -357,8 +359,8 @@ export const CinematicHero = () => {
           </p>
 
           <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-xl">
-            From business automation to AI-powered platforms — I design, build, and ship
-            production systems that people actually use. Database to deployment, no shortcuts.
+            From business automation to AI-powered platforms — I design, build, and ship production
+            systems that people actually use. Database to deployment, no shortcuts.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mt-2">
@@ -430,7 +432,9 @@ function ProductPreview() {
         {/* Stat tiles */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           <div className="rounded-xl border border-border p-3">
-            <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">12,543</div>
+            <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">
+              12,543
+            </div>
             <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
               Docs indexed
             </div>
@@ -442,7 +446,9 @@ function ProductPreview() {
             </div>
           </div>
           <div className="rounded-xl border border-border p-3">
-            <div className="font-serif text-xl sm:text-2xl text-[var(--brand-pink)] leading-none">99.6%</div>
+            <div className="font-serif text-xl sm:text-2xl text-[var(--brand-pink)] leading-none">
+              99.6%
+            </div>
             <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
               Uptime
             </div>
@@ -451,7 +457,12 @@ function ProductPreview() {
 
         {/* Chart */}
         <div className="rounded-xl border border-border p-3 mb-6">
-          <svg viewBox="0 0 300 80" className="w-full h-20" preserveAspectRatio="none" aria-hidden="true">
+          <svg
+            viewBox="0 0 300 80"
+            className="w-full h-20"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
             <polyline
               points="0,60 30,55 60,58 90,40 120,45 150,30 180,35 210,18 240,24 270,12 300,16"
               fill="none"

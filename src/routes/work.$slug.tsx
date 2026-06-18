@@ -23,9 +23,21 @@ export const Route = createFileRoute("/work/$slug")({
 
 const brandColors: Record<string, { bg: string; text: string; details: string }> = {
   neurodashboard: { bg: "bg-[var(--brand-pink)]", text: "text-white", details: "AI_PLATFORM" },
-  "shade-ledger": { bg: "bg-[var(--brand-ochre)]", text: "text-white", details: "BILLING_AUTOMATION" },
-  "smart-parking": { bg: "bg-[var(--brand-peach)]", text: "text-white", details: "REALTIME_BOOKING" },
-  "carbon-compass": { bg: "bg-[var(--brand-teal)]", text: "text-white", details: "IMPACT_TRACKING" },
+  "shade-ledger": {
+    bg: "bg-[var(--brand-ochre)]",
+    text: "text-white",
+    details: "BILLING_AUTOMATION",
+  },
+  "smart-parking": {
+    bg: "bg-[var(--brand-peach)]",
+    text: "text-white",
+    details: "REALTIME_BOOKING",
+  },
+  "carbon-compass": {
+    bg: "bg-[var(--brand-teal)]",
+    text: "text-white",
+    details: "IMPACT_TRACKING",
+  },
 };
 
 // Business-translated descriptions for each NeuroDashboard module
@@ -174,9 +186,9 @@ function NeuroDashboardCaseStudy() {
     <>
       <Section heading="Executive summary">
         <p>
-          NeuroDashboard is a multi-module AI platform — over 70,000 lines of production code,
-          built and shipped end to end. It's the proof behind a simple belief: if it doesn't run
-          in production, it doesn't count.
+          NeuroDashboard is a multi-module AI platform — over 70,000 lines of production code, built
+          and shipped end to end. It's the proof behind a simple belief: if it doesn't run in
+          production, it doesn't count.
         </p>
       </Section>
 
@@ -191,8 +203,8 @@ function NeuroDashboardCaseStudy() {
       <Section heading="Why it exists">
         <p>
           NeuroDashboard puts that information in one place, makes it instantly searchable, and
-          automates the busywork around it — without depending on a single AI provider that might
-          go down.
+          automates the busywork around it — without depending on a single AI provider that might go
+          down.
         </p>
       </Section>
 
@@ -237,7 +249,10 @@ function NeuroDashboardCaseStudy() {
       <Section heading="Engineering decisions">
         <ul className="space-y-3 list-disc pl-5">
           <li>Multi-provider LLM routing instead of a single API — no single point of failure.</li>
-          <li>pgvector for semantic search instead of a separate vector database — one less moving part.</li>
+          <li>
+            pgvector for semantic search instead of a separate vector database — one less moving
+            part.
+          </li>
           <li>Async job queue (BullMQ/Redis) for anything that doesn't need to block the UI.</li>
           <li>Multi-tenant access control so each workspace only sees its own data.</li>
         </ul>
@@ -254,8 +269,8 @@ function NeuroDashboardCaseStudy() {
 
       <Section heading="Current state">
         <p>
-          NeuroDashboard is live and in active use across its core modules — Knowledge Hub,
-          Notes, Tasks, and the AI Insights Engine are running in production today.
+          NeuroDashboard is live and in active use across its core modules — Knowledge Hub, Notes,
+          Tasks, and the AI Insights Engine are running in production today.
         </p>
       </Section>
 
@@ -270,8 +285,8 @@ function NeuroDashboardCaseStudy() {
       <Section heading="Lessons learned">
         <p>
           Shipping the whole stack — not just the demo — is what separates a prototype from a
-          platform. Every module here had to handle real data, real failures, and real users
-          before it counted as "done."
+          platform. Every module here had to handle real data, real failures, and real users before
+          it counted as "done."
         </p>
       </Section>
 

@@ -30,7 +30,7 @@ export function TextRevealByWord({
     el.innerHTML = words
       .map(
         (word) =>
-          `<span class="reveal-word inline-block mr-[0.25em]" style="will-change: transform, opacity; transform-style: preserve-3d;">${word}</span>`
+          `<span class="reveal-word inline-block mr-[0.25em]" style="will-change: transform, opacity; transform-style: preserve-3d;">${word}</span>`,
       )
       .join(" ");
 
@@ -58,7 +58,7 @@ export function TextRevealByWord({
             end,
             scrub: 0.8,
           },
-        }
+        },
       );
     }, el);
 

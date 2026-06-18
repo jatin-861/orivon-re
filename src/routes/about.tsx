@@ -56,7 +56,8 @@ await system.deploy({
 }
 
 function TerminalLogSimulator() {
-  const [logs, setLogs] = useState<string[]>([]);
+  const [logs, setLogs] = useState<{ id: number; text: string }[]>([]);
+  const nextId = useRef(0);
   const logPool = [
     "$ npm run build",
     "vite v7.3.1 building for production...",
@@ -78,7 +79,7 @@ function TerminalLogSimulator() {
     let index = 0;
     const interval = setInterval(() => {
       setLogs((prev) => {
-        const next = [...prev, logPool[index]];
+        const next = [...prev, { id: nextId.current++, text: logPool[index] }];
         if (next.length > 5) next.shift(); // Keep last 5 lines
         return next;
       });
@@ -90,9 +91,18 @@ function TerminalLogSimulator() {
 
   return (
     <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
-      {logs.map((log, i) => (
-        <div key={i} className={log.startsWith("$") ? "text-[var(--brand-peach)]" : log.includes("✓") || log.includes("200") ? "text-[var(--brand-pink)]" : "text-[#FAF7F2]/70"}>
-          {log}
+      {logs.map((log) => (
+        <div
+          key={log.id}
+          className={
+            log.text.startsWith("$")
+              ? "text-[var(--brand-peach)]"
+              : log.text.includes("✓") || log.text.includes("200")
+                ? "text-[var(--brand-pink)]"
+                : "text-[#FAF7F2]/70"
+          }
+        >
+          {log.text}
         </div>
       ))}
       <div className="flex items-center gap-1.5 text-[#FAF7F2]/50">
@@ -243,7 +253,8 @@ function About() {
         <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
             <p className="font-serif text-2xl md:text-3xl font-light italic leading-normal text-foreground/90">
-              Saral Banker & Jatin Basantani — two engineers based in India who design, build, and ship complete systems, from database to deployment.
+              Saral Banker & Jatin Basantani — two engineers based in India who design, build, and
+              ship complete systems, from database to deployment.
             </p>
             <div className="text-base text-muted-foreground space-y-6 leading-relaxed font-sans pt-4 border-t border-border/60">
               <p>
@@ -251,8 +262,8 @@ function About() {
                 production, for real users, every day. That's the bar we hold our own work to.
               </p>
               <p>
-                Between us we cover the full stack — backend architecture, APIs, AI integrations, and
-                the frontends that sit on top of them.
+                Between us we cover the full stack — backend architecture, APIs, AI integrations,
+                and the frontends that sit on top of them.
               </p>
             </div>
           </div>
@@ -318,8 +329,8 @@ function About() {
               <span className="text-[var(--brand-pink)] font-serif italic block">Milestones.</span>
             </h2>
             <p className="text-muted-foreground text-sm font-sans mt-6 leading-relaxed max-w-sm">
-              From first deployed projects to a multi-module AI platform and a paying client —
-              a short history of things we've shipped and kept running.
+              From first deployed projects to a multi-module AI platform and a paying client — a
+              short history of things we've shipped and kept running.
             </p>
           </div>
           <div className="relative space-y-16 lg:pl-16">
@@ -375,7 +386,9 @@ function About() {
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h3 className="font-display text-3xl font-bold text-foreground">Saral Banker</h3>
+                      <h3 className="font-display text-3xl font-bold text-foreground">
+                        Saral Banker
+                      </h3>
                       <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
                         Full Stack Engineer · AI Application Developer
                       </p>
@@ -385,21 +398,47 @@ function About() {
                       download
                       className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
                       title="Download Resume"
+                      aria-label="Download Saral Banker's resume"
                     >
                       <Download size={16} />
                     </a>
                   </div>
 
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                    I design, build, and ship complete systems — database to deployment. Built NeuroDashboard, a multi-module AI platform (Knowledge Hub finds answers instantly across your information, plus analytics, automation, and more), and Shade Ledger, an automated billing system running for 220 rental units today. <br/><br/>
-                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">Academic Excellence:</strong> 8.36 / 10 GPA
+                    I design, build, and ship complete systems — database to deployment. Built
+                    NeuroDashboard, a multi-module AI platform (Knowledge Hub finds answers
+                    instantly across your information, plus analytics, automation, and more), and
+                    Shade Ledger, an automated billing system running for 220 rental units today.{" "}
+                    <br />
+                    <br />
+                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">
+                      Academic Excellence:
+                    </strong>{" "}
+                    8.36 / 10 GPA
                   </p>
 
                   <div className="mb-6">
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Core Tech Stack</span>
+                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                      Core Tech Stack
+                    </span>
                     <div className="flex flex-wrap gap-1.5">
-                      {["React 18", "Next.js", "Node.js / Express", "FastAPI", "PostgreSQL", "Supabase", "Redis", "Docker", "GitHub Actions", "RAG / pgvector", "Socket.IO"].map((sk) => (
-                        <span key={sk} className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80">
+                      {[
+                        "React 18",
+                        "Next.js",
+                        "Node.js / Express",
+                        "FastAPI",
+                        "PostgreSQL",
+                        "Supabase",
+                        "Redis",
+                        "Docker",
+                        "GitHub Actions",
+                        "RAG / pgvector",
+                        "Socket.IO",
+                      ].map((sk) => (
+                        <span
+                          key={sk}
+                          className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80"
+                        >
                           {sk}
                         </span>
                       ))}
@@ -408,7 +447,9 @@ function About() {
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">System Deployment Log</span>
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                    System Deployment Log
+                  </span>
                   <TerminalLogSimulator />
                 </div>
               </SpotlightCard>
@@ -420,7 +461,9 @@ function About() {
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h3 className="font-display text-3xl font-bold text-foreground">Jatin Basantani</h3>
+                      <h3 className="font-display text-3xl font-bold text-foreground">
+                        Jatin Basantani
+                      </h3>
                       <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
                         Full-Stack Engineer & AI Systems Builder
                       </p>
@@ -430,21 +473,43 @@ function About() {
                       download
                       className="rounded-full bg-muted hover:bg-primary hover:text-primary-foreground p-3 text-muted-foreground transition-all flex items-center justify-center cursor-pointer"
                       title="Download Resume"
+                      aria-label="Download Jatin Basantani's resume"
                     >
                       <Download size={16} />
                     </a>
                   </div>
 
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                    Specializing in AI-centric application development, agent architectures, and automated research systems. Creator of Knowledge Hub. I leverage frontier AI models (Gemini, Claude, GPT) and modern stacks to build scalable, highly performant products. <br/><br/>
-                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">Academic Excellence:</strong> 8.61 / 10 GPA
+                    Specializing in AI-centric application development, agent architectures, and
+                    automated research systems. Creator of Knowledge Hub. I leverage frontier AI
+                    models (Gemini, Claude, GPT) and modern stacks to build scalable, highly
+                    performant products. <br />
+                    <br />
+                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">
+                      Academic Excellence:
+                    </strong>{" "}
+                    8.61 / 10 GPA
                   </p>
 
                   <div className="mb-6">
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Core Tech Stack</span>
+                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                      Core Tech Stack
+                    </span>
                     <div className="flex flex-wrap gap-1.5">
-                      {["React", "Next.js", "Tailwind CSS", "shadcn/ui", "Supabase", "PostgreSQL", "TypeScript", "LLM Agents"].map((sk) => (
-                        <span key={sk} className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80">
+                      {[
+                        "React",
+                        "Next.js",
+                        "Tailwind CSS",
+                        "shadcn/ui",
+                        "Supabase",
+                        "PostgreSQL",
+                        "TypeScript",
+                        "LLM Agents",
+                      ].map((sk) => (
+                        <span
+                          key={sk}
+                          className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80"
+                        >
                           {sk}
                         </span>
                       ))}
@@ -453,7 +518,9 @@ function About() {
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">Live Code Preview</span>
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                    Live Code Preview
+                  </span>
                   <CodeTypingSimulator />
                 </div>
               </SpotlightCard>
@@ -486,12 +553,18 @@ function About() {
         {/* Core Values */}
         <div className="mt-24 grid md:grid-cols-3 gap-8">
           {[
-            { t: "Ownership", c: "We see things through — idea to production, not just the fun parts." },
+            {
+              t: "Ownership",
+              c: "We see things through — idea to production, not just the fun parts.",
+            },
             { t: "Transparency", c: "Direct communication, clear scope, no fluff." },
             { t: "Reliability", c: "If it ships, it has to keep working — not just on day one." },
           ].map((v) => (
             <BentoTilt key={v.t} className="h-full w-full">
-              <SpotlightCard glowHue={15} className="p-8 bg-[var(--card)] border border-border h-full w-full">
+              <SpotlightCard
+                glowHue={15}
+                className="p-8 bg-[var(--card)] border border-border h-full w-full"
+              >
                 <h3 className="font-serif text-2xl font-normal mb-3 text-[var(--brand-pink)]">
                   {v.t}
                 </h3>

@@ -6,11 +6,11 @@ interface UseInViewOptions {
   triggerOnce?: boolean;
 }
 
-export function useInView(
-  options: UseInViewOptions = {}
-): [RefObject<any>, boolean] {
+export function useInView<T extends Element = HTMLCanvasElement>(
+  options: UseInViewOptions = {},
+): [RefObject<T | null>, boolean] {
   const { threshold = 0, rootMargin = "0px", triggerOnce = false } = options;
-  const ref = useRef<any>(null);
+  const ref = useRef<T>(null);
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function useInView(
           observer.unobserve(el);
         }
       },
-      { threshold, rootMargin }
+      { threshold, rootMargin },
     );
 
     observer.observe(el);

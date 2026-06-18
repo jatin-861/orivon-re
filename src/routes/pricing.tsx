@@ -159,10 +159,12 @@ function PricingPage() {
                     <h3 className="font-display text-2xl md:text-3xl font-bold">{p.name}</h3>
 
                     <div className="mt-6 flex items-end gap-1">
-                      <span className={cn(
-                        "font-display text-6xl font-bold",
-                        p.popular ? "text-white" : "text-[var(--brand-pink)]"
-                      )}>
+                      <span
+                        className={cn(
+                          "font-display text-6xl font-bold",
+                          p.popular ? "text-white" : "text-[var(--brand-pink)]",
+                        )}
+                      >
                         ${yearly ? p.yearlyPrice : p.price}k
                       </span>
                       <span className={cn("text-xs font-mono pb-2", subLabelClass)}>

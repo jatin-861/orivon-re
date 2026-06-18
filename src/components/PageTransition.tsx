@@ -26,29 +26,33 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (location.pathname !== currentPath) {
+      // Reset scroll immediately. <Outlet/> swaps to the new route's content the
+      // instant navigation starts (it subscribes directly to router state,
+      // regardless of this component's "frozen" displayChildren below), so the
+      // new page's pinned GSAP/ScrollTrigger sections mount and measure layout
+      // right now — they must not see a stale, scrolled-down position.
+      lenis?.scrollTo(0, { immediate: true });
+      window.scrollTo(0, 0);
+
       const tl = gsap.timeline({
         onComplete: () => {
-          // Reset scroll to top before the new page mounts, so pinned/scroll-linked
-          // sections on the new page don't start mid-progress and render blank
-          lenis?.scrollTo(0, { immediate: true });
-          window.scrollTo(0, 0);
-
           setCurrentPath(location.pathname);
           setDisplayChildren(children);
 
+          // Recalculate Lenis dimensions and ScrollTrigger geometry for the new
+          // page now, while still hidden behind the curtain — not after it
+          // reopens, which would expose any mis-measured pinned sections.
+          lenis?.resize();
+          ScrollTrigger.refresh();
+
           // Animate curtain opening up
-          const tlOut = gsap.timeline({
-            onComplete: () => {
-              // Recalculate Lenis dimensions and ScrollTrigger parameters on the new page
-              lenis?.resize();
-              ScrollTrigger.refresh();
-            }
-          });
-          
+          const tlOut = gsap.timeline();
+
           // Animate content scaling back up
-          gsap.fromTo(contentRef.current, 
-            { scale: 0.97, opacity: 0.6 }, 
-            { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" }
+          gsap.fromTo(
+            contentRef.current,
+            { scale: 0.97, opacity: 0.6 },
+            { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" },
           );
 
           tlOut
@@ -70,40 +74,48 @@ export function PageTransition({ children }: { children: ReactNode }) {
       tl.set(overlayRef.current, { visibility: "visible" })
         .set(pathRef.current, { attr: { d: initialPath } })
         .set(textRef.current, { opacity: 0, scale: 0.92, y: 15 })
-        
+
         // Scale down the active page content slightly
-        .to(contentRef.current, {
-          scale: 0.97,
-          duration: 0.4,
-          ease: "power3.inOut"
-        }, 0)
+        .to(
+          contentRef.current,
+          {
+            scale: 0.97,
+            duration: 0.4,
+            ease: "power3.inOut",
+          },
+          0,
+        )
 
         // Curtain slide down
-        .to(pathRef.current, {
-          attr: { d: curveDownPath },
-          duration: 0.45,
-          ease: "power3.inOut",
-        }, 0)
+        .to(
+          pathRef.current,
+          {
+            attr: { d: curveDownPath },
+            duration: 0.45,
+            ease: "power3.inOut",
+          },
+          0,
+        )
         .to(pathRef.current, {
           attr: { d: flatCoverPath },
           duration: 0.2,
           ease: "power2.inOut",
         })
-        
+
         // Brand wordmark reveal during cover hold
         .to(textRef.current, {
           opacity: 1,
           scale: 1,
           y: 0,
           duration: 0.4,
-          ease: "power4.out"
+          ease: "power4.out",
         })
         .to(textRef.current, {
           opacity: 0,
           scale: 1.04,
           duration: 0.25,
           ease: "power3.in",
-          delay: 0.15
+          delay: 0.15,
         });
 
       // Clean up the curtain timeline if the component unmounts mid-transition
@@ -129,12 +141,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
         >
           <path ref={pathRef} d={initialPath} fill="var(--secondary)" />
         </svg>
-        <div 
-          ref={textRef} 
+        <div
+          ref={textRef}
           className="relative z-10 text-[var(--background)] font-serif font-normal text-5xl md:text-7xl tracking-[0.35em] uppercase select-none pointer-events-none pl-[0.35em]"
           style={{ opacity: 0 }}
         >
-          Saral x Jatin
+          Orvion.co
         </div>
       </div>
       <div ref={contentRef} className="origin-center w-full min-h-screen">

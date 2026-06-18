@@ -1,5 +1,5 @@
 ---
-name: Orivon
+name: Orvion
 description: Warm Editorial color system & typography specifications
 colors:
   primary: "#1A1A1A"
@@ -42,13 +42,13 @@ components:
     textColor: "{colors.neutral-bg}"
 ---
 
-# Design System: Orivon
+# Design System: Orvion
 
 ## 1. Overview
 
 **Creative North Star: "The Warm Editorial Gallery"**
 
-Orivon is a visual showcase that rejects standard tech-startup templates and generic 3D meshes in favor of classical typographic grids, tactile interfaces, and meaningful visual storytelling. Spacing is generous, mimicking physical art galleries where white space allows the content to breathe. The system is light-only, utilizing warm cream backgrounds contrasted with high-fidelity charcoal ink and vibrant solid accent highlights (burnt terracotta, warm amber).
+Orvion is a visual showcase that rejects standard tech-startup templates and generic 3D meshes in favor of classical typographic grids, tactile interfaces, and meaningful visual storytelling. Spacing is generous, mimicking physical art galleries where white space allows the content to breathe. The system is light-only, utilizing warm cream backgrounds contrasted with high-fidelity charcoal ink and vibrant solid accent highlights (burnt terracotta, warm amber).
 
 **Key Characteristics:**
 

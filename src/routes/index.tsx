@@ -27,15 +27,25 @@ function Index() {
   const homeSchema = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    name: "Saral x Jatin — Product Engineers",
+    name: "Orvion.co — Product Engineers",
     description:
-      "Saral x Jatin are product engineers who build complete, production systems — from database to deployment.",
+      "Orvion.co is a product engineering studio that builds complete, production systems — from database to deployment.",
     mainEntity: {
       "@type": "Organization",
-      name: "Saral x Jatin",
+      name: "Orvion.co",
       member: [
-        { "@type": "Person", name: "Saral Banker", jobTitle: "Product Engineer", sameAs: ["https://github.com/saralbanker"] },
-        { "@type": "Person", name: "Jatin Basantani", jobTitle: "Frontend & AI Systems Developer", sameAs: ["https://github.com/jatin-861"] },
+        {
+          "@type": "Person",
+          name: "Saral Banker",
+          jobTitle: "Product Engineer",
+          sameAs: ["https://github.com/saralbanker"],
+        },
+        {
+          "@type": "Person",
+          name: "Jatin Basantani",
+          jobTitle: "Frontend & AI Systems Developer",
+          sameAs: ["https://github.com/jatin-861"],
+        },
       ],
     },
   };
@@ -43,8 +53,8 @@ function Index() {
   return (
     <div className="relative text-foreground transition-colors duration-500 font-sans overflow-x-clip">
       <SEO
-        title="Saral x Jatin — Product Engineers"
-        description="Saral x Jatin are product engineers who build complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
+        title="Orvion.co — Product Engineers"
+        description="Orvion.co is a product engineering studio that builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
         canonical="/"
         keywords="product engineer, full-stack developer, AI applications, React, Node.js, software engineer portfolio"
         ogType="website"
@@ -83,20 +93,8 @@ function Index() {
 function StudioShowreel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
-
     if (!containerRef.current || !scrollRef.current) return;
 
     const scrollEl = scrollRef.current;
@@ -135,14 +133,14 @@ function StudioShowreel() {
                 end: "right left",
                 scrub: true,
               },
-            }
+            },
           );
         }
       });
     }, containerRef);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, []);
 
   const items = [
     {
@@ -165,104 +163,17 @@ function StudioShowreel() {
     },
   ];
 
-  if (isMobile) {
-    return (
-      <div className="relative bg-[var(--brand-pink)] text-white overflow-hidden z-10 border-y border-white/10 py-16 px-6">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
-        
-        <div className="space-y-12">
-          {/* Intro Panel */}
-          <div className="max-w-xl">
-            <span className="text-xs font-mono text-[var(--brand-peach)] tracking-widest uppercase mb-4 block">
-              — Systems In Motion
-            </span>
-            <h2 className="font-serif text-4xl sm:text-6xl font-normal leading-[1.1] tracking-tighter">
-              Real projects, <br />
-              <span className="text-secondary italic">running</span> in production.
-            </h2>
-            <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              A closer look at what's actually live.
-            </p>
-          </div>
-
-          {/* Video Panels stacked vertically */}
-          <div className="space-y-8">
-            {items.map((item, idx) => (
-              <div 
-                key={idx} 
-                className="relative h-96 w-full overflow-hidden rounded-2xl bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 group"
-              >
-                {/* Background Video */}
-                <div className="absolute inset-0 z-0 overflow-hidden">
-                  <video
-                    src={item.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-35"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-pink)] via-transparent to-black/10" />
-                </div>
-
-                {/* Video Label */}
-                <div className="relative z-10 flex justify-between items-center text-xs font-mono tracking-widest uppercase text-white/50">
-                  <span>{item.tag}</span>
-                  <span className="text-[var(--brand-pink)]">✦</span>
-                </div>
-
-                {/* Details */}
-                <div className="relative z-10 mt-auto">
-                  <h3 className="font-serif text-2xl font-normal tracking-tight leading-tight mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-white/60 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Outro Panel */}
-          <div className="rounded-2xl p-8 bg-[var(--muted)] text-foreground relative border border-border">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
-            <div>
-              <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
-                — Want To See More?
-              </span>
-              <h2 className="font-serif text-3xl sm:text-5xl font-normal leading-tight tracking-tighter mb-4">
-                See what's <br />
-                <span className="text-[var(--brand-pink)] font-sans font-bold italic">running.</span>
-              </h2>
-              <p className="text-xs text-muted-foreground leading-relaxed mb-6">
-                Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture, decisions, and what's still on the roadmap.
-              </p>
-              <Link
-                to="/work"
-                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold shadow-glow-cyan"
-              >
-                See Selected Work <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} className="relative bg-[var(--brand-pink)] text-white overflow-hidden z-10 border-y border-white/10">
+    <div
+      ref={containerRef}
+      className="relative bg-[var(--brand-pink)] text-white overflow-hidden z-10 border-y border-white/10"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
-      
+
       {/* Horizontal scroll track */}
-      <div 
-        ref={scrollRef} 
-        className="flex h-screen items-center"
-        style={{ width: "fit-content" }}
-      >
+      <div ref={scrollRef} className="flex h-screen items-center" style={{ width: "fit-content" }}>
         {/* Intro Panel */}
-        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-12 md:px-24 max-w-4xl">
+        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 max-w-4xl">
           <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4">
             — Systems In Motion
           </span>
@@ -277,9 +188,9 @@ function StudioShowreel() {
 
         {/* Video Panels */}
         {items.map((item, idx) => (
-          <div 
-            key={idx} 
-            className="showreel-panel-card relative h-[70vh] w-[85vw] md:w-[60vw] flex-shrink-0 overflow-hidden rounded-2xl mx-12 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-8 md:p-12 group"
+          <div
+            key={idx}
+            className="showreel-panel-card relative h-[70vh] w-[85vw] md:w-[60vw] flex-shrink-0 overflow-hidden rounded-2xl mx-4 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 md:p-12 group"
             data-cursor-text="PLAY"
           >
             {/* Background Video */}
@@ -314,7 +225,7 @@ function StudioShowreel() {
         ))}
 
         {/* Outro CTA Panel */}
-        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-12 md:px-24 bg-[var(--muted)] text-foreground relative">
+        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 bg-[var(--muted)] text-foreground relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
           <div className="max-w-xl">
             <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
@@ -325,7 +236,8 @@ function StudioShowreel() {
               <span className="text-[var(--brand-pink)] font-sans font-bold italic">running.</span>
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-md">
-              Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture, decisions, and what's still on the roadmap.
+              Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture,
+              decisions, and what's still on the roadmap.
             </p>
             <Link
               to="/work"
@@ -392,7 +304,7 @@ function StudioManifesto() {
                 end: "bottom top",
                 scrub: true,
               },
-            }
+            },
           );
         }
       });
@@ -412,7 +324,7 @@ function StudioManifesto() {
               end: "top 75%",
               scrub: true,
             },
-          }
+          },
         );
       });
 
@@ -431,7 +343,7 @@ function StudioManifesto() {
               start: "top 85%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
     }, textRef);
@@ -443,11 +355,18 @@ function StudioManifesto() {
       className="py-40 px-6 bg-[var(--muted)] relative z-10 border-y border-border"
       data-cursor-text="BELIEF"
     >
-      <div className="mx-auto max-w-6xl grid md:grid-cols-12 gap-8 md:gap-16 items-start" ref={textRef}>
+      <div
+        className="mx-auto max-w-6xl grid md:grid-cols-12 gap-8 md:gap-16 items-start"
+        ref={textRef}
+      >
         {/* Sticky editorial left header */}
         <div className="md:col-span-3 md:sticky md:top-40 select-none">
-          <div className="font-serif text-[7rem] md:text-[10rem] font-bold leading-none text-secondary/15">01</div>
-          <span className="text-xs text-secondary font-mono tracking-widest uppercase block mt-2">— Core Belief</span>
+          <div className="font-serif text-[7rem] md:text-[10rem] font-bold leading-none text-secondary/15">
+            01
+          </div>
+          <span className="text-xs text-secondary font-mono tracking-widest uppercase block mt-2">
+            — Core Belief
+          </span>
         </div>
 
         {/* Right content area */}
@@ -479,7 +398,11 @@ function StudioManifesto() {
                 <span className="reveal-word inline-block mr-[0.25em]">it</span>{" "}
                 <span className="reveal-word inline-block mr-[0.25em]">doesn't</span>{" "}
                 <span className="reveal-word inline-block mr-[0.25em]">count.</span>
-                <span ref={underlineRef} className="absolute left-0 bottom-0 h-1.5 bg-secondary origin-left" style={{ width: "0%" }} />
+                <span
+                  ref={underlineRef}
+                  className="absolute left-0 bottom-0 h-1.5 bg-secondary origin-left"
+                  style={{ width: "0%" }}
+                />
               </span>
             </p>
           </div>
@@ -506,7 +429,10 @@ const SKILLS = [
 
 function SkillsMarquee() {
   return (
-    <section className="relative z-10 py-12 sm:py-16 border-y border-border bg-background/50 backdrop-blur-sm" data-cursor-text="STACK">
+    <section
+      className="relative z-10 py-12 sm:py-16 border-y border-border bg-background/50 backdrop-blur-sm"
+      data-cursor-text="STACK"
+    >
       <div className="mx-auto max-w-7xl px-6 mb-6">
         <span className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground">
           — Tools we build with
@@ -557,7 +483,7 @@ function StatCounter({ value }: StatCounterProps) {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(el);
@@ -582,10 +508,7 @@ function Numbers() {
     { v: "1", l: "Paid contract, delivered duo" },
   ];
   return (
-    <section
-      className="py-24 px-6 border-b border-border relative z-10"
-      data-cursor-text="STATS"
-    >
+    <section className="py-24 px-6 border-b border-border relative z-10" data-cursor-text="STATS">
       <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((s) => (
           <SpotlightCard key={s.l} className="p-6 md:p-8 bg-[var(--card)] border border-border">
@@ -693,8 +616,8 @@ function BigCTA() {
           </span>
         </h2>
         <p className="mt-8 text-muted-foreground text-base md:text-lg max-w-xl mx-auto leading-relaxed font-sans">
-          If you've got something worth building, I'd like to hear about it — and help take it
-          from idea to something running in production.
+          If you've got something worth building, I'd like to hear about it — and help take it from
+          idea to something running in production.
         </p>
         <div className="mt-12">
           <MagneticButton

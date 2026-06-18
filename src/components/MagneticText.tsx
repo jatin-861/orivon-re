@@ -41,7 +41,7 @@ export function MagneticText({
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
-      charSpans.forEach((span: any) => {
+      charSpans.forEach((span: Element) => {
         const spanRect = span.getBoundingClientRect();
         const spanX = spanRect.left + spanRect.width / 2;
         const spanY = spanRect.top + spanRect.height / 2;
@@ -54,7 +54,7 @@ export function MagneticText({
           // Push chars away from mouse (repulsion)
           const force = (radius - dist) / radius;
           const angle = Math.atan2(dy, dx);
-          
+
           const x = -Math.cos(angle) * force * strength;
           const y = -Math.sin(angle) * force * strength;
 
@@ -95,12 +95,7 @@ export function MagneticText({
     };
   }, [text, strength, radius]);
 
-  return (
-    <div
-      ref={containerRef}
-      className={`inline-block select-none ${className}`}
-    />
-  );
+  return <div ref={containerRef} className={`inline-block select-none ${className}`} />;
 }
 
 export default MagneticText;

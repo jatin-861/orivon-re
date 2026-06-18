@@ -146,8 +146,8 @@ function Process() {
               </div>
 
               {/* Step description content */}
-              <div 
-                data-step-text 
+              <div
+                data-step-text
                 className="opacity-50 transition-all duration-500 bg-[var(--card)] text-foreground p-8 rounded-2xl shadow-elegant border border-border"
               >
                 <span className="text-xs text-[var(--brand-pink)] font-mono block mb-2">

@@ -1,8 +1,8 @@
 {
   "projectId": "efcce36b-1c98-40ca-8482-056dd0b8e009",
   "shape": "package",
-  "pkg": "orivon",
-  "globalName": "Orivon",
+  "pkg": "orvion",
+  "globalName": "Orvion",
   "srcDir": "src/components/ui",
   "tsconfig": "tsconfig.json",
   "cssEntry": ".design-sync/.cache/compiled.css",

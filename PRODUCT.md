@@ -10,7 +10,7 @@ Creative founders, product teams, startup executives, and design managers seekin
 
 ## Product Purpose
 
-To showcase Orivon's design craft, methodology, selected projects, pricing, and services to convert prospective clients into design partners.
+To showcase Orvion's design craft, methodology, selected projects, pricing, and services to convert prospective clients into design partners.
 
 ## Brand Personality
 

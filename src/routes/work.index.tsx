@@ -13,9 +13,21 @@ export const Route = createFileRoute("/work/")({
 // Color mapping for project showcases
 const brandColors: Record<string, { bg: string; text: string; details: string }> = {
   neurodashboard: { bg: "bg-[var(--brand-pink)]", text: "text-white", details: "AI_PLATFORM" },
-  "shade-ledger": { bg: "bg-[var(--brand-ochre)]", text: "text-white", details: "BILLING_AUTOMATION" },
-  "smart-parking": { bg: "bg-[var(--brand-peach)]", text: "text-white", details: "REALTIME_BOOKING" },
-  "carbon-compass": { bg: "bg-[var(--brand-teal)]", text: "text-white", details: "IMPACT_TRACKING" },
+  "shade-ledger": {
+    bg: "bg-[var(--brand-ochre)]",
+    text: "text-white",
+    details: "BILLING_AUTOMATION",
+  },
+  "smart-parking": {
+    bg: "bg-[var(--brand-peach)]",
+    text: "text-white",
+    details: "REALTIME_BOOKING",
+  },
+  "carbon-compass": {
+    bg: "bg-[var(--brand-teal)]",
+    text: "text-white",
+    details: "IMPACT_TRACKING",
+  },
 };
 
 function WorkPage() {

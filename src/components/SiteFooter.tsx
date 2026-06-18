@@ -20,7 +20,12 @@ const dockItems = [
     label: "GitHub",
     Icon: <Github size={20} />,
   },
-  { link: "mailto:saralbanker1@gmail.com", external: true, label: "Email", Icon: <Mail size={20} /> },
+  {
+    link: "mailto:saralbanker1@gmail.com",
+    external: true,
+    label: "Email",
+    Icon: <Mail size={20} />,
+  },
 ];
 
 export function SiteFooter() {
@@ -40,9 +45,7 @@ export function SiteFooter() {
               <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 border border-primary/30">
                 <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
               </span>
-              <span className="font-display text-2xl font-bold tracking-tight">
-                SARAL X JATIN
-              </span>
+              <span className="font-display text-2xl font-bold tracking-tight">ORVION.CO</span>
             </Link>
             <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
               Product engineer. I design, build, and ship complete systems — database to deployment.
@@ -97,7 +100,7 @@ export function SiteFooter() {
         {/* Giant gooey wordmark */}
         <div className="relative mt-12 select-none overflow-hidden h-[clamp(4rem,15vw,10rem)]">
           <GooeyText
-            texts={["SARAL", "X", "JATIN", "SARAL X JATIN"]}
+            texts={["ORVION.CO", "BUILD", "SARAL X JATIN", "ENGINEER"]}
             morphTime={1.4}
             cooldownTime={1.6}
             className="h-full w-full"
@@ -106,7 +109,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Saral x Jatin.</p>
+          <p>© {new Date().getFullYear()} Orvion.co.</p>
           <p>If it doesn't run in production, it doesn't count.</p>
         </div>
       </div>

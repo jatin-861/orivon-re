@@ -27,7 +27,7 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
       60,
       window.innerWidth / window.innerHeight,
       1,
-      10000
+      10000,
     );
     camera.position.set(0, 360, 1100);
 
@@ -137,7 +137,7 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 
     const tick = () => {
       animId = requestAnimationFrame(tick);
-      
+
       // OPTIMIZATION: Only render if tab is focused and page is not scrolled deep
       if (!isPageFocused || isScrolledDeep) return;
 
@@ -152,8 +152,12 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
       isScrolledDeep = window.scrollY > window.innerHeight * 1.2;
     };
 
-    const handleFocus = () => { isPageFocused = true; };
-    const handleBlur = () => { isPageFocused = false; };
+    const handleFocus = () => {
+      isPageFocused = true;
+    };
+    const handleBlur = () => {
+      isPageFocused = false;
+    };
     const handleVisibility = () => {
       isPageFocused = document.visibilityState === "visible";
     };
@@ -196,7 +200,10 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
   return (
     <div
       ref={containerRef}
-      className={cn("pointer-events-none fixed inset-0 -z-10 bg-transparent overflow-hidden", className)}
+      className={cn(
+        "pointer-events-none fixed inset-0 -z-10 bg-transparent overflow-hidden",
+        className,
+      )}
       {...props}
     />
   );

@@ -286,7 +286,10 @@ function Contact() {
 }
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
-  <label htmlFor={htmlFor} className="block text-xs uppercase tracking-widest text-muted-foreground mb-3">
+  <label
+    htmlFor={htmlFor}
+    className="block text-xs uppercase tracking-widest text-muted-foreground mb-3"
+  >
     {children}
   </label>
 );

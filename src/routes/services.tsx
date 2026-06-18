@@ -28,7 +28,9 @@ function GestaltStaticPreview() {
                 <div
                   className="w-[18px] h-[18px] rounded-full transition-colors duration-500"
                   style={{
-                    backgroundColor: isDiagonal ? "var(--brand-pink)" : "var(--color-muted-foreground)",
+                    backgroundColor: isDiagonal
+                      ? "var(--brand-pink)"
+                      : "var(--color-muted-foreground)",
                     opacity: isDiagonal ? 1 : 0.35,
                     transform: isDiagonal ? "scale(1.2)" : "scale(1)",
                   }}
@@ -91,10 +93,7 @@ function CapabilitiesBentoGrid() {
   }, []);
 
   return (
-    <section
-      className="bg-transparent py-32 px-0 relative z-10"
-      data-cursor-text="LAB"
-    >
+    <section className="bg-transparent py-32 px-0 relative z-10" data-cursor-text="LAB">
       <div className="bento-grid-trigger mx-auto max-w-7xl">
         <div className="mb-24 max-w-3xl">
           <span className="text-xs text-secondary font-mono tracking-widest uppercase mb-4 block">
@@ -114,7 +113,11 @@ function CapabilitiesBentoGrid() {
             title={
               <>
                 Brand Systems
-                <span className="font-serif italic text-secondary font-normal lowercase"> &</span> Motion
+                <span className="font-serif italic text-secondary font-normal lowercase">
+                  {" "}
+                  &
+                </span>{" "}
+                Motion
               </>
             }
             description="High-impact brand systems, motion-led interfaces, and polished design systems for standout digital identities."
@@ -230,19 +233,34 @@ const SERVICES = [
     Icon: Palette,
     title: "Frontend Design",
     copy: "Strategic Figma layouts, bespoke typography scales, and CSS micro-interactions that communicate your brand values.",
-    items: ["Figma Design Systems", "Bespoke Typography", "Tailwind CSS Layouts", "Responsive Interfaces"],
+    items: [
+      "Figma Design Systems",
+      "Bespoke Typography",
+      "Tailwind CSS Layouts",
+      "Responsive Interfaces",
+    ],
   },
   {
     Icon: Code2,
     title: "Full-Stack Dev",
     copy: "High-performance React & Next.js apps, robust Node.js/Express APIs, Python/Django services, and clean relational databases.",
-    items: ["Next.js & React Apps", "REST & GraphQL APIs", "Relational Databases", "Performance Optimization"],
+    items: [
+      "Next.js & React Apps",
+      "REST & GraphQL APIs",
+      "Relational Databases",
+      "Performance Optimization",
+    ],
   },
   {
     Icon: ShoppingBag,
     title: "E-commerce",
     copy: "Shopify integration and custom storefront development designed for seamless checkout, speed, and elevated conversion rates.",
-    items: ["Shopify Development", "Subscription Engines", "Custom Storefronts", "Conversion Audits"],
+    items: [
+      "Shopify Development",
+      "Subscription Engines",
+      "Custom Storefronts",
+      "Conversion Audits",
+    ],
   },
   {
     Icon: Sparkles,
@@ -264,7 +282,7 @@ function Services() {
           duration: 1.1,
           ease: "power3.inOut",
           delay: 0.25,
-        }
+        },
       );
 
       // 2. 3D card flip entry on scroll
@@ -292,7 +310,10 @@ function Services() {
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
           — Capabilities
         </span>
-        <div className="services-hero-text overflow-hidden" style={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}>
+        <div
+          className="services-hero-text overflow-hidden"
+          style={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
+        >
           <RevealText
             text="What we do best."
             as="h1"
@@ -300,10 +321,14 @@ function Services() {
           />
         </div>
         <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-          Four core practices, one studio. We handle both design and development, ensuring your product is seamless from code to pixels.
+          Four core practices, one studio. We handle both design and development, ensuring your
+          product is seamless from code to pixels.
         </p>
 
-        <div className="services-grid-trigger mt-20 grid md:grid-cols-2 gap-6" style={{ perspective: "1000px" }}>
+        <div
+          className="services-grid-trigger mt-20 grid md:grid-cols-2 gap-6"
+          style={{ perspective: "1000px" }}
+        >
           {SERVICES.map(({ Icon, title, copy, items }, i) => (
             <div
               key={title}

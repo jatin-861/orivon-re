@@ -6,7 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import { Project } from "@/data/projects";
 import { SpotlightCard } from "./SpotlightCard";
 import { InteractiveGrid2D } from "./InteractiveGrid2D";
-import { cn } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,20 +20,8 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   const scrollRef = useRef<HTMLDivElement>(null);
   const bleedRef = useRef<HTMLDivElement>(null);
   const [counter, setCounter] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
-
     const container = containerRef.current;
     const scrollSection = scrollRef.current;
     if (!container || !scrollSection) return;
@@ -142,7 +129,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
     }, container);
 
     return () => ctx.revert();
-  }, [projects, isMobile]);
+  }, [projects]);
 
   // Premium glassmorphic brand backgrounds with high-contrast text color combinations
   const bgClasses = [
@@ -162,209 +149,6 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
     320, // Atelier (Pinkish)
     190, // Halo (Cyan)
   ];
-
-  if (isMobile) {
-    return (
-      <div className="relative py-20 transition-colors duration-700">
-        {/* 2D interactive background grid */}
-        <div className="absolute inset-0 opacity-15 pointer-events-none z-0">
-          <InteractiveGrid2D />
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 relative z-10 space-y-16">
-          {/* Intro Slide */}
-          <div className="max-w-3xl">
-            <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
-              Selected Work
-            </span>
-            <h2 className="font-display font-bold leading-[1.05] text-[clamp(2.2rem,6vw,4.5rem)] tracking-tight">
-              Real systems, built{" "}
-              <span className="text-secondary font-serif italic font-normal">and shipped.</span>
-            </h2>
-            <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
-              A multi-module AI platform, production billing automation, and more — each one solving a real problem for real users.
-            </p>
-          </div>
-
-          {/* Project Cards stacked vertically */}
-          <div className="space-y-12">
-            {projects.map((p, index) => {
-              const cardBg = bgClasses[index % bgClasses.length];
-              const glowHue = glowHues[index % glowHues.length];
-              return (
-                <div
-                  key={p.slug}
-                  className={cn(
-                    "w-full rounded-2xl p-6 sm:p-10 grid gap-8 items-center border border-border/10 shadow-elegant bg-transparent",
-                    cardBg
-                  )}
-                >
-                  {/* Left side: Case Study Metadata */}
-                  <div className="flex flex-col justify-between py-2">
-                    <div>
-                      <div className="flex gap-2 mb-4 font-mono text-xs opacity-75">
-                        <span className="border border-current/30 rounded-full px-3 py-1">
-                          {p.category}
-                        </span>
-                        <span className="border border-current/30 rounded-full px-3 py-1">
-                          {p.year}
-                        </span>
-                      </div>
-
-                      <h3 className="font-display text-2xl sm:text-4xl font-bold leading-tight mb-3">
-                        {p.title.split(" — ")[0]}
-                      </h3>
-                      <p className="text-sm sm:text-base opacity-80 leading-relaxed mb-6">
-                        {p.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1.5 mb-6">
-                        {p.services.map((s) => (
-                          <span
-                            key={s}
-                            className="bg-current/10 rounded px-2.5 py-1 text-xs font-mono font-medium"
-                          >
-                            {s}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link
-                      to="/work/$slug"
-                      params={{ slug: p.slug }}
-                      className="inline-flex items-center gap-2 group self-start border-b-2 border-current pb-1 text-sm font-bold tracking-wider uppercase transition-all"
-                    >
-                      Explore case <ArrowUpRight size={16} />
-                    </Link>
-                  </div>
-
-                  {/* Right side: Mockup */}
-                  <div className="h-56 sm:h-72 w-full flex items-center justify-center relative overflow-hidden rounded-xl">
-                    <SpotlightCard
-                      glowHue={glowHue}
-                      className="w-full h-full bg-black/10 border-white/10 p-0 flex flex-col justify-between overflow-hidden shadow-2xl relative"
-                    >
-                      <div className="p-4 h-full flex flex-col justify-between">
-                        {/* Window Controls */}
-                        <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
-                          </div>
-                          <span className="text-[9px] font-mono tracking-widest opacity-40">
-                            SARAL BANKER // {p.slug.toUpperCase()}
-                          </span>
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex-1 flex items-center justify-center py-4 relative">
-                          {p.image && (
-                            <img
-                              src={p.image}
-                              alt={p.title}
-                              className="w-full h-48 object-cover rounded-lg"
-                            />
-                          )}
-                          {p.slug === "lumen-finance" && (
-                            <div className="w-full max-w-[240px] space-y-3 text-left">
-                              <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between">
-                                <span className="text-[9px] opacity-60 font-mono">CAPITAL</span>
-                                <span className="text-xs font-bold font-mono">$842,912</span>
-                              </div>
-                              <div className="h-14 flex items-end justify-between gap-1">
-                                {[40, 25, 55, 30, 85, 45, 95, 60, 110, 75, 120].map((val, i) => (
-                                  <div
-                                    key={i}
-                                    className="w-full bg-gradient-to-t from-[var(--brand-pink)] to-white/40 rounded-t-sm"
-                                    style={{ height: `${(val / 120) * 100}%` }}
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          {p.slug === "noctis-music" && (
-                            <div className="w-full flex flex-col items-center justify-center space-y-2">
-                              <div className="relative w-16 h-16 rounded-full border-2 border-dashed border-white/20 flex items-center justify-center animate-[spin_20s_linear_infinite]">
-                                <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20" />
-                              </div>
-                              <div className="flex items-center gap-1 h-4">
-                                {[10, 18, 14, 24, 8, 16, 22, 12].map((h, i) => (
-                                  <div
-                                    key={i}
-                                    className="w-0.5 bg-white/70 rounded-full animate-pulse"
-                                    style={{ height: `${h * 0.6}px`, animationDelay: `${i * 0.15}s` }}
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          {p.slug === "orbit-aerospace" && (
-                            <div className="w-full max-w-[200px] space-y-3 text-left">
-                              <div className="flex items-center justify-between text-[9px] font-mono">
-                                <span className="opacity-50">ORBIT_TRACKER</span>
-                                <span className="text-[var(--brand-peach)]">L-04:12</span>
-                              </div>
-                              <div className="relative h-14 border border-white/10 rounded-lg overflow-hidden flex items-center justify-center">
-                                <div className="absolute w-24 h-24 rounded-full border border-white/20 -bottom-16 animate-[spin_60s_linear_infinite]" />
-                                <div className="w-2 h-2 rounded-full bg-[var(--brand-peach)] shadow-[0_0_10px_#ffb084]" />
-                              </div>
-                            </div>
-                          )}
-
-                          {p.slug === "verdant-eco" && (
-                            <div className="w-full max-w-[200px] space-y-2.5">
-                              <div className="text-center font-display text-lg font-bold opacity-80">
-                                98.4%
-                              </div>
-                              <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden p-0.5 border border-white/15">
-                                <div className="bg-white/80 h-full rounded-full" style={{ width: "98.4%" }} />
-                              </div>
-                            </div>
-                          )}
-
-                          {p.slug === "atelier-fashion" && (
-                            <div className="w-full max-w-[220px] grid grid-cols-2 gap-2">
-                              <div className="border border-white/10 rounded-md p-2 flex flex-col justify-between aspect-square bg-white/5">
-                                <span className="text-[8px] font-mono opacity-40">01/CAPE</span>
-                                <span className="font-display text-xs font-medium opacity-80 text-left">ATELIER</span>
-                              </div>
-                              <div className="border border-white/10 rounded-md p-2 flex flex-col justify-between aspect-square bg-white/5">
-                                <span className="text-[8px] font-mono opacity-40">02/SILK</span>
-                                <span className="font-display text-xs font-medium opacity-80 text-left">COUTURE</span>
-                              </div>
-                            </div>
-                          )}
-
-                          {p.slug === "halo-health" && (
-                            <div className="w-full flex flex-col items-center space-y-2">
-                              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center animate-ping">
-                                <div className="w-8 h-8 rounded-full bg-white/10" />
-                              </div>
-                              <span className="text-[9px] font-mono opacity-50">INHALE/EXHALE</span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Footer Row */}
-                        <div className="flex justify-between items-center text-[8px] font-mono opacity-40">
-                          <span>SARAL BANKER</span>
-                          <span>©2026</span>
-                        </div>
-                      </div>
-                    </SpotlightCard>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -411,8 +195,8 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             <span className="text-secondary font-serif italic font-normal">and shipped.</span>
           </h2>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            A multi-module AI platform, production billing automation, and more — each one
-            solving a real problem for real users.
+            A multi-module AI platform, production billing automation, and more — each one solving a
+            real problem for real users.
           </p>
           <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-foreground/50">
             <span>Scroll down or scroll wheel</span>

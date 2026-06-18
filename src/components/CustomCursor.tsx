@@ -215,7 +215,8 @@ export function CustomCursor() {
 
     const getMagneticElements = () => {
       const now = Date.now();
-      if (now - lastQueryTime > 5000) { // Throttled from 1000ms to 5000ms
+      if (now - lastQueryTime > 5000) {
+        // Throttled from 1000ms to 5000ms
         lastQueryTime = now;
         cachedMagneticElements = Array.from(
           document.querySelectorAll(

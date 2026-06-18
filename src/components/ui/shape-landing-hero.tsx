@@ -174,7 +174,6 @@ export function HeroGeometric({
           </motion.div>
         </div>
       </div>
-
     </div>
   );
 }
