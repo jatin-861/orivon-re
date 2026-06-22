@@ -83,7 +83,7 @@ function CaseStudy() {
           <span className="text-xs font-mono uppercase tracking-wider text-[var(--brand-pink)] mb-4 block">
             — {p.category} · {p.year}
           </span>
-          <h1 className="font-display text-5xl md:text-8xl font-bold leading-[0.9] tracking-tight">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-8xl font-bold leading-[0.9] tracking-tight">
             {p.title}
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">

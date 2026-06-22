@@ -36,6 +36,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         scrollTrigger: {
           trigger: container,
           pin: true,
+          pinType: "transform",
           scrub: 1.2,
           start: "top top",
           end: () => `+=${(scrollSection.scrollWidth - window.innerWidth) * 1.5}`,
@@ -288,7 +289,9 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                           <img
                             src={p.image}
                             alt={p.title}
-                            className="w-full h-64 md:h-80 object-cover rounded-xl"
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full aspect-[2.15/1] object-contain rounded-xl"
                           />
                         )}
                         {p.slug === "lumen-finance" && (

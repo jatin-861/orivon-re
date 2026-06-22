@@ -5,7 +5,7 @@ import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
 import { RevealText } from "@/components/RevealText";
 import { MagneticButton } from "@/components/MagneticButton";
 import { PulseBeams } from "@/components/PulseBeams";
-import { BookingCalendar } from "@/components/ui/booking-calendar";
+import { BookingCalendar, type BookedDate } from "@/components/ui/booking-calendar";
 
 const beams = [
   {
@@ -130,16 +130,56 @@ export const Route = createFileRoute("/contact")({
 });
 
 const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Something Else"];
+const CONTACT_EMAILS = ["saralbanker1@gmail.com", "jatinbasantani861@gmail.com"];
 
 function Contact() {
   const [sent, setSent] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
+  const [bookedDate, setBookedDate] = useState<BookedDate | null>(null);
+  const [dateError, setDateError] = useState(false);
+  const [mailtoUrl, setMailtoUrl] = useState("");
 
   const toggle = (s: string) =>
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!bookedDate) {
+      setDateError(true);
+      return;
+    }
+    setDateError(false);
+
+    const form = new FormData(e.currentTarget);
+    const name = (form.get("name") as string)?.trim() || "";
+    const email = (form.get("email") as string)?.trim() || "";
+    const company = (form.get("company") as string)?.trim() || "";
+    const message = (form.get("message") as string)?.trim() || "";
+
+    const subject = `New project inquiry from ${name || "website visitor"}`;
+    const bodyLines = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      company && `Company: ${company}`,
+      selected.length && `Reason: ${selected.join(", ")}`,
+      `Preferred date: ${bookedDate.month} ${bookedDate.day}, ${bookedDate.year}`,
+      "",
+      "Message:",
+      message || "(no message provided)",
+    ].filter(Boolean);
+
+    const url = `mailto:${CONTACT_EMAILS.join(",")}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    setMailtoUrl(url);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.rel = "noopener";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
     setSent(true);
   };
 
@@ -154,12 +194,12 @@ function Contact() {
             <RevealText
               text="Let's talk about"
               as="h1"
-              className="font-display text-5xl md:text-7xl font-bold leading-[0.9] block"
+              className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-[0.9] block"
             />
             <RevealText
               text="what you're building."
               as="h1"
-              className="font-display text-5xl md:text-7xl font-bold leading-[0.9] block text-[var(--brand-pink)]"
+              className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-[0.9] block text-[var(--brand-pink)]"
               delay={300}
             />
             <p className="mt-6 text-muted-foreground max-w-md">
@@ -199,10 +239,22 @@ function Contact() {
               <div className="mx-auto h-16 w-16 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center mb-6">
                 <Send className="text-primary" />
               </div>
-              <h2 className="font-display text-3xl font-bold mb-3">Message received.</h2>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">
+                Your email app is opening...
+              </h2>
               <p className="text-muted-foreground">
-                Thanks for reaching out. I'll be in touch within 48 hours.
+                Your message is pre-filled and ready — just hit send in your email app. I reply
+                within 48 hours.
               </p>
+              {mailtoUrl && (
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Nothing happened?{" "}
+                  <a href={mailtoUrl} className="text-primary underline">
+                    Click here to open your email app
+                  </a>
+                  .
+                </p>
+              )}
             </motion.div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-8">
@@ -249,6 +301,12 @@ function Contact() {
                 />
               </div>
 
+              {dateError && (
+                <p className="text-sm text-destructive">
+                  Pick a preferred date in the booking calendar (right side) before sending.
+                </p>
+              )}
+
               <MagneticButton
                 as="button"
                 type="submit"
@@ -260,9 +318,14 @@ function Contact() {
           )}
 
           <aside className="space-y-8">
-            <Info Icon={Mail} label="Email" value="saralbanker1@gmail.com" />
+            <Info Icon={Mail} label="Email" value={CONTACT_EMAILS} />
             <Info Icon={MapPin} label="Location" value="India" />
-            <BookingCalendar />
+            <BookingCalendar
+              onDateChange={(date) => {
+                setBookedDate(date);
+                if (date) setDateError(false);
+              }}
+            />
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Response time</h3>
               <p className="text-sm text-muted-foreground">
@@ -273,8 +336,8 @@ function Contact() {
               <h3 className="font-display text-lg font-bold mb-2">Open to</h3>
               <p className="text-sm text-muted-foreground">
                 Full-time roles, contract work, and freelance projects:{" "}
-                <a className="text-primary" href="mailto:saralbanker1@gmail.com">
-                  saralbanker1@gmail.com
+                <a className="text-primary" href={`mailto:${CONTACT_EMAILS.join(",")}`}>
+                  {CONTACT_EMAILS.join(", ")}
                 </a>
               </p>
             </div>
@@ -322,7 +385,16 @@ function Field({
   );
 }
 
-function Info({ Icon, label, value }: { Icon: typeof Mail; label: string; value: string }) {
+function Info({
+  Icon,
+  label,
+  value,
+}: {
+  Icon: typeof Mail;
+  label: string;
+  value: string | string[];
+}) {
+  const values = Array.isArray(value) ? value : [value];
   return (
     <div className="flex items-start gap-4">
       <div className="rounded-full glass p-3">
@@ -330,7 +402,11 @@ function Info({ Icon, label, value }: { Icon: typeof Mail; label: string; value:
       </div>
       <div>
         <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{label}</div>
-        <div className="font-display text-xl">{value}</div>
+        {values.map((v) => (
+          <div key={v} className="font-display text-xl">
+            {v}
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,5 +1,10 @@
-import { useEffect, useRef } from "react";
-import { DottedSurface } from "./ui/dotted-surface";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+
+// Pulls in three.js (~1MB) — deferred so it never blocks initial page load,
+// and skipped on mobile entirely (see isDesktop below) to save GPU/battery.
+const DottedSurface = lazy(() =>
+  import("./ui/dotted-surface").then((m) => ({ default: m.DottedSurface })),
+);
 
 /**
  * Lightweight, GPU-composited animated mesh gradient background.
@@ -8,10 +13,12 @@ import { DottedSurface } from "./ui/dotted-surface";
  */
 export function SiteBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     // Only track cursor on desktop/hoverable devices to minimize overhead
     if (window.innerWidth < 768) return;
+    setIsDesktop(true);
 
     const container = containerRef.current;
     if (!container) return;
@@ -38,8 +45,12 @@ export function SiteBackground() {
         } as React.CSSProperties
       }
     >
-      {/* 3D Global Dotted Surface Wave Background */}
-      <DottedSurface className="absolute inset-0 z-[1] pointer-events-none" />
+      {/* 3D Global Dotted Surface Wave Background — desktop only, deferred via Suspense */}
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <DottedSurface className="absolute inset-0 z-[1] pointer-events-none" />
+        </Suspense>
+      )}
 
       {/* Interactive cursor blob */}
       <div

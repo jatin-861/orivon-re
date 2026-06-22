@@ -1,8 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 import { RevealText } from "@/components/RevealText";
+import { SpotlightCard } from "@/components/SpotlightCard";
+import { BentoTilt } from "@/components/BentoTilt";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -48,6 +52,31 @@ const STEPS = [
     title: "Grow",
     copy: "Post-launch we keep iterating. Analytics, usability testing, and conversion audits to compound the digital gains.",
     color: "var(--brand-coral)",
+  },
+];
+
+const FACTS = [
+  { v: "2 weeks", l: "Typical time to a first working build" },
+  { v: "Direct", l: "Access to the engineers building it — no account managers" },
+  { v: "Weekly", l: "Live demos of real progress, not status decks" },
+];
+
+const FAQS = [
+  {
+    q: "How long does a project usually take?",
+    a: "Most engagements run 6–10 weeks from Discover to Ship, depending on scope. We'll give you a real estimate after the Define phase, once the brief is locked — not a guess on day one.",
+  },
+  {
+    q: "Who will I actually be talking to?",
+    a: "Saral and Jatin, directly — the same two people writing the code and designing the screens. No intermediaries, no account managers relaying messages back and forth.",
+  },
+  {
+    q: "What happens after launch?",
+    a: "Ship isn't the finish line. The Grow phase covers monitoring, bug fixes, and iteration based on real usage data — we stay close to anything we've shipped.",
+  },
+  {
+    q: "Can you join mid-project, or just from scratch?",
+    a: "Both. We've taken over half-built systems and shipped them to production, and started others from a blank repo. Discover adapts either way — we audit what exists before defining next steps.",
   },
 ];
 
@@ -105,16 +134,38 @@ function Process() {
 
   return (
     <div className="pt-40 pb-32 px-6 text-foreground transition-colors duration-500">
-      <div className="mx-auto max-w-5xl">
-        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">— Methodology</span>
+      <div className="mx-auto max-w-6xl">
+        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+          — Methodology
+        </span>
         <RevealText
-          text="How we work."
+          text="How we"
           as="h1"
-          className="font-display text-6xl md:text-9xl font-bold leading-[0.9]"
+          className="font-serif text-4xl sm:text-6xl md:text-9xl font-normal leading-[1.1] pb-1 block"
+        />
+        <RevealText
+          text="work."
+          as="h1"
+          className="font-serif text-4xl sm:text-6xl md:text-9xl font-normal leading-[1.1] pb-1 block text-[var(--brand-pink)] italic"
+          delay={150}
         />
         <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-          A clean, repeatable framework that makes ambitious, human-made digital projects feel calm.
+          A clean, repeatable framework that makes ambitious, human-made digital projects feel calm —
+          six phases, no surprises.
         </p>
+
+        {/* Quick facts strip */}
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl">
+          {FACTS.map((f) => (
+            <div key={f.l} className="border-l border-border pl-5">
+              <div className="font-serif text-3xl sm:text-4xl text-[var(--brand-pink)] leading-none">
+                {f.v}
+              </div>
+              <div className="mt-2 text-sm text-muted-foreground leading-snug">{f.l}</div>
+            </div>
+          ))}
+        </div>
+
         <div className="animated-divider mt-24" />
 
         {/* Steps container */}
@@ -137,32 +188,86 @@ function Process() {
                 className="absolute left-0 top-0 flex items-center justify-center h-12 w-12 md:h-24 md:w-24 rounded-xl bg-[var(--card)] border border-border/80 transition-all duration-300 z-10"
                 style={{ borderColor: s.color }}
               >
-                <span
-                  className="font-display text-lg md:text-3xl font-bold font-mono"
-                  style={{ color: s.color }}
-                >
+                <span className="text-lg md:text-3xl font-bold font-mono" style={{ color: s.color }}>
                   {s.n}
                 </span>
               </div>
 
               {/* Step description content */}
-              <div
-                data-step-text
-                className="opacity-50 transition-all duration-500 bg-[var(--card)] text-foreground p-8 rounded-2xl shadow-elegant border border-border"
-              >
-                <span className="text-xs text-[var(--brand-pink)] font-mono block mb-2">
-                  Phase 0{idx + 1}
-                </span>
-                <h2 className="font-display text-2xl md:text-4xl font-bold leading-tight mb-4 text-foreground">
-                  {s.title}
-                </h2>
-                <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
-                  {s.copy}
-                </p>
+              <div data-step-text className="opacity-50 transition-all duration-500">
+                <BentoTilt className="h-full w-full">
+                  <SpotlightCard className="p-8 bg-[var(--card)] border border-border shadow-elegant">
+                    <span className="text-xs text-[var(--brand-pink)] font-mono block mb-2 uppercase tracking-[0.2em]">
+                      Phase 0{idx + 1}
+                    </span>
+                    <h2 className="font-serif text-2xl md:text-4xl font-normal leading-tight mb-4 text-foreground">
+                      {s.title}
+                    </h2>
+                    <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
+                      {s.copy}
+                    </p>
+                  </SpotlightCard>
+                </BentoTilt>
               </div>
             </div>
           ))}
         </div>
+
+        <div className="animated-divider mt-24" />
+
+        {/* FAQ */}
+        <div className="mt-24 grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
+          <div>
+            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+              — Questions
+            </span>
+            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-tight">
+              Before you{" "}
+              <span className="text-[var(--brand-pink)] font-serif italic block">reach out.</span>
+            </h2>
+          </div>
+          <div className="divide-y divide-border">
+            {FAQS.map((f) => (
+              <details key={f.q} className="group py-6 first:pt-0">
+                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none">
+                  <h3 className="font-serif text-xl md:text-2xl font-normal text-foreground">
+                    {f.q}
+                  </h3>
+                  <span className="shrink-0 font-mono text-[var(--brand-pink)] text-xl transition-transform duration-300 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-muted-foreground leading-relaxed max-w-2xl">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        <div className="animated-divider mt-24" />
+
+        {/* Closing CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-24 glass rounded-2xl p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        >
+          <div>
+            <h3 className="font-serif text-3xl md:text-5xl font-normal leading-tight">
+              Ready for <span className="text-[var(--brand-pink)] italic">phase one?</span>
+            </h3>
+            <p className="text-muted-foreground mt-3 max-w-md">
+              Tell us about the project — we'll come back within 48 hours with next steps.
+            </p>
+          </div>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-4 font-semibold shadow-glow-cyan whitespace-nowrap shrink-0"
+          >
+            Get in touch <ArrowRight size={18} />
+          </Link>
+        </motion.div>
       </div>
     </div>
   );

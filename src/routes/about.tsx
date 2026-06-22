@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
@@ -241,18 +242,18 @@ function About() {
         <RevealText
           text="Two engineers,"
           as="h1"
-          className="font-serif text-5xl md:text-9xl font-normal leading-[1.1] pb-1 block"
+          className="font-serif text-4xl sm:text-6xl md:text-9xl font-normal leading-[1.1] pb-1 block"
         />
         <RevealText
           text="real systems."
           as="h1"
-          className="font-serif text-5xl md:text-9xl font-normal leading-[1.1] pb-1 block text-[var(--brand-pink)] italic"
+          className="font-serif text-4xl sm:text-6xl md:text-9xl font-normal leading-[1.1] pb-1 block text-[var(--brand-pink)] italic"
           delay={300}
         />
 
         <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
-            <p className="font-serif text-2xl md:text-3xl font-light italic leading-normal text-foreground/90">
+            <p className="font-serif text-2xl md:text-3xl font-normal leading-snug text-foreground">
               Saral Banker & Jatin Basantani — two engineers based in India who design, build, and
               ship complete systems, from database to deployment.
             </p>
@@ -573,6 +574,32 @@ function About() {
             </BentoTilt>
           ))}
         </div>
+
+        <div className="animated-divider mt-24" />
+
+        {/* Closing CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-24 glass rounded-2xl p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        >
+          <div>
+            <h3 className="font-serif text-3xl md:text-5xl font-normal leading-tight">
+              Like how we <span className="text-[var(--brand-pink)] italic">think?</span>
+            </h3>
+            <p className="text-muted-foreground mt-3 max-w-md">
+              Tell us what you're building — we'll come back within 48 hours with next steps.
+            </p>
+          </div>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-4 font-semibold shadow-glow-cyan whitespace-nowrap shrink-0"
+          >
+            Get in touch <ArrowRight size={18} />
+          </Link>
+        </motion.div>
       </div>
     </div>
   );

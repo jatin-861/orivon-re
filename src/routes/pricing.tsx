@@ -80,12 +80,12 @@ function PricingPage() {
         <RevealText
           text="Plans built for"
           as="h1"
-          className="font-display text-5xl md:text-8xl font-bold leading-[0.9] block"
+          className="font-display text-4xl sm:text-6xl md:text-8xl font-bold leading-[0.9] block"
         />
         <RevealText
           text="ambitious teams."
           as="h1"
-          className="font-display text-5xl md:text-8xl font-bold leading-[0.9] block text-[var(--brand-pink)]"
+          className="font-display text-4xl sm:text-6xl md:text-8xl font-bold leading-[0.9] block text-[var(--brand-pink)]"
           delay={300}
         />
         <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">

@@ -1,5 +1,6 @@
 import { createRouter, useRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import { PageSkeleton } from "./components/layout/PageSkeleton";
 
 function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
@@ -67,6 +68,11 @@ export const getRouter = () => {
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
+    defaultPendingComponent: PageSkeleton,
+    // Skip the skeleton for fast (cached/prefetched) transitions; only show it
+    // once a transition has genuinely been loading for a noticeable moment.
+    defaultPendingMs: 150,
+    defaultPendingMinMs: 300,
   });
 
   return router;

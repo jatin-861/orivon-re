@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
       "Notes System",
       "Document Processing Pipeline",
     ],
-    image: "/images/neurodashboard.png",
+    image: "/images/neurodashboard.webp",
   },
   {
     slug: "shade-ledger",
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
       "Replaced manual Excel billing and phone calls with automatic invoices, reminders, and penalty tracking — running live for 220 rental units, saving 40+ hours of manual work every month.",
     services: ["React", "Node.js", "react-pdf", "WhatsApp Business API"],
     color: "#8B5E3C",
-    image: "/images/shade-ledger.png",
+    image: "/images/shade-ledger.webp",
   },
   {
     slug: "smart-parking",
@@ -57,7 +57,7 @@ export const PROJECTS: Project[] = [
     services: ["React", "Node.js", "Express", "MongoDB"],
     color: "#D4845A",
     link: "https://github.com/saralbanker/smart-parking",
-    image: "/images/smart-parking.png",
+    image: "/images/smart-parking.webp",
   },
   {
     slug: "carbon-compass",
@@ -70,6 +70,6 @@ export const PROJECTS: Project[] = [
     services: ["React", "Node.js", "Express", "MongoDB"],
     color: "#6B8F5E",
     link: "https://github.com/saralbanker/carbon-compass",
-    image: "/images/carbon-compass.png",
+    image: "/images/carbon-compass.webp",
   },
 ];

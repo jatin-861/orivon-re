@@ -39,20 +39,24 @@ export function PageTransition({ children }: { children: ReactNode }) {
           setCurrentPath(location.pathname);
           setDisplayChildren(children);
 
-          // Recalculate Lenis dimensions and ScrollTrigger geometry for the new
-          // page now, while still hidden behind the curtain — not after it
-          // reopens, which would expose any mis-measured pinned sections.
-          lenis?.resize();
-          ScrollTrigger.refresh();
-
           // Animate curtain opening up
           const tlOut = gsap.timeline();
 
-          // Animate content scaling back up
+          // Animate content scaling back up. clearProps removes the inline transform
+          // once settled — otherwise it lingers (even at scale 1) and turns this
+          // element into the containing block for any position:fixed descendant
+          // (GSAP ScrollTrigger pins, Radix dialogs/tooltips), anchoring them to
+          // this box instead of the viewport.
           gsap.fromTo(
             contentRef.current,
             { scale: 0.97, opacity: 0.6 },
-            { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.55,
+              ease: "power3.out",
+              clearProps: "transform",
+            },
           );
 
           tlOut
@@ -126,6 +130,15 @@ export function PageTransition({ children }: { children: ReactNode }) {
       setDisplayChildren(children);
     }
   }, [location.pathname, children, currentPath]);
+
+  // Recalculate Lenis's scroll limit and ScrollTrigger's pin geometry only after
+  // the new page has actually committed to the DOM — doing it synchronously in
+  // the gsap onComplete above measures the *previous* route's layout, since
+  // React 18 batches the setDisplayChildren update instead of flushing it inline.
+  useEffect(() => {
+    lenis?.resize();
+    ScrollTrigger.refresh();
+  }, [displayChildren, lenis]);
 
   return (
     <>

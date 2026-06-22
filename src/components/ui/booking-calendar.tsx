@@ -7,7 +7,15 @@ import { cn } from "@/lib/utils";
 
 const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-export function BookingCalendar({ className }: { className?: string }) {
+export type BookedDate = { day: number; month: string; year: number };
+
+export function BookingCalendar({
+  className,
+  onDateChange,
+}: {
+  className?: string;
+  onDateChange?: (date: BookedDate | null) => void;
+}) {
   const today = new Date();
   const [view, setView] = useState({ year: today.getFullYear(), month: today.getMonth() });
   const [selected, setSelected] = useState<number | null>(null);
@@ -36,6 +44,12 @@ export function BookingCalendar({ className }: { className?: string }) {
     const y = view.year + Math.floor(m / 12);
     setView({ year: y, month: ((m % 12) + 12) % 12 });
     setSelected(null);
+    onDateChange?.(null);
+  };
+
+  const selectDay = (d: number) => {
+    setSelected(d);
+    onDateChange?.({ day: d, month: monthName, year: view.year });
   };
 
   return (
@@ -89,7 +103,7 @@ export function BookingCalendar({ className }: { className?: string }) {
               whileHover={!past ? { scale: 1.06 } : undefined}
               whileTap={!past ? { scale: 0.94 } : undefined}
               disabled={past}
-              onClick={() => setSelected(d)}
+              onClick={() => selectDay(d)}
               className={cn(
                 "aspect-square rounded-lg text-sm transition-all relative",
                 past && "text-muted-foreground/40 cursor-not-allowed",

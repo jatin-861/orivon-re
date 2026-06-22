@@ -8,6 +8,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Marquee } from "@/components/Marquee";
 import { ScrollStoryHorizontal } from "@/components/ScrollStoryHorizontal";
+import { LazyVideo } from "@/components/LazyVideo";
 import { PROJECTS } from "@/data/projects";
 
 import { CinematicHero } from "@/components/canvas/CinematicHero";
@@ -108,6 +109,7 @@ function StudioShowreel() {
         scrollTrigger: {
           trigger: containerRef.current,
           pin: true,
+          pinType: "transform",
           scrub: 1,
           start: "top top",
           end: () => `+=${scrollEl.scrollWidth - window.innerWidth}`,
@@ -195,15 +197,11 @@ function StudioShowreel() {
           >
             {/* Background Video */}
             <div className="absolute inset-0 z-0 overflow-hidden">
-              <video
+              <LazyVideo
                 src={item.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-[115%] h-full object-cover opacity-30 transition-opacity duration-700 group-hover:opacity-55 scale-105 group-hover:scale-100"
+                className="w-[115%] h-full object-cover opacity-80 transition-opacity duration-700 group-hover:opacity-100 scale-105 group-hover:scale-100"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-pink)] via-transparent to-black/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             </div>
 
             {/* Video Label */}

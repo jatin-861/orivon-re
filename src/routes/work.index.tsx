@@ -103,7 +103,9 @@ function WorkPage() {
                         <img
                           src={p.image}
                           alt={p.title}
-                          className="absolute inset-0 w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 w-full h-full object-contain p-4"
                         />
                       ) : (
                         <div className="relative z-10 my-auto py-6 flex items-center justify-center">

@@ -317,7 +317,7 @@ function Services() {
           <RevealText
             text="What we do best."
             as="h1"
-            className="font-display text-6xl md:text-9xl font-bold leading-[0.9]"
+            className="font-display text-4xl sm:text-6xl md:text-9xl font-bold leading-[0.9]"
           />
         </div>
         <p className="mt-8 max-w-xl text-lg text-muted-foreground">
