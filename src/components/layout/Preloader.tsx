@@ -2,18 +2,10 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Preloader() {
-  const [shouldRender, setShouldRender] = useState(() => {
-    if (typeof window !== "undefined") {
-      return !sessionStorage.getItem("portfolio-preloader-seen");
-    }
-    return true;
-  });
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    if (!shouldRender) return;
-
     // Lock body scroll during load
     document.body.style.overflow = "hidden";
 
@@ -32,7 +24,6 @@ export function Preloader() {
         clearInterval(timer);
         setTimeout(() => {
           setIsComplete(true);
-          sessionStorage.setItem("portfolio-preloader-seen", "true");
           // Unlock body scroll
           document.body.style.overflow = "";
         }, 600); // Hold at 100% for a brief moment
@@ -43,9 +34,7 @@ export function Preloader() {
       clearInterval(timer);
       document.body.style.overflow = "";
     };
-  }, [shouldRender]);
-
-  if (!shouldRender) return null;
+  }, []);
 
   const brandWords = "ORVION.CO".split("");
 

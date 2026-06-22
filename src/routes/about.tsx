@@ -251,47 +251,21 @@ function About() {
           delay={300}
         />
 
-        <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
-          <div className="space-y-8">
-            <p className="font-serif text-2xl md:text-3xl font-normal leading-snug text-foreground">
-              Saral Banker & Jatin Basantani — two engineers based in India who design, build, and
-              ship complete systems, from database to deployment.
+        <div className="mt-24 max-w-3xl space-y-8">
+          <p className="font-serif text-2xl md:text-3xl font-normal leading-snug text-foreground">
+            Saral Banker & Jatin Basantani — two engineers based in India who design, build, and
+            ship complete systems, from database to deployment.
+          </p>
+          <div className="text-base text-muted-foreground space-y-6 leading-relaxed font-sans pt-4 border-t border-border/60">
+            <p>
+              We believe a project isn't done when the demo works — it's done when it's running in
+              production, for real users, every day. That's the bar we hold our own work to.
             </p>
-            <div className="text-base text-muted-foreground space-y-6 leading-relaxed font-sans pt-4 border-t border-border/60">
-              <p>
-                We believe a project isn't done when the demo works — it's done when it's running in
-                production, for real users, every day. That's the bar we hold our own work to.
-              </p>
-              <p>
-                Between us we cover the full stack — backend architecture, APIs, AI integrations,
-                and the frontends that sit on top of them.
-              </p>
-            </div>
+            <p>
+              Between us we cover the full stack — backend architecture, APIs, AI integrations,
+              and the frontends that sit on top of them.
+            </p>
           </div>
-
-          {/* Styled Editorial Card instead of Stock Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            data-cursor-text="CREDO"
-            className="relative aspect-[4/3] rounded-xl bg-[var(--brand-teal)] text-white p-10 flex flex-col justify-between border border-border"
-          >
-            <div className="relative z-10">
-              <span className="text-[10px] font-mono opacity-60 uppercase tracking-widest block mb-4">
-                CORE BELIEF // 01
-              </span>
-              <h3 className="font-serif text-3xl font-normal leading-tight">
-                "If it doesn't run in{" "}
-                <em className="italic text-[var(--brand-peach)]">production</em>, it doesn't count."
-              </h3>
-            </div>
-            <div className="relative z-10 flex justify-between items-center text-[10px] font-mono opacity-60">
-              <span>SARAL BANKER & JATIN BASANTANI</span>
-              <span>EST. 2023</span>
-            </div>
-          </motion.div>
         </div>
         <div className="animated-divider mt-24" />
 

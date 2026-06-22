@@ -22,16 +22,14 @@ export default defineConfig({
     dedupe: ["react", "react-dom", "@tanstack/react-router"],
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "gsap", "lenis", "framer-motion", "animejs"],
+    include: ["react", "react-dom", "gsap", "lenis", "framer-motion"],
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ["three", "@react-three/fiber", "@react-three/drei"],
           gsap: ["gsap"],
           framer: ["framer-motion"],
-          anime: ["animejs"],
         },
       },
     },

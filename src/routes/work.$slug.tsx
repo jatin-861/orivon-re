@@ -98,6 +98,26 @@ function CaseStudy() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className={`mt-16 relative overflow-hidden rounded-xl border border-border aspect-[16/8] p-12 flex flex-col justify-between shadow-elegant ${colors.bg} ${colors.text}`}
         >
+          {p.image && (
+            <div
+              className="hidden sm:block absolute right-[5%] top-1/2 z-0 w-[40%] md:w-[36%]"
+              style={{
+                transform: "translateY(-50%) perspective(1400px) rotateX(6deg) rotateY(-10deg)",
+              }}
+            >
+              <div
+                className="absolute -inset-8 rounded-[2rem] bg-black/25 blur-3xl"
+                aria-hidden="true"
+              />
+              <img
+                src={p.image}
+                alt={p.title}
+                loading="lazy"
+                decoding="async"
+                className="relative w-full h-auto rounded-lg border border-white/20 shadow-2xl"
+              />
+            </div>
+          )}
           <div className="relative z-10">
             <span className="text-xs font-mono opacity-80 uppercase tracking-widest block mb-4">
               CASE STUDY // {colors.details}

@@ -126,13 +126,20 @@ export function BookingCalendar({
         <a
           href={
             selected
-              ? `mailto:saralbanker1@gmail.com?subject=${encodeURIComponent(
+              ? // Gmail web compose so booking works in any browser without a
+                // desktop mail client (a bare mailto: silently does nothing when
+                // no mail app is registered).
+                `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                  "saralbanker1@gmail.com",
+                )}&su=${encodeURIComponent(
                   `30 min intro call — ${monthName} ${selected}, ${view.year}`,
                 )}&body=${encodeURIComponent(
                   `Hi, I'd like to book a 30 min intro call on ${monthName} ${selected}, ${view.year}. Let me know a time that works.`,
                 )}`
               : undefined
           }
+          target="_blank"
+          rel="noopener noreferrer"
           aria-disabled={!selected}
           className={cn(
             "rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 ease-out",

@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
-import { animate } from "animejs";
 import { MagneticButton } from "@/components/MagneticButton";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Marquee } from "@/components/Marquee";
@@ -280,7 +279,6 @@ function ScrollingTicker() {
 
 function StudioManifesto() {
   const textRef = useRef<HTMLDivElement>(null);
-  const underlineRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -325,25 +323,6 @@ function StudioManifesto() {
           },
         );
       });
-
-      // 3. Draw underline under last paragraph
-      const underline = underlineRef.current;
-      if (underline) {
-        gsap.fromTo(
-          underline,
-          { width: "0%" },
-          {
-            width: "100%",
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: underline,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          },
-        );
-      }
     }, textRef);
     return () => ctx.revert();
   }, []);
@@ -381,28 +360,6 @@ function StudioManifesto() {
 
           <div data-para-block data-para-speed="-0.4">
             <TextRevealByWord text="Real systems run for real people, every day — Shade Ledger has billed 220 rental units, automatically, every month, for over a year." />
-          </div>
-          <div className="h-px bg-border/40 w-full origin-left scale-x-0" data-hr-line />
-
-          <div data-para-block data-para-speed="0.3" className="pt-4">
-            <p className="text-[var(--brand-pink)] font-serif italic font-medium leading-tight">
-              <span className="relative inline-block pb-3">
-                <span className="reveal-word inline-block mr-[0.25em]">If</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">it</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">doesn't</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">run</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">in</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">production,</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">it</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">doesn't</span>{" "}
-                <span className="reveal-word inline-block mr-[0.25em]">count.</span>
-                <span
-                  ref={underlineRef}
-                  className="absolute left-0 bottom-0 h-1.5 bg-secondary origin-left"
-                  style={{ width: "0%" }}
-                />
-              </span>
-            </p>
           </div>
         </div>
       </div>
@@ -469,13 +426,12 @@ function StatCounter({ value }: StatCounterProps) {
       ([entry]) => {
         if (entry.isIntersecting) {
           const obj = { val: 0 };
-          animate(obj, {
+          gsap.to(obj, {
             val: numericPart,
-            round: 1,
-            duration: 2200,
-            ease: "easeOutElastic(1, 0.65)",
+            duration: 2.2,
+            ease: "elastic.out(1, 0.65)",
             onUpdate: () => {
-              setDisplayValue(Math.floor(obj.val));
+              setDisplayValue(Math.round(obj.val));
             },
           });
           observer.unobserve(el);

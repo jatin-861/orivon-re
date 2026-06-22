@@ -6,6 +6,13 @@ import { RevealText } from "@/components/RevealText";
 import { MagneticButton } from "@/components/MagneticButton";
 import { PulseBeams } from "@/components/PulseBeams";
 import { BookingCalendar, type BookedDate } from "@/components/ui/booking-calendar";
+import {
+  buildMailUrls,
+  openCompose,
+  pickCompose,
+  type ComposeChoice,
+  type MailUrls,
+} from "@/lib/mail";
 
 const beams = [
   {
@@ -137,7 +144,10 @@ function Contact() {
   const [selected, setSelected] = useState<string[]>([]);
   const [bookedDate, setBookedDate] = useState<BookedDate | null>(null);
   const [dateError, setDateError] = useState(false);
-  const [mailtoUrl, setMailtoUrl] = useState("");
+  const [mailUrls, setMailUrls] = useState<MailUrls | null>(null);
+  const [choice, setChoice] = useState<ComposeChoice | null>(null);
+  const [plainText, setPlainText] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const toggle = (s: string) =>
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
@@ -158,7 +168,7 @@ function Contact() {
     const message = (form.get("message") as string)?.trim() || "";
 
     const subject = `New project inquiry from ${name || "website visitor"}`;
-    const bodyLines = [
+    const body = [
       `Name: ${name}`,
       `Email: ${email}`,
       company && `Company: ${company}`,
@@ -167,20 +177,52 @@ function Contact() {
       "",
       "Message:",
       message || "(no message provided)",
-    ].filter(Boolean);
+    ]
+      .filter(Boolean)
+      .join("\n");
 
-    const url = `mailto:${CONTACT_EMAILS.join(",")}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-    setMailtoUrl(url);
+    const urls = buildMailUrls({ to: CONTACT_EMAILS, subject, body });
+    // Detect the visitor's provider from the address they entered and route to
+    // the matching webmail (Gmail/Outlook/Yahoo), or their desktop mail app via
+    // mailto: for anything else.
+    const picked = pickCompose(email, urls);
 
-    const link = document.createElement("a");
-    link.href = url;
-    link.rel = "noopener";
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    setMailUrls(urls);
+    setChoice(picked);
+    setPlainText(`To: ${CONTACT_EMAILS.join(", ")}\nSubject: ${subject}\n\n${body}`);
+    setCopied(false);
+
+    // Open the chosen compose target right away. Fired synchronously inside the
+    // submit gesture so the browser treats it as user-initiated (not a blocked
+    // popup). The success panel offers every other provider + a copy fallback.
+    openCompose(picked);
 
     setSent(true);
+  };
+
+  const copyMessage = async () => {
+    try {
+      await navigator.clipboard.writeText(plainText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API unavailable (older browser / insecure context) — fall
+      // back to a temporary textarea + execCommand.
+      const ta = document.createElement("textarea");
+      ta.value = plainText;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        /* nothing more we can do */
+      }
+      document.body.removeChild(ta);
+    }
   };
 
   return (
@@ -234,27 +276,76 @@ function Contact() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="glass rounded-3xl p-12 text-center"
+              className="glass rounded-3xl p-8 sm:p-10 text-center"
             >
               <div className="mx-auto h-16 w-16 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center mb-6">
                 <Send className="text-primary" />
               </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">
-                Your email app is opening...
+                Your message is ready
               </h2>
               <p className="text-muted-foreground">
-                Your message is pre-filled and ready — just hit send in your email app. I reply
-                within 48 hours.
+                {choice?.webmail
+                  ? `We opened a pre-filled email in ${choice.label} — just hit send there. Use a different app? Pick one below. We reply within 48 hours.`
+                  : "We opened your email app with everything pre-filled — just hit send. Nothing opened? Pick an option below. We reply within 48 hours."}
               </p>
-              {mailtoUrl && (
-                <p className="mt-4 text-sm text-muted-foreground">
-                  Nothing happened?{" "}
-                  <a href={mailtoUrl} className="text-primary underline">
-                    Click here to open your email app
-                  </a>
-                  .
-                </p>
-              )}
+
+              <div className="mt-7 flex flex-col gap-3">
+                {/* Primary: the provider we detected from the visitor's address */}
+                <a
+                  href={choice?.url}
+                  target={choice?.webmail ? "_blank" : undefined}
+                  rel={choice?.webmail ? "noopener noreferrer" : undefined}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 font-semibold shadow-glow-cyan transition-transform hover:scale-[1.02]"
+                >
+                  Open in {choice?.label ?? "email"} <ArrowRight size={18} />
+                </a>
+
+                {/* Every other provider, so anyone can pick their own */}
+                {mailUrls && (
+                  <>
+                    <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
+                      Use a different app
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {choice?.provider !== "gmail" && (
+                        <ProviderChip href={mailUrls.gmail} webmail>
+                          Gmail
+                        </ProviderChip>
+                      )}
+                      {choice?.provider !== "outlook" && (
+                        <ProviderChip href={mailUrls.outlook} webmail>
+                          Outlook
+                        </ProviderChip>
+                      )}
+                      {choice?.provider !== "yahoo" && (
+                        <ProviderChip href={mailUrls.yahoo} webmail>
+                          Yahoo
+                        </ProviderChip>
+                      )}
+                      {choice?.provider !== "other" && (
+                        <ProviderChip href={mailUrls.mailto}>Email app</ProviderChip>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                <button
+                  type="button"
+                  onClick={copyMessage}
+                  className="mt-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {copied ? "Copied to clipboard ✓" : "Copy the message instead"}
+                </button>
+              </div>
+
+              <p className="mt-6 text-sm text-muted-foreground">
+                Or email us directly at{" "}
+                <a href={mailUrls?.mailto} className="text-primary underline break-words">
+                  {CONTACT_EMAILS.join(", ")}
+                </a>
+                .
+              </p>
             </motion.div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-8">
@@ -356,6 +447,27 @@ const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: str
     {children}
   </label>
 );
+
+function ProviderChip({
+  href,
+  webmail,
+  children,
+}: {
+  href: string;
+  webmail?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target={webmail ? "_blank" : undefined}
+      rel={webmail ? "noopener noreferrer" : undefined}
+      className="rounded-full border border-border glass px-4 py-2 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary"
+    >
+      {children}
+    </a>
+  );
+}
 
 function Field({
   label,

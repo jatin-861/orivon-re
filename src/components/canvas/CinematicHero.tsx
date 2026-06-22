@@ -131,9 +131,8 @@ export const CinematicHero = () => {
     isInViewRef.current = isInView;
   }, [isInView]);
 
-  const hasSeenPreloader =
-    typeof window !== "undefined" && sessionStorage.getItem("portfolio-preloader-seen");
-  const delayBase = hasSeenPreloader ? 0.2 : 2.5;
+  // Preloader always plays in full now, so the hero entrance always waits for it.
+  const delayBase = 2.5;
 
   useEffect(() => {
     // Entry elements reveal animations
