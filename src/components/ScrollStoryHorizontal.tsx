@@ -20,6 +20,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   const scrollRef = useRef<HTMLDivElement>(null);
   const bleedRef = useRef<HTMLDivElement>(null);
   const [counter, setCounter] = useState("");
+  const [onIntro, setOnIntro] = useState(true);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -45,6 +46,12 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       }, 150);
     };
 
+    // Total slide count (intro + one per project) — each slide is exactly one
+    // viewport wide, so progress 0..1 across the pinned scroll divides evenly
+    // into this many stops regardless of the 1.5x pacing multiplier below
+    // (it uniformly stretches the *scroll distance per stop*, not the stops).
+    const slideCount = projects.length + 1;
+
     const ctx = gsap.context(() => {
       // 1. Horizontal Scroll Animation
       const horizontalTween = gsap.to(scrollSection, {
@@ -59,6 +66,16 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           end: () => `+=${(scrollSection.scrollWidth - window.innerWidth) * 1.5}`,
           invalidateOnRefresh: true,
           onUpdate: onScrollVelocity,
+          // Without this, nothing ever rounds the scroll position to a slide
+          // boundary — scrubbing can come to rest anywhere, which is exactly
+          // the "always two half-cards, never one full card" bug. Snap to the
+          // nearest slide once the user stops scrolling/lifts their finger.
+          snap: {
+            snapTo: 1 / (slideCount - 1),
+            duration: { min: 0.2, max: 0.5 },
+            ease: "power1.inOut",
+            inertia: false,
+          },
         },
       });
 
@@ -125,8 +142,10 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
               // Slide Counter logic
               if (i > 0) {
                 setCounter(`0${i} / 0${projects.length}`);
+                setOnIntro(false);
               } else {
                 setCounter("");
+                setOnIntro(true);
               }
             }
           },
@@ -201,13 +220,17 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         className="absolute inset-0 pointer-events-none transition-all duration-700 mix-blend-multiply z-[1]"
       />
 
-      {/* Slide Navigation & Info indicator */}
-      <div className="absolute top-28 left-6 md:left-12 z-20 flex items-center gap-3">
-        <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-        <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-mono">
-          Selected Work
-        </span>
-      </div>
+      {/* Slide Navigation & Info indicator — hidden on the intro slide since it
+          already shows its own "Selected Work" label in-flow; leaving this on
+          top of it there caused the heading text to render through/behind it. */}
+      {!onIntro && (
+        <div className="absolute top-28 left-6 md:left-12 z-20 flex items-center gap-3">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-mono">
+            Selected Work
+          </span>
+        </div>
+      )}
 
       {/* Floating Awwwards-style large active counter */}
       {counter && (
