@@ -17,8 +17,9 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const SEPARATION = 28;
+    const SEPARATION = 34;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const FRAME_INTERVAL = 1000 / 30; // cap to 30fps — ambient effect doesn't need 60
 
     let width = 0;
     let height = 0;
@@ -41,35 +42,48 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
     let animId = 0;
     let isPageFocused = true;
     let isScrolledDeep = false;
+    let isScrolling = false;
+    let scrollIdleTimeout = 0;
     let time = 0;
+    let lastDraw = 0;
 
-    const tick = () => {
-      if (isPageFocused && !isScrolledDeep) {
-        time += 0.012;
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = "#C75B3A";
+    const tick = (now: number) => {
+      animId = requestAnimationFrame(tick);
 
-        for (let ix = 0; ix < cols; ix++) {
-          for (let iy = 0; iy < rows; iy++) {
-            const x = ix * SEPARATION;
-            const baseY = iy * SEPARATION;
-            const wave =
-              Math.sin(x * 0.012 + time * 0.8) * 6 + Math.cos(baseY * 0.018 + time * 0.6) * 5;
-            const y = baseY + wave;
+      // Freeze the wave while the user is actively scrolling so the per-frame
+      // canvas work doesn't compete with Lenis for the main thread (the #1 cause
+      // of scroll stutter here). Also skip when off-screen / backgrounded.
+      if (!isPageFocused || isScrolledDeep || isScrolling) return;
+      if (now - lastDraw < FRAME_INTERVAL) return;
+      lastDraw = now;
 
-            ctx.globalAlpha = 0.16 + 0.06 * Math.sin(x * 0.01 + baseY * 0.01 + time);
-            ctx.beginPath();
-            ctx.arc(x, y, 1.4, 0, Math.PI * 2);
-            ctx.fill();
-          }
+      time += 0.012 * (1000 / 30 / FRAME_INTERVAL); // keep motion speed frame-rate independent
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#C75B3A";
+
+      for (let ix = 0; ix < cols; ix++) {
+        for (let iy = 0; iy < rows; iy++) {
+          const x = ix * SEPARATION;
+          const baseY = iy * SEPARATION;
+          const wave =
+            Math.sin(x * 0.012 + time * 0.8) * 6 + Math.cos(baseY * 0.018 + time * 0.6) * 5;
+          const y = baseY + wave;
+
+          ctx.globalAlpha = 0.16 + 0.06 * Math.sin(x * 0.01 + baseY * 0.01 + time);
+          ctx.beginPath();
+          ctx.arc(x, y, 1.4, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
-
-      animId = requestAnimationFrame(tick);
     };
 
     const handleScroll = () => {
       isScrolledDeep = window.scrollY > window.innerHeight * 1.2;
+      isScrolling = true;
+      clearTimeout(scrollIdleTimeout);
+      scrollIdleTimeout = window.setTimeout(() => {
+        isScrolling = false;
+      }, 140);
     };
     const handleFocus = () => {
       isPageFocused = true;
@@ -93,11 +107,12 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
     };
     window.addEventListener("resize", handleResize);
 
-    tick();
+    animId = requestAnimationFrame(tick);
 
     return () => {
       cancelAnimationFrame(animId);
       clearTimeout(resizeTimeout);
+      clearTimeout(scrollIdleTimeout);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("focus", handleFocus);
       window.removeEventListener("blur", handleBlur);

@@ -54,10 +54,7 @@ export function BookingCalendar({
 
   return (
     <div
-      className={cn(
-        "relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-elegant",
-        className,
-      )}
+      className={cn("relative overflow-hidden rounded-2xl glass p-6 shadow-elegant", className)}
     >
       <div className="relative flex items-center justify-between mb-5">
         <div>

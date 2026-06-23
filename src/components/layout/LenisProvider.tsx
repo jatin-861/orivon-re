@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, createContext, useContext } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,7 +19,12 @@ interface LenisProviderProps {
 }
 
 export function LenisProvider({ children }: LenisProviderProps) {
-  const lenisRef = useRef<Lenis | null>(null);
+  // Hold the instance in state (not a ref) so the context value actually updates
+  // once Lenis is constructed — consumers like PageTransition rely on useLenis()
+  // returning the live instance to call scrollTo()/resize(). With a ref the value
+  // stayed null forever, so Lenis never recomputed its scroll limit after a route
+  // change and scrolling could feel stuck/desynced.
+  const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
     // Respect prefers-reduced-motion: fall back to native scroll instead of smoothed momentum
@@ -36,7 +41,7 @@ export function LenisProvider({ children }: LenisProviderProps) {
       autoRaf: false, // Prevent double-RAF syncing
     });
 
-    lenisRef.current = lenis;
+    setLenis(lenis);
 
     // Mobile browsers fire a resize event every time the address bar collapses/expands
     // mid-scroll. ScrollTrigger would otherwise treat that as a real viewport change and
@@ -69,9 +74,9 @@ export function LenisProvider({ children }: LenisProviderProps) {
       ScrollTrigger.removeEventListener("refresh", onRefresh);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
-      lenisRef.current = null;
+      setLenis(null);
     };
   }, []);
 
-  return <LenisContext.Provider value={lenisRef.current}>{children}</LenisContext.Provider>;
+  return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

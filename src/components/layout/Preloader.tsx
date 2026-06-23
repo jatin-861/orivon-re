@@ -51,8 +51,8 @@ export function Preloader() {
         >
           {/* Top text */}
           <div className="flex justify-between items-center text-xs font-mono tracking-widest text-muted-foreground uppercase opacity-60">
-            <span>ORVION.CO // PRODUCT ENGINEERS</span>
-            <span>STG // 2026</span>
+            <span>Orvion.co</span>
+            <span>Product Engineers</span>
           </div>
 
           {/* Centered Logo Lettering */}
@@ -98,7 +98,7 @@ export function Preloader() {
           >
             <div className="flex justify-between items-end">
               <span className="text-[10px] font-mono tracking-widest text-muted-foreground opacity-50 uppercase">
-                Initializing immersive engine
+                Loading
               </span>
               <span className="font-mono text-4xl md:text-6xl font-bold text-[var(--foreground)]/90">
                 {progress.toString().padStart(3, "0")}

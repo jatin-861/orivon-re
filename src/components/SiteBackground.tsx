@@ -52,13 +52,12 @@ export function SiteBackground() {
         </Suspense>
       )}
 
-      {/* Interactive cursor blob */}
+      {/* Interactive cursor blob — positioned via transform (GPU-composited) instead
+          of left/top so moving the mouse doesn't repaint this huge blurred layer. */}
       <div
-        className="absolute w-[45vw] h-[45vw] rounded-full bg-[var(--brand-pink)] filter blur-[150px] opacity-15 z-0"
+        className="absolute left-0 top-0 w-[45vw] h-[45vw] rounded-full bg-[var(--brand-pink)] filter blur-[150px] opacity-15 z-0"
         style={{
-          left: "var(--mouse-x)",
-          top: "var(--mouse-y)",
-          transform: "translate3d(-50%, -50%, 0)",
+          transform: "translate3d(calc(var(--mouse-x) - 50%), calc(var(--mouse-y) - 50%), 0)",
           transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
           willChange: "transform",
         }}

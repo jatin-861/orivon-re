@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as LoginRouteImport } from './routes/login'
@@ -23,11 +22,6 @@ import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
   path: '/work',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProcessRoute = ProcessRouteImport.update({
@@ -78,7 +72,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRoute
   '/work': typeof WorkRouteWithChildren
   '/work/$slug': typeof WorkSlugRoute
   '/work/': typeof WorkIndexRoute
@@ -90,7 +83,6 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRoute
   '/work/$slug': typeof WorkSlugRoute
   '/work': typeof WorkIndexRoute
 }
@@ -102,7 +94,6 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
-  '/services': typeof ServicesRoute
   '/work': typeof WorkRouteWithChildren
   '/work/$slug': typeof WorkSlugRoute
   '/work/': typeof WorkIndexRoute
@@ -116,7 +107,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/pricing'
     | '/process'
-    | '/services'
     | '/work'
     | '/work/$slug'
     | '/work/'
@@ -128,7 +118,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/pricing'
     | '/process'
-    | '/services'
     | '/work/$slug'
     | '/work'
   id:
@@ -139,7 +128,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/pricing'
     | '/process'
-    | '/services'
     | '/work'
     | '/work/$slug'
     | '/work/'
@@ -152,7 +140,6 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
-  ServicesRoute: typeof ServicesRoute
   WorkRoute: typeof WorkRouteWithChildren
 }
 
@@ -163,13 +150,6 @@ declare module '@tanstack/react-router' {
       path: '/work'
       fullPath: '/work'
       preLoaderRoute: typeof WorkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/process': {
@@ -250,7 +230,6 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
-  ServicesRoute: ServicesRoute,
   WorkRoute: WorkRouteWithChildren,
 }
 export const routeTree = rootRouteImport

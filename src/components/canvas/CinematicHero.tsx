@@ -170,7 +170,7 @@ export const CinematicHero = () => {
 
       // Draw the belief statement, dynamically scaled to fit width, across two lines
       const isMobile = cssWidth < 768;
-      const lines = ["TWO ENGINEERS,", "REAL SYSTEMS."];
+      const lines = ["USEFUL OVER", "IMPRESSIVE"];
       let fontSize = Math.min(cssWidth * (isMobile ? 0.21 : 0.125), 190);
       tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
       const maxWidth = cssWidth * 0.94;
@@ -328,14 +328,14 @@ export const CinematicHero = () => {
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
       {/* Real DOM heading — canvas text is invisible to crawlers */}
       <h1 className="sr-only">
-        Orvion.co — Product Engineers. Two engineers, real systems: we build software that solves
-        real problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
+        Orvion.co — Product Engineers. Useful over impressive: we build software that solves real
+        problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
         multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units.
       </h1>
 
       {/* Top identity bar */}
       <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
-        <div>Orvion.co — Product Engineers // India</div>
+        <div>Orvion.co — Product Engineers, India</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
           Open to new projects

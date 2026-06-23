@@ -28,6 +28,23 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
 
     const scrollAmount = scrollSection.scrollWidth - window.innerWidth;
 
+    // backdrop-filter is the single most expensive thing to recomposite every frame —
+    // an Awwwards-style trick (locomotive-scroll, etc. all do this) is to drop it entirely
+    // while actively scrolling fast and only pay for it once motion settles, since nobody
+    // can appreciate the frosted-glass detail mid-scroll anyway. .no-blur-scrub (styles.css)
+    // forces backdrop-filter: none on this section's glass surfaces while it's set.
+    let blurResumeTimeout: number;
+    const FAST_SCROLL_PX_PER_SEC = 900;
+    const onScrollVelocity = (self: { getVelocity: () => number }) => {
+      if (Math.abs(self.getVelocity()) > FAST_SCROLL_PX_PER_SEC) {
+        container.classList.add("no-blur-scrub");
+      }
+      clearTimeout(blurResumeTimeout);
+      blurResumeTimeout = window.setTimeout(() => {
+        container.classList.remove("no-blur-scrub");
+      }, 150);
+    };
+
     const ctx = gsap.context(() => {
       // 1. Horizontal Scroll Animation
       const horizontalTween = gsap.to(scrollSection, {
@@ -41,32 +58,40 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           start: "top top",
           end: () => `+=${(scrollSection.scrollWidth - window.innerWidth) * 1.5}`,
           invalidateOnRefresh: true,
+          onUpdate: onScrollVelocity,
         },
       });
 
-      // 2. Card Skew based on Scroll Velocity
-      const skewProxy = { skew: 0 };
-      const skewSetter = gsap.quickSetter("[data-skew-card]", "skewX", "deg");
-      const clamp = gsap.utils.clamp(-6, 6);
+      // 2. Card Skew based on Scroll Velocity — desktop only. On touch, scroll
+      // velocity from native momentum is erratic and makes the cards wobble/jitter,
+      // which reads as the section "vibrating" on phones.
+      const isFinePointer =
+        typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
 
-      ScrollTrigger.create({
-        trigger: container,
-        start: "top top",
-        end: () => `+=${scrollAmount * 1.5}`,
-        onUpdate: (self) => {
-          const skew = clamp(self.getVelocity() / 350);
-          if (Math.abs(skew) > Math.abs(skewProxy.skew)) {
-            skewProxy.skew = skew;
-            gsap.to(skewProxy, {
-              skew: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              overwrite: "auto",
-              onUpdate: () => skewSetter(skewProxy.skew),
-            });
-          }
-        },
-      });
+      if (isFinePointer) {
+        const skewProxy = { skew: 0 };
+        const skewSetter = gsap.quickSetter("[data-skew-card]", "skewX", "deg");
+        const clamp = gsap.utils.clamp(-6, 6);
+
+        ScrollTrigger.create({
+          trigger: container,
+          start: "top top",
+          end: () => `+=${scrollAmount * 1.5}`,
+          onUpdate: (self) => {
+            const skew = clamp(self.getVelocity() / 350);
+            if (Math.abs(skew) > Math.abs(skewProxy.skew)) {
+              skewProxy.skew = skew;
+              gsap.to(skewProxy, {
+                skew: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                overwrite: "auto",
+                onUpdate: () => skewSetter(skewProxy.skew),
+              });
+            }
+          },
+        });
+      }
 
       // 3. Bleed Background & Counter Setup
       // Bleed hues: Pink, Lavender, Peach, Mint, Magenta, Cyan
@@ -129,20 +154,26 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       });
     }, container);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(blurResumeTimeout);
+      ctx.revert();
+    };
   }, [projects]);
 
-  // Premium glassmorphic brand backgrounds with high-contrast text color combinations
+  // Premium glassmorphic brand backgrounds with high-contrast text color combinations.
+  // The dark text shades only read against a light cream background — on the dark theme's
+  // near-black background that same 10-12% tint barely shows, so the text needs a light
+  // dark:text-* variant (badges/divider/link all inherit it for free via currentColor).
   // backdrop-blur-xl is recomposited every frame while these cards are inside a pinned,
   // scroll-scrubbed track — on phone GPUs that's expensive enough to drop frames and is felt
   // as scroll jitter. Keep blur cheap on mobile, restore the full blur on larger screens.
   const bgClasses = [
-    "backdrop-blur-sm md:backdrop-blur-xl bg-[#C75B3A]/10 text-[#6E2A18] border-[#C75B3A]/20 shadow-[0_30px_60px_-15px_rgba(199,91,58,0.08)]",
-    "backdrop-blur-sm md:backdrop-blur-xl bg-[#4B6E6A]/10 text-[#213533] border-[#4B6E6A]/20 shadow-[0_30px_60px_-15px_rgba(75,110,106,0.08)]",
-    "backdrop-blur-sm md:backdrop-blur-xl bg-[#6A5B7B]/10 text-[#362B41] border-[#6A5B7B]/20 shadow-[0_30px_60px_-15px_rgba(106,91,123,0.08)]",
-    "backdrop-blur-sm md:backdrop-blur-xl bg-[#C37B68]/12 text-[#683427] border-[#C37B68]/20 shadow-[0_30px_60px_-15px_rgba(195,123,104,0.08)]",
-    "backdrop-blur-sm md:backdrop-blur-xl bg-[#B87830]/10 text-[#54330B] border-[#B87830]/20 shadow-[0_30px_60px_-15px_rgba(184,120,48,0.08)]",
-    "backdrop-blur-sm md:backdrop-blur-xl bg-[#D25E42]/10 text-[#712818] border-[#D25E42]/20 shadow-[0_30px_60px_-15px_rgba(210,94,66,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#C75B3A]/10 text-[#6E2A18] dark:text-[#F2C4B0] border-[#C75B3A]/20 shadow-[0_30px_60px_-15px_rgba(199,91,58,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#4B6E6A]/10 text-[#213533] dark:text-[#BFE0DA] border-[#4B6E6A]/20 shadow-[0_30px_60px_-15px_rgba(75,110,106,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#6A5B7B]/10 text-[#362B41] dark:text-[#D9CFEA] border-[#6A5B7B]/20 shadow-[0_30px_60px_-15px_rgba(106,91,123,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#C37B68]/12 text-[#683427] dark:text-[#F0CDB9] border-[#C37B68]/20 shadow-[0_30px_60px_-15px_rgba(195,123,104,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#B87830]/10 text-[#54330B] dark:text-[#F2D9A8] border-[#B87830]/20 shadow-[0_30px_60px_-15px_rgba(184,120,48,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#D25E42]/10 text-[#712818] dark:text-[#F7C9BC] border-[#D25E42]/20 shadow-[0_30px_60px_-15px_rgba(210,94,66,0.08)]",
   ];
 
   const glowHues = [
@@ -157,7 +188,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   return (
     <div
       ref={containerRef}
-      className="relative h-[100dvh] overflow-hidden bg-background transition-colors duration-700"
+      className="relative h-[100svh] overflow-hidden bg-background transition-colors duration-700"
     >
       {/* 2D interactive background grid */}
       <div className="absolute inset-0 opacity-25 pointer-events-none z-0">
@@ -189,7 +220,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         {/* Intro Slide */}
         <div
           data-panel
-          className="w-screen h-[100dvh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
+          className="w-screen h-[100svh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
         >
           <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
             Selected Work
@@ -216,7 +247,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             <div
               key={p.slug}
               data-panel
-              className="w-screen h-[100dvh] flex-shrink-0 flex items-center justify-center px-4 md:px-16"
+              className="w-screen h-[100svh] flex-shrink-0 flex items-center justify-center px-4 md:px-16"
             >
               <div
                 data-skew-card
@@ -275,18 +306,13 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                   >
                     <div className="p-6 h-full flex flex-col justify-between" data-parallax-inner>
                       {/* Window Controls */}
-                      <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-3 h-3 rounded-full bg-white/20" />
-                          <span className="w-3 h-3 rounded-full bg-white/20" />
-                          <span className="w-3 h-3 rounded-full bg-white/20" />
-                        </div>
-                        <span className="text-[10px] font-mono tracking-widest opacity-40">
-                          SARAL BANKER // {p.slug.toUpperCase()}
-                        </span>
+                      <div className="flex items-center gap-1.5 pb-4 border-b border-white/10">
+                        <span className="w-3 h-3 rounded-full bg-white/20" />
+                        <span className="w-3 h-3 rounded-full bg-white/20" />
+                        <span className="w-3 h-3 rounded-full bg-white/20" />
                       </div>
 
-                      {/* CSS Vector Content tailored to each case */}
+                      {/* Product shot */}
                       <div className="flex-1 flex items-center justify-center py-6 relative">
                         {p.image && (
                           <img
@@ -294,118 +320,9 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                             alt={p.title}
                             loading="lazy"
                             decoding="async"
-                            className="w-full aspect-[2.15/1] object-contain rounded-xl"
+                            className="theme-shot w-full aspect-[2.15/1] object-contain rounded-xl"
                           />
                         )}
-                        {p.slug === "lumen-finance" && (
-                          <div className="w-full max-w-sm space-y-4">
-                            <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
-                              <span className="text-xs opacity-60 font-mono">FINANCE_CAPITAL</span>
-                              <span className="text-base font-bold font-mono">$842,912.00</span>
-                            </div>
-                            {/* Mini styled chart */}
-                            <div className="h-28 flex items-end justify-between gap-1.5 pt-4">
-                              {[40, 25, 55, 30, 85, 45, 95, 60, 110, 75, 120].map((val, i) => (
-                                <div
-                                  key={i}
-                                  className="w-full bg-gradient-to-t from-[var(--brand-pink)] to-white/40 rounded-t-sm transition-all duration-500 hover:opacity-100"
-                                  style={{
-                                    height: `${(val / 120) * 100}%`,
-                                    opacity: 0.3 + i * 0.05,
-                                  }}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {p.slug === "noctis-music" && (
-                          <div className="w-full flex flex-col items-center justify-center space-y-4">
-                            <div className="relative w-32 h-32 rounded-full border-4 border-dashed border-white/20 flex items-center justify-center animate-[spin_20s_linear_infinite]">
-                              <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                                <span className="w-4 h-4 rounded-full bg-white/50" />
-                              </div>
-                            </div>
-                            {/* Equalizer lines */}
-                            <div className="flex items-center gap-1.5 h-6">
-                              {[10, 18, 14, 24, 8, 16, 22, 12].map((h, i) => (
-                                <div
-                                  key={i}
-                                  className="w-1 bg-white/70 rounded-full animate-pulse"
-                                  style={{ height: `${h}px`, animationDelay: `${i * 0.15}s` }}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {p.slug === "orbit-aerospace" && (
-                          <div className="w-full max-w-xs space-y-6 text-left">
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-mono opacity-50">ORBIT_TRACKER</span>
-                              <span className="text-xs font-mono text-[var(--brand-peach)]">
-                                L-04:12:05
-                              </span>
-                            </div>
-                            {/* Orbital path */}
-                            <div className="relative h-24 border border-white/10 rounded-xl overflow-hidden flex items-center justify-center">
-                              <div className="absolute w-40 h-40 rounded-full border border-white/20 -bottom-28 animate-[spin_60s_linear_infinite]" />
-                              <div className="absolute w-3 h-3 rounded-full bg-[var(--brand-peach)] shadow-[0_0_15px_#ffb084]" />
-                              <span className="text-[10px] font-mono opacity-30 absolute bottom-2 right-2">
-                                ALT. 408KM
-                              </span>
-                            </div>
-                          </div>
-                        )}
-
-                        {p.slug === "verdant-eco" && (
-                          <div className="w-full max-w-xs space-y-4">
-                            <div className="text-center font-display text-2xl font-bold opacity-80">
-                              98.4%
-                            </div>
-                            <p className="text-[10px] font-mono text-center opacity-50 uppercase tracking-widest">
-                              ECO_REDUCTION_TARGET
-                            </p>
-                            <div className="w-full bg-white/10 h-3 rounded-full overflow-hidden p-0.5 border border-white/15">
-                              <div
-                                className="bg-white/80 h-full rounded-full"
-                                style={{ width: "98.4%" }}
-                              />
-                            </div>
-                          </div>
-                        )}
-
-                        {p.slug === "atelier-fashion" && (
-                          <div className="w-full max-w-sm grid grid-cols-2 gap-4">
-                            <div className="border border-white/10 rounded-lg p-3 flex flex-col justify-between aspect-square bg-white/5">
-                              <span className="text-[10px] font-mono opacity-40">CAPE</span>
-                              <span className="font-display text-lg font-medium opacity-80">
-                                ATELIER CAFE
-                              </span>
-                            </div>
-                            <div className="border border-white/10 rounded-lg p-3 flex flex-col justify-between aspect-square bg-white/5">
-                              <span className="text-[10px] font-mono opacity-40">SILK</span>
-                              <span className="font-display text-lg font-medium opacity-80">
-                                COUTURE NOIR
-                              </span>
-                            </div>
-                          </div>
-                        )}
-
-                        {p.slug === "halo-health" && (
-                          <div className="w-full flex flex-col items-center space-y-3">
-                            <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center animate-ping">
-                              <div className="w-16 h-16 rounded-full bg-white/10" />
-                            </div>
-                            <span className="text-xs font-mono opacity-50">INHALE ... EXHALE</span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Footer Row */}
-                      <div className="flex justify-between items-center text-[9px] font-mono opacity-40">
-                        <span>BUILT BY SARAL BANKER</span>
-                        <span>©2026 // ALL RIGHTS RESERVED</span>
                       </div>
                     </div>
                   </SpotlightCard>

@@ -5,6 +5,11 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Theme is toggled by adding/removing .dark on <html> (see ThemeToggle.tsx), not by OS
+   color-scheme preference — without this, Tailwind's dark: variant follows the OS setting
+   instead, so it can disagree with (and invert) whatever the user actually picked on-site. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -317,16 +322,33 @@
     font-family: var(--font-body);
   }
 
+  /* Liquid-glass surface: same single backdrop-filter cost as a flat blur, the "liquid"
+     read comes from a free diagonal sheen + inset highlight (box-shadow/gradient — both
+     cheap layout-only paints, no extra blurred layer). Disabled wherever .no-blur-scrub
+     is toggled on an ancestor (see ScrollStoryHorizontal) since backdrop-filter is the
+     single most expensive thing to recomposite every frame during fast scroll. */
   .glass {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(26, 26, 26, 0.06);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.22));
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .dark .glass {
-    background: rgba(20, 20, 20, 0.5);
-    border: 1px solid rgba(245, 241, 234, 0.08);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(245, 241, 234, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  }
+
+  .no-blur-scrub .glass,
+  .no-blur-scrub [data-skew-card] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   .marquee {
@@ -378,6 +400,13 @@
 
   .font-mono {
     font-family: var(--font-mono);
+  }
+
+  /* Case-study screenshots are real product UIs with their own brand colors
+     (e.g. Parkwise's blue) — mute/warm them so they sit inside the site's
+     terracotta/cream palette instead of clashing with it. */
+  .theme-shot {
+    filter: grayscale(35%) sepia(20%) saturate(140%);
   }
 
   /* Custom Awwwards Cursor gated by media hover */
@@ -485,7 +514,7 @@
   }
 
   .text-variable-hover {
-    font-variation-settings: "wght" 300;
+    font-variation-settings: "wght" 500;
     transition: font-variation-settings 0.4s var(--transition-smooth);
   }
   .text-variable-hover:hover {

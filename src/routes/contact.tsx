@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Send, MessageSquare, PhoneCall, Rocket } from "lucide-react";
 import { RevealText } from "@/components/RevealText";
 import { MagneticButton } from "@/components/MagneticButton";
 import { PulseBeams } from "@/components/PulseBeams";
+import { BentoTilt } from "@/components/BentoTilt";
 import { BookingCalendar, type BookedDate } from "@/components/ui/booking-calendar";
 import {
   buildMailUrls,
@@ -138,6 +139,27 @@ export const Route = createFileRoute("/contact")({
 
 const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Something Else"];
 const CONTACT_EMAILS = ["saralbanker1@gmail.com", "jatinbasantani861@gmail.com"];
+
+const NEXT_STEPS = [
+  {
+    n: "01",
+    title: "We reply",
+    copy: "Within 48 hours, personally — no auto-responder, no account manager in between.",
+    icon: MessageSquare,
+  },
+  {
+    n: "02",
+    title: "Quick call",
+    copy: "15–20 minutes to understand scope, timeline, and whether we're a fit.",
+    icon: PhoneCall,
+  },
+  {
+    n: "03",
+    title: "We start",
+    copy: "A real proposal with timeline and next steps — not a generic sales deck.",
+    icon: Rocket,
+  },
+];
 
 function Contact() {
   const [sent, setSent] = useState(false);
@@ -433,6 +455,37 @@ function Contact() {
               </p>
             </div>
           </aside>
+        </div>
+
+        {/* What happens after you reach out */}
+        <div className="mt-24 md:mt-32">
+          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+            — After you hit send
+          </span>
+          <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-10">
+            What happens next.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {NEXT_STEPS.map((s) => (
+              <BentoTilt
+                key={s.n}
+                className="rounded-[28px] min-h-[220px] transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="h-full w-full rounded-[28px] border border-border bg-card p-7 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <s.icon className="h-5 w-5 text-secondary" strokeWidth={1.75} />
+                    <span className="font-mono text-xs text-muted-foreground">{s.n}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg font-bold text-foreground mb-2">
+                      {s.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{s.copy}</p>
+                  </div>
+                </div>
+              </BentoTilt>
+            ))}
+          </div>
         </div>
       </div>
     </div>

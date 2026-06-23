@@ -3,10 +3,10 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Users, Calendar, Code2 } from "lucide-react";
 import { RevealText } from "@/components/RevealText";
 import { SpotlightCard } from "@/components/SpotlightCard";
-import { BentoTilt } from "@/components/BentoTilt";
+import { BentoTilt, BentoStatCard } from "@/components/BentoTilt";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -56,9 +56,9 @@ const STEPS = [
 ];
 
 const FACTS = [
-  { v: "2 weeks", l: "Typical time to a first working build" },
-  { v: "Direct", l: "Access to the engineers building it — no account managers" },
-  { v: "Weekly", l: "Live demos of real progress, not status decks" },
+  { v: "2 weeks", l: "Typical time to a first working build", icon: Clock },
+  { v: "Direct", l: "Access to the engineers building it — no account managers", icon: Users },
+  { v: "Weekly", l: "Live demos of real progress, not status decks", icon: Calendar },
 ];
 
 const FAQS = [
@@ -155,14 +155,11 @@ function Process() {
         </p>
 
         {/* Quick facts strip */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl">
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl">
           {FACTS.map((f) => (
-            <div key={f.l} className="border-l border-border pl-5">
-              <div className="font-serif text-3xl sm:text-4xl text-[var(--brand-pink)] leading-none">
-                {f.v}
-              </div>
-              <div className="mt-2 text-sm text-muted-foreground leading-snug">{f.l}</div>
-            </div>
+            <BentoTilt key={f.l} className="h-[170px] rounded-[28px] transition-transform duration-300 hover:-translate-y-1">
+              <BentoStatCard icon={f.icon} value={f.v} label={f.l} />
+            </BentoTilt>
           ))}
         </div>
 
@@ -211,6 +208,64 @@ function Process() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="animated-divider mt-24" />
+
+        {/* What you get */}
+        <div className="mt-24">
+          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+            — What you get
+          </span>
+          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-tight mb-12">
+            No middlemen, <span className="text-[var(--brand-pink)] italic">no fluff.</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <BentoTilt className="md:col-span-2 rounded-[28px] min-h-[280px] transition-transform duration-300 hover:-translate-y-1">
+              <SpotlightCard className="h-full w-full p-8 md:p-10 bg-[var(--card)] border border-border flex flex-col justify-between">
+                <Users className="h-7 w-7 text-secondary" strokeWidth={1.75} />
+                <div>
+                  <h3 className="font-serif text-2xl md:text-3xl font-normal leading-snug text-foreground mb-3">
+                    You talk to the people writing the code.
+                  </h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
+                    Saral and Jatin, directly — every call, every update, every decision. No
+                    account managers relaying messages back and forth.
+                  </p>
+                </div>
+              </SpotlightCard>
+            </BentoTilt>
+
+            <BentoTilt className="rounded-[28px] min-h-[280px] transition-transform duration-300 hover:-translate-y-1">
+              <SpotlightCard className="h-full w-full p-8 bg-[var(--card)] border border-border flex flex-col justify-between">
+                <Calendar className="h-6 w-6 text-secondary" strokeWidth={1.75} />
+                <div>
+                  <h3 className="font-serif text-xl font-normal text-foreground mb-2">
+                    Fixed scope, fixed price.
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    A real estimate once the brief locks in Define — not a guess on day one.
+                  </p>
+                </div>
+              </SpotlightCard>
+            </BentoTilt>
+
+            <BentoTilt className="md:col-span-3 rounded-[28px] min-h-[160px] transition-transform duration-300 hover:-translate-y-1">
+              <SpotlightCard className="h-full w-full p-8 bg-[var(--card)] border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <Code2 className="h-6 w-6 text-secondary shrink-0" strokeWidth={1.75} />
+                  <h3 className="font-serif text-xl font-normal text-foreground">
+                    Built with modern, boring-on-purpose tools.
+                  </h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+                  TanStack, GSAP, Tailwind CSS — maintainable code, not framework-of-the-week
+                  experiments.
+                </p>
+              </SpotlightCard>
+            </BentoTilt>
+          </div>
         </div>
 
         <div className="animated-divider mt-24" />

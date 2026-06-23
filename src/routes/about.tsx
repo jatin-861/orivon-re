@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Rocket, Gauge, Clock, Code2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
@@ -9,7 +9,7 @@ import { RevealText } from "@/components/RevealText";
 import { Marquee } from "@/components/Marquee";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { AnimatedTestimonials } from "@/components/AnimatedTestimonials";
-import { BentoTilt } from "@/components/BentoTilt";
+import { BentoTilt, BentoStatCard } from "@/components/BentoTilt";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -147,6 +147,13 @@ const TEAM = [
   },
 ];
 
+const ABOUT_STATS = [
+  { v: "2", l: "Production systems shipped", icon: Rocket },
+  { v: "220+", l: "Rental units automated", icon: Gauge },
+  { v: "40+", l: "Hours saved monthly", icon: Clock },
+  { v: "70k+", l: "Lines of production code", icon: Code2 },
+];
+
 const HISTORY = [
   {
     year: "2023",
@@ -267,6 +274,19 @@ function About() {
             </p>
           </div>
         </div>
+
+        {/* Proof strip */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl">
+          {ABOUT_STATS.map((s) => (
+            <BentoTilt
+              key={s.l}
+              className="h-[160px] rounded-[28px] transition-transform duration-300 hover:-translate-y-1"
+            >
+              <BentoStatCard icon={s.icon} value={s.v} label={s.l} />
+            </BentoTilt>
+          ))}
+        </div>
+
         <div className="animated-divider mt-24" />
 
         {/* Dynamic Stacking Team testimonials */}

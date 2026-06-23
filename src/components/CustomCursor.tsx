@@ -209,6 +209,20 @@ export function CustomCursor() {
 
     document.addEventListener("mouseover", onMouseOver);
 
+    // While the page is actively scrolling, skip the magnetic getBoundingClientRect()
+    // scan below — reading layout every frame mid-scroll forces synchronous reflows
+    // that thrash against Lenis's scroll transform and cause visible stutter.
+    let isScrolling = false;
+    let scrollIdleTimer = 0;
+    const onScroll = () => {
+      isScrolling = true;
+      clearTimeout(scrollIdleTimer);
+      scrollIdleTimer = window.setTimeout(() => {
+        isScrolling = false;
+      }, 120);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     // Caching selector targets for high performance
     let lastQueryTime = 0;
     let cachedMagneticElements: Element[] = [];
@@ -265,35 +279,42 @@ export function CustomCursor() {
       const targetX = mouse.current.targetX;
       const targetY = mouse.current.targetY;
 
-      // Locate closest magnetic element
-      const magneticElements = getMagneticElements();
-      let closest: HTMLElement | null = null;
-      let minDst = Infinity;
+      // Locate closest magnetic element — skipped entirely during active scroll to
+      // avoid per-frame layout reads (see onScroll above).
+      if (isScrolling) {
+        activeTarget = null;
+        targetRect = null;
+        targetBorderRadius = "50%";
+      } else {
+        const magneticElements = getMagneticElements();
+        let closest: HTMLElement | null = null;
+        let minDst = Infinity;
 
-      for (const el of magneticElements) {
-        const htmlEl = el as HTMLElement;
-        const rect = htmlEl.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dst = Math.hypot(targetX - cx, targetY - cy);
-        if (dst < 75 && dst < minDst) {
-          minDst = dst;
-          closest = htmlEl;
+        for (const el of magneticElements) {
+          const htmlEl = el as HTMLElement;
+          const rect = htmlEl.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dst = Math.hypot(targetX - cx, targetY - cy);
+          if (dst < 75 && dst < minDst) {
+            minDst = dst;
+            closest = htmlEl;
+          }
         }
-      }
 
-      if (closest !== activeTarget) {
-        activeTarget = closest;
-        if (activeTarget) {
+        if (closest !== activeTarget) {
+          activeTarget = closest;
+          if (activeTarget) {
+            targetRect = activeTarget.getBoundingClientRect();
+            const computed = window.getComputedStyle(activeTarget);
+            targetBorderRadius = computed.borderRadius || "50%";
+          } else {
+            targetRect = null;
+            targetBorderRadius = "50%";
+          }
+        } else if (activeTarget) {
           targetRect = activeTarget.getBoundingClientRect();
-          const computed = window.getComputedStyle(activeTarget);
-          targetBorderRadius = computed.borderRadius || "50%";
-        } else {
-          targetRect = null;
-          targetBorderRadius = "50%";
         }
-      } else if (activeTarget) {
-        targetRect = activeTarget.getBoundingClientRect();
       }
 
       // Default outer ring target parameters
@@ -449,6 +470,8 @@ export function CustomCursor() {
       window.removeEventListener("mouseup", onMouseUp);
       window.removeEventListener("blur", onWindowBlur);
       document.removeEventListener("mouseover", onMouseOver);
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(scrollIdleTimer);
       cancelAnimationFrame(rafId);
     };
   }, [prefersReducedMotion]);

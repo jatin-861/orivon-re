@@ -21,23 +21,11 @@ export const Route = createFileRoute("/work/$slug")({
   component: CaseStudy,
 });
 
-const brandColors: Record<string, { bg: string; text: string; details: string }> = {
-  neurodashboard: { bg: "bg-[var(--brand-pink)]", text: "text-white", details: "AI_PLATFORM" },
-  "shade-ledger": {
-    bg: "bg-[var(--brand-ochre)]",
-    text: "text-white",
-    details: "BILLING_AUTOMATION",
-  },
-  "smart-parking": {
-    bg: "bg-[var(--brand-peach)]",
-    text: "text-white",
-    details: "REALTIME_BOOKING",
-  },
-  "carbon-compass": {
-    bg: "bg-[var(--brand-teal)]",
-    text: "text-white",
-    details: "IMPACT_TRACKING",
-  },
+const brandColors: Record<string, { bg: string; text: string }> = {
+  neurodashboard: { bg: "bg-[var(--brand-pink)]", text: "text-white" },
+  "shade-ledger": { bg: "bg-[var(--brand-ochre)]", text: "text-white" },
+  "smart-parking": { bg: "bg-[var(--brand-peach)]", text: "text-white" },
+  "carbon-compass": { bg: "bg-[var(--brand-teal)]", text: "text-white" },
 };
 
 // Business-translated descriptions for each NeuroDashboard module
@@ -62,7 +50,6 @@ function CaseStudy() {
   const colors = brandColors[p.slug] || {
     bg: "bg-[var(--brand-pink)]",
     text: "text-white",
-    details: "CASE_STUDY",
   };
 
   return (
@@ -116,7 +103,7 @@ function CaseStudy() {
             {/* Text — frosted glass panel */}
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-xl md:p-7">
               <span className="block font-mono text-[11px] uppercase tracking-[0.2em] opacity-80">
-                CASE STUDY // {colors.details}
+                Case Study — {p.category}
               </span>
               <h2 className="mt-4 font-display text-4xl font-bold leading-[0.95] tracking-tight md:text-5xl">
                 {p.client}
@@ -142,7 +129,7 @@ function CaseStudy() {
                   alt={p.title}
                   loading="lazy"
                   decoding="async"
-                  className="relative h-auto w-full rounded-xl border border-white/20 shadow-2xl"
+                  className="theme-shot relative h-auto w-full rounded-xl border border-white/20 shadow-2xl"
                 />
               </div>
             )}
@@ -196,7 +183,7 @@ function CaseStudy() {
                           alt=""
                           loading="lazy"
                           decoding="async"
-                          className="relative h-auto w-full rounded-lg border border-white/20 shadow-2xl transition-transform duration-500 group-hover:scale-[1.04]"
+                          className="theme-shot relative h-auto w-full rounded-lg border border-white/20 shadow-2xl transition-transform duration-500 group-hover:scale-[1.04]"
                         />
                       </div>
                     </div>
