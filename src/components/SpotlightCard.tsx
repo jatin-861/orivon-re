@@ -39,7 +39,7 @@ export const SpotlightCard = ({ children, className = "", glowHue = 15 }: Props)
       ref={cardRef}
       style={style}
       className={cn(
-        "relative rounded-2xl border border-border bg-card backdrop-blur-md transition-all duration-500",
+        "relative rounded-2xl border border-border bg-card backdrop-blur-sm md:backdrop-blur-md transition-all duration-500",
         "before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-[radial-gradient(300px_circle_at_calc(var(--x,0)*1px)_calc(var(--y,0)*1px),hsl(var(--hue)_95%_70%/0.4),transparent_60%)] before:-z-0 before:[mask:linear-gradient(black,black)_content-box,linear-gradient(black,black)] before:[mask-composite:exclude]",
         "hover:border-primary/40",
         className,

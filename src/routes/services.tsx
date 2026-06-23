@@ -2,11 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
-import { ArrowRight, Palette, Code2, Sparkles, ShoppingBag } from "lucide-react";
+import { ArrowRight, Palette, Code2, Sparkles, ShoppingBag, Gauge } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { RevealText } from "@/components/RevealText";
 import { ComponentLab } from "@/components/skills/ComponentLab";
-import { BentoTilt, BentoCard } from "@/components/BentoTilt";
+import { BentoTilt, BentoCard, BentoStatCard } from "@/components/BentoTilt";
 import { FittsSimulator } from "@/components/skills/FittsSimulator";
 import { GestaltVisualizer } from "@/components/skills/GestaltVisualizer";
 import { HierarchySimulator } from "@/components/skills/HierarchySimulator";
@@ -108,7 +108,7 @@ function CapabilitiesBentoGrid() {
         </div>
 
         {/* Main large Bento Card */}
-        <BentoTilt className="bento-animate-item relative mb-7 h-[500px] w-full overflow-hidden rounded-xl">
+        <BentoTilt className="bento-animate-item relative mb-5 h-[500px] w-full overflow-hidden rounded-[28px] transition-transform duration-300 hover:-translate-y-1">
           <BentoCard
             title={
               <>
@@ -136,8 +136,8 @@ function CapabilitiesBentoGrid() {
             </div>
           </BentoCard>
         </BentoTilt>
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-7 h-auto md:h-[150vh] w-full">
-          <BentoTilt className="bento-animate-item relative col-span-1 md:col-span-1 md:row-span-2 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[400px] md:min-h-[450px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-5 h-auto md:h-[150vh] w-full">
+          <BentoTilt className="bento-animate-item relative col-span-1 md:col-span-1 md:row-span-2 overflow-hidden rounded-[28px] transition-transform duration-300 ease-out hover:-translate-y-1 min-h-[400px] md:min-h-[450px]">
             <BentoCard
               title={
                 <>
@@ -155,7 +155,7 @@ function CapabilitiesBentoGrid() {
             </BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-[28px] transition-transform duration-300 ease-out hover:-translate-y-1 min-h-[280px] md:min-h-[300px]">
             <BentoCard
               title={
                 <>
@@ -173,7 +173,7 @@ function CapabilitiesBentoGrid() {
             </BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl transition-transform duration-300 ease-out min-h-[280px] md:min-h-[300px]">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-[28px] transition-transform duration-300 ease-out hover:-translate-y-1 min-h-[280px] md:min-h-[300px]">
             <BentoCard
               title={
                 <>
@@ -191,19 +191,11 @@ function CapabilitiesBentoGrid() {
             </BentoCard>
           </BentoTilt>
 
-          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl min-h-[200px]">
-            <div className="flex flex-col justify-between bg-secondary p-6 text-white h-full">
-              <h3 className="text-3xl font-serif leading-none tracking-tight max-w-xs uppercase">
-                M<span className="font-serif italic text-white font-normal lowercase">o</span>re c
-                <span className="font-serif italic text-white font-normal lowercase">r</span>aft in
-                de<span className="font-serif italic text-white font-normal lowercase">v</span>
-                elopment.
-              </h3>
-              <ArrowRight className="h-10 w-10 text-white self-end transition-transform duration-300 hover:translate-x-2" />
-            </div>
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-[28px] transition-transform duration-300 ease-out hover:-translate-y-1 min-h-[200px]">
+            <BentoStatCard icon={Gauge} value="220" label="Rental units on automated billing, live" />
           </BentoTilt>
 
-          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-xl bg-card border border-border/10 min-h-[200px] transition-transform duration-300 ease-out">
+          <BentoTilt className="bento-animate-item relative col-span-1 overflow-hidden rounded-[28px] bg-card border border-border/10 min-h-[200px] transition-transform duration-300 ease-out hover:-translate-y-1">
             <BentoCard
               title={
                 <>
@@ -425,5 +417,3 @@ function Services() {
     </div>
   );
 }
-
-export default Services;

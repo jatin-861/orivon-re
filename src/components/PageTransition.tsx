@@ -53,7 +53,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
             {
               scale: 1,
               opacity: 1,
-              duration: 0.55,
+              duration: 0.32,
               ease: "power3.out",
               clearProps: "transform",
             },
@@ -62,12 +62,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
           tlOut
             .to(pathRef.current, {
               attr: { d: curveUpPath },
-              duration: 0.45,
+              duration: 0.28,
               ease: "power3.in",
             })
             .to(pathRef.current, {
               attr: { d: initialPath },
-              duration: 0.2,
+              duration: 0.12,
               ease: "power2.out",
             })
             .set(overlayRef.current, { visibility: "hidden" });
@@ -84,7 +84,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
           contentRef.current,
           {
             scale: 0.97,
-            duration: 0.4,
+            duration: 0.25,
             ease: "power3.inOut",
           },
           0,
@@ -95,14 +95,14 @@ export function PageTransition({ children }: { children: ReactNode }) {
           pathRef.current,
           {
             attr: { d: curveDownPath },
-            duration: 0.45,
+            duration: 0.28,
             ease: "power3.inOut",
           },
           0,
         )
         .to(pathRef.current, {
           attr: { d: flatCoverPath },
-          duration: 0.2,
+          duration: 0.12,
           ease: "power2.inOut",
         })
 
@@ -111,15 +111,15 @@ export function PageTransition({ children }: { children: ReactNode }) {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.4,
+          duration: 0.26,
           ease: "power4.out",
         })
         .to(textRef.current, {
           opacity: 0,
           scale: 1.04,
-          duration: 0.25,
+          duration: 0.16,
           ease: "power3.in",
-          delay: 0.15,
+          delay: 0.08,
         });
 
       // Clean up the curtain timeline if the component unmounts mid-transition

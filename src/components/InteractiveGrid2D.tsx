@@ -23,6 +23,13 @@ export function InteractiveGrid2D() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Purely a mouse-hover effect — touch devices never trigger it, so the continuous rAF
+    // redraw loop would just compete with GSAP/Lenis on the main thread during scroll for no
+    // visual benefit. Skip it entirely on coarse pointers.
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 

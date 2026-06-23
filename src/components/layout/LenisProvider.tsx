@@ -38,10 +38,20 @@ export function LenisProvider({ children }: LenisProviderProps) {
 
     lenisRef.current = lenis;
 
+    // Mobile browsers fire a resize event every time the address bar collapses/expands
+    // mid-scroll. ScrollTrigger would otherwise treat that as a real viewport change and
+    // re-run refresh()/re-pin on the spot, which is what produces the "vibrating" jump on
+    // pinned/scrubbed sections while scrolling on a phone.
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
     // Synchronize Lenis scroll event with ScrollTrigger updates
     lenis.on("scroll", () => {
       ScrollTrigger.update();
     });
+
+    // Keep Lenis's internal measurements aligned with ScrollTrigger after layout/refresh changes
+    const onRefresh = () => lenis.resize();
+    ScrollTrigger.addEventListener("refresh", onRefresh);
 
     // Sync GSAP ticker with Lenis requestAnimationFrame loop
     const updateTicker = (time: number) => {
@@ -56,6 +66,7 @@ export function LenisProvider({ children }: LenisProviderProps) {
     ScrollTrigger.refresh();
 
     return () => {
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       lenisRef.current = null;

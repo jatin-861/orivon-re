@@ -170,15 +170,23 @@ export const CinematicHero = () => {
 
       // Draw the belief statement, dynamically scaled to fit width, across two lines
       const isMobile = cssWidth < 768;
-      const lines = ["USEFUL OVER", "IMPRESSIVE"];
+      const lines = ["TWO ENGINEERS,", "REAL SYSTEMS."];
       let fontSize = Math.min(cssWidth * (isMobile ? 0.21 : 0.125), 190);
       tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
       const maxWidth = cssWidth * 0.94;
       const widest = Math.max(...lines.map((line) => tempCtx.measureText(line).width));
       if (widest > maxWidth) {
         fontSize = fontSize * (maxWidth / widest);
-        tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
       }
+
+      // Also clamp by the canvas's actual height. Font size above was sized purely from
+      // width, so on viewports where width >> height the two stacked lines were taller than
+      // the canvas itself — that's what was clipping the top/bottom of the letters.
+      const lineHeightRatio = 1.08;
+      const maxFontSizeByHeight = (cssHeight / (lines.length * lineHeightRatio)) * 0.88;
+      fontSize = Math.min(fontSize, maxFontSizeByHeight);
+      tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
+
       tempCtx.fillStyle = "#000000";
       tempCtx.textAlign = "center";
       tempCtx.textBaseline = "middle";
@@ -320,8 +328,8 @@ export const CinematicHero = () => {
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
       {/* Real DOM heading — canvas text is invisible to crawlers */}
       <h1 className="sr-only">
-        Orvion.co — Product Engineers. Useful over impressive: we build software that solves real
-        problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
+        Orvion.co — Product Engineers. Two engineers, real systems: we build software that solves
+        real problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
         multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units.
       </h1>
 
@@ -335,7 +343,7 @@ export const CinematicHero = () => {
       </div>
 
       {/* Belief statement canvas */}
-      <div className="relative h-[38vh] sm:h-[42vh] lg:h-[46vh] w-full">
+      <div className="relative h-[42vh] sm:h-[46vh] lg:h-[50vh] w-full">
         <canvas
           ref={canvasRef}
           aria-hidden="true"

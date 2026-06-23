@@ -98,13 +98,13 @@ export function SiteFooter() {
         </div>
 
         {/* Giant gooey wordmark */}
-        <div className="relative mt-12 select-none overflow-hidden h-[clamp(4rem,15vw,10rem)]">
+        <div className="relative mt-12 select-none overflow-hidden h-[clamp(3.5rem,12vw,9rem)]">
           <GooeyText
-            texts={["ORVION.CO", "BUILD", "SARAL X JATIN", "ENGINEER"]}
+            texts={["SARAL", "JATIN", "SARAL X JATIN", "ORVION.CO"]}
             morphTime={1.4}
             cooldownTime={1.6}
             className="h-full w-full"
-            textClassName="text-[var(--brand-pink)] tracking-tighter leading-[1.0] text-[clamp(3.5rem,15vw,10rem)] py-2"
+            textClassName="text-[var(--brand-pink)] tracking-tighter leading-none whitespace-nowrap text-[clamp(1.75rem,9vw,7.5rem)]"
           />
         </div>
 

@@ -105,18 +105,24 @@ export function GooeyText({
         </defs>
       </svg>
       <div
-        className="flex items-center justify-center"
+        className="relative flex h-full w-full items-center justify-center"
         style={{ filter: "url(#threshold-portfolio)" }}
       >
         <span
           ref={text1Ref}
-          className={cn("absolute inline-block select-none font-display font-black", textClassName)}
+          className={cn(
+            "absolute inset-0 flex items-center justify-center select-none font-display font-black",
+            textClassName,
+          )}
         >
           {texts[0]}
         </span>
         <span
           ref={text2Ref}
-          className={cn("inline-block select-none font-display font-black", textClassName)}
+          className={cn(
+            "absolute inset-0 flex items-center justify-center select-none font-display font-black",
+            textClassName,
+          )}
         >
           {texts[1] ?? texts[0]}
         </span>

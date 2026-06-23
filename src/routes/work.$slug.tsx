@@ -96,39 +96,56 @@ function CaseStudy() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className={`mt-16 relative overflow-hidden rounded-xl border border-border aspect-[16/8] p-12 flex flex-col justify-between shadow-elegant ${colors.bg} ${colors.text}`}
+          className={`mt-16 relative overflow-hidden rounded-2xl border border-white/15 shadow-elegant ${colors.bg} ${colors.text}`}
         >
-          {p.image && (
-            <div
-              className="hidden sm:block absolute right-[5%] top-1/2 z-0 w-[40%] md:w-[36%]"
-              style={{
-                transform: "translateY(-50%) perspective(1400px) rotateX(6deg) rotateY(-10deg)",
-              }}
-            >
-              <div
-                className="absolute -inset-8 rounded-[2rem] bg-black/25 blur-3xl"
-                aria-hidden="true"
-              />
-              <img
-                src={p.image}
-                alt={p.title}
-                loading="lazy"
-                decoding="async"
-                className="relative w-full h-auto rounded-lg border border-white/20 shadow-2xl"
-              />
+          {/* Depth — directional gradient + soft highlight bloom so the flat fill reads premium */}
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-black/30"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -top-1/4 -left-[8%] h-[65%] w-[55%] rounded-full bg-white/20 blur-[110px]"
+            aria-hidden="true"
+          />
+
+          <div
+            className={`relative grid items-center gap-8 p-7 sm:p-10 md:gap-12 md:p-12 ${
+              p.image ? "md:grid-cols-[0.82fr_1.18fr]" : ""
+            }`}
+          >
+            {/* Text — frosted glass panel */}
+            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-xl md:p-7">
+              <span className="block font-mono text-[11px] uppercase tracking-[0.2em] opacity-80">
+                CASE STUDY // {colors.details}
+              </span>
+              <h2 className="mt-4 font-display text-4xl font-bold leading-[0.95] tracking-tight md:text-5xl">
+                {p.client}
+              </h2>
+              <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[11px] uppercase tracking-wider opacity-80">
+                <span>Built by Saral Banker</span>
+                <span>{p.year}</span>
+              </div>
             </div>
-          )}
-          <div className="relative z-10">
-            <span className="text-xs font-mono opacity-80 uppercase tracking-widest block mb-4">
-              CASE STUDY // {colors.details}
-            </span>
-            <h2 className="font-display text-4xl md:text-6xl font-bold leading-none tracking-tighter">
-              {p.client}
-            </h2>
-          </div>
-          <div className="relative z-10 flex justify-between items-center text-xs font-mono opacity-80">
-            <span>BUILT BY SARAL BANKER</span>
-            <span>{p.year}</span>
+
+            {/* Product shot — large focal point, gently tilted with a soft cast shadow */}
+            {p.image && (
+              <div
+                className="relative"
+                style={{ transform: "perspective(1600px) rotateX(3deg) rotateY(-7deg)" }}
+              >
+                <div
+                  className="absolute -inset-6 rounded-[2rem] bg-black/30 blur-3xl"
+                  aria-hidden="true"
+                />
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="relative h-auto w-full rounded-xl border border-white/20 shadow-2xl"
+                />
+              </div>
+            )}
           </div>
         </motion.div>
 
@@ -154,17 +171,54 @@ function CaseStudy() {
                   key={o.slug}
                   to="/work/$slug"
                   params={{ slug: o.slug }}
-                  className={`group block relative overflow-hidden rounded-xl border border-border/10 aspect-[16/10] p-8 flex flex-col justify-between shadow-elegant ${otherColors.bg} ${otherColors.text}`}
+                  className={`group relative block overflow-hidden rounded-xl border border-white/15 aspect-[16/10] p-8 shadow-elegant ${otherColors.bg} ${otherColors.text}`}
                 >
-                  <div className="relative z-10 flex justify-between items-center opacity-85 font-mono text-xs">
-                    <span>NEXT CASE</span>
-                    <span>{o.category}</span>
-                  </div>
-                  <div className="relative z-10">
-                    <h4 className="font-display text-3xl font-bold tracking-tight mb-2 group-hover:underline">
-                      {o.title.split(" — ")[0]}
-                    </h4>
-                    <p className="text-xs opacity-80 font-mono">EXPLORE CASE STUDY →</p>
+                  {/* Depth — matches the cover banner treatment */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-br from-white/12 via-transparent to-black/30"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="absolute -top-1/4 -left-[8%] h-[55%] w-[50%] rounded-full bg-white/15 blur-[90px]"
+                    aria-hidden="true"
+                  />
+
+                  {/* Product shot peeking from the right */}
+                  {o.image && (
+                    <div
+                      className="absolute right-[-8%] top-1/2 w-[58%] -translate-y-1/2"
+                      aria-hidden="true"
+                    >
+                      <div style={{ transform: "perspective(1400px) rotateX(3deg) rotateY(-9deg)" }}>
+                        <div className="absolute -inset-5 rounded-[1.5rem] bg-black/30 blur-2xl" />
+                        <img
+                          src={o.image}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="relative h-auto w-full rounded-lg border border-white/20 shadow-2xl transition-transform duration-500 group-hover:scale-[1.04]"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Scrim so the title stays readable over the image */}
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/35 to-transparent"
+                    aria-hidden="true"
+                  />
+
+                  <div className="relative z-10 flex h-full flex-col justify-between">
+                    <div className="flex justify-between items-center opacity-85 font-mono text-xs">
+                      <span>NEXT CASE</span>
+                      <span>{o.category}</span>
+                    </div>
+                    <div>
+                      <h4 className="font-display text-3xl font-bold tracking-tight mb-2 group-hover:underline">
+                        {o.title.split(" — ")[0]}
+                      </h4>
+                      <p className="text-xs opacity-80 font-mono">EXPLORE CASE STUDY →</p>
+                    </div>
                   </div>
                 </Link>
               );

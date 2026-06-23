@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, type LucideIcon } from "lucide-react";
 
 interface BentoTiltProps {
   children: React.ReactNode;
@@ -83,7 +83,7 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
       onMouseMove={handleCardMouseMove}
       onMouseEnter={() => setHoverOpacity(1)}
       onMouseLeave={() => setHoverOpacity(0)}
-      className="relative w-full h-full overflow-hidden rounded-xl border border-border bg-card"
+      className="relative w-full h-full overflow-hidden rounded-[28px] border border-border bg-card transition-shadow duration-300 hover:border-[var(--brand-pink)]/35 hover:shadow-[0_30px_70px_-20px_rgba(199,91,58,0.3)]"
     >
       {children ? (
         <div className="absolute inset-0 w-full h-full z-0">{children}</div>
@@ -139,6 +139,30 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
             <span className="relative z-20">Coming Soon</span>
           </div>
         )}
+      </div>
+    </div>
+  );
+};
+
+interface BentoStatCardProps {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+}
+
+// Icon + oversized-number micro-card — the small "stat tile" pattern bento layouts
+// (bentogrids.com-style) use to break up the larger media cards with hard proof points.
+export const BentoStatCard = ({ icon: Icon, value, label }: BentoStatCardProps) => {
+  return (
+    <div className="flex h-full w-full flex-col justify-between rounded-[28px] border border-border bg-card p-6">
+      <Icon className="h-5 w-5 text-secondary" strokeWidth={1.75} />
+      <div>
+        <div className="font-serif text-4xl md:text-5xl font-normal text-foreground leading-none">
+          {value}
+        </div>
+        <div className="mt-2 text-xs font-mono text-muted-foreground uppercase tracking-wide">
+          {label}
+        </div>
       </div>
     </div>
   );

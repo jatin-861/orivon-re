@@ -133,13 +133,16 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   }, [projects]);
 
   // Premium glassmorphic brand backgrounds with high-contrast text color combinations
+  // backdrop-blur-xl is recomposited every frame while these cards are inside a pinned,
+  // scroll-scrubbed track — on phone GPUs that's expensive enough to drop frames and is felt
+  // as scroll jitter. Keep blur cheap on mobile, restore the full blur on larger screens.
   const bgClasses = [
-    "backdrop-blur-xl bg-[#C75B3A]/10 text-[#6E2A18] border-[#C75B3A]/20 shadow-[0_30px_60px_-15px_rgba(199,91,58,0.08)]",
-    "backdrop-blur-xl bg-[#4B6E6A]/10 text-[#213533] border-[#4B6E6A]/20 shadow-[0_30px_60px_-15px_rgba(75,110,106,0.08)]",
-    "backdrop-blur-xl bg-[#6A5B7B]/10 text-[#362B41] border-[#6A5B7B]/20 shadow-[0_30px_60px_-15px_rgba(106,91,123,0.08)]",
-    "backdrop-blur-xl bg-[#C37B68]/12 text-[#683427] border-[#C37B68]/20 shadow-[0_30px_60px_-15px_rgba(195,123,104,0.08)]",
-    "backdrop-blur-xl bg-[#B87830]/10 text-[#54330B] border-[#B87830]/20 shadow-[0_30px_60px_-15px_rgba(184,120,48,0.08)]",
-    "backdrop-blur-xl bg-[#D25E42]/10 text-[#712818] border-[#D25E42]/20 shadow-[0_30px_60px_-15px_rgba(210,94,66,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#C75B3A]/10 text-[#6E2A18] border-[#C75B3A]/20 shadow-[0_30px_60px_-15px_rgba(199,91,58,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#4B6E6A]/10 text-[#213533] border-[#4B6E6A]/20 shadow-[0_30px_60px_-15px_rgba(75,110,106,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#6A5B7B]/10 text-[#362B41] border-[#6A5B7B]/20 shadow-[0_30px_60px_-15px_rgba(106,91,123,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#C37B68]/12 text-[#683427] border-[#C37B68]/20 shadow-[0_30px_60px_-15px_rgba(195,123,104,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#B87830]/10 text-[#54330B] border-[#B87830]/20 shadow-[0_30px_60px_-15px_rgba(184,120,48,0.08)]",
+    "backdrop-blur-sm md:backdrop-blur-xl bg-[#D25E42]/10 text-[#712818] border-[#D25E42]/20 shadow-[0_30px_60px_-15px_rgba(210,94,66,0.08)]",
   ];
 
   const glowHues = [

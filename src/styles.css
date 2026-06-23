@@ -185,7 +185,9 @@
     border-color: var(--color-border);
   }
   html {
-    scroll-behavior: smooth;
+    /* Lenis drives scroll easing in JS; native smooth-scroll fights it frame-to-frame
+       and is the main source of the mobile scroll vibration/jitter. */
+    scroll-behavior: auto;
   }
   body {
     background-color: var(--color-background);
