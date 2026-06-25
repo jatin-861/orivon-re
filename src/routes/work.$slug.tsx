@@ -176,7 +176,9 @@ function CaseStudy() {
                       className="absolute right-[-8%] top-1/2 w-[58%] -translate-y-1/2"
                       aria-hidden="true"
                     >
-                      <div style={{ transform: "perspective(1400px) rotateX(3deg) rotateY(-9deg)" }}>
+                      <div
+                        style={{ transform: "perspective(1400px) rotateX(3deg) rotateY(-9deg)" }}
+                      >
                         <div className="absolute -inset-5 rounded-[1.5rem] bg-black/30 blur-2xl" />
                         <img
                           src={o.image}

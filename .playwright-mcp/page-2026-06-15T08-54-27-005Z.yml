@@ -1,466 +1,466 @@
 - generic [ref=e2]:
-  - link "Skip to content" [ref=e3]:
-    - /url: "#main-content"
-  - generic:
-    - generic: THEME
-  - banner [ref=e4]:
-    - generic [ref=e5]:
-      - link "SARAL BANKER" [ref=e6]:
-        - /url: /
-        - generic [ref=e9]: SARAL BANKER
-      - navigation [ref=e10]:
-        - link "Work" [ref=e11]:
-          - /url: /work
-        - link "Process" [ref=e12]:
-          - /url: /process
-        - link "About" [ref=e13]:
-          - /url: /about
-        - link "Contact" [ref=e14]:
-          - /url: /contact
-      - generic [ref=e15]:
-        - button "Switch to dark mode" [active] [ref=e555]:
-          - img [ref=e17]
-        - link "Let's talk →" [ref=e23]:
-          - /url: /contact
-  - main [ref=e24]:
-    - generic [ref=e26]:
-      - generic [ref=e27]:
-        - 'heading "Saral Banker — Product Engineer. Useful over impressive: I build software that solves real problems — from business automation to AI-powered platforms. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units." [level=1] [ref=e28]'
-        - generic [ref=e29]:
-          - generic [ref=e30]: Saral Banker — Product Engineer // India
-          - generic [ref=e31]: Open to new projects
-        - generic [ref=e34]:
-          - generic [ref=e35]:
-            - heading "Hi, I'm Saral Banker." [level=2] [ref=e36]
-            - paragraph [ref=e37]: I build software that solves real problems.
-            - paragraph [ref=e38]: From business automation to AI-powered platforms — I design, build, and ship production systems that people actually use. Database to deployment, no shortcuts.
-            - generic [ref=e39]:
-              - link "View Projects" [ref=e40]:
-                - /url: /work
-              - link "Resume" [ref=e41]:
-                - /url: /Saral_Banker_Resume.pdf
-                - text: Resume
-                - img [ref=e42]
-            - generic [ref=e45]:
-              - generic [ref=e46]:
-                - generic [ref=e47]: "2"
-                - generic [ref=e48]: Production systems shipped
-              - generic [ref=e49]:
-                - generic [ref=e50]: 220+
-                - generic [ref=e51]: Rental units automated
-              - generic [ref=e52]:
-                - generic [ref=e53]: 40+
-                - generic [ref=e54]: Hours saved every month
-              - generic [ref=e55]:
-                - generic [ref=e56]: 100%
-                - generic [ref=e57]: Built for production
-          - generic [ref=e59]:
-            - generic [ref=e60]:
-              - generic [ref=e63]: NeuroDashboard
-              - generic [ref=e64]: Currently Building
-            - generic [ref=e65]:
-              - paragraph [ref=e66]: Welcome back, Saral. Here's what's running right now.
-              - generic [ref=e67]:
-                - generic [ref=e68]:
-                  - generic [ref=e69]: 12,543
-                  - generic [ref=e70]: Docs indexed
-                - generic [ref=e71]:
-                  - generic [ref=e72]: 1,247
-                  - generic [ref=e73]: Queries / day
-                - generic [ref=e74]:
-                  - generic [ref=e75]: 99.6%
-                  - generic [ref=e76]: Uptime
-              - img [ref=e78]
-              - generic [ref=e81]:
-                - generic [ref=e82]:
-                  - generic [ref=e83]: Knowledge Hub indexed 312 documents
-                  - generic [ref=e84]: 2m ago
-                - generic [ref=e85]:
-                  - generic [ref=e86]: Shade Ledger sent 18 invoices
-                  - generic [ref=e87]: 1h ago
-                - generic [ref=e88]:
-                  - generic [ref=e89]: Workflow automation run completed
-                  - generic [ref=e90]: 3h ago
-      - generic [ref=e94]:
-        - generic [ref=e95]:
-          - generic [ref=e96]:
-            - generic [ref=e97]: Find Answers Instantly
-            - generic [ref=e98]: ✦
-          - generic [ref=e99]:
-            - generic [ref=e100]: Automate Manual Work
-            - generic [ref=e101]: ✦
-          - generic [ref=e102]:
-            - generic [ref=e103]: Real-Time Collaboration
-            - generic [ref=e104]: ✦
-          - generic [ref=e105]:
-            - generic [ref=e106]: Production-Ready Systems
-            - generic [ref=e107]: ✦
-          - generic [ref=e108]:
-            - generic [ref=e109]: Full-Stack Engineering
-            - generic [ref=e110]: ✦
-          - generic [ref=e111]:
-            - generic [ref=e112]: AI & Automation
-            - generic [ref=e113]: ✦
-          - generic [ref=e114]:
-            - generic [ref=e115]: Reliable by Design
-            - generic [ref=e116]: ✦
-          - generic [ref=e117]:
-            - generic [ref=e118]: Shipped & Running
-            - generic [ref=e119]: ✦
-        - generic [ref=e120]:
-          - generic [ref=e121]:
-            - generic [ref=e122]: Find Answers Instantly
-            - generic [ref=e123]: ✦
-          - generic [ref=e124]:
-            - generic [ref=e125]: Automate Manual Work
-            - generic [ref=e126]: ✦
-          - generic [ref=e127]:
-            - generic [ref=e128]: Real-Time Collaboration
-            - generic [ref=e129]: ✦
-          - generic [ref=e130]:
-            - generic [ref=e131]: Production-Ready Systems
-            - generic [ref=e132]: ✦
-          - generic [ref=e133]:
-            - generic [ref=e134]: Full-Stack Engineering
-            - generic [ref=e135]: ✦
-          - generic [ref=e136]:
-            - generic [ref=e137]: AI & Automation
-            - generic [ref=e138]: ✦
-          - generic [ref=e139]:
-            - generic [ref=e140]: Reliable by Design
-            - generic [ref=e141]: ✦
-          - generic [ref=e142]:
-            - generic [ref=e143]: Shipped & Running
-            - generic [ref=e144]: ✦
-      - generic [ref=e148]:
-        - generic [ref=e151]: Selected Work
-        - generic [ref=e152]:
-          - generic [ref=e153]:
-            - generic [ref=e154]: Selected Work
-            - heading "Real systems, built and shipped." [level=2] [ref=e155]
-            - paragraph [ref=e156]: A multi-module AI platform, production billing automation, and more — each one solving a real problem for real users.
-            - generic [ref=e157]:
-              - generic [ref=e158]: Scroll down or scroll wheel
-              - generic [ref=e159]: →
-          - generic [ref=e161]:
-            - generic [ref=e162]:
-              - generic [ref=e163]:
-                - generic [ref=e164]:
-                  - generic [ref=e165]: AI Platform
-                  - generic [ref=e166]: 2024–2025
-                - heading "NeuroDashboard" [level=3] [ref=e167]
-                - paragraph [ref=e168]: A multi-module AI platform that finds answers instantly across your documents and notes — plus analytics, automation, and real-time collaboration. 70k+ lines, built and shipped end to end.
-                - generic [ref=e169]:
-                  - generic [ref=e170]: React
-                  - generic [ref=e171]: Node.js / Express
-                  - generic [ref=e172]: PostgreSQL
-                  - generic [ref=e173]: Redis
-                  - generic [ref=e174]: RAG / pgvector
-                  - generic [ref=e175]: Socket.IO
-              - link "Explore case" [ref=e176]:
-                - /url: /work/neurodashboard
-                - text: Explore case
-                - img [ref=e177]
-            - generic [ref=e183]:
-              - generic [ref=e189]: SARAL BANKER // NEURODASHBOARD
-              - generic [ref=e191]:
-                - generic [ref=e192]: BUILT BY SARAL BANKER
-                - generic [ref=e193]: ©2026 // ALL RIGHTS RESERVED
-          - generic [ref=e195]:
-            - generic [ref=e196]:
-              - generic [ref=e197]:
-                - generic [ref=e198]:
-                  - generic [ref=e199]: Automation
-                  - generic [ref=e200]: 2025–2026
-                - heading "Shade Ledger" [level=3] [ref=e201]
-                - paragraph [ref=e202]: Replaced manual Excel billing and phone calls with automatic invoices, reminders, and penalty tracking — running live for 220 rental units, saving 40+ hours of manual work every month.
-                - generic [ref=e203]:
-                  - generic [ref=e204]: React
-                  - generic [ref=e205]: Node.js
-                  - generic [ref=e206]: react-pdf
-                  - generic [ref=e207]: WhatsApp Business API
-              - link "Explore case" [ref=e208]:
-                - /url: /work/shade-ledger
-                - text: Explore case
-                - img [ref=e209]
-            - generic [ref=e215]:
-              - generic [ref=e221]: SARAL BANKER // SHADE-LEDGER
-              - generic [ref=e223]:
-                - generic [ref=e224]: BUILT BY SARAL BANKER
-                - generic [ref=e225]: ©2026 // ALL RIGHTS RESERVED
-          - generic [ref=e227]:
-            - generic [ref=e228]:
-              - generic [ref=e229]:
-                - generic [ref=e230]:
-                  - generic [ref=e231]: Systems
-                  - generic [ref=e232]: "2023"
-                - heading "Smart Parking Management System" [level=3] [ref=e233]
-                - paragraph [ref=e234]: Drivers see open spots in real time and book one instantly — a full-stack system for managing live parking availability and bookings.
-                - generic [ref=e235]:
-                  - generic [ref=e236]: React
-                  - generic [ref=e237]: Node.js
-                  - generic [ref=e238]: Express
-                  - generic [ref=e239]: MongoDB
-              - link "Explore case" [ref=e240]:
-                - /url: /work/smart-parking
-                - text: Explore case
-                - img [ref=e241]
-            - generic [ref=e247]:
-              - generic [ref=e253]: SARAL BANKER // SMART-PARKING
-              - generic [ref=e255]:
-                - generic [ref=e256]: BUILT BY SARAL BANKER
-                - generic [ref=e257]: ©2026 // ALL RIGHTS RESERVED
-          - generic [ref=e259]:
-            - generic [ref=e260]:
-              - generic [ref=e261]:
-                - generic [ref=e262]:
-                  - generic [ref=e263]: Product
-                  - generic [ref=e264]: "2023"
-                - heading "Carbon Compass" [level=3] [ref=e265]
-                - paragraph [ref=e266]: Tracks your environmental footprint and shows where to cut back — a personal carbon-tracking app with actionable insights.
-                - generic [ref=e267]:
-                  - generic [ref=e268]: React
-                  - generic [ref=e269]: Node.js
-                  - generic [ref=e270]: Express
-                  - generic [ref=e271]: MongoDB
-              - link "Explore case" [ref=e272]:
-                - /url: /work/carbon-compass
-                - text: Explore case
-                - img [ref=e273]
-            - generic [ref=e279]:
-              - generic [ref=e285]: SARAL BANKER // CARBON-COMPASS
-              - generic [ref=e287]:
-                - generic [ref=e288]: BUILT BY SARAL BANKER
-                - generic [ref=e289]: ©2026 // ALL RIGHTS RESERVED
-      - generic [ref=e293]:
-        - generic [ref=e294]:
-          - generic [ref=e295]: — Systems In Motion
-          - heading "Real projects, running in production." [level=2] [ref=e296]:
-            - text: Real projects,
-            - text: running in production.
-          - paragraph [ref=e297]: Scroll horizontally for a closer look at what's actually live.
-        - generic [ref=e298]:
-          - generic [ref=e302]:
-            - generic [ref=e303]: Knowledge Hub
-            - generic [ref=e304]: ✦
-          - generic [ref=e305]:
-            - heading "Find answers instantly." [level=3] [ref=e306]
-            - paragraph [ref=e307]: Semantic search across all your documents and notes — the flagship module inside NeuroDashboard.
-        - generic [ref=e308]:
-          - generic [ref=e312]:
-            - generic [ref=e313]: Shade Ledger
-            - generic [ref=e314]: ✦
-          - generic [ref=e315]:
-            - heading "Billing that runs itself." [level=3] [ref=e316]
-            - paragraph [ref=e317]: Automatic invoices, reminders, and penalty tracking — running live for 220 rental units.
-        - generic [ref=e318]:
-          - generic [ref=e322]:
-            - generic [ref=e323]: Smart Parking
-            - generic [ref=e324]: ✦
-          - generic [ref=e325]:
-            - heading "Real-time, on demand." [level=3] [ref=e326]
-            - paragraph [ref=e327]: Drivers see open spots in real time and book one instantly.
-        - generic [ref=e329]:
-          - generic [ref=e330]: — Want To See More?
-          - heading "See what's running." [level=2] [ref=e331]:
-            - text: See what's
-            - text: running.
-          - paragraph [ref=e332]: Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture, decisions, and what's still on the roadmap.
-          - link "See Selected Work" [ref=e333]:
-            - /url: /work
-            - text: See Selected Work
-            - img [ref=e334]
-      - generic [ref=e338]:
-        - paragraph [ref=e339]: THE CORE BELIEF
-        - generic [ref=e340]:
-          - generic:
-            - generic:
-              - generic: if
-              - generic: it
-              - generic: doesn't
-              - generic: run
-            - generic:
-              - generic: in
-              - generic: production
-          - generic [ref=e346]: Production System // Log. 01
-        - generic [ref=e348]:
-          - paragraph [ref=e349]: Most software stays a prototype. The systems here are different — they're live, in use, and solving real problems for real people, today.
-          - button "see what's running see what's running" [ref=e350]:
-            - generic [ref=e352]:
-              - generic [ref=e353]: see what's running
-              - generic [ref=e354]: see what's running
-      - generic [ref=e357]:
-        - generic [ref=e358]:
-          - generic [ref=e359]: "01"
-          - generic [ref=e360]: — Core Belief
-        - generic [ref=e361]:
-          - generic [ref=e363]:
-            - generic [ref=e364]: Most
-            - generic [ref=e365]: software
-            - generic [ref=e366]: stays
-            - generic [ref=e367]: a
-            - generic [ref=e368]: demo
-            - generic [ref=e369]: —
-            - generic [ref=e370]: a
-            - generic [ref=e371]: prototype
-            - generic [ref=e372]: that
-            - generic [ref=e373]: never
-            - generic [ref=e374]: reaches
-            - generic [ref=e375]: a
-            - generic [ref=e376]: real
-            - generic [ref=e377]: user.
-          - generic [ref=e379]:
-            - generic [ref=e380]: Shipping
-            - generic [ref=e381]: the
-            - generic [ref=e382]: whole
-            - generic [ref=e383]: stack,
-            - generic [ref=e384]: database
-            - generic [ref=e385]: to
-            - generic [ref=e386]: deployment,
-            - generic [ref=e387]: is
-            - generic [ref=e388]: what
-            - generic [ref=e389]: turns
-            - generic [ref=e390]: a
-            - generic [ref=e391]: prototype
-            - generic [ref=e392]: into
-            - generic [ref=e393]: a
-            - generic [ref=e394]: product.
-          - generic [ref=e396]:
-            - generic [ref=e397]: Real
-            - generic [ref=e398]: systems
-            - generic [ref=e399]: run
-            - generic [ref=e400]: for
-            - generic [ref=e401]: real
-            - generic [ref=e402]: people,
-            - generic [ref=e403]: every
-            - generic [ref=e404]: day
-            - generic [ref=e405]: —
-            - generic [ref=e406]: Shade
-            - generic [ref=e407]: Ledger
-            - generic [ref=e408]: has
-            - generic [ref=e409]: billed
-            - generic [ref=e410]: "220"
-            - generic [ref=e411]: rental
-            - generic [ref=e412]: units,
-            - generic [ref=e413]: automatically,
-            - generic [ref=e414]: every
-            - generic [ref=e415]: month,
-            - generic [ref=e416]: for
-            - generic [ref=e417]: over
-            - generic [ref=e418]: a
-            - generic [ref=e419]: year.
-          - paragraph [ref=e421]:
-            - generic [ref=e422]:
-              - generic [ref=e423]: If
-              - generic [ref=e424]: it
-              - generic [ref=e425]: doesn't
-              - generic [ref=e426]: run
-              - generic [ref=e427]: in
-              - generic [ref=e428]: production,
-              - generic [ref=e429]: it
-              - generic [ref=e430]: doesn't
-              - generic [ref=e431]: count.
-      - generic [ref=e434]:
-        - generic [ref=e436]:
-          - generic [ref=e437]: "0"
-          - generic [ref=e438]: Production systems, built end to end
-        - generic [ref=e440]:
-          - generic [ref=e441]: "0"
-          - generic [ref=e442]: Rental units on automated billing
-        - generic [ref=e444]:
-          - generic [ref=e446]: 0+
-          - generic [ref=e447]: Hours of manual work saved monthly
-        - generic [ref=e449]:
-          - generic [ref=e450]: "0"
-          - generic [ref=e451]: Paid contract, delivered solo
-      - generic [ref=e454]:
-        - heading "L e t ' s b u i l d s o m e t h i n g t h a t s h i p s ." [level=2] [ref=e455]:
-          - generic [ref=e456]:
-            - generic [ref=e457]:
-              - generic [ref=e458]:
-                - generic [ref=e459]: L
-                - generic [ref=e460]: e
-                - generic [ref=e461]: t
-                - generic [ref=e462]: "'"
-                - generic [ref=e463]: s
-              - generic [ref=e464]:
-                - generic [ref=e465]: b
-                - generic [ref=e466]: u
-                - generic [ref=e467]: i
-                - generic [ref=e468]: l
-                - generic [ref=e469]: d
-            - emphasis [ref=e470]:
-              - generic [ref=e471]:
-                - generic [ref=e472]:
-                  - generic [ref=e473]: s
-                  - generic [ref=e474]: o
-                  - generic [ref=e475]: m
-                  - generic [ref=e476]: e
-                  - generic [ref=e477]: t
-                  - generic [ref=e478]: h
-                  - generic [ref=e479]: i
-                  - generic [ref=e480]: "n"
-                  - generic [ref=e481]: g
-                - generic [ref=e482]:
-                  - generic [ref=e483]: t
-                  - generic [ref=e484]: h
-                  - generic [ref=e485]: a
-                  - generic [ref=e486]: t
-                - generic [ref=e487]:
-                  - generic [ref=e488]: s
-                  - generic [ref=e489]: h
-                  - generic [ref=e490]: i
-                  - generic [ref=e491]: p
-                  - generic [ref=e492]: s
-                  - generic [ref=e493]: .
-        - paragraph [ref=e494]: If you've got something worth building, I'd like to hear about it — and help take it from idea to something running in production.
-        - link "Get in touch" [ref=e496]:
-          - /url: /contact
-          - text: Get in touch
-          - img [ref=e497]
-  - contentinfo [ref=e499]:
-    - generic [ref=e500]:
-      - generic [ref=e502]:
-        - link "GitHub" [ref=e504]:
-          - /url: https://github.com/saralbanker
-          - img [ref=e506]
-        - link "Email" [ref=e510]:
-          - /url: mailto:saralbanker1@gmail.com
-          - img [ref=e512]
-      - generic [ref=e515]:
-        - generic [ref=e516]:
-          - link "SARAL BANKER" [ref=e517]:
-            - /url: /
-            - generic [ref=e520]: SARAL BANKER
-          - paragraph [ref=e521]: Product engineer. I design, build, and ship complete systems — database to deployment.
-        - generic [ref=e522]:
-          - paragraph [ref=e523]: Work
-          - list [ref=e524]:
-            - listitem [ref=e525]:
-              - link "About" [ref=e526]:
-                - /url: /about
-            - listitem [ref=e527]:
-              - link "Process" [ref=e528]:
-                - /url: /process
-        - generic [ref=e529]:
-          - paragraph [ref=e530]: Connect
-          - list [ref=e531]:
-            - listitem [ref=e532]:
-              - link "Selected Work" [ref=e533]:
-                - /url: /work
-            - listitem [ref=e534]:
-              - link "Contact" [ref=e535]:
-                - /url: /contact
-          - list [ref=e536]:
-            - listitem [ref=e537]:
-              - img [ref=e538]
-              - text: saralbanker1@gmail.com
-            - listitem [ref=e541]:
-              - img [ref=e542]
-              - text: India
-      - generic [ref=e547]:
-        - generic [ref=e548]: SHIP
-        - generic [ref=e549]: SARAL
-      - generic [ref=e550]:
-        - paragraph [ref=e551]: © 2026 Saral Banker.
-        - paragraph [ref=e552]: If it doesn't run in production, it doesn't count.
+    - link "Skip to content" [ref=e3]:
+        - /url: "#main-content"
+    - generic:
+        - generic: THEME
+    - banner [ref=e4]:
+        - generic [ref=e5]:
+            - link "SARAL BANKER" [ref=e6]:
+                - /url: /
+                - generic [ref=e9]: SARAL BANKER
+            - navigation [ref=e10]:
+                - link "Work" [ref=e11]:
+                    - /url: /work
+                - link "Process" [ref=e12]:
+                    - /url: /process
+                - link "About" [ref=e13]:
+                    - /url: /about
+                - link "Contact" [ref=e14]:
+                    - /url: /contact
+            - generic [ref=e15]:
+                - button "Switch to dark mode" [active] [ref=e555]:
+                    - img [ref=e17]
+                - link "Let's talk →" [ref=e23]:
+                    - /url: /contact
+    - main [ref=e24]:
+        - generic [ref=e26]:
+            - generic [ref=e27]:
+                - 'heading "Saral Banker — Product Engineer. Useful over impressive: I build software that solves real problems — from business automation to AI-powered platforms. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units." [level=1] [ref=e28]'
+                - generic [ref=e29]:
+                    - generic [ref=e30]: Saral Banker — Product Engineer // India
+                    - generic [ref=e31]: Open to new projects
+                - generic [ref=e34]:
+                    - generic [ref=e35]:
+                        - heading "Hi, I'm Saral Banker." [level=2] [ref=e36]
+                        - paragraph [ref=e37]: I build software that solves real problems.
+                        - paragraph [ref=e38]: From business automation to AI-powered platforms — I design, build, and ship production systems that people actually use. Database to deployment, no shortcuts.
+                        - generic [ref=e39]:
+                            - link "View Projects" [ref=e40]:
+                                - /url: /work
+                            - link "Resume" [ref=e41]:
+                                - /url: /Saral_Banker_Resume.pdf
+                                - text: Resume
+                                - img [ref=e42]
+                        - generic [ref=e45]:
+                            - generic [ref=e46]:
+                                - generic [ref=e47]: "2"
+                                - generic [ref=e48]: Production systems shipped
+                            - generic [ref=e49]:
+                                - generic [ref=e50]: 220+
+                                - generic [ref=e51]: Rental units automated
+                            - generic [ref=e52]:
+                                - generic [ref=e53]: 40+
+                                - generic [ref=e54]: Hours saved every month
+                            - generic [ref=e55]:
+                                - generic [ref=e56]: 100%
+                                - generic [ref=e57]: Built for production
+                    - generic [ref=e59]:
+                        - generic [ref=e60]:
+                            - generic [ref=e63]: NeuroDashboard
+                            - generic [ref=e64]: Currently Building
+                        - generic [ref=e65]:
+                            - paragraph [ref=e66]: Welcome back, Saral. Here's what's running right now.
+                            - generic [ref=e67]:
+                                - generic [ref=e68]:
+                                    - generic [ref=e69]: 12,543
+                                    - generic [ref=e70]: Docs indexed
+                                - generic [ref=e71]:
+                                    - generic [ref=e72]: 1,247
+                                    - generic [ref=e73]: Queries / day
+                                - generic [ref=e74]:
+                                    - generic [ref=e75]: 99.6%
+                                    - generic [ref=e76]: Uptime
+                            - img [ref=e78]
+                            - generic [ref=e81]:
+                                - generic [ref=e82]:
+                                    - generic [ref=e83]: Knowledge Hub indexed 312 documents
+                                    - generic [ref=e84]: 2m ago
+                                - generic [ref=e85]:
+                                    - generic [ref=e86]: Shade Ledger sent 18 invoices
+                                    - generic [ref=e87]: 1h ago
+                                - generic [ref=e88]:
+                                    - generic [ref=e89]: Workflow automation run completed
+                                    - generic [ref=e90]: 3h ago
+            - generic [ref=e94]:
+                - generic [ref=e95]:
+                    - generic [ref=e96]:
+                        - generic [ref=e97]: Find Answers Instantly
+                        - generic [ref=e98]: ✦
+                    - generic [ref=e99]:
+                        - generic [ref=e100]: Automate Manual Work
+                        - generic [ref=e101]: ✦
+                    - generic [ref=e102]:
+                        - generic [ref=e103]: Real-Time Collaboration
+                        - generic [ref=e104]: ✦
+                    - generic [ref=e105]:
+                        - generic [ref=e106]: Production-Ready Systems
+                        - generic [ref=e107]: ✦
+                    - generic [ref=e108]:
+                        - generic [ref=e109]: Full-Stack Engineering
+                        - generic [ref=e110]: ✦
+                    - generic [ref=e111]:
+                        - generic [ref=e112]: AI & Automation
+                        - generic [ref=e113]: ✦
+                    - generic [ref=e114]:
+                        - generic [ref=e115]: Reliable by Design
+                        - generic [ref=e116]: ✦
+                    - generic [ref=e117]:
+                        - generic [ref=e118]: Shipped & Running
+                        - generic [ref=e119]: ✦
+                - generic [ref=e120]:
+                    - generic [ref=e121]:
+                        - generic [ref=e122]: Find Answers Instantly
+                        - generic [ref=e123]: ✦
+                    - generic [ref=e124]:
+                        - generic [ref=e125]: Automate Manual Work
+                        - generic [ref=e126]: ✦
+                    - generic [ref=e127]:
+                        - generic [ref=e128]: Real-Time Collaboration
+                        - generic [ref=e129]: ✦
+                    - generic [ref=e130]:
+                        - generic [ref=e131]: Production-Ready Systems
+                        - generic [ref=e132]: ✦
+                    - generic [ref=e133]:
+                        - generic [ref=e134]: Full-Stack Engineering
+                        - generic [ref=e135]: ✦
+                    - generic [ref=e136]:
+                        - generic [ref=e137]: AI & Automation
+                        - generic [ref=e138]: ✦
+                    - generic [ref=e139]:
+                        - generic [ref=e140]: Reliable by Design
+                        - generic [ref=e141]: ✦
+                    - generic [ref=e142]:
+                        - generic [ref=e143]: Shipped & Running
+                        - generic [ref=e144]: ✦
+            - generic [ref=e148]:
+                - generic [ref=e151]: Selected Work
+                - generic [ref=e152]:
+                    - generic [ref=e153]:
+                        - generic [ref=e154]: Selected Work
+                        - heading "Real systems, built and shipped." [level=2] [ref=e155]
+                        - paragraph [ref=e156]: A multi-module AI platform, production billing automation, and more — each one solving a real problem for real users.
+                        - generic [ref=e157]:
+                            - generic [ref=e158]: Scroll down or scroll wheel
+                            - generic [ref=e159]: →
+                    - generic [ref=e161]:
+                        - generic [ref=e162]:
+                            - generic [ref=e163]:
+                                - generic [ref=e164]:
+                                    - generic [ref=e165]: AI Platform
+                                    - generic [ref=e166]: 2024–2025
+                                - heading "NeuroDashboard" [level=3] [ref=e167]
+                                - paragraph [ref=e168]: A multi-module AI platform that finds answers instantly across your documents and notes — plus analytics, automation, and real-time collaboration. 70k+ lines, built and shipped end to end.
+                                - generic [ref=e169]:
+                                    - generic [ref=e170]: React
+                                    - generic [ref=e171]: Node.js / Express
+                                    - generic [ref=e172]: PostgreSQL
+                                    - generic [ref=e173]: Redis
+                                    - generic [ref=e174]: RAG / pgvector
+                                    - generic [ref=e175]: Socket.IO
+                            - link "Explore case" [ref=e176]:
+                                - /url: /work/neurodashboard
+                                - text: Explore case
+                                - img [ref=e177]
+                        - generic [ref=e183]:
+                            - generic [ref=e189]: SARAL BANKER // NEURODASHBOARD
+                            - generic [ref=e191]:
+                                - generic [ref=e192]: BUILT BY SARAL BANKER
+                                - generic [ref=e193]: ©2026 // ALL RIGHTS RESERVED
+                    - generic [ref=e195]:
+                        - generic [ref=e196]:
+                            - generic [ref=e197]:
+                                - generic [ref=e198]:
+                                    - generic [ref=e199]: Automation
+                                    - generic [ref=e200]: 2025–2026
+                                - heading "Shade Ledger" [level=3] [ref=e201]
+                                - paragraph [ref=e202]: Replaced manual Excel billing and phone calls with automatic invoices, reminders, and penalty tracking — running live for 220 rental units, saving 40+ hours of manual work every month.
+                                - generic [ref=e203]:
+                                    - generic [ref=e204]: React
+                                    - generic [ref=e205]: Node.js
+                                    - generic [ref=e206]: react-pdf
+                                    - generic [ref=e207]: WhatsApp Business API
+                            - link "Explore case" [ref=e208]:
+                                - /url: /work/shade-ledger
+                                - text: Explore case
+                                - img [ref=e209]
+                        - generic [ref=e215]:
+                            - generic [ref=e221]: SARAL BANKER // SHADE-LEDGER
+                            - generic [ref=e223]:
+                                - generic [ref=e224]: BUILT BY SARAL BANKER
+                                - generic [ref=e225]: ©2026 // ALL RIGHTS RESERVED
+                    - generic [ref=e227]:
+                        - generic [ref=e228]:
+                            - generic [ref=e229]:
+                                - generic [ref=e230]:
+                                    - generic [ref=e231]: Systems
+                                    - generic [ref=e232]: "2023"
+                                - heading "Smart Parking Management System" [level=3] [ref=e233]
+                                - paragraph [ref=e234]: Drivers see open spots in real time and book one instantly — a full-stack system for managing live parking availability and bookings.
+                                - generic [ref=e235]:
+                                    - generic [ref=e236]: React
+                                    - generic [ref=e237]: Node.js
+                                    - generic [ref=e238]: Express
+                                    - generic [ref=e239]: MongoDB
+                            - link "Explore case" [ref=e240]:
+                                - /url: /work/smart-parking
+                                - text: Explore case
+                                - img [ref=e241]
+                        - generic [ref=e247]:
+                            - generic [ref=e253]: SARAL BANKER // SMART-PARKING
+                            - generic [ref=e255]:
+                                - generic [ref=e256]: BUILT BY SARAL BANKER
+                                - generic [ref=e257]: ©2026 // ALL RIGHTS RESERVED
+                    - generic [ref=e259]:
+                        - generic [ref=e260]:
+                            - generic [ref=e261]:
+                                - generic [ref=e262]:
+                                    - generic [ref=e263]: Product
+                                    - generic [ref=e264]: "2023"
+                                - heading "Carbon Compass" [level=3] [ref=e265]
+                                - paragraph [ref=e266]: Tracks your environmental footprint and shows where to cut back — a personal carbon-tracking app with actionable insights.
+                                - generic [ref=e267]:
+                                    - generic [ref=e268]: React
+                                    - generic [ref=e269]: Node.js
+                                    - generic [ref=e270]: Express
+                                    - generic [ref=e271]: MongoDB
+                            - link "Explore case" [ref=e272]:
+                                - /url: /work/carbon-compass
+                                - text: Explore case
+                                - img [ref=e273]
+                        - generic [ref=e279]:
+                            - generic [ref=e285]: SARAL BANKER // CARBON-COMPASS
+                            - generic [ref=e287]:
+                                - generic [ref=e288]: BUILT BY SARAL BANKER
+                                - generic [ref=e289]: ©2026 // ALL RIGHTS RESERVED
+            - generic [ref=e293]:
+                - generic [ref=e294]:
+                    - generic [ref=e295]: — Systems In Motion
+                    - heading "Real projects, running in production." [level=2] [ref=e296]:
+                        - text: Real projects,
+                        - text: running in production.
+                    - paragraph [ref=e297]: Scroll horizontally for a closer look at what's actually live.
+                - generic [ref=e298]:
+                    - generic [ref=e302]:
+                        - generic [ref=e303]: Knowledge Hub
+                        - generic [ref=e304]: ✦
+                    - generic [ref=e305]:
+                        - heading "Find answers instantly." [level=3] [ref=e306]
+                        - paragraph [ref=e307]: Semantic search across all your documents and notes — the flagship module inside NeuroDashboard.
+                - generic [ref=e308]:
+                    - generic [ref=e312]:
+                        - generic [ref=e313]: Shade Ledger
+                        - generic [ref=e314]: ✦
+                    - generic [ref=e315]:
+                        - heading "Billing that runs itself." [level=3] [ref=e316]
+                        - paragraph [ref=e317]: Automatic invoices, reminders, and penalty tracking — running live for 220 rental units.
+                - generic [ref=e318]:
+                    - generic [ref=e322]:
+                        - generic [ref=e323]: Smart Parking
+                        - generic [ref=e324]: ✦
+                    - generic [ref=e325]:
+                        - heading "Real-time, on demand." [level=3] [ref=e326]
+                        - paragraph [ref=e327]: Drivers see open spots in real time and book one instantly.
+                - generic [ref=e329]:
+                    - generic [ref=e330]: — Want To See More?
+                    - heading "See what's running." [level=2] [ref=e331]:
+                        - text: See what's
+                        - text: running.
+                    - paragraph [ref=e332]: Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture, decisions, and what's still on the roadmap.
+                    - link "See Selected Work" [ref=e333]:
+                        - /url: /work
+                        - text: See Selected Work
+                        - img [ref=e334]
+            - generic [ref=e338]:
+                - paragraph [ref=e339]: THE CORE BELIEF
+                - generic [ref=e340]:
+                    - generic:
+                        - generic:
+                            - generic: if
+                            - generic: it
+                            - generic: doesn't
+                            - generic: run
+                        - generic:
+                            - generic: in
+                            - generic: production
+                    - generic [ref=e346]: Production System // Log. 01
+                - generic [ref=e348]:
+                    - paragraph [ref=e349]: Most software stays a prototype. The systems here are different — they're live, in use, and solving real problems for real people, today.
+                    - button "see what's running see what's running" [ref=e350]:
+                        - generic [ref=e352]:
+                            - generic [ref=e353]: see what's running
+                            - generic [ref=e354]: see what's running
+            - generic [ref=e357]:
+                - generic [ref=e358]:
+                    - generic [ref=e359]: "01"
+                    - generic [ref=e360]: — Core Belief
+                - generic [ref=e361]:
+                    - generic [ref=e363]:
+                        - generic [ref=e364]: Most
+                        - generic [ref=e365]: software
+                        - generic [ref=e366]: stays
+                        - generic [ref=e367]: a
+                        - generic [ref=e368]: demo
+                        - generic [ref=e369]: —
+                        - generic [ref=e370]: a
+                        - generic [ref=e371]: prototype
+                        - generic [ref=e372]: that
+                        - generic [ref=e373]: never
+                        - generic [ref=e374]: reaches
+                        - generic [ref=e375]: a
+                        - generic [ref=e376]: real
+                        - generic [ref=e377]: user.
+                    - generic [ref=e379]:
+                        - generic [ref=e380]: Shipping
+                        - generic [ref=e381]: the
+                        - generic [ref=e382]: whole
+                        - generic [ref=e383]: stack,
+                        - generic [ref=e384]: database
+                        - generic [ref=e385]: to
+                        - generic [ref=e386]: deployment,
+                        - generic [ref=e387]: is
+                        - generic [ref=e388]: what
+                        - generic [ref=e389]: turns
+                        - generic [ref=e390]: a
+                        - generic [ref=e391]: prototype
+                        - generic [ref=e392]: into
+                        - generic [ref=e393]: a
+                        - generic [ref=e394]: product.
+                    - generic [ref=e396]:
+                        - generic [ref=e397]: Real
+                        - generic [ref=e398]: systems
+                        - generic [ref=e399]: run
+                        - generic [ref=e400]: for
+                        - generic [ref=e401]: real
+                        - generic [ref=e402]: people,
+                        - generic [ref=e403]: every
+                        - generic [ref=e404]: day
+                        - generic [ref=e405]: —
+                        - generic [ref=e406]: Shade
+                        - generic [ref=e407]: Ledger
+                        - generic [ref=e408]: has
+                        - generic [ref=e409]: billed
+                        - generic [ref=e410]: "220"
+                        - generic [ref=e411]: rental
+                        - generic [ref=e412]: units,
+                        - generic [ref=e413]: automatically,
+                        - generic [ref=e414]: every
+                        - generic [ref=e415]: month,
+                        - generic [ref=e416]: for
+                        - generic [ref=e417]: over
+                        - generic [ref=e418]: a
+                        - generic [ref=e419]: year.
+                    - paragraph [ref=e421]:
+                        - generic [ref=e422]:
+                            - generic [ref=e423]: If
+                            - generic [ref=e424]: it
+                            - generic [ref=e425]: doesn't
+                            - generic [ref=e426]: run
+                            - generic [ref=e427]: in
+                            - generic [ref=e428]: production,
+                            - generic [ref=e429]: it
+                            - generic [ref=e430]: doesn't
+                            - generic [ref=e431]: count.
+            - generic [ref=e434]:
+                - generic [ref=e436]:
+                    - generic [ref=e437]: "0"
+                    - generic [ref=e438]: Production systems, built end to end
+                - generic [ref=e440]:
+                    - generic [ref=e441]: "0"
+                    - generic [ref=e442]: Rental units on automated billing
+                - generic [ref=e444]:
+                    - generic [ref=e446]: 0+
+                    - generic [ref=e447]: Hours of manual work saved monthly
+                - generic [ref=e449]:
+                    - generic [ref=e450]: "0"
+                    - generic [ref=e451]: Paid contract, delivered solo
+            - generic [ref=e454]:
+                - heading "L e t ' s b u i l d s o m e t h i n g t h a t s h i p s ." [level=2] [ref=e455]:
+                    - generic [ref=e456]:
+                        - generic [ref=e457]:
+                            - generic [ref=e458]:
+                                - generic [ref=e459]: L
+                                - generic [ref=e460]: e
+                                - generic [ref=e461]: t
+                                - generic [ref=e462]: "'"
+                                - generic [ref=e463]: s
+                            - generic [ref=e464]:
+                                - generic [ref=e465]: b
+                                - generic [ref=e466]: u
+                                - generic [ref=e467]: i
+                                - generic [ref=e468]: l
+                                - generic [ref=e469]: d
+                        - emphasis [ref=e470]:
+                            - generic [ref=e471]:
+                                - generic [ref=e472]:
+                                    - generic [ref=e473]: s
+                                    - generic [ref=e474]: o
+                                    - generic [ref=e475]: m
+                                    - generic [ref=e476]: e
+                                    - generic [ref=e477]: t
+                                    - generic [ref=e478]: h
+                                    - generic [ref=e479]: i
+                                    - generic [ref=e480]: "n"
+                                    - generic [ref=e481]: g
+                                - generic [ref=e482]:
+                                    - generic [ref=e483]: t
+                                    - generic [ref=e484]: h
+                                    - generic [ref=e485]: a
+                                    - generic [ref=e486]: t
+                                - generic [ref=e487]:
+                                    - generic [ref=e488]: s
+                                    - generic [ref=e489]: h
+                                    - generic [ref=e490]: i
+                                    - generic [ref=e491]: p
+                                    - generic [ref=e492]: s
+                                    - generic [ref=e493]: .
+                - paragraph [ref=e494]: If you've got something worth building, I'd like to hear about it — and help take it from idea to something running in production.
+                - link "Get in touch" [ref=e496]:
+                    - /url: /contact
+                    - text: Get in touch
+                    - img [ref=e497]
+    - contentinfo [ref=e499]:
+        - generic [ref=e500]:
+            - generic [ref=e502]:
+                - link "GitHub" [ref=e504]:
+                    - /url: https://github.com/saralbanker
+                    - img [ref=e506]
+                - link "Email" [ref=e510]:
+                    - /url: mailto:saralbanker1@gmail.com
+                    - img [ref=e512]
+            - generic [ref=e515]:
+                - generic [ref=e516]:
+                    - link "SARAL BANKER" [ref=e517]:
+                        - /url: /
+                        - generic [ref=e520]: SARAL BANKER
+                    - paragraph [ref=e521]: Product engineer. I design, build, and ship complete systems — database to deployment.
+                - generic [ref=e522]:
+                    - paragraph [ref=e523]: Work
+                    - list [ref=e524]:
+                        - listitem [ref=e525]:
+                            - link "About" [ref=e526]:
+                                - /url: /about
+                        - listitem [ref=e527]:
+                            - link "Process" [ref=e528]:
+                                - /url: /process
+                - generic [ref=e529]:
+                    - paragraph [ref=e530]: Connect
+                    - list [ref=e531]:
+                        - listitem [ref=e532]:
+                            - link "Selected Work" [ref=e533]:
+                                - /url: /work
+                        - listitem [ref=e534]:
+                            - link "Contact" [ref=e535]:
+                                - /url: /contact
+                    - list [ref=e536]:
+                        - listitem [ref=e537]:
+                            - img [ref=e538]
+                            - text: saralbanker1@gmail.com
+                        - listitem [ref=e541]:
+                            - img [ref=e542]
+                            - text: India
+            - generic [ref=e547]:
+                - generic [ref=e548]: SHIP
+                - generic [ref=e549]: SARAL
+            - generic [ref=e550]:
+                - paragraph [ref=e551]: © 2026 Saral Banker.
+                - paragraph [ref=e552]: If it doesn't run in production, it doesn't count.

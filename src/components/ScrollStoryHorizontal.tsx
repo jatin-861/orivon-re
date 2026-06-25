@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
 import { Project } from "@/data/projects";
 import { SpotlightCard } from "./SpotlightCard";
 import { InteractiveGrid2D } from "./InteractiveGrid2D";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useHorizontalScrollCarousel } from "@/hooks/useHorizontalScrollCarousel";
 
 interface ScrollStoryHorizontalProps {
   projects: Project[];
@@ -33,10 +28,8 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   const [counter, setCounter] = useState("");
   const [onIntro, setOnIntro] = useState(true);
 
-  // Desktop = mouse-driven. Only there do we use the GSAP pinned scroll that
-  // converts vertical scroll into horizontal motion. On touch that mechanism
-  // fights Lenis (which preventDefaults touch to smooth-scroll) and never snaps
-  // to a card — so phones get a real native scroll-snap carousel instead.
+  // Only used to pick the right hint copy ("drag" vs "swipe") and to enable
+  // mouse drag-to-scroll, which touch devices don't need (they drag natively).
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px) and (pointer: fine)");
@@ -46,8 +39,6 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Helper shared by both modes: reflect the active slide index in the counter,
-  // the intro-label visibility, and the color-bleed overlay.
   const setActiveSlide = (i: number) => {
     if (bleedRef.current) {
       bleedRef.current.style.backgroundColor = BLEED_COLORS[i] ?? BLEED_COLORS[0];
@@ -61,9 +52,10 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
     }
   };
 
-  // ── MOBILE: native horizontal scroll-snap ──────────────────────────────────
+  // This is a real native horizontal scroll-snap carousel on every device — no
+  // scroll-jacking. Vertical page scroll is never hijacked; you browse the
+  // cards yourself via touch swipe, trackpad/shift+wheel, or mouse drag.
   useEffect(() => {
-    if (isDesktop) return;
     const scroller = scrollRef.current;
     if (!scroller) return;
 
@@ -85,157 +77,14 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
 
     return () => io.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDesktop, projects]);
+  }, [projects]);
 
-  // Mirrors the desktop "no-blur-scrub" mitigation: real native momentum scroll
-  // on a phone drives this just as fast as GSAP's scrub does on desktop, and
-  // backdrop-filter is the same expensive-to-recomposite cost on mobile GPUs —
-  // it's the leading cause of scroll stutter/jiggle during a fast swipe.
-  useEffect(() => {
-    if (isDesktop) return;
-    const scroller = scrollRef.current;
-    const container = containerRef.current;
-    if (!scroller || !container) return;
-
-    const FAST_SCROLL_PX_PER_SEC = 900;
-    let lastX = scroller.scrollLeft;
-    let lastT = performance.now();
-    let blurResumeTimeout: number;
-
-    const onScroll = () => {
-      const now = performance.now();
-      const dt = now - lastT;
-      if (dt > 0) {
-        const velocity = Math.abs(scroller.scrollLeft - lastX) / (dt / 1000);
-        if (velocity > FAST_SCROLL_PX_PER_SEC) {
-          container.classList.add("no-blur-scrub");
-        }
-      }
-      lastX = scroller.scrollLeft;
-      lastT = now;
-      clearTimeout(blurResumeTimeout);
-      blurResumeTimeout = window.setTimeout(() => {
-        container.classList.remove("no-blur-scrub");
-      }, 150);
-    };
-
-    scroller.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      clearTimeout(blurResumeTimeout);
-      scroller.removeEventListener("scroll", onScroll);
-    };
-  }, [isDesktop]);
-
-  // ── DESKTOP: GSAP pinned vertical-drives-horizontal scroll ──────────────────
-  useEffect(() => {
-    if (!isDesktop) return;
-    const container = containerRef.current;
-    const scrollSection = scrollRef.current;
-    if (!container || !scrollSection) return;
-
-    const scrollAmount = scrollSection.scrollWidth - window.innerWidth;
-
-    // backdrop-filter is the single most expensive thing to recomposite every
-    // frame — drop it while scrolling fast and restore it once motion settles.
-    let blurResumeTimeout: number;
-    const FAST_SCROLL_PX_PER_SEC = 900;
-    const onScrollVelocity = (self: { getVelocity: () => number }) => {
-      if (Math.abs(self.getVelocity()) > FAST_SCROLL_PX_PER_SEC) {
-        container.classList.add("no-blur-scrub");
-      }
-      clearTimeout(blurResumeTimeout);
-      blurResumeTimeout = window.setTimeout(() => {
-        container.classList.remove("no-blur-scrub");
-      }, 150);
-    };
-
-    const ctx = gsap.context(() => {
-      // 1. Horizontal Scroll Animation
-      const horizontalTween = gsap.to(scrollSection, {
-        x: () => -(scrollSection.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: container,
-          pin: true,
-          pinType: "transform",
-          // Lenis already lags/eases the raw wheel input by ~1.2s before ScrollTrigger
-          // sees it. Adding a second independent scrub lag on top made two easing
-          // systems chase each other, which is what produced the rubber-band
-          // jiggle/stuck feeling on this section. scrub: true tracks the
-          // (already-smoothed) Lenis position 1:1 instead of re-lagging it.
-          scrub: true,
-          start: "top top",
-          end: () => `+=${(scrollSection.scrollWidth - window.innerWidth) * 1.5}`,
-          invalidateOnRefresh: true,
-          onUpdate: onScrollVelocity,
-        },
-      });
-
-      // 2. Card Skew based on Scroll Velocity
-      const skewProxy = { skew: 0 };
-      const skewSetter = gsap.quickSetter("[data-skew-card]", "skewX", "deg");
-      const clamp = gsap.utils.clamp(-6, 6);
-
-      ScrollTrigger.create({
-        trigger: container,
-        start: "top top",
-        end: () => `+=${scrollAmount * 1.5}`,
-        onUpdate: (self) => {
-          const skew = clamp(self.getVelocity() / 350);
-          if (Math.abs(skew) > Math.abs(skewProxy.skew)) {
-            skewProxy.skew = skew;
-            gsap.to(skewProxy, {
-              skew: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              overwrite: "auto",
-              onUpdate: () => skewSetter(skewProxy.skew),
-            });
-          }
-        },
-      });
-
-      // 3. Bleed Background & Counter per slide
-      const panels = gsap.utils.toArray<Element>("[data-panel]");
-      panels.forEach((el, i) => {
-        ScrollTrigger.create({
-          trigger: el,
-          containerAnimation: horizontalTween,
-          start: "left center",
-          end: "right center",
-          onToggle: (self) => {
-            if (self.isActive) setActiveSlide(i);
-          },
-        });
-
-        // 4. Mockup Content Inner Parallax
-        const parallaxInner = el.querySelector("[data-parallax-inner]");
-        if (parallaxInner) {
-          gsap.fromTo(
-            parallaxInner,
-            { x: -35 },
-            {
-              x: 35,
-              ease: "none",
-              scrollTrigger: {
-                trigger: el,
-                containerAnimation: horizontalTween,
-                start: "left right",
-                end: "right left",
-                scrub: true,
-              },
-            },
-          );
-        }
-      });
-    }, container);
-
-    return () => {
-      clearTimeout(blurResumeTimeout);
-      ctx.revert();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDesktop, projects]);
+  // backdrop-filter is the single most expensive thing to recomposite every
+  // frame — drop it while scrolling fast and restore it once motion settles.
+  useHorizontalScrollCarousel(scrollRef, {
+    enableDrag: isDesktop,
+    onFastScrollChange: (fast) => containerRef.current?.classList.toggle("no-blur-scrub", fast),
+  });
 
   // Premium glassmorphic brand backgrounds with high-contrast text color combinations.
   // The dark text shades only read against a light cream background — on the dark theme's
@@ -294,23 +143,17 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         </div>
       )}
 
-      {/* Track. Desktop: a w-max flex row that GSAP translates horizontally.
-          Mobile: a real native scroll-snap carousel — data-lenis-prevent stops
-          the global Lenis smooth-scroll from swallowing the horizontal swipe,
-          which is what previously made it impossible to settle on one card.
-          touch-pan-x tells the OS gesture recognizer up front that this element
-          only pans horizontally — without it, the browser has to guess the
-          gesture's axis on every touch, and that ambiguity window is what
-          produced the vertical rubber-band judder ("up-down jiggle") and the
-          occasional dead/stuck swipe right as a touch began. */}
+      {/* Track: a real native scroll-snap carousel on every breakpoint.
+          data-lenis-prevent stops the global Lenis smooth-scroll from
+          swallowing the swipe/drag. touch-pan-x tells the OS gesture
+          recognizer up front that this element only pans horizontally —
+          without it the browser has to guess the gesture's axis on every
+          touch, which is what produced the vertical rubber-band judder and
+          occasional dead/stuck swipes. */}
       <div
         ref={scrollRef}
-        {...(!isDesktop && { "data-lenis-prevent": true })}
-        className={
-          isDesktop
-            ? "flex h-full w-max items-center relative z-10"
-            : "flex items-stretch relative z-10 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x px-4 gap-4"
-        }
+        data-lenis-prevent
+        className="flex h-auto md:h-full items-stretch md:items-center relative z-10 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x cursor-grab active:cursor-grabbing px-4 md:px-0 gap-4 md:gap-0"
       >
         {/* Intro Slide */}
         <div
@@ -329,7 +172,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             real problem for real users.
           </p>
           <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-foreground/50">
-            <span className="md:inline hidden">Scroll down or scroll wheel</span>
+            <span className="md:inline hidden">Drag or scroll to explore</span>
             <span className="md:hidden inline">Swipe to explore</span>
             <span className="text-secondary text-lg animate-bounce-horizontal">→</span>
           </div>
@@ -346,8 +189,8 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
               className="w-[88vw] md:w-screen h-auto md:h-[100svh] flex-shrink-0 snap-start md:snap-center snap-always flex items-center justify-center px-2 md:px-16"
             >
               <div
-                data-skew-card
-                className={`w-full max-w-6xl md:aspect-[16/9] rounded-xl p-6 md:p-14 grid md:grid-cols-12 gap-6 md:gap-12 items-center overflow-hidden border border-border/10 shadow-elegant ${cardBg} transition-transform duration-200`}
+                data-blur-card
+                className={`w-full max-w-6xl md:aspect-[16/9] rounded-xl p-6 md:p-14 grid md:grid-cols-12 gap-6 md:gap-12 items-center overflow-hidden border border-border/10 shadow-elegant ${cardBg}`}
               >
                 {/* Left side: Case Study Metadata */}
                 <div className="md:col-span-5 flex flex-col md:h-full md:justify-between py-2">
@@ -400,7 +243,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                     glowHue={glowHue}
                     className="w-full h-full bg-black/10 border-white/10 p-0 flex flex-col justify-between overflow-hidden shadow-2xl relative"
                   >
-                    <div className="p-6 h-full flex flex-col justify-between" data-parallax-inner>
+                    <div className="p-6 h-full flex flex-col justify-between">
                       {/* Window Controls */}
                       <div className="flex items-center gap-1.5 pb-4 border-b border-white/10">
                         <span className="w-3 h-3 rounded-full bg-white/20" />

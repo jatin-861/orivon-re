@@ -53,9 +53,7 @@ export function BookingCalendar({
   };
 
   return (
-    <div
-      className={cn("relative overflow-hidden rounded-2xl glass p-6 shadow-elegant", className)}
-    >
+    <div className={cn("relative overflow-hidden rounded-2xl glass p-6 shadow-elegant", className)}>
       <div className="relative flex items-center justify-between mb-5">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-primary mb-1">Book a call</p>

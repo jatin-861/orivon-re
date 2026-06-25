@@ -123,7 +123,10 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 
   return (
     <div
-      className={cn("pointer-events-none fixed inset-0 -z-10 bg-transparent overflow-hidden", className)}
+      className={cn(
+        "pointer-events-none fixed inset-0 -z-10 bg-transparent overflow-hidden",
+        className,
+      )}
       {...props}
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />

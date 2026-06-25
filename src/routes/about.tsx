@@ -269,8 +269,8 @@ function About() {
               production, for real users, every day. That's the bar we hold our own work to.
             </p>
             <p>
-              Between us we cover the full stack — backend architecture, APIs, AI integrations,
-              and the frontends that sit on top of them.
+              Between us we cover the full stack — backend architecture, APIs, AI integrations, and
+              the frontends that sit on top of them.
             </p>
           </div>
         </div>

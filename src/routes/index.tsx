@@ -9,6 +9,7 @@ import { Marquee } from "@/components/Marquee";
 import { ScrollStoryHorizontal } from "@/components/ScrollStoryHorizontal";
 import { LazyVideo } from "@/components/LazyVideo";
 import { PROJECTS } from "@/data/projects";
+import { useHorizontalScrollCarousel } from "@/hooks/useHorizontalScrollCarousel";
 
 import { CinematicHero } from "@/components/canvas/CinematicHero";
 import { StoryTeller } from "@/components/StoryTeller";
@@ -94,54 +95,24 @@ function StudioShowreel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Pointer:fine only — touch devices already drag/swipe this natively.
+  const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    if (!containerRef.current || !scrollRef.current) return;
-
-    const scrollEl = scrollRef.current;
-    if (!scrollEl) return;
-
-    const ctx = gsap.context(() => {
-      gsap.to(scrollEl, {
-        id: "scroll-showreel",
-        x: () => -(scrollEl.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          pin: true,
-          pinType: "transform",
-          scrub: 1,
-          start: "top top",
-          end: () => `+=${scrollEl.scrollWidth - window.innerWidth}`,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // Subtle parallax shift for video panels
-      const panels = gsap.utils.toArray<HTMLElement>(".showreel-panel-card");
-      panels.forEach((panel) => {
-        const video = panel.querySelector("video");
-        if (video) {
-          gsap.fromTo(
-            video,
-            { xPercent: -8 },
-            {
-              xPercent: 8,
-              ease: "none",
-              scrollTrigger: {
-                trigger: panel,
-                containerAnimation: gsap.getById("scroll-showreel") as gsap.core.Tween | undefined, // ties parallax to the horizontal scroll track
-                start: "left right",
-                end: "right left",
-                scrub: true,
-              },
-            },
-          );
-        }
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
+    const mq = window.matchMedia("(pointer: fine)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
+
+  // Real native horizontal scroll — no scroll-jacking. Vertical page scroll
+  // is never hijacked; mouse drag, trackpad/shift+wheel, or touch swipe move
+  // the reel. backdrop-filter is dropped during fast scroll/drag since it's
+  // the most expensive thing to recomposite every frame.
+  useHorizontalScrollCarousel(scrollRef, {
+    enableDrag: isDesktop,
+    onFastScrollChange: (fast) => containerRef.current?.classList.toggle("no-blur-scrub", fast),
+  });
 
   const items = [
     {
@@ -171,10 +142,18 @@ function StudioShowreel() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
 
-      {/* Horizontal scroll track */}
-      <div ref={scrollRef} className="flex h-screen items-center" style={{ width: "fit-content" }}>
+      {/* Horizontal scroll track: real native scroll-snap, not scroll-jacked.
+          data-lenis-prevent keeps Lenis from swallowing the gesture; touch-pan-x
+          tells the OS up front this only pans horizontally (no vertical-scroll
+          ambiguity/judder); drag-to-scroll comes from useHorizontalScrollCarousel. */}
+      <div
+        ref={scrollRef}
+        data-lenis-prevent
+        className="flex h-screen items-center overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x cursor-grab active:cursor-grabbing"
+        style={{ width: "100%" }}
+      >
         {/* Intro Panel */}
-        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 max-w-4xl">
+        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 snap-center snap-always flex-col justify-center px-6 md:px-24 max-w-4xl">
           <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4">
             — Systems In Motion
           </span>
@@ -183,7 +162,7 @@ function StudioShowreel() {
             <span className="text-secondary italic">running</span> in production.
           </h2>
           <p className="mt-6 text-sm md:text-base text-white/60 max-w-md leading-relaxed">
-            Scroll horizontally for a closer look at what's actually live.
+            Drag or scroll horizontally for a closer look at what's actually live.
           </p>
         </div>
 
@@ -191,7 +170,7 @@ function StudioShowreel() {
         {items.map((item, idx) => (
           <div
             key={idx}
-            className="showreel-panel-card relative h-[70vh] w-[85vw] md:w-[60vw] flex-shrink-0 overflow-hidden rounded-2xl mx-4 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 md:p-12 group"
+            className="showreel-panel-card relative h-[70vh] w-[85vw] md:w-[60vw] flex-shrink-0 snap-center snap-always overflow-hidden rounded-2xl mx-4 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 md:p-12 group"
             data-cursor-text="PLAY"
           >
             {/* Background Video */}
@@ -222,7 +201,7 @@ function StudioShowreel() {
         ))}
 
         {/* Outro CTA Panel */}
-        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 bg-[var(--muted)] text-foreground relative">
+        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 snap-center snap-always flex-col justify-center px-6 md:px-24 bg-[var(--muted)] text-foreground relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
           <div className="max-w-xl">
             <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">

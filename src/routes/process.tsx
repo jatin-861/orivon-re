@@ -150,14 +150,17 @@ function Process() {
           delay={150}
         />
         <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-          A clean, repeatable framework that makes ambitious, human-made digital projects feel calm —
-          six phases, no surprises.
+          A clean, repeatable framework that makes ambitious, human-made digital projects feel calm
+          — six phases, no surprises.
         </p>
 
         {/* Quick facts strip */}
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl">
           {FACTS.map((f) => (
-            <BentoTilt key={f.l} className="h-[170px] rounded-[28px] transition-transform duration-300 hover:-translate-y-1">
+            <BentoTilt
+              key={f.l}
+              className="h-[170px] rounded-[28px] transition-transform duration-300 hover:-translate-y-1"
+            >
               <BentoStatCard icon={f.icon} value={f.v} label={f.l} />
             </BentoTilt>
           ))}
@@ -185,7 +188,10 @@ function Process() {
                 className="absolute left-0 top-0 flex items-center justify-center h-12 w-12 md:h-24 md:w-24 rounded-xl bg-[var(--card)] border border-border/80 transition-all duration-300 z-10"
                 style={{ borderColor: s.color }}
               >
-                <span className="text-lg md:text-3xl font-bold font-mono" style={{ color: s.color }}>
+                <span
+                  className="text-lg md:text-3xl font-bold font-mono"
+                  style={{ color: s.color }}
+                >
                   {s.n}
                 </span>
               </div>
@@ -230,8 +236,8 @@ function Process() {
                     You talk to the people writing the code.
                   </h3>
                   <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
-                    Saral and Jatin, directly — every call, every update, every decision. No
-                    account managers relaying messages back and forth.
+                    Saral and Jatin, directly — every call, every update, every decision. No account
+                    managers relaying messages back and forth.
                   </p>
                 </div>
               </SpotlightCard>
