@@ -429,11 +429,12 @@ BRAINSTORM → PLAN → CRITIQUE → BUILD → CRITIQUE AGAIN
 ```
 
 Work in two passes:
+
 1. **Plan first** — compact token system: Color (4-6 named hex values), Type (display + body + utility face), Layout (one-sentence concept + ASCII wireframe), **Signature** (the one unique element this page is remembered by).
 2. **Critique the plan** before building — would this be the generic default for any similar brief? If yes, revise and say what changed and why.
 3. **Build**, then **critique again** with screenshots — a picture is worth 1000 tokens.
 
-**Spend your boldness in one place.** One signature element, everything else quiet and disciplined. *"Before leaving the house, take a look in the mirror and remove one accessory."*
+**Spend your boldness in one place.** One signature element, everything else quiet and disciplined. _"Before leaving the house, take a look in the mirror and remove one accessory."_
 
 ## 12. Writing & Microcopy Guidance
 

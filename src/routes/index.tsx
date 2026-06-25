@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { MagneticButton } from "@/components/MagneticButton";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Marquee } from "@/components/Marquee";
@@ -85,6 +85,8 @@ function Index() {
       <SkillsMarquee />
       <div className="animated-divider" />
       <Numbers />
+      <div className="animated-divider" />
+      <PricingTeaser />
       <div className="animated-divider" />
       <BigCTA />
     </div>
@@ -451,6 +453,104 @@ function Numbers() {
             <div className="mt-2 text-xs text-muted-foreground font-mono font-medium">{s.l}</div>
           </SpotlightCard>
         ))}
+      </div>
+    </section>
+  );
+}
+
+const PRICING_LINES = [
+  {
+    index: "01",
+    title: "Website Development",
+    description:
+      "From a single landing page to fully custom headless commerce — 18 categories benchmarked.",
+    priceRange: "₹0.15L – ₹12L",
+    delivery: "1–16 wks",
+    categories: "18 categories",
+    pdf: "/Orvion-Pricing-Website-Development.pdf",
+  },
+  {
+    index: "02",
+    title: "Mobile App Development",
+    description:
+      "Native Android/iOS, cross-platform builds, and full-stack mobile-plus-backend systems.",
+    priceRange: "₹0.75L – ₹25L",
+    delivery: "4–24 wks",
+    categories: "8 categories",
+    pdf: "/Orvion-Pricing-Mobile-App-Development.pdf",
+  },
+  {
+    index: "03",
+    title: "SaaS & Custom Software",
+    description:
+      "Sales, finance, HR, healthcare, logistics, retail and 12 verticals of business software.",
+    priceRange: "₹1.5L – ₹60L",
+    delivery: "4–32 wks",
+    categories: "83 categories · 12 verticals",
+    pdf: "/Orvion-Pricing-SaaS-Custom-Software.pdf",
+  },
+];
+
+function PricingTeaser() {
+  return (
+    <section className="py-24 px-6 relative z-10" data-cursor-text="PRICING">
+      <div className="mx-auto max-w-7xl">
+        <div className="max-w-2xl mb-12">
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)]">
+            — India Market Pricing
+          </span>
+          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
+            Fixed fee, <span className="text-[var(--brand-pink)] italic">not hourly.</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            Every build benchmarked against current India-market rates. Pick a service line below
+            and download the full pricing breakdown for that category.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {PRICING_LINES.map((line) => (
+            <SpotlightCard
+              key={line.index}
+              className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full"
+            >
+              <div>
+                <span className="font-serif text-5xl font-bold text-secondary/15 leading-none">
+                  {line.index}
+                </span>
+                <h3 className="font-display text-2xl font-bold text-foreground mt-4">
+                  {line.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                  {line.description}
+                </p>
+
+                <div className="mt-6 space-y-2 text-sm font-mono">
+                  <div className="flex justify-between border-b border-border/60 pb-2">
+                    <span className="text-muted-foreground">Market Price</span>
+                    <span className="text-foreground font-semibold">{line.priceRange}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-border/60 pb-2">
+                    <span className="text-muted-foreground">Delivery</span>
+                    <span className="text-foreground font-semibold">{line.delivery}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Scope</span>
+                    <span className="text-foreground font-semibold">{line.categories}</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={line.pdf}
+                download
+                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-border hover:border-foreground px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-colors"
+              >
+                Download Pricing PDF <Download size={14} />
+              </a>
+            </SpotlightCard>
+          ))}
+        </div>
       </div>
     </section>
   );

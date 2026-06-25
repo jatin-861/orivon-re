@@ -128,7 +128,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           already shows its own "Selected Work" label in-flow; leaving this on
           top of it there caused the heading text to render through/behind it. */}
       {!onIntro && (
-        <div className="absolute top-28 left-6 md:left-12 z-20 flex items-center gap-3">
+        <div className="absolute top-28 left-6 md:left-12 z-20 hidden md:flex items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
           <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-mono">
             Selected Work
