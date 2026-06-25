@@ -297,14 +297,19 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       {/* Track. Desktop: a w-max flex row that GSAP translates horizontally.
           Mobile: a real native scroll-snap carousel — data-lenis-prevent stops
           the global Lenis smooth-scroll from swallowing the horizontal swipe,
-          which is what previously made it impossible to settle on one card. */}
+          which is what previously made it impossible to settle on one card.
+          touch-pan-x tells the OS gesture recognizer up front that this element
+          only pans horizontally — without it, the browser has to guess the
+          gesture's axis on every touch, and that ambiguity window is what
+          produced the vertical rubber-band judder ("up-down jiggle") and the
+          occasional dead/stuck swipe right as a touch began. */}
       <div
         ref={scrollRef}
         {...(!isDesktop && { "data-lenis-prevent": true })}
         className={
           isDesktop
             ? "flex h-full w-max items-center relative z-10"
-            : "flex items-stretch relative z-10 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain px-4 gap-4"
+            : "flex items-stretch relative z-10 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x px-4 gap-4"
         }
       >
         {/* Intro Slide */}
