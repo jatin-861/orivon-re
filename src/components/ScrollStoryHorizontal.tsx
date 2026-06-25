@@ -15,6 +15,17 @@ interface ScrollStoryHorizontalProps {
   projects: Project[];
 }
 
+// Bleed hues per slide: None (intro), Pink, Lavender, Peach, Mint, Magenta, Cyan
+const BLEED_COLORS = [
+  "rgba(251, 251, 250, 0)", // Intro (None)
+  "rgba(224, 83, 125, 0.08)", // Lumen
+  "rgba(156, 139, 200, 0.08)", // Noctis
+  "rgba(229, 159, 123, 0.08)", // Orbit
+  "rgba(145, 196, 181, 0.08)", // Verdant
+  "rgba(244, 114, 182, 0.08)", // Atelier
+  "rgba(94, 231, 255, 0.08)", // Halo
+];
+
 export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -22,18 +33,110 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   const [counter, setCounter] = useState("");
   const [onIntro, setOnIntro] = useState(true);
 
+  // Desktop = mouse-driven. Only there do we use the GSAP pinned scroll that
+  // converts vertical scroll into horizontal motion. On touch that mechanism
+  // fights Lenis (which preventDefaults touch to smooth-scroll) and never snaps
+  // to a card — so phones get a real native scroll-snap carousel instead.
+  const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px) and (pointer: fine)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Helper shared by both modes: reflect the active slide index in the counter,
+  // the intro-label visibility, and the color-bleed overlay.
+  const setActiveSlide = (i: number) => {
+    if (bleedRef.current) {
+      bleedRef.current.style.backgroundColor = BLEED_COLORS[i] ?? BLEED_COLORS[0];
+    }
+    if (i > 0) {
+      setCounter(`0${i} / 0${projects.length}`);
+      setOnIntro(false);
+    } else {
+      setCounter("");
+      setOnIntro(true);
+    }
+  };
+
+  // ── MOBILE: native horizontal scroll-snap ──────────────────────────────────
+  useEffect(() => {
+    if (isDesktop) return;
+    const scroller = scrollRef.current;
+    if (!scroller) return;
+
+    const panels = Array.from(scroller.querySelectorAll<HTMLElement>("[data-panel]"));
+
+    // Whichever panel is at least ~55% in view is the active one. With one
+    // panel per viewport and mandatory snapping, exactly one qualifies at rest.
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+            setActiveSlide(panels.indexOf(entry.target as HTMLElement));
+          }
+        });
+      },
+      { root: scroller, threshold: [0.55] },
+    );
+    panels.forEach((p) => io.observe(p));
+
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDesktop, projects]);
+
+  // Mirrors the desktop "no-blur-scrub" mitigation: real native momentum scroll
+  // on a phone drives this just as fast as GSAP's scrub does on desktop, and
+  // backdrop-filter is the same expensive-to-recomposite cost on mobile GPUs —
+  // it's the leading cause of scroll stutter/jiggle during a fast swipe.
+  useEffect(() => {
+    if (isDesktop) return;
+    const scroller = scrollRef.current;
+    const container = containerRef.current;
+    if (!scroller || !container) return;
+
+    const FAST_SCROLL_PX_PER_SEC = 900;
+    let lastX = scroller.scrollLeft;
+    let lastT = performance.now();
+    let blurResumeTimeout: number;
+
+    const onScroll = () => {
+      const now = performance.now();
+      const dt = now - lastT;
+      if (dt > 0) {
+        const velocity = Math.abs(scroller.scrollLeft - lastX) / (dt / 1000);
+        if (velocity > FAST_SCROLL_PX_PER_SEC) {
+          container.classList.add("no-blur-scrub");
+        }
+      }
+      lastX = scroller.scrollLeft;
+      lastT = now;
+      clearTimeout(blurResumeTimeout);
+      blurResumeTimeout = window.setTimeout(() => {
+        container.classList.remove("no-blur-scrub");
+      }, 150);
+    };
+
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      clearTimeout(blurResumeTimeout);
+      scroller.removeEventListener("scroll", onScroll);
+    };
+  }, [isDesktop]);
+
+  // ── DESKTOP: GSAP pinned vertical-drives-horizontal scroll ──────────────────
+  useEffect(() => {
+    if (!isDesktop) return;
     const container = containerRef.current;
     const scrollSection = scrollRef.current;
     if (!container || !scrollSection) return;
 
     const scrollAmount = scrollSection.scrollWidth - window.innerWidth;
 
-    // backdrop-filter is the single most expensive thing to recomposite every frame —
-    // an Awwwards-style trick (locomotive-scroll, etc. all do this) is to drop it entirely
-    // while actively scrolling fast and only pay for it once motion settles, since nobody
-    // can appreciate the frosted-glass detail mid-scroll anyway. .no-blur-scrub (styles.css)
-    // forces backdrop-filter: none on this section's glass surfaces while it's set.
+    // backdrop-filter is the single most expensive thing to recomposite every
+    // frame — drop it while scrolling fast and restore it once motion settles.
     let blurResumeTimeout: number;
     const FAST_SCROLL_PX_PER_SEC = 900;
     const onScrollVelocity = (self: { getVelocity: () => number }) => {
@@ -46,12 +149,6 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       }, 150);
     };
 
-    // Total slide count (intro + one per project) — each slide is exactly one
-    // viewport wide, so progress 0..1 across the pinned scroll divides evenly
-    // into this many stops regardless of the 1.5x pacing multiplier below
-    // (it uniformly stretches the *scroll distance per stop*, not the stops).
-    const slideCount = projects.length + 1;
-
     const ctx = gsap.context(() => {
       // 1. Horizontal Scroll Animation
       const horizontalTween = gsap.to(scrollSection, {
@@ -61,93 +158,53 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
           trigger: container,
           pin: true,
           pinType: "transform",
-          scrub: 1.2,
+          // Lenis already lags/eases the raw wheel input by ~1.2s before ScrollTrigger
+          // sees it. Adding a second independent scrub lag on top made two easing
+          // systems chase each other, which is what produced the rubber-band
+          // jiggle/stuck feeling on this section. scrub: true tracks the
+          // (already-smoothed) Lenis position 1:1 instead of re-lagging it.
+          scrub: true,
           start: "top top",
           end: () => `+=${(scrollSection.scrollWidth - window.innerWidth) * 1.5}`,
           invalidateOnRefresh: true,
           onUpdate: onScrollVelocity,
-          // Without this, nothing ever rounds the scroll position to a slide
-          // boundary — scrubbing can come to rest anywhere, which is exactly
-          // the "always two half-cards, never one full card" bug. Snap to the
-          // nearest slide once the user stops scrolling/lifts their finger.
-          snap: {
-            snapTo: 1 / (slideCount - 1),
-            duration: { min: 0.2, max: 0.5 },
-            ease: "power1.inOut",
-            inertia: false,
-          },
         },
       });
 
-      // 2. Card Skew based on Scroll Velocity — desktop only. On touch, scroll
-      // velocity from native momentum is erratic and makes the cards wobble/jitter,
-      // which reads as the section "vibrating" on phones.
-      const isFinePointer =
-        typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
+      // 2. Card Skew based on Scroll Velocity
+      const skewProxy = { skew: 0 };
+      const skewSetter = gsap.quickSetter("[data-skew-card]", "skewX", "deg");
+      const clamp = gsap.utils.clamp(-6, 6);
 
-      if (isFinePointer) {
-        const skewProxy = { skew: 0 };
-        const skewSetter = gsap.quickSetter("[data-skew-card]", "skewX", "deg");
-        const clamp = gsap.utils.clamp(-6, 6);
+      ScrollTrigger.create({
+        trigger: container,
+        start: "top top",
+        end: () => `+=${scrollAmount * 1.5}`,
+        onUpdate: (self) => {
+          const skew = clamp(self.getVelocity() / 350);
+          if (Math.abs(skew) > Math.abs(skewProxy.skew)) {
+            skewProxy.skew = skew;
+            gsap.to(skewProxy, {
+              skew: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              overwrite: "auto",
+              onUpdate: () => skewSetter(skewProxy.skew),
+            });
+          }
+        },
+      });
 
-        ScrollTrigger.create({
-          trigger: container,
-          start: "top top",
-          end: () => `+=${scrollAmount * 1.5}`,
-          onUpdate: (self) => {
-            const skew = clamp(self.getVelocity() / 350);
-            if (Math.abs(skew) > Math.abs(skewProxy.skew)) {
-              skewProxy.skew = skew;
-              gsap.to(skewProxy, {
-                skew: 0,
-                duration: 0.8,
-                ease: "power3.out",
-                overwrite: "auto",
-                onUpdate: () => skewSetter(skewProxy.skew),
-              });
-            }
-          },
-        });
-      }
-
-      // 3. Bleed Background & Counter Setup
-      // Bleed hues: Pink, Lavender, Peach, Mint, Magenta, Cyan
-      const bleedColors = [
-        "rgba(251, 251, 250, 0)", // Intro (None)
-        "rgba(224, 83, 125, 0.08)", // Lumen
-        "rgba(156, 139, 200, 0.08)", // Noctis
-        "rgba(229, 159, 123, 0.08)", // Orbit
-        "rgba(145, 196, 181, 0.08)", // Verdant
-        "rgba(244, 114, 182, 0.08)", // Atelier
-        "rgba(94, 231, 255, 0.08)", // Halo
-      ];
-
-      const panels = gsap.utils.toArray("[data-panel]");
-      panels.forEach((panel: unknown, i: number) => {
-        const el = panel as Element;
+      // 3. Bleed Background & Counter per slide
+      const panels = gsap.utils.toArray<Element>("[data-panel]");
+      panels.forEach((el, i) => {
         ScrollTrigger.create({
           trigger: el,
           containerAnimation: horizontalTween,
           start: "left center",
           end: "right center",
           onToggle: (self) => {
-            if (self.isActive) {
-              // Fade the bleed overlay to the active slide's signature glow color
-              gsap.to(bleedRef.current, {
-                backgroundColor: bleedColors[i],
-                duration: 0.8,
-                ease: "power2.out",
-              });
-
-              // Slide Counter logic
-              if (i > 0) {
-                setCounter(`0${i} / 0${projects.length}`);
-                setOnIntro(false);
-              } else {
-                setCounter("");
-                setOnIntro(true);
-              }
-            }
+            if (self.isActive) setActiveSlide(i);
           },
         });
 
@@ -177,15 +234,13 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
       clearTimeout(blurResumeTimeout);
       ctx.revert();
     };
-  }, [projects]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDesktop, projects]);
 
   // Premium glassmorphic brand backgrounds with high-contrast text color combinations.
   // The dark text shades only read against a light cream background — on the dark theme's
   // near-black background that same 10-12% tint barely shows, so the text needs a light
   // dark:text-* variant (badges/divider/link all inherit it for free via currentColor).
-  // backdrop-blur-xl is recomposited every frame while these cards are inside a pinned,
-  // scroll-scrubbed track — on phone GPUs that's expensive enough to drop frames and is felt
-  // as scroll jitter. Keep blur cheap on mobile, restore the full blur on larger screens.
   const bgClasses = [
     "backdrop-blur-sm md:backdrop-blur-xl bg-[#C75B3A]/10 text-[#6E2A18] dark:text-[#F2C4B0] border-[#C75B3A]/20 shadow-[0_30px_60px_-15px_rgba(199,91,58,0.08)]",
     "backdrop-blur-sm md:backdrop-blur-xl bg-[#4B6E6A]/10 text-[#213533] dark:text-[#BFE0DA] border-[#4B6E6A]/20 shadow-[0_30px_60px_-15px_rgba(75,110,106,0.08)]",
@@ -207,7 +262,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
   return (
     <div
       ref={containerRef}
-      className="relative h-[100svh] overflow-hidden bg-background transition-colors duration-700"
+      className="relative h-auto md:h-[100svh] overflow-hidden bg-background transition-colors duration-700 py-12 md:py-0"
     >
       {/* 2D interactive background grid */}
       <div className="absolute inset-0 opacity-25 pointer-events-none z-0">
@@ -239,11 +294,23 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         </div>
       )}
 
-      <div ref={scrollRef} className="flex h-full w-max items-center relative z-10">
+      {/* Track. Desktop: a w-max flex row that GSAP translates horizontally.
+          Mobile: a real native scroll-snap carousel — data-lenis-prevent stops
+          the global Lenis smooth-scroll from swallowing the horizontal swipe,
+          which is what previously made it impossible to settle on one card. */}
+      <div
+        ref={scrollRef}
+        {...(!isDesktop && { "data-lenis-prevent": true })}
+        className={
+          isDesktop
+            ? "flex h-full w-max items-center relative z-10"
+            : "flex items-stretch relative z-10 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain px-4 gap-4"
+        }
+      >
         {/* Intro Slide */}
         <div
           data-panel
-          className="w-screen h-[100svh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-4xl"
+          className="w-[88vw] md:w-screen h-auto md:h-[100svh] flex-shrink-0 snap-start md:snap-center snap-always flex flex-col justify-center px-2 md:px-24 max-w-4xl"
         >
           <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
             Selected Work
@@ -257,7 +324,8 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             real problem for real users.
           </p>
           <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-foreground/50">
-            <span>Scroll down or scroll wheel</span>
+            <span className="md:inline hidden">Scroll down or scroll wheel</span>
+            <span className="md:hidden inline">Swipe to explore</span>
             <span className="text-secondary text-lg animate-bounce-horizontal">→</span>
           </div>
         </div>
@@ -270,14 +338,14 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             <div
               key={p.slug}
               data-panel
-              className="w-screen h-[100svh] flex-shrink-0 flex items-center justify-center px-4 md:px-16"
+              className="w-[88vw] md:w-screen h-auto md:h-[100svh] flex-shrink-0 snap-start md:snap-center snap-always flex items-center justify-center px-2 md:px-16"
             >
               <div
                 data-skew-card
-                className={`w-full max-w-6xl min-h-[75vh] md:min-h-0 md:aspect-[16/9] rounded-xl p-6 md:p-14 grid md:grid-cols-12 gap-6 md:gap-12 items-center overflow-y-auto md:overflow-hidden border border-border/10 shadow-elegant ${cardBg} transition-transform duration-200`}
+                className={`w-full max-w-6xl md:aspect-[16/9] rounded-xl p-6 md:p-14 grid md:grid-cols-12 gap-6 md:gap-12 items-center overflow-hidden border border-border/10 shadow-elegant ${cardBg} transition-transform duration-200`}
               >
                 {/* Left side: Case Study Metadata */}
-                <div className="md:col-span-5 flex flex-col h-full justify-between py-2">
+                <div className="md:col-span-5 flex flex-col md:h-full md:justify-between py-2">
                   <div>
                     <div className="flex gap-2 mb-6 font-mono text-xs opacity-75">
                       <span className="border border-current/30 rounded-full px-3 py-1">
