@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Orvion Pricing Intelligence Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" />
+<style>
+:root{
+  --bg:#FAF7F2; --fg:#1A1A1A; --card:#FFFFFF; --border:#E5DDD3;
+  --muted:#F0EAE0; --muted-fg:#544E45; --pink:#C75B3A; --teal:#4B6E6A;
+  --lavender:#6A5B7B; --ochre:#B87830; --chart1:#1A1A1A; --chart2:#C75B3A;
+  --chart3:#8B5E3C; --chart5:#6B6358;
+  --serif:"Bodoni Moda",Georgia,serif; --sans:"Cabinet Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+@page{ size:A4 landscape; margin:0; }
+body{ font-family:var(--sans); background:var(--bg); color:var(--fg); font-size:11px; line-height:1.45; }
+.page{ width:297mm; min-height:210mm; padding:12mm 14mm; position:relative; break-after:page; background:var(--bg); }
+.page:last-child{ break-after:auto; }
+h1,h2,h3{ font-family:var(--sans); font-weight:800; letter-spacing:-0.02em; }
+.serif{ font-family:var(--serif); font-weight:400; }
+.mono{ font-family:var(--mono); }
+.accent{ color:var(--pink); }
+.muted{ color:var(--muted-fg); }
+.eyebrow{ font-family:var(--mono); font-size:9.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--pink); display:flex; align-items:center; gap:8px; margin-bottom:10px;}
+.eyebrow::before{ content:""; width:18px; height:1.5px; background:var(--pink); display:inline-block;}
+.rule{ height:1px; background:linear-gradient(90deg,var(--pink),transparent 70%); margin:10px 0 18px; }
+
+/* Cover */
+.cover{ display:flex; flex-direction:column; justify-content:space-between; }
+.cover-top .brand{ font-family:var(--sans); font-weight:900; font-size:15px; letter-spacing:0.02em; }
+.cover-mid{ margin-top:30px; }
+.cover-title{ font-size:54px; font-weight:800; letter-spacing:-0.03em; line-height:0.98; }
+.cover-title .serif{ font-size:54px; color:var(--pink); display:block; }
+.cover-sub{ max-width:520px; margin-top:18px; font-size:13px; color:var(--muted-fg); }
+.stat-row{ display:flex; gap:14px; margin-top:36px; }
+.stat{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px 20px; min-width:130px; box-shadow:0 10px 30px -10px rgba(26,26,26,.08); }
+.stat .num{ font-size:26px; font-weight:800; color:var(--pink); font-family:var(--sans); }
+.stat .lbl{ font-size:9.5px; color:var(--muted-fg); margin-top:4px; text-transform:uppercase; letter-spacing:0.06em; font-family:var(--mono);}
+.cover-bottom{ display:flex; justify-content:space-between; align-items:flex-end; font-family:var(--mono); font-size:9.5px; color:var(--muted-fg); border-top:1px solid var(--border); padding-top:12px; }
+
+/* Section header */
+.section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:10px; }
+.section-head h2{ font-size:30px; font-weight:800; }
+.section-num{ font-family:var(--mono); font-size:11px; color:var(--muted-fg); }
+.section-blurb{ max-width:680px; font-size:11px; color:var(--muted-fg); margin-bottom:14px; }
+
+/* Legend */
+.legend{ display:flex; gap:16px; margin:6px 0 14px; }
+.legend span{ display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:9px; text-transform:uppercase; letter-spacing:0.05em; }
+.dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+
+/* Chart */
+.chart-wrap{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:14px 18px; margin-bottom:14px; box-shadow:0 10px 30px -10px rgba(26,26,26,.06);}
+.chart-wrap .cap{ font-family:var(--mono); font-size:9px; color:var(--muted-fg); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;}
+
+/* Table */
+table{ width:100%; border-collapse:collapse; font-size:10px; }
+thead{ display:table-header-group; }
+tr{ break-inside:avoid; }
+th{ text-align:left; font-family:var(--mono); font-size:8.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted-fg); background:var(--muted); padding:7px 8px; border-bottom:1px solid var(--border); }
+td{ padding:6px 8px; border-bottom:1px solid var(--border); vertical-align:middle; }
+tbody tr:nth-child(even){ background:rgba(240,234,224,0.4); }
+.cat-name{ font-weight:700; }
+.ind{ color:var(--muted-fg); font-size:9.5px; }
+.badge{ display:inline-block; padding:2px 8px; border-radius:20px; font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:0.04em; color:#fff; }
+.price{ font-family:var(--mono); font-weight:700; white-space:nowrap; }
+.blank{ display:inline-block; min-width:64px; border:1px dashed var(--pink); border-radius:8px; color:var(--pink); font-family:var(--mono); font-size:8.5px; text-align:center; padding:3px 6px; opacity:0.65; }
+.group-title{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--pink); margin:16px 0 6px; padding-bottom:4px; border-bottom:1px solid var(--border);}
+.group-title:first-of-type{ margin-top:4px; }
+
+/* Maintenance cards */
+.maint-grid{ display:flex; gap:14px; margin-top:10px; }
+.maint-card{ flex:1; background:var(--card); border:1px solid var(--border); border-radius:20px; padding:18px; position:relative; box-shadow:0 10px 30px -10px rgba(26,26,26,.08); }
+.maint-card.popular{ background:var(--teal); color:#fff; border-color:transparent; }
+.maint-card .tag{ position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:var(--pink); color:#fff; font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:0.08em; padding:3px 10px; border-radius:20px; }
+.maint-card h3{ font-size:17px; }
+.maint-row{ display:flex; justify-content:space-between; align-items:baseline; margin:12px 0; font-family:var(--mono); }
+.maint-row .lbl{ font-size:8.5px; text-transform:uppercase; letter-spacing:0.05em; opacity:0.7;}
+.maint-row .val{ font-size:13px; font-weight:700; }
+.maint-card ul{ list-style:none; margin-top:10px; padding:0; }
+.maint-card li{ font-size:9.5px; padding:3px 0; display:flex; gap:6px; }
+.maint-card li::before{ content:"+"; color:var(--pink); font-weight:800; }
+.maint-card.popular li::before{ color:#fff; }
+
+/* Addon grid */
+.addon-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+.addon{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center; }
+.addon .name{ font-size:10px; font-weight:600; }
+
+/* footer */
+.foot{ position:absolute; bottom:8mm; left:14mm; right:14mm; display:flex; justify-content:space-between; font-family:var(--mono); font-size:8px; color:var(--muted-fg); border-top:1px solid var(--border); padding-top:6px; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const T = {B:{l:'Basic',c:'#6B6358'}, M:{l:'Medium',c:'#8B5E3C'}, H:{l:'High',c:'#C75B3A'}, E:{l:'Enterprise',c:'#1A1A1A'}};
+
+const WEBSITE = [
+["Static Landing Page (1 page)","All Businesses","B","₹0.15L–₹0.4L",1,2],
+["Static Brochure Website (3–5 pages)","All Businesses","B","₹0.3L–₹0.8L",2,3],
+["Static Brochure Website (6–10 pages)","All Businesses","B","₹0.5L–₹1.2L",3,4],
+["Dynamic CMS Website (blog/news-driven)","Media, Publishing","M","₹0.8L–₹2L",4,6],
+["Portfolio / Personal Brand Website","Consulting, Creators","B","₹0.3L–₹0.7L",2,3],
+["Multi-language Website Build","Export, Tourism, Real Estate","M","₹1.2L–₹3L",5,8],
+["Web App / Client Dashboard — Basic","All Businesses","M","₹1.5L–₹3.5L",5,7],
+["Web App / Client Dashboard — Medium","All Businesses","M","₹3L–₹6L",7,10],
+["Web App / Client Dashboard — Complex","All Businesses","H","₹6L–₹12L",10,16],
+["E-commerce — Template-based","Retail, D2C","B","₹0.5L–₹1.5L",3,5],
+["E-commerce — Semi-custom Build","Retail, D2C","M","₹1.5L–₹4L",6,9],
+["E-commerce — Fully Custom / Headless","Retail, D2C, Enterprise","H","₹4L–₹10L",10,16],
+["Booking Website — Single Service","Salon, Clinics, Consulting","B","₹0.5L–₹1.2L",3,4],
+["Booking Website — Multi-service/Multi-staff","Healthcare, Hospitality","M","₹1.2L–₹2.8L",5,7],
+["Educational Course Catalog Website","Education, EdTech","M","₹1L–₹2.5L",5,7],
+["Progressive Web App (PWA)","Retail, Services, Startups","H","₹3L–₹7L",8,12],
+["Website Redesign / Platform Migration","All Businesses","M","₹1L–₹3L",4,7],
+["Landing Page A/B Variant Pack","Marketing, D2C","B","₹0.25L–₹0.6L",1,2],
+];
+
+const MOBILE = [
+["App MVP (single core feature)","Startups, All Businesses","B","₹0.75L–₹2L",4,6],
+["Cross-Platform Business App (Flutter/RN)","Retail, Services, Startups","M","₹2.5L–₹6L",8,12],
+["Cross-Platform Enterprise App","Enterprise, Logistics, Healthcare","H","₹6L–₹14L",12,18],
+["Native Android App","Consumer, Fintech","M","₹3L–₹7L",8,12],
+["Native iOS App","Consumer, Fintech, Premium Brands","M","₹3.5L–₹8L",8,13],
+["Native Android + iOS (Complex/Enterprise)","Enterprise, Fintech, Healthcare","E","₹10L–₹25L",16,24],
+["App + Custom Backend/API (full-stack mobile)","All Businesses","H","₹5L–₹12L",10,16],
+["Marketplace / On-demand App (multi-sided)","Logistics, Services, Delivery","E","₹10L–₹22L",16,24],
+];
+
+const AUTOMATION = [
+["WhatsApp Auto-Reply Bot (FAQ/greeting)","Retail, Services","B","₹0.4L–₹1L",1,2],
+["WhatsApp Catalog / Order-Flow Bot","Retail, F&B, D2C","M","₹1L–₹2.5L",3,4],
+["WhatsApp Business API + CRM-linked Bot","Retail, D2C, Services","H","₹2L–₹6L",4,6],
+["AI Website Chatbot (FAQ/support widget)","All Businesses","B","₹0.6L–₹1.5L",2,3],
+["AI Multi-channel Chatbot (Web+WhatsApp+IG)","Retail, D2C, Support-heavy","H","₹5L–₹15L",8,12],
+["Voice Bot / IVR Automation","BFSI, Healthcare, Support Centers","H","₹3L–₹8L",6,10],
+["Email Drip / Marketing Automation","D2C, SaaS, Agencies","M","₹1.5L–₹4L",4,6],
+["Behavioral & Transactional Email Automation","D2C, SaaS","M","₹2L–₹5L",5,7],
+["Internal Workflow Automation — Single-tool","All Businesses","B","₹0.8L–₹2L",2,4],
+["Internal Workflow Automation — Multi-tool Orchestration","All Businesses","M","₹2L–₹5L",4,7],
+["Custom Workflow / Process Engine","Enterprise, Manufacturing","H","₹4L–₹12L",7,10],
+["RPA — Attended (desktop-assist bot)","BFSI, Back-office Ops","M","₹2L–₹5L",5,8],
+["RPA — Unattended (independent backend bot)","BFSI, Enterprise Ops","H","₹4L–₹10L",8,12],
+["AI Agent — Single-task Agent","All Businesses","M","₹2.5L–₹6L",5,8],
+["AI Agent — Multi-step Agentic Workflow Platform","Enterprise, SaaS","E","₹8L–₹25L",12,18],
+["Document / Invoice OCR Automation","Finance, Logistics, Legal","M","₹2L–₹5L",5,7],
+["Compliance Document Auto-Generation","Legal, Manufacturing, Healthcare","M","₹2.5L–₹6L",6,8],
+["Social Media Scheduling Automation","Marketing, D2C","B","₹0.8L–₹2L",2,4],
+["Social Media Engagement Auto-Response","Marketing, D2C","M","₹1.5L–₹4L",4,6],
+["Lead Capture & Auto-Routing Automation","Sales, Real Estate, D2C","M","₹1.5L–₹4L",4,6],
+["Web Scraping / Data Pipeline Automation","Research, E-commerce, Finance","M","₹2L–₹5L",4,7],
+["ETL / Reporting Automation Pipeline","Enterprise, Finance","H","₹3L–₹8L",6,10],
+];
+
+const SAAS = [
+["Sales, CRM & Growth",[
+["CRM – Customer Relationship Mgmt","Retail, Real Estate, B2B","M","₹5L–₹18L",8,12],
+["Lead Management System","Real Estate, Sales, D2C","M","₹2L–₹8L",5,8],
+["Marketing Automation Suite","D2C, SaaS, Agencies","H","₹5L–₹15L",8,12],
+["Customer Self-Service Portal","SaaS, Utilities, Retail","M","₹2L–₹8L",5,8],
+["Vendor Portal","Manufacturing, Retail, Procurement","M","₹3L–₹10L",6,8],
+["Loyalty & Rewards Program Platform","Retail, F&B, D2C","M","₹3L–₹8L",6,9],
+["Affiliate & Influencer Management Platform","D2C, Marketing","M","₹3L–₹8L",6,9],
+["Referral Program Engine","D2C, SaaS, Retail","B","₹1.5L–₹4L",4,6],
+]],
+["Finance, Billing & Compliance",[
+["Billing Software","All Businesses","B","₹1.5L–₹5L",4,6],
+["Accounting Software","All Businesses","M","₹3L–₹10L",6,10],
+["Expense Management","Enterprise, Agencies","B","₹2L–₹6L",4,6],
+["Multi-currency / Global Invoicing Platform","Export, Agencies, SaaS","M","₹3L–₹9L",6,10],
+["Insurance Policy Management","Insurance, Finance","H","₹5L–₹15L",9,13],
+["Subscription Platform","SaaS, Media, D2C","M","₹4L–₹12L",7,10],
+["Membership Management","Clubs, NGOs, Associations","B","₹2L–₹7L",4,7],
+]],
+["HR & People Ops",[
+["HRMS – Human Resource Mgmt","Enterprise, All Businesses","M","₹5L–₹15L",8,12],
+["Attendance Management","All Businesses","B","₹1.5L–₹5L",4,6],
+["Payroll System","Enterprise, HR & Staffing","M","₹2L–₹8L",5,8],
+["Recruitment Platform (ATS)","HR & Staffing, Enterprise","M","₹4L–₹12L",7,10],
+["Employee Onboarding Platform","Enterprise, HR","B","₹2L–₹6L",4,6],
+["Performance Review / OKR Tracker","Enterprise, HR","M","₹3L–₹8L",6,9],
+["Time Tracking & Billing (Agency/Freelance)","Agencies, Consulting, Legal","M","₹2.5L–₹7L",5,8],
+]],
+["Operations, Assets & Workflow",[
+["Inventory Management","Retail, Manufacturing, Distribution","M","₹3L–₹10L",6,8],
+["Asset Management","Manufacturing, Facilities","M","₹3L–₹10L",6,8],
+["Maintenance Management (CMMS)","Manufacturing, Facilities","M","₹4L–₹12L",8,10],
+["Document Management System","Legal, Enterprise, Healthcare","M","₹3L–₹10L",6,8],
+["Knowledge Base Platform","SaaS, Support Teams","B","₹2L–₹6L",4,6],
+["Custom Analytics Dashboard","Enterprise, All Businesses","M","₹3L–₹10L",6,9],
+["Procurement / e-Tendering Platform","Manufacturing, Govt-adjacent","H","₹6L–₹16L",10,14],
+["Contractor Management","Construction, Facilities","M","₹3L–₹10L",6,8],
+["Compliance Management","Manufacturing, Healthcare, Legal","M","₹4L–₹12L",7,10],
+["Project Management Tool","Agencies, Enterprise","M","₹3L–₹10L",6,10],
+["Helpdesk & Ticketing System","Support Teams, SaaS, Enterprise","M","₹3L–₹10L",5,8],
+["Quality Management System","Manufacturing","M","₹3L–₹9L",6,9],
+]],
+["Education",[
+["School Management System","Education","M","₹4L–₹12L",8,12],
+["College Management System","Education","H","₹6.2L–₹19L",10,15],
+["LMS – Learning Management System","EdTech, Enterprise Training","H","₹5L–₹15L",9,13],
+["Online Examination System","Education, EdTech","M","₹3L–₹10L",6,8],
+["Library Management System","Education, Public Institutions","B","₹1.5L–₹5L",4,6],
+["Daycare / Childcare Management","Education, Childcare","B","₹2L–₹6L",4,7],
+]],
+["Healthcare",[
+["Hospital Management System","Healthcare","H","₹8L–₹25L",14,20],
+["Clinic Management System","Healthcare","M","₹3L–₹8L",6,10],
+["Pharmacy Management","Healthcare, Retail","M","₹3L–₹10L",6,8],
+["Telemedicine Platform","Healthcare","H","₹6L–₹16L",10,14],
+["Laboratory Information Mgmt System (LIMS)","Healthcare, Diagnostics","H","₹6L–₹18L",10,15],
+["Veterinary Clinic Management","Healthcare, Pet Care","M","₹2.5L–₹7L",5,8],
+]],
+["Logistics, Fleet & Field Ops",[
+["Logistics Management","Logistics, Supply Chain","H","₹6L–₹18L",10,14],
+["Fleet Management","Logistics, Transport","M","₹4L–₹14L",8,12],
+["Warehouse Management System","Retail, Manufacturing, Logistics","M","₹5L–₹15L",8,12],
+["Field Service Management","Utilities, Maintenance, Logistics","M","₹4L–₹12L",7,10],
+["Transport Management System","Logistics, Transport","H","₹5L–₹15L",9,13],
+["Tour & Travel Portal","Tourism, Hospitality","M","₹4L–₹12L",7,10],
+["Route & Dispatch Planning","Logistics, Field Service","M","₹4L–₹10L",7,10],
+]],
+["Real Estate, Property & Hospitality",[
+["Real Estate Management / CRM","Real Estate","M","₹4L–₹12L",7,10],
+["Property Management System","Real Estate","M","₹4L–₹12L",7,10],
+["Rental Management","Real Estate","M","₹2L–₹8L",5,7],
+["Hotel Management System (PMS)","Hospitality","H","₹5L–₹15L",9,13],
+["Co-working Space Management","Real Estate, Hospitality","M","₹3L–₹8L",6,9],
+["Parking Management System","Real Estate, Smart City","M","₹3L–₹8L",6,9],
+["Construction Project Management","Construction, Real Estate","H","₹6L–₹16L",10,14],
+]],
+["Retail, Commerce & Marketplaces",[
+["Retail POS","Retail","M","₹2L–₹8L",5,8],
+["Restaurant POS","F&B, Hospitality","M","₹3L–₹10L",6,8],
+["Marketplace Platform","Multi-vendor Commerce","E","₹10L–₹30L",16,24],
+["Subscription Box Management","D2C, Retail","M","₹3L–₹8L",6,9],
+["Auction Platform","Marketplaces, Real Estate","H","₹6L–₹16L",10,14],
+["Classifieds Platform","Marketplaces, Real Estate, Auto","H","₹5L–₹14L",9,13],
+["Multi-location Franchise Management","Retail, F&B, Education","E","₹8L–₹20L",14,18],
+]],
+["Manufacturing & Production",[
+["Manufacturing Dashboard","Manufacturing","M","₹3L–₹10L",6,8],
+["Production Tracking System","Manufacturing","M","₹4L–₹12L",7,10],
+["Manufacturing ERP","Manufacturing","E","₹13L–₹45L",18,28],
+]],
+["Niche & Community Platforms",[
+["Gym & Fitness Management","Fitness, Wellness","B","₹2L–₹7L",4,6],
+["Salon & Spa Management","Beauty, Wellness","B","₹2L–₹6L",4,6],
+["Event Management Platform","Events, Hospitality","M","₹3L–₹10L",6,8],
+["NGO / Trust Management","Nonprofit","M","₹2.5L–₹8L",5,8],
+["Legal Case Management","Legal","M","₹4L–₹12L",7,10],
+["Feedback & Survey Platform","All Businesses","B","₹2L–₹6L",4,6],
+["Job Portal / Career Site","HR & Staffing, Recruitment Marketplaces","H","₹5L–₹14L",9,13],
+["Crowdfunding / Donation Platform","NGOs, Startups","H","₹5L–₹14L",9,13],
+["Visitor Management System","Enterprise, Facilities","B","₹1.5L–₹4L",3,5],
+]],
+["Enterprise & Bespoke Builds",[
+["ERP – Enterprise Resource Planning","Manufacturing, Enterprise","E","₹15L–₹60L",20,32],
+["Custom Enterprise Platform","Enterprise","E","₹15L–₹60L",20,32],
+["Custom Business Software","All Businesses","H","₹8L–₹25L",12,20],
+["AI Automation Platform (Enterprise-grade)","Enterprise, SaaS","E","₹8L–₹25L",12,18],
+]],
+];
+
+const MAINTENANCE = [
+{name:"Basic Care", popular:false, market:"12–15% of build cost / yr", items:["Security patches & library updates","Uptime monitoring (business hours)","Critical bug fixes","Monthly backup snapshot","Email support — 72h SLA"]},
+{name:"Standard Care", popular:true, market:"15–20% of build cost / yr", items:["Everything in Basic Care, plus:","Up to 4 hrs/month minor feature tweaks","Monthly health & performance report","Weekly backups","Priority email/chat support — 48h SLA","24/7 uptime monitoring"]},
+{name:"Premium Care", popular:false, market:"20–25%+ of build cost / yr", items:["Everything in Standard Care, plus:","Up to 10 hrs/month feature additions","Quarterly roadmap & optimization review","Dedicated account contact","Priority support — 12h SLA","Quarterly security & performance audit"]},
+];
+
+const ADDONS = [
+"Extra Page / Module","WhatsApp Business API Integration",
+"Payment Gateway Integration (Razorpay/Stripe/PayU)","SMS Gateway Integration",
+"ERP / Tally / Accounting Sync","Multi-language Support Pack","Advanced Analytics / BI Dashboard",
+"AI Chatbot Widget Add-on","Native Mobile App Companion","Extra User Roles & Permission Tier",
+"Public API Access for Developers","White-label / Multi-tenant Setup",
+"Extended Post-launch Support (beyond standard 30 days)","Professional Content Writing & SEO Copy",
+"Domain + Hosting + SSL Setup","App Store Deployment & ASO Setup",
+"UI/UX Redesign Only (no new dev)","Speed & Technical SEO Audit + Fix",
+];
+
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+
+function badge(code){ const t=T[code]; return `<span class="badge" style="background:${t.c}">${t.l}</span>`; }
+function wk(min,max){ return `${min}–${max} wks`; }
+function blankCell(){ return `<span class="blank">— fill in —</span>`; }
+
+/* Maintenance is derived per category from its own Market Price (industry baseline:
+   15-25% of build cost / yr), not a flat tier price — so it stays accurate if a
+   category's market price above is ever revised. */
+function parsePriceRange(str){
+  const m = str.match(/₹([\d.]+)L[–-]₹([\d.]+)L/);
+  return m ? [parseFloat(m[1]), parseFloat(m[2])] : [0,0];
+}
+function fmtL(n){
+  return (Math.round(n*100)/100).toString();
+}
+function maintRange(priceStr){
+  const [min,max] = parsePriceRange(priceStr);
+  return `₹${fmtL(min*0.15)}L–₹${fmtL(max*0.25)}L`;
+}
+const SLA_BY_TIER = {B:"3 business days", M:"2 business days", H:"1 business day", E:"Same-day (priority)"};
+const CARE_BY_TIER = {B:"Basic Care", M:"Standard Care", H:"Premium Care", E:"Premium Care"};
+
+function maintTableHTML(rows){
+  let h = `<table><thead><tr><th style="width:27%">Category</th><th style="width:10%">Complexity</th><th style="width:13%">Recommended Tier</th><th style="width:14%">Market Maintenance /yr</th><th style="width:13%">Market SLA</th><th style="width:14%">Orvion Maintenance /yr</th><th style="width:9%">Orvion SLA</th></tr></thead><tbody>`;
+  for(const r of rows){
+    h += `<tr><td class="cat-name">${r[0]}</td><td>${badge(r[2])}</td><td class="mono" style="font-size:9px">${CARE_BY_TIER[r[2]]}</td><td class="price">${maintRange(r[3])}</td><td class="mono">${SLA_BY_TIER[r[2]]}</td><td>${blankCell()}</td><td>${blankCell()}</td></tr>`;
+  }
+  return h + `</tbody></table>`;
+}
+
+function tableHTML(rows){
+  let h = `<table><thead><tr>
+    <th style="width:19%">Category</th>
+    <th style="width:11%">Industries</th>
+    <th style="width:7%">Complexity</th>
+    <th style="width:8%">Market Price</th>
+    <th style="width:7%">Market Delivery</th>
+    <th style="width:8%">Market Maint/yr</th>
+    <th style="width:8%">Orvion Price</th>
+    <th style="width:7%">Orvion Delivery</th>
+    <th style="width:8%">Orvion Maint/yr</th>
+  </tr></thead><tbody>`;
+  for(const r of rows){
+    h += `<tr>
+      <td class="cat-name">${r[0]}</td>
+      <td class="ind">${r[1]}</td>
+      <td>${badge(r[2])}</td>
+      <td class="price">${r[3]}</td>
+      <td class="mono">${wk(r[4],r[5])}</td>
+      <td class="price">${maintRange(r[3])}</td>
+      <td>${blankCell()}</td>
+      <td>${blankCell()}</td>
+      <td>${blankCell()}</td>
+    </tr>`;
+  }
+  return h + `</tbody></table>`;
+}
+
+function scatterSVG(rows, caption){
+  const W=900,H=220,padL=50,padB=30,padT=14,padR=14;
+  const innerW=W-padL-padR, innerH=H-padT-padB;
+  const maxWk = Math.max(...rows.map(r=>r[5])) + 4;
+  const tierX = {B:0.14,M:0.38,H:0.62,E:0.86};
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block">`;
+  // gridlines
+  for(let i=0;i<=4;i++){
+    const y = padT + innerH - (innerH*i/4);
+    const val = Math.round(maxWk*i/4);
+    svg += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#E5DDD3" stroke-width="1"/>`;
+    svg += `<text x="${padL-8}" y="${y+3}" font-size="9" font-family="JetBrains Mono" fill="#544E45" text-anchor="end">${val}w</text>`;
+  }
+  Object.entries(tierX).forEach(([code,fx])=>{
+    const x = padL + innerW*fx;
+    svg += `<text x="${x}" y="${H-8}" font-size="9" font-family="JetBrains Mono" fill="#544E45" text-anchor="middle">${T[code].l}</text>`;
+  });
+  svg += `<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+innerH}" stroke="#1A1A1A" stroke-width="1"/>`;
+  svg += `<line x1="${padL}" y1="${padT+innerH}" x2="${W-padR}" y2="${padT+innerH}" stroke="#1A1A1A" stroke-width="1"/>`;
+  rows.forEach((r,i)=>{
+    const code=r[2], avgWk=(r[4]+r[5])/2;
+    const jitter = ((i%7)-3)*0.025;
+    const x = padL + innerW*(tierX[code]+jitter);
+    const y = padT + innerH - (innerH*avgWk/maxWk);
+    svg += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.2" fill="${T[code].c}" opacity="0.85"/>`;
+  });
+  svg += `</svg>`;
+  return `<div class="chart-wrap"><div class="cap">${caption}</div>${svg}</div>`;
+}
+
+function legendHTML(){
+  return `<div class="legend">` + Object.entries(T).map(([k,v])=>`<span><span class="dot" style="background:${v.c}"></span>${v.l}</span>`).join("") + `</div>`;
+}
+
+const app = document.getElementById('app');
+let pageNum = 0;
+function addPage(node){ pageNum++; node.classList.add('page'); app.appendChild(node); return node; }
+function footer(label){ return `<div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>${label}</span><span>Confidential — Client Use Only</span></div>`; }
+
+/* ---- Cover ---- */
+{
+  const totalCount = WEBSITE.length + MOBILE.length + AUTOMATION.length + SAAS.reduce((a,g)=>a+g[1].length,0);
+  const p = el('div','cover');
+  p.innerHTML = `
+    <div class="cover-top" style="display:flex;justify-content:space-between;">
+      <span class="brand">ORVION</span>
+      <span class="mono muted" style="font-size:9.5px;">CUSTOM SOFTWARE DEVELOPMENT STUDIO</span>
+    </div>
+    <div class="cover-mid">
+      <span class="eyebrow">PRICING INTELLIGENCE</span>
+      <div class="cover-title">Pricing Intelligence<span class="serif">Report — 2026</span></div>
+      <p class="cover-sub">A complete benchmark across Websites, Mobile Apps, Automation and ${SAAS.length} software verticals — India market pricing, typical delivery time, and Orvion's fixed-fee position, side by side.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">${totalCount}+</div><div class="lbl">Priced Categories</div></div>
+        <div class="stat"><div class="num">${SAAS.length}</div><div class="lbl">Software Verticals</div></div>
+        <div class="stat"><div class="num">4</div><div class="lbl">Core Service Lines</div></div>
+        <div class="stat"><div class="num">Fixed</div><div class="lbl">Fee, Not Hourly</div></div>
+      </div>
+    </div>
+    <div class="cover-bottom"><span>ORVION STUDIO — AHMEDABAD, INDIA</span><span>JUNE 2026 — INDIA MARKET EDITION</span></div>
+  `;
+  addPage(p);
+}
+
+/* ---- How to read ---- */
+{
+  const p = el('div','');
+  p.innerHTML = `
+    <span class="eyebrow">HOW THIS REPORT WORKS</span>
+    <h2>Reading the Pricing Matrix</h2>
+    <div class="rule"></div>
+    <p class="section-blurb">Every category below is benchmarked against current India-market rates for an equivalent custom build — sourced from agency rate cards, freelancing platform quotes, and direct market intelligence, consistent with Orvion's prior pricing methodology. Newly added categories not previously benchmarked are modeled against the same Basic/Medium/High/Enterprise complexity bands as the validated set.</p>
+    <div class="maint-grid" style="margin-top:24px;">
+      <div class="maint-card"><h3 class="mono" style="font-size:12px;letter-spacing:0.05em;">MARKET PRICE</h3><p style="margin-top:8px;font-size:10px;color:var(--muted-fg)">What a business typically pays an established India agency for an equivalent custom build of this category, end to end.</p></div>
+      <div class="maint-card"><h3 class="mono" style="font-size:12px;letter-spacing:0.05em;">MARKET DELIVERY</h3><p style="margin-top:8px;font-size:10px;color:var(--muted-fg)">Typical agency timeline for the same scope — from kickoff to production launch.</p></div>
+      <div class="maint-card" style="border-color:var(--pink)"><h3 class="mono" style="font-size:12px;letter-spacing:0.05em;color:var(--pink)">ORVION PRICE / DELIVERY</h3><p style="margin-top:8px;font-size:10px;color:var(--muted-fg)">Left intentionally blank in this draft — Orvion's fixed fee and delivery window are filled in per category once finalized, always positioned below market.</p></div>
+    </div>
+    <h3 style="margin-top:26px;font-size:13px;">Complexity Legend</h3>
+    ${legendHTML()}
+  `;
+  addPage(p);
+  p.appendChild(el('div','',footer('Methodology')));
+}
+
+/* ---- Website ---- */
+{
+  const p = el('div','');
+  p.innerHTML = `
+    <div class="section-head"><h2>01 — Website Development</h2><span class="section-num mono">${WEBSITE.length} CATEGORIES</span></div>
+    <p class="section-blurb">From a single static landing page to fully custom headless commerce — every website type a business asks for, broken out by build complexity rather than bundled into one vague "website" line.</p>
+    ${scatterSVG(WEBSITE, "COMPLEXITY VS. TYPICAL DELIVERY TIME — WEBSITE DEVELOPMENT")}
+    ${tableHTML(WEBSITE)}
+  `;
+  addPage(p);
+}
+
+/* ---- Mobile ---- */
+{
+  const p = el('div','');
+  p.innerHTML = `
+    <div class="section-head"><h2>02 — Mobile App Development</h2><span class="section-num mono">${MOBILE.length} CATEGORIES</span></div>
+    <p class="section-blurb">Native Android/iOS, cross-platform Flutter/React Native builds, and full-stack mobile-plus-backend systems — priced by platform choice and complexity.</p>
+    ${scatterSVG(MOBILE, "COMPLEXITY VS. TYPICAL DELIVERY TIME — MOBILE APPS")}
+    ${tableHTML(MOBILE)}
+  `;
+  addPage(p);
+  p.appendChild(el('div','',footer('Section 02 — Mobile Apps')));
+}
+
+/* ---- Automation ---- */
+{
+  const p = el('div','');
+  p.innerHTML = `
+    <div class="section-head"><h2>03 — Automation</h2><span class="section-num mono">${AUTOMATION.length} CATEGORIES</span></div>
+    <p class="section-blurb">WhatsApp bots, AI chatbots, RPA, agentic workflows, document automation and marketing/data pipelines — split into the granular sub-types clients actually ask for.</p>
+    ${scatterSVG(AUTOMATION, "COMPLEXITY VS. TYPICAL DELIVERY TIME — AUTOMATION")}
+    ${tableHTML(AUTOMATION)}
+  `;
+  addPage(p);
+}
+
+/* ---- SaaS / Custom ---- */
+{
+  const allSaas = SAAS.reduce((a,g)=>a.concat(g[1]),[]);
+  const p = el('div','');
+  p.innerHTML = `
+    <div class="section-head"><h2>04 — SaaS &amp; Custom Business Software</h2><span class="section-num mono">${allSaas.length} CATEGORIES · ${SAAS.length} VERTICALS</span></div>
+    <p class="section-blurb">Every business-software vertical grouped by function — Sales, Finance, HR, Operations, Education, Healthcare, Logistics, Real Estate, Retail, Manufacturing, Niche platforms, and Enterprise/Bespoke builds. Each category ships as a Readymade base (fast, lightly customized) or a Full Custom build (scoped from scratch) — same fixed-fee philosophy, two delivery speeds.</p>
+    ${scatterSVG(allSaas, "COMPLEXITY VS. TYPICAL DELIVERY TIME — ALL SOFTWARE VERTICALS")}
+  `;
+  addPage(p);
+  p.appendChild(el('div','',footer('Section 04 — SaaS & Custom Software')));
+}
+{
+  const p = el('div','');
+  p.innerHTML = SAAS.map(([groupName, items]) =>
+    `<div class="group-title">${groupName}</div>` + tableHTML(items)
+  ).join('');
+  addPage(p);
+}
+
+/* ---- Maintenance ---- */
+const MAINT_GROUPS = [["Website", WEBSITE], ["Mobile Apps", MOBILE], ["Automation", AUTOMATION]].concat(SAAS);
+{
+  const p = el('div','');
+  let cards = MAINTENANCE.map(m => `
+    <div class="maint-card ${m.popular?'popular':''}">
+      ${m.popular?'<span class="tag">Most Chosen</span>':''}
+      <h3>${m.name}</h3>
+      <div class="maint-row"><div><div class="lbl">Market Basis</div><div class="val">${m.market}</div></div></div>
+      <ul>${m.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
+  p.innerHTML = `
+    <div class="section-head"><h2>05 — Maintenance Plans</h2><span class="section-num mono">MARKET VS. ORVION — PER CATEGORY</span></div>
+    <p class="section-blurb">Three care tiers, scoped the way agencies structure retainers. Every category from Sections 01–04 then gets its own maintenance row on the following pages — Market Maintenance is calculated directly from that category's own Market Price (15–25%/yr baseline) rather than a single flat number, with the recommended tier auto-matched to build complexity. Orvion Maintenance and Orvion SLA are left blank for you to fill in per category.</p>
+    <div class="maint-grid">${cards}</div>
+  `;
+  addPage(p);
+}
+{
+  const p = el('div','');
+  p.innerHTML = MAINT_GROUPS.map(([groupName, items]) =>
+    `<div class="group-title">${groupName} — Maintenance</div>` + maintTableHTML(items)
+  ).join('');
+  addPage(p);
+}
+
+/* ---- Addons ---- */
+{
+  const p = el('div','');
+  let grid = ADDONS.map(a => `<div class="addon"><span class="name">${a}</span><span class="blank">— fill in —</span></div>`).join('');
+  p.innerHTML = `
+    <div class="section-head"><h2>06 — Add-ons Menu</h2><span class="section-num mono">${ADDONS.length} ITEMS</span></div>
+    <p class="section-blurb">Sold on top of any base package — for clients who want more than the standard scope without re-negotiating the whole project.</p>
+    <div class="addon-grid">${grid}</div>
+  `;
+  addPage(p);
+  p.appendChild(el('div','',footer('Section 06 — Add-ons')));
+}
+
+/* ---- Closing ---- */
+{
+  const p = el('div','cover');
+  p.innerHTML = `
+    <div class="cover-top" style="display:flex;justify-content:space-between;">
+      <span class="brand">ORVION</span>
+      <span class="mono muted" style="font-size:9.5px;">READY TO QUOTE</span>
+    </div>
+    <div class="cover-mid">
+      <span class="eyebrow">NEXT STEP</span>
+      <h2 style="font-size:34px;max-width:720px;">Every category above is scoped before it's quoted — and priced fixed, not hourly.</h2>
+      <p class="cover-sub">This draft locks the category structure, industries served, and India-market benchmark for each line. Orvion's price and delivery columns are intentionally left blank — fill them in once finalized, and the same matrix becomes the client-facing version of this report.</p>
+    </div>
+    <div class="cover-bottom"><span>ORVION STUDIO — AHMEDABAD, INDIA</span><span>CONFIDENTIAL — INTERNAL DRAFT</span></div>
+  `;
+  addPage(p);
+}
+
+document.body.setAttribute('data-render-done','true');
+</script>
+</body>
+</html>
