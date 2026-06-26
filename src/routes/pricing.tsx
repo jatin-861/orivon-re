@@ -262,48 +262,68 @@ function PricingPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {PRICING_LINES.map((line) => (
-            <SpotlightCard
-              key={line.index}
-              className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full"
-            >
-              <div>
-                <span className="font-serif text-5xl font-bold text-secondary/15 leading-none">
-                  {line.index}
-                </span>
-                <h3 className="font-display text-2xl font-bold text-foreground mt-4">
-                  {line.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                  {line.description}
-                </p>
-
-                <div className="mt-6 space-y-2 text-sm font-mono">
-                  <div className="flex justify-between border-b border-border/60 pb-2">
-                    <span className="text-muted-foreground">Market Price</span>
-                    <span className="text-foreground font-semibold">{line.priceRange}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-border/60 pb-2">
-                    <span className="text-muted-foreground">Delivery</span>
-                    <span className="text-foreground font-semibold">{line.delivery}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Scope</span>
-                    <span className="text-foreground font-semibold">{line.categories}</span>
-                  </div>
-                </div>
-              </div>
-
-              <a
-                href={line.pdf}
-                download
-                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-border hover:border-foreground px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-colors"
+        <div className="flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center md:gap-6">
+          {PRICING_LINES.map((line, i) => {
+            const rotate = i === 0 ? -5 : i === PRICING_LINES.length - 1 ? 5 : 0;
+            const featured = i === 1;
+            return (
+              <motion.div
+                key={line.index}
+                initial={{ opacity: 0, y: featured ? 60 : 40, rotate }}
+                whileInView={{ opacity: 1, y: featured ? -20 : 0, rotate }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", duration: featured ? 0.7 : 0.5, delay: i * 0.1 }}
+                className={cn(
+                  "relative w-full max-w-xs transition-transform hover:scale-[1.03]",
+                  featured && "z-20 md:scale-110 md:hover:scale-[1.12]",
+                )}
               >
-                Download Pricing PDF <Download size={14} />
-              </a>
-            </SpotlightCard>
-          ))}
+                <SpotlightCard
+                  className={cn(
+                    "p-8 rounded-2xl bg-[var(--card)] border flex flex-col justify-between h-full",
+                    featured
+                      ? "border-[var(--brand-pink)]/40 shadow-elegant"
+                      : "border-border hover:border-[var(--brand-pink)]/40",
+                  )}
+                >
+                  <div>
+                    <span className="font-serif text-5xl font-bold text-secondary/15 leading-none">
+                      {line.index}
+                    </span>
+                    <h3 className="font-display text-2xl font-bold text-foreground mt-4">
+                      {line.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                      {line.description}
+                    </p>
+
+                    <div className="mt-6 space-y-2 text-sm font-mono">
+                      <div className="flex justify-between border-b border-border/60 pb-2">
+                        <span className="text-muted-foreground">Market Price</span>
+                        <span className="text-foreground font-semibold">{line.priceRange}</span>
+                      </div>
+                      <div className="flex justify-between border-b border-border/60 pb-2">
+                        <span className="text-muted-foreground">Delivery</span>
+                        <span className="text-foreground font-semibold">{line.delivery}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Scope</span>
+                        <span className="text-foreground font-semibold">{line.categories}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href={line.pdf}
+                    download
+                    className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-border hover:border-[var(--brand-pink)]/40 px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-colors"
+                  >
+                    Download Pricing PDF <Download size={14} />
+                  </a>
+                </SpotlightCard>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
