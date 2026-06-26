@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -32,11 +31,6 @@ const ProcessRoute = ProcessRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -69,7 +63,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/work': typeof WorkRouteWithChildren
@@ -80,7 +73,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -91,7 +83,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/work': typeof WorkRouteWithChildren
@@ -104,7 +95,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/login'
     | '/pricing'
     | '/process'
     | '/work'
@@ -115,7 +105,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/login'
     | '/pricing'
     | '/process'
     | '/work/$slug'
@@ -125,7 +114,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/login'
     | '/pricing'
     | '/process'
     | '/work'
@@ -137,7 +125,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  LoginRoute: typeof LoginRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
   WorkRoute: typeof WorkRouteWithChildren
@@ -164,13 +151,6 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -227,7 +207,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  LoginRoute: LoginRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
   WorkRoute: WorkRouteWithChildren,

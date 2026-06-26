@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Download, Globe2, Smartphone, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SpotlightCard } from "@/components/SpotlightCard";
+import { SEO } from "@/components/SEO";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -48,6 +49,12 @@ const PRICING_LINES = [
 function PricingPage() {
   return (
     <div className="relative pt-40 pb-32 px-6 overflow-hidden text-foreground transition-colors duration-500">
+      <SEO
+        title="Pricing — Orvion.co"
+        description="Transparent, fixed-fee pricing for website development, mobile apps, and SaaS — benchmarked against India market rates. Download the full pricing PDF."
+        canonical="https://orvion.co/pricing"
+        ogImage="https://orvion.co/og-image.png"
+      />
       <div className="absolute inset-0 bg-aurora opacity-40 pointer-events-none" />
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
 

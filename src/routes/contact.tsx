@@ -14,6 +14,7 @@ import {
   type ComposeChoice,
   type MailUrls,
 } from "@/lib/mail";
+import { SEO } from "@/components/SEO";
 
 const beams = [
   {
@@ -142,9 +143,9 @@ const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Someth
 // always lands with the founders too if the primary company inbox is ever
 // missed or down — order here is primary first, then the co-founders as backup.
 const CONTACT_EMAILS = [
-  "orvionstudio.co@gmail.com",
-  "saralbanker1@gmail.com",
-  "jatinbasantani861@gmail.com",
+  ["orvionstudio.co", "gmail.com"].join("@"),
+  ["saralbanker1", "gmail.com"].join("@"),
+  ["jatinbasantani861", "gmail.com"].join("@"),
 ];
 
 const NEXT_STEPS = [
@@ -256,6 +257,12 @@ function Contact() {
 
   return (
     <div className="pt-40 pb-32 px-6">
+      <SEO
+        title="Contact — Orvion.co"
+        description="Start a project with Orvion.co. Tell us what you're building — we'll reply within 48 hours."
+        canonical="https://orvion.co/contact"
+        ogImage="https://orvion.co/og-image.png"
+      />
       <div className="mx-auto max-w-6xl">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
           <div>

@@ -7,6 +7,7 @@ import { ArrowRight, Clock, Users, Calendar, Code2 } from "lucide-react";
 import { RevealText } from "@/components/RevealText";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { BentoTilt, BentoStatCard } from "@/components/BentoTilt";
+import { SEO } from "@/components/SEO";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -134,6 +135,12 @@ function Process() {
 
   return (
     <div className="pt-40 pb-32 px-6 text-foreground transition-colors duration-500">
+      <SEO
+        title="Process — Orvion.co"
+        description="How Orvion.co builds. Our engineering process from scoping to deployment — fixed scope, clear milestones, and production-grade delivery every time."
+        canonical="https://orvion.co/process"
+        ogImage="https://orvion.co/og-image.png"
+      />
       <div className="mx-auto max-w-6xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
           — Methodology

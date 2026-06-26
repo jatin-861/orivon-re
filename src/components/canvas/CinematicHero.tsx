@@ -378,7 +378,7 @@ export const CinematicHero = () => {
               View Projects
             </Link>
             <a
-              href="/Orivon_Team_Resume.pdf"
+              href="/Orvion_Team_Resume.pdf"
               download
               className="rounded-full border border-border hover:border-foreground px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors inline-flex items-center gap-2"
             >

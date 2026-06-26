@@ -56,7 +56,8 @@ function Index() {
       <SEO
         title="Orvion.co — Product Engineers"
         description="Orvion.co is a product engineering studio that builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
-        canonical="/"
+        canonical="https://orvion.co/"
+        ogImage="https://orvion.co/og-image.png"
         keywords="product engineer, full-stack developer, AI applications, React, Node.js, software engineer portfolio"
         ogType="website"
         schema={homeSchema}

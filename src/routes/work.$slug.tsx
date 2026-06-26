@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import { PROJECTS } from "@/data/projects";
+import { SEO } from "@/components/SEO";
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
@@ -54,6 +55,12 @@ function CaseStudy() {
 
   return (
     <div className="pt-32 pb-24 text-foreground transition-colors duration-500">
+      <SEO
+        title={`${p.title} — Orvion.co`}
+        description={p.description}
+        canonical={`https://orvion.co/work/${p.slug}`}
+        ogImage="https://orvion.co/og-image.png"
+      />
       <div className="mx-auto max-w-7xl px-6">
         <Link
           to="/work"

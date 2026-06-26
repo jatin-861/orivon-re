@@ -49,3 +49,10 @@ ds-bundle/
 # MS Office lock files (created while an .xlsx/.docx is open)
 ~$*
 
+# reports/ — one-off scripts, generated assets, temp files
+reports/*.mjs
+reports/*.html
+reports/*.json
+reports/*.png
+reports/*.xlsx
+

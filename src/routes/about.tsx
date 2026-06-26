@@ -14,6 +14,7 @@ import { BentoTilt, BentoStatCard } from "@/components/BentoTilt";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { TESTIMONIALS, type Testimonial } from "@/data/testimonials";
+import { SEO } from "@/components/SEO";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -315,6 +316,12 @@ function About() {
 
   return (
     <div className="pt-48 pb-48 px-6 text-foreground transition-colors duration-500 font-sans">
+      <SEO
+        title="About — Orvion.co"
+        description="Meet the product engineers behind Orvion.co. We build complete systems — from database to deployment — with production-grade code and real-world client results."
+        canonical="https://orvion.co/about"
+        ogImage="https://orvion.co/og-image.png"
+      />
       <div className="mx-auto max-w-7xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
           — About

@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "@/data/projects";
 import { BentoTilt } from "@/components/BentoTilt";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import { SEO } from "@/components/SEO";
 
 export const Route = createFileRoute("/work/")({
   component: WorkPage,
@@ -25,6 +26,12 @@ function WorkPage() {
 
   return (
     <div className="pb-32 text-foreground transition-colors duration-500">
+      <SEO
+        title="Work — Orvion.co"
+        description="Selected projects by Orvion.co — NeuroDashboard, Shade Ledger, Smart Parking, and Carbon Compass. Full case studies with tech stack, scope, and architecture."
+        canonical="https://orvion.co/work"
+        ogImage="https://orvion.co/og-image.png"
+      />
       <HeroGeometric
         badge="Selected Work"
         title1="Things I've"
