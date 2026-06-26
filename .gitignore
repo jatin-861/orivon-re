@@ -46,3 +46,6 @@ ds-bundle/
 .design-sync/learnings/
 .design-sync/node_modules
 
+# MS Office lock files (created while an .xlsx/.docx is open)
+~$*
+

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Orvion — Mobile App Pricing 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap"/>
+<style>
+:root{
+  --bg:#FAF7F2; --fg:#1A1A1A; --card:#FFFFFF; --border:#E5DDD3;
+  --muted:#F0EAE0; --muted-fg:#544E45; --pink:#C75B3A; --teal:#4B6E6A;
+  --serif:"Bodoni Moda",Georgia,serif;
+  --sans:"Cabinet Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+@page{size:A4 landscape;margin:0;}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);font-size:10.5px;line-height:1.4;}
+.page{width:297mm;min-height:210mm;padding:11mm 13mm;position:relative;break-after:page;background:var(--bg);}
+.page:last-child{break-after:auto;}
+h1,h2,h3{font-family:var(--sans);font-weight:800;letter-spacing:-0.02em;}
+.serif{font-family:var(--serif);}
+.mono{font-family:var(--mono);}
+.accent{color:var(--pink);}
+.muted{color:var(--muted-fg);}
+.eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--pink);display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.eyebrow::before{content:"";width:18px;height:1.5px;background:var(--pink);display:inline-block;}
+.rule{height:1px;background:linear-gradient(90deg,var(--pink),transparent 70%);margin:8px 0 14px;}
+
+/* Cover */
+.cover{display:flex;flex-direction:column;justify-content:space-between;}
+.cover-top .brand{font-family:var(--sans);font-weight:900;font-size:15px;letter-spacing:0.02em;}
+.cover-title{font-size:50px;font-weight:800;letter-spacing:-0.03em;line-height:0.98;margin-top:24px;}
+.cover-title .serif{font-size:50px;color:var(--pink);display:block;}
+.cover-sub{max-width:520px;margin-top:14px;font-size:12px;color:var(--muted-fg);}
+.stat-row{display:flex;gap:12px;margin-top:28px;}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;min-width:120px;box-shadow:0 8px 24px -8px rgba(26,26,26,.08);}
+.stat .num{font-size:24px;font-weight:800;color:var(--pink);}
+.stat .lbl{font-size:9px;color:var(--muted-fg);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em;font-family:var(--mono);}
+.cover-bottom{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:9px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:10px;}
+
+/* Section */
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px;}
+.section-head h2{font-size:26px;font-weight:800;}
+.section-num{font-family:var(--mono);font-size:10px;color:var(--muted-fg);}
+.section-blurb{max-width:680px;font-size:10px;color:var(--muted-fg);margin-bottom:12px;}
+.group-title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#fff;background:var(--pink);margin:14px 0 4px;padding:5px 8px;border-radius:4px;}
+.group-title:first-of-type{margin-top:2px;}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:9.5px;}
+thead{display:table-header-group;}
+tr{break-inside:avoid;}
+
+/* Market headers — dark charcoal */
+th{text-align:left;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.05em;background:#1A1A1A;color:#E8DDD0;padding:6px 7px;border-bottom:2px solid var(--pink);border-right:1px solid #333;}
+
+/* Orvion column headers — terracotta/green accents on dark */
+th.th-orv-price{background:#1A1A1A;color:#FF8A6A;border-bottom:2px solid #C75B3A;}
+th.th-orv-del{background:#1A1A1A;color:#6BDDAA;border-bottom:2px solid #1B7A4A;}
+th.th-orv-maint{background:#1A1A1A;color:#7DCFCC;border-bottom:2px solid #2D6E6A;}
+
+td{padding:5px 7px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:middle;}
+tbody tr:nth-child(even){background:rgba(240,234,224,0.45);}
+tbody tr:nth-child(odd){background:#fff;}
+.cat-name{font-weight:700;color:#1A1A1A;}
+.ind{color:var(--muted-fg);font-size:8.5px;}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-family:var(--mono);font-size:7.5px;text-transform:uppercase;letter-spacing:0.04em;color:#fff;white-space:nowrap;}
+.mkt-price{font-family:var(--mono);font-weight:700;color:#1A1A1A;}
+.mkt-del{font-family:var(--mono);color:#544E45;}
+.mkt-maint{font-family:var(--mono);font-size:8.5px;color:#544E45;}
+
+/* ── ORVION VALUE CELLS — solid vibrant fills, high-contrast white text ── */
+td.orv-price{
+  background:#C75B3A;
+  color:#FFFFFF;
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:9.5px;
+  text-align:center;
+  letter-spacing:0.01em;
+  border-right:2px solid #fff;
+}
+td.orv-del{
+  background:#1B7A4A;
+  color:#FFFFFF;
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:9px;
+  text-align:center;
+  border-right:2px solid #fff;
+}
+td.orv-maint{
+  background:#2D6E6A;
+  color:#FFFFFF;
+  font-family:var(--mono);
+  font-size:9px;
+  text-align:center;
+}
+/* Addons */
+.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+.addon{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 11px;display:flex;justify-content:space-between;align-items:center;}
+.addon .name{font-size:9.5px;font-weight:600;}
+.addon .price{background:#C75B3A;color:#fff;font-family:var(--mono);font-size:8.5px;font-weight:700;padding:2px 8px;border-radius:20px;}
+/* Footer */
+.foot{position:absolute;bottom:7mm;left:13mm;right:13mm;display:flex;justify-content:space-between;font-family:var(--mono);font-size:7.5px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:5px;}
+</style>
+</head>
+<body>
+<div id="app"><div class="page cover">
+    <div style="display:flex;justify-content:space-between;">
+      <span class="brand" style="font-family:var(--sans);font-weight:900;font-size:15px;">ORVION</span>
+      <span style="font-family:var(--mono);font-size:9px;color:var(--muted-fg);">CUSTOM SOFTWARE DEVELOPMENT STUDIO</span>
+    </div>
+    <div>
+      <span class="eyebrow">MOBILE APP DEVELOPMENT</span>
+      <div class="cover-title">Mobile App Development<span class="serif"><br>Pricing — 2026</span></div>
+      <p class="cover-sub">India market benchmark vs. Orvion's fixed fee — side by side, every category scoped before it's quoted.</p>
+      <div class="stat-row"><div class="stat"><div class="num">8</div><div class="lbl">Categories</div></div><div class="stat"><div class="num">Fixed</div><div class="lbl">Fee Model</div></div><div class="stat"><div class="num">< Market</div><div class="lbl">Always</div></div></div>
+    </div>
+    <div class="cover-bottom">
+      <span>ORVION STUDIO — AHMEDABAD, INDIA</span>
+      <span>JUNE 2026 — INDIA MARKET EDITION</span>
+    </div>
+  </div><div class="page">
+    <span class="eyebrow">HOW TO READ THIS REPORT</span>
+    <h2 style="font-size:26px;">Reading the Pricing Matrix</h2>
+    <div class="rule"></div>
+    <p style="font-size:10px;color:var(--muted-fg);max-width:680px;margin-bottom:20px;">Every category below is benchmarked against current India-market rates for an equivalent custom build. The three coloured columns on the right are Orvion's fixed-fee position — always below market, always scoped before quoted.</p>
+    <div style="display:flex;gap:32px;">
+      <div style="flex:1;">
+        <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--pink);margin-bottom:10px;">ORVION COLUMNS</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:#C75B3A;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">Price</div>
+    <div><div style="font-weight:700;font-size:10px;">ORVION Price</div><div style="font-size:9px;color:var(--muted-fg);">Your fixed-fee build price</div></div>
+  </div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:#1B7A4A;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">Delivery</div>
+    <div><div style="font-weight:700;font-size:10px;">ORVION Delivery</div><div style="font-size:9px;color:var(--muted-fg);">Orvion delivery window</div></div>
+  </div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:#2D6E6A;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">Maint/yr</div>
+    <div><div style="font-weight:700;font-size:10px;">ORVION Maint/yr</div><div style="font-size:9px;color:var(--muted-fg);">Annual maintenance retainer</div></div>
+  </div>
+      </div>
+      <div style="flex:1;">
+        <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--pink);margin-bottom:10px;">COMPLEXITY LEVELS</div>
+        <span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#6B6358;display:inline-block;"></span>Basic</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#8B5E3C;display:inline-block;"></span>Medium</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#C75B3A;display:inline-block;"></span>High</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#1A1A1A;display:inline-block;"></span>Enterprise</span>
+        <div style="margin-top:16px;font-size:9.5px;color:var(--muted-fg);line-height:1.6;">
+          <b>Market Price</b> — What an established India agency typically charges for this scope.<br>
+          <b>Market Delivery</b> — Typical agency timeline from kickoff to launch.<br>
+          <b>Market Maint/yr</b> — Industry standard annual support retainer (15–25% of build cost).<br>
+          <b>ORVION Price</b> — Fixed fee, not hourly. Scoped before quoted.<br>
+          <b>ORVION Maint/yr</b> — Orvion's retainer — consistently below market.
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>How to Read</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <div class="section-head">
+      <h2>02 — Mobile App Development</h2>
+      <span class="section-num mono">8 CATEGORIES</span>
+    </div>
+    <p class="section-blurb">Native Android/iOS, cross-platform Flutter/React Native builds, and full-stack mobile-plus-backend systems — priced by platform and complexity.</p>
+    <table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">App MVP (single core feature)</td>
+      <td class="ind">Startups, All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.75L–₹2L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.11L – ₹0.5L / yr</td>
+      <td class="orv-price">₹60K-1.5L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹6k – ₹45k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Cross-Platform Business App (Flutter/RN)</td>
+      <td class="ind">Retail, Services, Startups</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹6L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹1.5L / yr</td>
+      <td class="orv-price">₹2L-5L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹33k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Cross-Platform Enterprise App</td>
+      <td class="ind">Enterprise, Logistics, Healthcare</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹14L</td>
+      <td class="mkt-del">12–18 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹3.5L / yr</td>
+      <td class="orv-price">₹5.5L-11L</td>
+      <td class="orv-del">14–20 wks</td>
+      <td class="orv-maint">₹85k – ₹3.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Native Android App</td>
+      <td class="ind">Consumer, Fintech</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹7L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹1.75L / yr</td>
+      <td class="orv-price">₹2.7L-5.3L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹40k – ₹1.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Native iOS App</td>
+      <td class="ind">Consumer, Fintech, Premium Brands</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3.5L–₹8L</td>
+      <td class="mkt-del">8–13 wks</td>
+      <td class="mkt-maint">₹0.53L – ₹2L / yr</td>
+      <td class="orv-price">₹2.9L-7L</td>
+      <td class="orv-del">9–14 wks</td>
+      <td class="orv-maint">₹48k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Native Android + iOS (Complex/Enterprise)</td>
+      <td class="ind">Enterprise, Fintech, Healthcare</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹10L–₹25L</td>
+      <td class="mkt-del">16–24 wks</td>
+      <td class="mkt-maint">₹1.5L – ₹6.25L / yr</td>
+      <td class="orv-price">₹8.9L-21L</td>
+      <td class="orv-del">19–27 wks</td>
+      <td class="orv-maint">₹1.45L – ₹6.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">App + Custom Backend/API (full-stack mobile)</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹12L</td>
+      <td class="mkt-del">10–16 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3L / yr</td>
+      <td class="orv-price">₹4.5L-10L</td>
+      <td class="orv-del">12–18 wks</td>
+      <td class="orv-maint">₹70k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Marketplace / On-demand App (multi-sided)</td>
+      <td class="ind">Logistics, Services, Delivery</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹10L–₹22L</td>
+      <td class="mkt-del">16–24 wks</td>
+      <td class="mkt-maint">₹1.5L – ₹5.5L / yr</td>
+      <td class="orv-price">₹9L-20L</td>
+      <td class="orv-del">19–27 wks</td>
+      <td class="orv-maint">₹1.45L – ₹5.45L / yr</td>
+    </tr></tbody></table>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 02 — Mobile Apps</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <span class="eyebrow">ADD-ONS — ON TOP OF ANY BASE PACKAGE</span>
+    <div class="section-head">
+      <h2>03 — Add-ons Menu</h2>
+      <span class="section-num mono">18 ITEMS · FIXED FEE</span>
+    </div>
+    <div class="rule"></div>
+    <p class="section-blurb">Any add-on below can be bolted onto any base build. Price is fixed — no surprises after scoping.</p>
+    <div class="addon-grid">
+    <div class="addon">
+      <span class="name">Extra Page / Module</span>
+      <span class="price">₹5k – ₹8k</span>
+    </div>
+    <div class="addon">
+      <span class="name">WhatsApp Business API Integration</span>
+      <span class="price">₹30k – ₹1.2L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Payment Gateway Integration (Razorpay/Stripe/PayU)</span>
+      <span class="price">₹30k – ₹1.2L</span>
+    </div>
+    <div class="addon">
+      <span class="name">SMS Gateway Integration</span>
+      <span class="price">₹25k – ₹75k</span>
+    </div>
+    <div class="addon">
+      <span class="name">ERP / Tally / Accounting Sync</span>
+      <span class="price">₹30k – ₹2L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Multi-language Support Pack</span>
+      <span class="price">₹10k – ₹20k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Advanced Analytics / BI Dashboard</span>
+      <span class="price">₹2L – ₹4L</span>
+    </div>
+    <div class="addon">
+      <span class="name">AI Chatbot Widget Add-on</span>
+      <span class="price">₹30k – ₹90k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Native Mobile App Companion</span>
+      <span class="price">₹2L – ₹5.5L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Extra User Roles & Permission Tier</span>
+      <span class="price">₹20k – ₹60k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Public API Access for Developers</span>
+      <span class="price">₹30k – ₹1L</span>
+    </div>
+    <div class="addon">
+      <span class="name">White-label / Multi-tenant Setup</span>
+      <span class="price">₹1L – ₹3.5L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Extended Post-launch Support (beyond 30 days)</span>
+      <span class="price">₹15k – ₹50k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Professional Content Writing & SEO Copy</span>
+      <span class="price">₹10k – ₹35k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Domain + Hosting + SSL Setup</span>
+      <span class="price">₹4k – ₹20k</span>
+    </div>
+    <div class="addon">
+      <span class="name">App Store Deployment & ASO Setup</span>
+      <span class="price">₹20k – ₹55k</span>
+    </div>
+    <div class="addon">
+      <span class="name">UI/UX Redesign Only (no new dev)</span>
+      <span class="price">₹25k – ₹90k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Speed & Technical SEO Audit + Fix</span>
+      <span class="price">₹20k – ₹55k</span>
+    </div></div>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 03 — Add-ons</span><span>Confidential — Client Use Only</span></div>
+  </div></div>
+<script>document.body.setAttribute('data-render-done','true');</script>
+</body>
+</html>

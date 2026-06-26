@@ -1,0 +1,1722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Orvion — Full Pricing Intelligence Report 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap"/>
+<style>
+:root{
+  --bg:#FAF7F2; --fg:#1A1A1A; --card:#FFFFFF; --border:#E5DDD3;
+  --muted:#F0EAE0; --muted-fg:#544E45; --pink:#C75B3A; --teal:#4B6E6A;
+  --serif:"Bodoni Moda",Georgia,serif;
+  --sans:"Cabinet Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+@page{size:A4 landscape;margin:0;}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);font-size:10.5px;line-height:1.4;}
+.page{width:297mm;min-height:210mm;padding:11mm 13mm;position:relative;break-after:page;background:var(--bg);}
+.page:last-child{break-after:auto;}
+h1,h2,h3{font-family:var(--sans);font-weight:800;letter-spacing:-0.02em;}
+.serif{font-family:var(--serif);}
+.mono{font-family:var(--mono);}
+.accent{color:var(--pink);}
+.muted{color:var(--muted-fg);}
+.eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--pink);display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.eyebrow::before{content:"";width:18px;height:1.5px;background:var(--pink);display:inline-block;}
+.rule{height:1px;background:linear-gradient(90deg,var(--pink),transparent 70%);margin:8px 0 14px;}
+
+/* Cover */
+.cover{display:flex;flex-direction:column;justify-content:space-between;}
+.cover-top .brand{font-family:var(--sans);font-weight:900;font-size:15px;letter-spacing:0.02em;}
+.cover-title{font-size:50px;font-weight:800;letter-spacing:-0.03em;line-height:0.98;margin-top:24px;}
+.cover-title .serif{font-size:50px;color:var(--pink);display:block;}
+.cover-sub{max-width:520px;margin-top:14px;font-size:12px;color:var(--muted-fg);}
+.stat-row{display:flex;gap:12px;margin-top:28px;}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;min-width:120px;box-shadow:0 8px 24px -8px rgba(26,26,26,.08);}
+.stat .num{font-size:24px;font-weight:800;color:var(--pink);}
+.stat .lbl{font-size:9px;color:var(--muted-fg);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em;font-family:var(--mono);}
+.cover-bottom{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:9px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:10px;}
+
+/* Section */
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px;}
+.section-head h2{font-size:26px;font-weight:800;}
+.section-num{font-family:var(--mono);font-size:10px;color:var(--muted-fg);}
+.section-blurb{max-width:680px;font-size:10px;color:var(--muted-fg);margin-bottom:12px;}
+.group-title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#fff;background:var(--pink);margin:14px 0 4px;padding:5px 8px;border-radius:4px;}
+.group-title:first-of-type{margin-top:2px;}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:9.5px;}
+thead{display:table-header-group;}
+tr{break-inside:avoid;}
+
+/* Market headers — dark charcoal */
+th{text-align:left;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.05em;background:#1A1A1A;color:#E8DDD0;padding:6px 7px;border-bottom:2px solid var(--pink);border-right:1px solid #333;}
+
+/* Orvion column headers — terracotta/green accents on dark */
+th.th-orv-price{background:#1A1A1A;color:#FF8A6A;border-bottom:2px solid #C75B3A;}
+th.th-orv-del{background:#1A1A1A;color:#6BDDAA;border-bottom:2px solid #1B7A4A;}
+th.th-orv-maint{background:#1A1A1A;color:#7DCFCC;border-bottom:2px solid #2D6E6A;}
+
+td{padding:5px 7px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:middle;}
+tbody tr:nth-child(even){background:rgba(240,234,224,0.45);}
+tbody tr:nth-child(odd){background:#fff;}
+.cat-name{font-weight:700;color:#1A1A1A;}
+.ind{color:var(--muted-fg);font-size:8.5px;}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-family:var(--mono);font-size:7.5px;text-transform:uppercase;letter-spacing:0.04em;color:#fff;white-space:nowrap;}
+.mkt-price{font-family:var(--mono);font-weight:700;color:#1A1A1A;}
+.mkt-del{font-family:var(--mono);color:#544E45;}
+.mkt-maint{font-family:var(--mono);font-size:8.5px;color:#544E45;}
+
+/* ── ORVION VALUE CELLS — solid vibrant fills, high-contrast white text ── */
+td.orv-price{
+  background:#C75B3A;
+  color:#FFFFFF;
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:9.5px;
+  text-align:center;
+  letter-spacing:0.01em;
+  border-right:2px solid #fff;
+}
+td.orv-del{
+  background:#1B7A4A;
+  color:#FFFFFF;
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:9px;
+  text-align:center;
+  border-right:2px solid #fff;
+}
+td.orv-maint{
+  background:#2D6E6A;
+  color:#FFFFFF;
+  font-family:var(--mono);
+  font-size:9px;
+  text-align:center;
+}
+/* Addons */
+.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+.addon{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 11px;display:flex;justify-content:space-between;align-items:center;}
+.addon .name{font-size:9.5px;font-weight:600;}
+.addon .price{background:#C75B3A;color:#fff;font-family:var(--mono);font-size:8.5px;font-weight:700;padding:2px 8px;border-radius:20px;}
+/* Footer */
+.foot{position:absolute;bottom:7mm;left:13mm;right:13mm;display:flex;justify-content:space-between;font-family:var(--mono);font-size:7.5px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:5px;}
+</style>
+</head>
+<body>
+<div id="app"><div class="page cover">
+    <div style="display:flex;justify-content:space-between;">
+      <span class="brand" style="font-family:var(--sans);font-weight:900;font-size:15px;">ORVION</span>
+      <span style="font-family:var(--mono);font-size:9px;color:var(--muted-fg);">CUSTOM SOFTWARE DEVELOPMENT STUDIO</span>
+    </div>
+    <div>
+      <span class="eyebrow">PRICING INTELLIGENCE</span>
+      <div class="cover-title">Pricing Intelligence<span class="serif"><br>Report — 2026</span></div>
+      <p class="cover-sub">India market benchmark vs. Orvion's fixed fee — side by side, every category scoped before it's quoted.</p>
+      <div class="stat-row"><div class="stat"><div class="num">131+</div><div class="lbl">Priced Categories</div></div><div class="stat"><div class="num">4</div><div class="lbl">Service Lines</div></div><div class="stat"><div class="num">12</div><div class="lbl">SaaS Verticals</div></div><div class="stat"><div class="num">Fixed</div><div class="lbl">Fee Model</div></div></div>
+    </div>
+    <div class="cover-bottom">
+      <span>ORVION STUDIO — AHMEDABAD, INDIA</span>
+      <span>JUNE 2026 — INDIA MARKET EDITION</span>
+    </div>
+  </div><div class="page">
+    <span class="eyebrow">HOW TO READ THIS REPORT</span>
+    <h2 style="font-size:26px;">Reading the Pricing Matrix</h2>
+    <div class="rule"></div>
+    <p style="font-size:10px;color:var(--muted-fg);max-width:680px;margin-bottom:20px;">Every category below is benchmarked against current India-market rates for an equivalent custom build. The three coloured columns on the right are Orvion's fixed-fee position — always below market, always scoped before quoted.</p>
+    <div style="display:flex;gap:32px;">
+      <div style="flex:1;">
+        <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--pink);margin-bottom:10px;">ORVION COLUMNS</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:#C75B3A;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">Price</div>
+    <div><div style="font-weight:700;font-size:10px;">ORVION Price</div><div style="font-size:9px;color:var(--muted-fg);">Your fixed-fee build price</div></div>
+  </div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:#1B7A4A;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">Delivery</div>
+    <div><div style="font-weight:700;font-size:10px;">ORVION Delivery</div><div style="font-size:9px;color:var(--muted-fg);">Orvion delivery window</div></div>
+  </div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:#2D6E6A;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">Maint/yr</div>
+    <div><div style="font-weight:700;font-size:10px;">ORVION Maint/yr</div><div style="font-size:9px;color:var(--muted-fg);">Annual maintenance retainer</div></div>
+  </div>
+      </div>
+      <div style="flex:1;">
+        <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--pink);margin-bottom:10px;">COMPLEXITY LEVELS</div>
+        <span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#6B6358;display:inline-block;"></span>Basic</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#8B5E3C;display:inline-block;"></span>Medium</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#C75B3A;display:inline-block;"></span>High</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:#1A1A1A;display:inline-block;"></span>Enterprise</span>
+        <div style="margin-top:16px;font-size:9.5px;color:var(--muted-fg);line-height:1.6;">
+          <b>Market Price</b> — What an established India agency typically charges for this scope.<br>
+          <b>Market Delivery</b> — Typical agency timeline from kickoff to launch.<br>
+          <b>Market Maint/yr</b> — Industry standard annual support retainer (15–25% of build cost).<br>
+          <b>ORVION Price</b> — Fixed fee, not hourly. Scoped before quoted.<br>
+          <b>ORVION Maint/yr</b> — Orvion's retainer — consistently below market.
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>How to Read</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <div class="section-head"><h2>01 — Website Development</h2><span class="section-num mono">18 CATEGORIES</span></div>
+    <p class="section-blurb">From a single landing page to fully custom headless commerce.</p>
+    <table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Static Landing Page (1 page)</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹25k to 50k</td>
+      <td class="mkt-del">1–2 wks</td>
+      <td class="mkt-maint">₹0.02L – ₹0.1L / yr</td>
+      <td class="orv-price">₹20k</td>
+      <td class="orv-del">1 wk</td>
+      <td class="orv-maint">₹2-5k</td>
+    </tr><tr>
+      <td class="cat-name">Static Brochure Website (3–5 pages)</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹35k to 80k</td>
+      <td class="mkt-del">2–3 wks</td>
+      <td class="mkt-maint">₹0.05L – ₹0.2L / yr</td>
+      <td class="orv-price">₹30k - 60k</td>
+      <td class="orv-del">3 wks</td>
+      <td class="orv-maint">₹3-10k</td>
+    </tr><tr>
+      <td class="cat-name">Static Brochure Website (6–10 pages)</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹75k to 1.3L</td>
+      <td class="mkt-del">3–4 wks</td>
+      <td class="mkt-maint">₹0.08L – ₹0.3L / yr</td>
+      <td class="orv-price">₹55k -  1L</td>
+      <td class="orv-del">5 wks</td>
+      <td class="orv-maint">₹8-15k</td>
+    </tr><tr>
+      <td class="cat-name">Dynamic CMS Website (blog/news-driven)</td>
+      <td class="ind">Media, Publishing</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹80k to 2L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.12L – ₹0.5L / yr</td>
+      <td class="orv-price">₹60k - 1.5L</td>
+      <td class="orv-del">5-7 wks</td>
+      <td class="orv-maint">₹10-25k</td>
+    </tr><tr>
+      <td class="cat-name">Portfolio / Personal Brand Website</td>
+      <td class="ind">Consulting, Creators</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹40k–₹70k</td>
+      <td class="mkt-del">2–3 wks</td>
+      <td class="mkt-maint">₹0.05L – ₹0.18L / yr</td>
+      <td class="orv-price">₹30k - 60k</td>
+      <td class="orv-del">3-4 wks</td>
+      <td class="orv-maint">₹3-10k</td>
+    </tr><tr>
+      <td class="cat-name">Multi-language Website Build</td>
+      <td class="ind">Export, Tourism, Real Estate</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.3L–₹3.8L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.18L – ₹0.75L / yr</td>
+      <td class="orv-price">₹80k - 2.9L</td>
+      <td class="orv-del">6-10-wks</td>
+      <td class="orv-maint">₹12-63k</td>
+    </tr><tr>
+      <td class="cat-name">Web App / Client Dashboard — Basic</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.5L–₹3.5L</td>
+      <td class="mkt-del">5–7 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹0.88L / yr</td>
+      <td class="orv-price">₹95k -  3L</td>
+      <td class="orv-del">6-10 wks</td>
+      <td class="orv-maint">₹17-70k</td>
+    </tr><tr>
+      <td class="cat-name">Web App / Client Dashboard — Medium</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹6L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹1.5L / yr</td>
+      <td class="orv-price">₹2L - 5L</td>
+      <td class="orv-del">6-10 wks</td>
+      <td class="orv-maint">₹35-95k</td>
+    </tr><tr>
+      <td class="cat-name">Web App / Client Dashboard — Complex</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹12L</td>
+      <td class="mkt-del">10–16 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹3L / yr</td>
+      <td class="orv-price">₹4L-10L</td>
+      <td class="orv-del">12-17 wks</td>
+      <td class="orv-maint">₹2-5k</td>
+    </tr><tr>
+      <td class="cat-name">E-commerce — Template-based</td>
+      <td class="ind">Retail, D2C</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹70k–₹1.5L</td>
+      <td class="mkt-del">3–5 wks</td>
+      <td class="mkt-maint">₹0.08L – ₹0.38L / yr</td>
+      <td class="orv-price">₹60k - 1.2L</td>
+      <td class="orv-del">4 wks</td>
+      <td class="orv-maint">₹5-25k</td>
+    </tr><tr>
+      <td class="cat-name">E-commerce — Semi-custom Build</td>
+      <td class="ind">Retail, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.5L–₹4L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1L / yr</td>
+      <td class="orv-price">₹1.2L - 3L</td>
+      <td class="orv-del">4-10 wks</td>
+      <td class="orv-maint">₹15-80k</td>
+    </tr><tr>
+      <td class="cat-name">E-commerce — Fully Custom / Headless</td>
+      <td class="ind">Retail, D2C, Enterprise</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹4L–₹10L</td>
+      <td class="mkt-del">10–16 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹2.5L / yr</td>
+      <td class="orv-price">₹3L - 8L</td>
+      <td class="orv-del">10-17 wks</td>
+      <td class="orv-maint">₹45k-1.5L</td>
+    </tr><tr>
+      <td class="cat-name">Booking Website — Single Service</td>
+      <td class="ind">Salon, Clinics, Consulting</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹90k - 1.6L</td>
+      <td class="mkt-del">3–4 wks</td>
+      <td class="mkt-maint">₹0.08L – ₹0.3L / yr</td>
+      <td class="orv-price">₹85k - 1.2L</td>
+      <td class="orv-del">5 wks</td>
+      <td class="orv-maint">₹4-25k</td>
+    </tr><tr>
+      <td class="cat-name">Booking Website — Multi-service/Multi-staff</td>
+      <td class="ind">Healthcare, Hospitality</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.7L–₹2.9L</td>
+      <td class="mkt-del">5–7 wks</td>
+      <td class="mkt-maint">₹0.18L – ₹0.7L / yr</td>
+      <td class="orv-price">₹1.3L - 2.3L</td>
+      <td class="orv-del">6-10 wks</td>
+      <td class="orv-maint">₹15-55k</td>
+    </tr><tr>
+      <td class="cat-name">Educational Course Catalog Website</td>
+      <td class="ind">Education, EdTech</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1L–₹2.5L</td>
+      <td class="mkt-del">5–7 wks</td>
+      <td class="mkt-maint">₹0.15L – ₹0.63L / yr</td>
+      <td class="orv-price">₹70k - 1.9L</td>
+      <td class="orv-del">6-10 wks</td>
+      <td class="orv-maint">₹6-45k</td>
+    </tr><tr>
+      <td class="cat-name">Progressive Web App (PWA)</td>
+      <td class="ind">Retail, Services, Startups</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹3L–₹7L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹1.75L / yr</td>
+      <td class="orv-price">₹2.5L - 6L</td>
+      <td class="orv-del">10-16 wks</td>
+      <td class="orv-maint">₹35k-1.5L:</td>
+    </tr><tr>
+      <td class="cat-name">Website Redesign / Platform Migration</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1L–₹3L</td>
+      <td class="mkt-del">4–7 wks</td>
+      <td class="mkt-maint">₹0.15L – ₹0.75L / yr</td>
+      <td class="orv-price">₹90k - 2.7L</td>
+      <td class="orv-del">5-8 wks</td>
+      <td class="orv-maint">₹8-70k</td>
+    </tr><tr>
+      <td class="cat-name">Landing Page A/B Variant Pack</td>
+      <td class="ind">Marketing, D2C</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.25L–₹0.6L</td>
+      <td class="mkt-del">1–2 wks</td>
+      <td class="mkt-maint">₹0.04L – ₹0.15L / yr</td>
+      <td class="orv-price">₹20k -50k</td>
+      <td class="orv-del">2-3 wks</td>
+      <td class="orv-maint">₹2-8k</td>
+    </tr></tbody></table>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 01 — Website Development</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <div class="section-head"><h2>02 — Mobile App Development</h2><span class="section-num mono">8 CATEGORIES</span></div>
+    <p class="section-blurb">Native Android/iOS, cross-platform builds, and full-stack mobile-plus-backend systems.</p>
+    <table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">App MVP (single core feature)</td>
+      <td class="ind">Startups, All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.75L–₹2L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.11L – ₹0.5L / yr</td>
+      <td class="orv-price">₹60K-1.5L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹6k – ₹45k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Cross-Platform Business App (Flutter/RN)</td>
+      <td class="ind">Retail, Services, Startups</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹6L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹1.5L / yr</td>
+      <td class="orv-price">₹2L-5L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹33k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Cross-Platform Enterprise App</td>
+      <td class="ind">Enterprise, Logistics, Healthcare</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹14L</td>
+      <td class="mkt-del">12–18 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹3.5L / yr</td>
+      <td class="orv-price">₹5.5L-11L</td>
+      <td class="orv-del">14–20 wks</td>
+      <td class="orv-maint">₹85k – ₹3.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Native Android App</td>
+      <td class="ind">Consumer, Fintech</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹7L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹1.75L / yr</td>
+      <td class="orv-price">₹2.7L-5.3L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹40k – ₹1.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Native iOS App</td>
+      <td class="ind">Consumer, Fintech, Premium Brands</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3.5L–₹8L</td>
+      <td class="mkt-del">8–13 wks</td>
+      <td class="mkt-maint">₹0.53L – ₹2L / yr</td>
+      <td class="orv-price">₹2.9L-7L</td>
+      <td class="orv-del">9–14 wks</td>
+      <td class="orv-maint">₹48k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Native Android + iOS (Complex/Enterprise)</td>
+      <td class="ind">Enterprise, Fintech, Healthcare</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹10L–₹25L</td>
+      <td class="mkt-del">16–24 wks</td>
+      <td class="mkt-maint">₹1.5L – ₹6.25L / yr</td>
+      <td class="orv-price">₹8.9L-21L</td>
+      <td class="orv-del">19–27 wks</td>
+      <td class="orv-maint">₹1.45L – ₹6.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">App + Custom Backend/API (full-stack mobile)</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹12L</td>
+      <td class="mkt-del">10–16 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3L / yr</td>
+      <td class="orv-price">₹4.5L-10L</td>
+      <td class="orv-del">12–18 wks</td>
+      <td class="orv-maint">₹70k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Marketplace / On-demand App (multi-sided)</td>
+      <td class="ind">Logistics, Services, Delivery</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹10L–₹22L</td>
+      <td class="mkt-del">16–24 wks</td>
+      <td class="mkt-maint">₹1.5L – ₹5.5L / yr</td>
+      <td class="orv-price">₹9L-20L</td>
+      <td class="orv-del">19–27 wks</td>
+      <td class="orv-maint">₹1.45L – ₹5.45L / yr</td>
+    </tr></tbody></table>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 02 — Mobile Apps</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <div class="section-head"><h2>03 — Automation</h2><span class="section-num mono">22 CATEGORIES</span></div>
+    <p class="section-blurb">WhatsApp bots, AI chatbots, RPA, agentic workflows, document automation and marketing/data pipelines.</p>
+    <table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">WhatsApp Auto-Reply Bot (FAQ/greeting)</td>
+      <td class="ind">Retail, Services</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.4L–₹1L</td>
+      <td class="mkt-del">1–2 wks</td>
+      <td class="mkt-maint">₹0.06L – ₹0.25L / yr</td>
+      <td class="orv-price">₹35k -70k</td>
+      <td class="orv-del">1–2 wks</td>
+      <td class="orv-maint">₹1k – ₹20k / yr</td>
+    </tr><tr>
+      <td class="cat-name">WhatsApp Catalog / Order-Flow Bot</td>
+      <td class="ind">Retail, F&B, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1L–₹2.5L</td>
+      <td class="mkt-del">3–4 wks</td>
+      <td class="mkt-maint">₹0.15L – ₹0.63L / yr</td>
+      <td class="orv-price">₹70k-1.7L</td>
+      <td class="orv-del">4–5 wks</td>
+      <td class="orv-maint">₹10k – ₹58k / yr</td>
+    </tr><tr>
+      <td class="cat-name">WhatsApp Business API + CRM-linked Bot</td>
+      <td class="ind">Retail, D2C, Services</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.7L-5L</td>
+      <td class="orv-del">6–8 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">AI Website Chatbot (FAQ/support widget)</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.6L–₹1.5L</td>
+      <td class="mkt-del">2–3 wks</td>
+      <td class="mkt-maint">₹0.09L – ₹0.38L / yr</td>
+      <td class="orv-price">₹45k-90k</td>
+      <td class="orv-del">2–3 wks</td>
+      <td class="orv-maint">₹4k – ₹33k / yr</td>
+    </tr><tr>
+      <td class="cat-name">AI Multi-channel Chatbot (Web+WhatsApp+IG)</td>
+      <td class="ind">Retail, D2C, Support-heavy</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹4L-13L</td>
+      <td class="orv-del">10–14 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Voice Bot / IVR Automation</td>
+      <td class="ind">BFSI, Healthcare, Support Centers</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.3L-6.7L</td>
+      <td class="orv-del">8–12 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Email Drip / Marketing Automation</td>
+      <td class="ind">D2C, SaaS, Agencies</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.5L–₹4L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1L / yr</td>
+      <td class="orv-price">₹1.2L-3.2L</td>
+      <td class="orv-del">5–7 wks</td>
+      <td class="orv-maint">₹17k – ₹95k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Behavioral & Transactional Email Automation</td>
+      <td class="ind">D2C, SaaS</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹5L</td>
+      <td class="mkt-del">5–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.25L / yr</td>
+      <td class="orv-price">₹1.7L-4L</td>
+      <td class="orv-del">6–8 wks</td>
+      <td class="orv-maint">₹25k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Internal Workflow Automation — Single-tool</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.8L–₹2L</td>
+      <td class="mkt-del">2–4 wks</td>
+      <td class="mkt-maint">₹0.12L – ₹0.5L / yr</td>
+      <td class="orv-price">₹60k-1.3L</td>
+      <td class="orv-del">2–4 wks</td>
+      <td class="orv-maint">₹7k – ₹45k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Internal Workflow Automation — Multi-tool Orchestration</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹5L</td>
+      <td class="mkt-del">4–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.25L / yr</td>
+      <td class="orv-price">₹1.8L-4.2L</td>
+      <td class="orv-del">5–8 wks</td>
+      <td class="orv-maint">₹25k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Custom Workflow / Process Engine</td>
+      <td class="ind">Enterprise, Manufacturing</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3L-10L</td>
+      <td class="orv-del">9–12 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">RPA — Attended (desktop-assist bot)</td>
+      <td class="ind">BFSI, Back-office Ops</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹5L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.25L / yr</td>
+      <td class="orv-price">₹1.7L-4L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹25k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">RPA — Unattended (independent backend bot)</td>
+      <td class="ind">BFSI, Enterprise Ops</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹4L–₹10L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹2.5L / yr</td>
+      <td class="orv-price">₹3.2L - 9L</td>
+      <td class="orv-del">10–14 wks</td>
+      <td class="orv-maint">₹55k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">AI Agent — Single-task Agent</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹6L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹1.5L / yr</td>
+      <td class="orv-price">₹2L-5.5L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹33k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">AI Agent — Multi-step Agentic Workflow Platform</td>
+      <td class="ind">Enterprise, SaaS</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹8L–₹25L</td>
+      <td class="mkt-del">12–18 wks</td>
+      <td class="mkt-maint">₹1.2L – ₹6.25L / yr</td>
+      <td class="orv-price">₹5L-27L</td>
+      <td class="orv-del">15–21 wks</td>
+      <td class="orv-maint">₹1.15L – ₹6.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Document / Invoice OCR Automation</td>
+      <td class="ind">Finance, Logistics, Legal</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹5L</td>
+      <td class="mkt-del">5–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.25L / yr</td>
+      <td class="orv-price">₹1.7L-4L</td>
+      <td class="orv-del">6–8 wks</td>
+      <td class="orv-maint">₹25k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Compliance Document Auto-Generation</td>
+      <td class="ind">Legal, Manufacturing, Healthcare</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹6L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹1.5L / yr</td>
+      <td class="orv-price">₹2.3L-5L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹33k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Social Media Scheduling Automation</td>
+      <td class="ind">Marketing, D2C</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹0.8L–₹2L</td>
+      <td class="mkt-del">2–4 wks</td>
+      <td class="mkt-maint">₹0.12L – ₹0.5L / yr</td>
+      <td class="orv-price">₹70K-1.2L</td>
+      <td class="orv-del">2–4 wks</td>
+      <td class="orv-maint">₹7k – ₹45k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Social Media Engagement Auto-Response</td>
+      <td class="ind">Marketing, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.5L–₹4L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1L / yr</td>
+      <td class="orv-price">₹1.2L-3.4L</td>
+      <td class="orv-del">5–7 wks</td>
+      <td class="orv-maint">₹17k – ₹95k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Lead Capture & Auto-Routing Automation</td>
+      <td class="ind">Sales, Real Estate, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹1.5L–₹4L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1L / yr</td>
+      <td class="orv-price">₹1.3L-4L</td>
+      <td class="orv-del">5–7 wks</td>
+      <td class="orv-maint">₹17k – ₹95k / yr</td>
+    </tr><tr>
+      <td class="cat-name">Web Scraping / Data Pipeline Automation</td>
+      <td class="ind">Research, E-commerce, Finance</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹5L</td>
+      <td class="mkt-del">4–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.25L / yr</td>
+      <td class="orv-price">₹1.6L-4L</td>
+      <td class="orv-del">5–8 wks</td>
+      <td class="orv-maint">₹25k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">ETL / Reporting Automation Pipeline</td>
+      <td class="ind">Enterprise, Finance</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.7L-6.8L</td>
+      <td class="orv-del">8–12 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr></tbody></table>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 03 — Automation</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <div class="section-head"><h2>04 — SaaS & Custom Business Software</h2><span class="section-num mono">83 CATEGORIES · 12 VERTICALS</span></div>
+    <p class="section-blurb">Every business-software vertical — Sales, Finance, HR, Operations, Education, Healthcare, Logistics, Real Estate, Retail, Manufacturing, Niche, and Enterprise.</p>
+    <div class="group-title">Sales, CRM & Growth</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">CRM – Customer Relationship Mgmt</td>
+      <td class="ind">Retail, Real Estate, B2B</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹5L–₹18L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹4.5L / yr</td>
+      <td class="orv-price">₹3L-17L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹70k – ₹4.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Lead Management System</td>
+      <td class="ind">Real Estate, Sales, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹8L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹2L / yr</td>
+      <td class="orv-price">₹1.5L-7L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹25k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Marketing Automation Suite</td>
+      <td class="ind">D2C, SaaS, Agencies</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹4.2L-14L</td>
+      <td class="orv-del">10–14 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Customer Self-Service Portal</td>
+      <td class="ind">SaaS, Utilities, Retail</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹8L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹2L / yr</td>
+      <td class="orv-price">₹1.6L-7L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹25k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Vendor Portal</td>
+      <td class="ind">Manufacturing, Retail, Procurement</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-8L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Loyalty & Rewards Program Platform</td>
+      <td class="ind">Retail, F&B, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.5L-6.5L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Affiliate & Influencer Management Platform</td>
+      <td class="ind">D2C, Marketing</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.9L-7.5L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Referral Program Engine</td>
+      <td class="ind">D2C, SaaS, Retail</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹1.5L–₹4L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1L / yr</td>
+      <td class="orv-price">₹1.2L-3.2L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹17k – ₹95k / yr</td>
+    </tr></tbody></table><div class="group-title">Finance, Billing & Compliance</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Billing Software</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹1.5L–₹5L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1.25L / yr</td>
+      <td class="orv-price">₹97k-4L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹17k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Accounting Software</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.7L-8L</td>
+      <td class="orv-del">7–11 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Expense Management</td>
+      <td class="ind">Enterprise, Agencies</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.3L-5.5L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Multi-currency / Global Invoicing Platform</td>
+      <td class="ind">Export, Agencies, SaaS</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹9L</td>
+      <td class="mkt-del">6–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.25L / yr</td>
+      <td class="orv-price">₹2.5L-8L</td>
+      <td class="orv-del">7–11 wks</td>
+      <td class="orv-maint">₹40k – ₹2.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Insurance Policy Management</td>
+      <td class="ind">Insurance, Finance</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹4-13.5L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Subscription Platform</td>
+      <td class="ind">SaaS, Media, D2C</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3L-9L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Membership Management</td>
+      <td class="ind">Clubs, NGOs, Associations</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹7L</td>
+      <td class="mkt-del">4–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.75L / yr</td>
+      <td class="orv-price">₹1.9L-6.7L</td>
+      <td class="orv-del">4–7 wks</td>
+      <td class="orv-maint">₹25k – ₹1.7L / yr</td>
+    </tr></tbody></table><div class="group-title">HR & People Ops</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">HRMS – Human Resource Mgmt</td>
+      <td class="ind">Enterprise, All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹3.9L-11L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Attendance Management</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹1.5L–₹5L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1.25L / yr</td>
+      <td class="orv-price">₹90K-4.2L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹17k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Payroll System</td>
+      <td class="ind">Enterprise, HR & Staffing</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹8L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹2L / yr</td>
+      <td class="orv-price">₹1.2L-6.9L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹25k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Recruitment Platform (ATS)</td>
+      <td class="ind">HR & Staffing, Enterprise</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.2L-9.9L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Employee Onboarding Platform</td>
+      <td class="ind">Enterprise, HR</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.5L-4.7L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Performance Review / OKR Tracker</td>
+      <td class="ind">Enterprise, HR</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.1L-6.7L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Time Tracking & Billing (Agency/Freelance)</td>
+      <td class="ind">Agencies, Consulting, Legal</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹7L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹1.75L / yr</td>
+      <td class="orv-price">₹1.8L-6.5L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹33k – ₹1.7L / yr</td>
+    </tr></tbody></table><div class="group-title">Operations, Assets & Workflow</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Inventory Management</td>
+      <td class="ind">Retail, Manufacturing, Distribution</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-8L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Asset Management</td>
+      <td class="ind">Manufacturing, Facilities</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-9L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Maintenance Management (CMMS)</td>
+      <td class="ind">Manufacturing, Facilities</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">8–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹2.9L-10L</td>
+      <td class="orv-del">9–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Document Management System</td>
+      <td class="ind">Legal, Enterprise, Healthcare</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-9L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Knowledge Base Platform</td>
+      <td class="ind">SaaS, Support Teams</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.2L-5L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Custom Analytics Dashboard</td>
+      <td class="ind">Enterprise, All Businesses</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-9L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Procurement / e-Tendering Platform</td>
+      <td class="ind">Manufacturing, Govt-adjacent</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹16L</td>
+      <td class="mkt-del">10–14 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹4L / yr</td>
+      <td class="orv-price">₹5L-13L</td>
+      <td class="orv-del">12–16 wks</td>
+      <td class="orv-maint">₹85k – ₹3.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Contractor Management</td>
+      <td class="ind">Construction, Facilities</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-9L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Compliance Management</td>
+      <td class="ind">Manufacturing, Healthcare, Legal</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.5L-9.9L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Project Management Tool</td>
+      <td class="ind">Agencies, Enterprise</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.3L-8.9L</td>
+      <td class="orv-del">7–11 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Helpdesk & Ticketing System</td>
+      <td class="ind">Support Teams, SaaS, Enterprise</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-9L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Quality Management System</td>
+      <td class="ind">Manufacturing</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹9L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.25L / yr</td>
+      <td class="orv-price">₹2.3L-8.8L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹2.2L / yr</td>
+    </tr></tbody></table><div class="group-title">Education</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">School Management System</td>
+      <td class="ind">Education</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.5L-10.3L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">College Management System</td>
+      <td class="ind">Education</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6.2L–₹19L</td>
+      <td class="mkt-del">10–15 wks</td>
+      <td class="mkt-maint">₹0.93L – ₹4.75L / yr</td>
+      <td class="orv-price">₹5.5L-18L</td>
+      <td class="orv-del">12–17 wks</td>
+      <td class="orv-maint">₹88k – ₹4.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">LMS – Learning Management System</td>
+      <td class="ind">EdTech, Enterprise Training</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹4.3L-13.3L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Online Examination System</td>
+      <td class="ind">Education, EdTech</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-8.5L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Library Management System</td>
+      <td class="ind">Education, Public Institutions</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹1.5L–₹5L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1.25L / yr</td>
+      <td class="orv-price">₹90k-3.9L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹17k – ₹1.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Daycare / Childcare Management</td>
+      <td class="ind">Education, Childcare</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.5L-5.3L</td>
+      <td class="orv-del">4–7 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr></tbody></table><div class="group-title">Healthcare</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Hospital Management System</td>
+      <td class="ind">Healthcare</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹8L–₹25L</td>
+      <td class="mkt-del">14–20 wks</td>
+      <td class="mkt-maint">₹1.2L – ₹6.25L / yr</td>
+      <td class="orv-price">₹7.3L-23.9L</td>
+      <td class="orv-del">16–22 wks</td>
+      <td class="orv-maint">₹1.15L – ₹6.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Clinic Management System</td>
+      <td class="ind">Healthcare</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–10 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.5L-7.5L</td>
+      <td class="orv-del">7–11 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Pharmacy Management</td>
+      <td class="ind">Healthcare, Retail</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-8.7L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Telemedicine Platform</td>
+      <td class="ind">Healthcare</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹16L</td>
+      <td class="mkt-del">10–14 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹4L / yr</td>
+      <td class="orv-price">₹5.3L-15.5L</td>
+      <td class="orv-del">12–16 wks</td>
+      <td class="orv-maint">₹85k – ₹3.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Laboratory Information Mgmt System (LIMS)</td>
+      <td class="ind">Healthcare, Diagnostics</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹18L</td>
+      <td class="mkt-del">10–15 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹4.5L / yr</td>
+      <td class="orv-price">₹5.5L-17.3L</td>
+      <td class="orv-del">12–17 wks</td>
+      <td class="orv-maint">₹85k – ₹4.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Veterinary Clinic Management</td>
+      <td class="ind">Healthcare, Pet Care</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹7L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹1.75L / yr</td>
+      <td class="orv-price">₹1.8L-6.5L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹33k – ₹1.7L / yr</td>
+    </tr></tbody></table><div class="group-title">Logistics, Fleet & Field Ops</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Logistics Management</td>
+      <td class="ind">Logistics, Supply Chain</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹18L</td>
+      <td class="mkt-del">10–14 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹4.5L / yr</td>
+      <td class="orv-price">₹5.7L-17L</td>
+      <td class="orv-del">12–16 wks</td>
+      <td class="orv-maint">₹85k – ₹4.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Fleet Management</td>
+      <td class="ind">Logistics, Transport</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹14L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3.5L / yr</td>
+      <td class="orv-price">₹3.5L-13.3L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹55k – ₹3.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Warehouse Management System</td>
+      <td class="ind">Retail, Manufacturing, Logistics</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">8–12 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹4.3L-13.9L</td>
+      <td class="orv-del">9–13 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Field Service Management</td>
+      <td class="ind">Utilities, Maintenance, Logistics</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.3L-11.5L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Transport Management System</td>
+      <td class="ind">Logistics, Transport</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹5.5L-14L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Tour & Travel Portal</td>
+      <td class="ind">Tourism, Hospitality</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.3L-11L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Route & Dispatch Planning</td>
+      <td class="ind">Logistics, Field Service</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹10L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹2.5L / yr</td>
+      <td class="orv-price">₹3.5L-9L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.45L / yr</td>
+    </tr></tbody></table><div class="group-title">Real Estate, Property & Hospitality</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Real Estate Management / CRM</td>
+      <td class="ind">Real Estate</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.3L-11.5L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Property Management System</td>
+      <td class="ind">Real Estate</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.5L-11L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Rental Management</td>
+      <td class="ind">Real Estate</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹8L</td>
+      <td class="mkt-del">5–7 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹2L / yr</td>
+      <td class="orv-price">₹1.7L-6.9L</td>
+      <td class="orv-del">6–8 wks</td>
+      <td class="orv-maint">₹25k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Hotel Management System (PMS)</td>
+      <td class="ind">Hospitality</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹15L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.75L / yr</td>
+      <td class="orv-price">₹4.3L-13.9L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Co-working Space Management</td>
+      <td class="ind">Real Estate, Hospitality</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.4L-6.9L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Parking Management System</td>
+      <td class="ind">Real Estate, Smart City</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2.5L-6.9L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Construction Project Management</td>
+      <td class="ind">Construction, Real Estate</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹16L</td>
+      <td class="mkt-del">10–14 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹4L / yr</td>
+      <td class="orv-price">₹5.5L-14L</td>
+      <td class="orv-del">12–16 wks</td>
+      <td class="orv-maint">₹85k – ₹3.95L / yr</td>
+    </tr></tbody></table><div class="group-title">Retail, Commerce & Marketplaces</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Retail POS</td>
+      <td class="ind">Retail</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2L–₹8L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹2L / yr</td>
+      <td class="orv-price">₹1.5L-7.9L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹25k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Restaurant POS</td>
+      <td class="ind">F&B, Hospitality</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-8.9L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Marketplace Platform</td>
+      <td class="ind">Multi-vendor Commerce</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹10L–₹30L</td>
+      <td class="mkt-del">16–24 wks</td>
+      <td class="mkt-maint">₹1.5L – ₹7.5L / yr</td>
+      <td class="orv-price">₹8.9L-28L</td>
+      <td class="orv-del">19–27 wks</td>
+      <td class="orv-maint">₹1.45L – ₹7.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Subscription Box Management</td>
+      <td class="ind">D2C, Retail</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹8L</td>
+      <td class="mkt-del">6–9 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2L / yr</td>
+      <td class="orv-price">₹2L-7L</td>
+      <td class="orv-del">7–10 wks</td>
+      <td class="orv-maint">₹40k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Auction Platform</td>
+      <td class="ind">Marketplaces, Real Estate</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹6L–₹16L</td>
+      <td class="mkt-del">10–14 wks</td>
+      <td class="mkt-maint">₹0.9L – ₹4L / yr</td>
+      <td class="orv-price">₹5.5L-15.5L</td>
+      <td class="orv-del">12–16 wks</td>
+      <td class="orv-maint">₹85k – ₹3.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Classifieds Platform</td>
+      <td class="ind">Marketplaces, Real Estate, Auto</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹14L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.5L / yr</td>
+      <td class="orv-price">₹4L-12L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Multi-location Franchise Management</td>
+      <td class="ind">Retail, F&B, Education</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹8L–₹20L</td>
+      <td class="mkt-del">14–18 wks</td>
+      <td class="mkt-maint">₹1.2L – ₹5L / yr</td>
+      <td class="orv-price">₹7L-18L</td>
+      <td class="orv-del">17–21 wks</td>
+      <td class="orv-maint">₹1.15L – ₹4.95L / yr</td>
+    </tr></tbody></table><div class="group-title">Manufacturing & Production</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Manufacturing Dashboard</td>
+      <td class="ind">Manufacturing</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2.5L-8.5L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Production Tracking System</td>
+      <td class="ind">Manufacturing</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.5L-9.5L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Manufacturing ERP</td>
+      <td class="ind">Manufacturing</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹13L–₹45L</td>
+      <td class="mkt-del">18–28 wks</td>
+      <td class="mkt-maint">₹1.95L – ₹11.25L / yr</td>
+      <td class="orv-price">₹10L-40L</td>
+      <td class="orv-del">21–31 wks</td>
+      <td class="orv-maint">₹1.9L – ₹11.2L / yr</td>
+    </tr></tbody></table><div class="group-title">Niche & Community Platforms</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">Gym & Fitness Management</td>
+      <td class="ind">Fitness, Wellness</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹7L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.75L / yr</td>
+      <td class="orv-price">₹1.5L-6L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹25k – ₹1.7L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Salon & Spa Management</td>
+      <td class="ind">Beauty, Wellness</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.5-5.7L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Event Management Platform</td>
+      <td class="ind">Events, Hospitality</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹3L–₹10L</td>
+      <td class="mkt-del">6–8 wks</td>
+      <td class="mkt-maint">₹0.45L – ₹2.5L / yr</td>
+      <td class="orv-price">₹2-8L</td>
+      <td class="orv-del">7–9 wks</td>
+      <td class="orv-maint">₹40k – ₹2.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">NGO / Trust Management</td>
+      <td class="ind">Nonprofit</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹2.5L–₹8L</td>
+      <td class="mkt-del">5–8 wks</td>
+      <td class="mkt-maint">₹0.38L – ₹2L / yr</td>
+      <td class="orv-price">₹1.7L-7L</td>
+      <td class="orv-del">6–9 wks</td>
+      <td class="orv-maint">₹33k – ₹1.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Legal Case Management</td>
+      <td class="ind">Legal</td>
+      <td><span class="badge" style="background:#8B5E3C">Medium</span></td>
+      <td class="mkt-price">₹4L–₹12L</td>
+      <td class="mkt-del">7–10 wks</td>
+      <td class="mkt-maint">₹0.6L – ₹3L / yr</td>
+      <td class="orv-price">₹3.5L-10L</td>
+      <td class="orv-del">8–11 wks</td>
+      <td class="orv-maint">₹55k – ₹2.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Feedback & Survey Platform</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹2L–₹6L</td>
+      <td class="mkt-del">4–6 wks</td>
+      <td class="mkt-maint">₹0.3L – ₹1.5L / yr</td>
+      <td class="orv-price">₹1.5L-5L</td>
+      <td class="orv-del">4–6 wks</td>
+      <td class="orv-maint">₹25k – ₹1.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Job Portal / Career Site</td>
+      <td class="ind">HR & Staffing, Recruitment Marketplaces</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹14L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.5L / yr</td>
+      <td class="orv-price">₹4.5L-12L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Crowdfunding / Donation Platform</td>
+      <td class="ind">NGOs, Startups</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹5L–₹14L</td>
+      <td class="mkt-del">9–13 wks</td>
+      <td class="mkt-maint">₹0.75L – ₹3.5L / yr</td>
+      <td class="orv-price">₹4.5L-12L</td>
+      <td class="orv-del">11–15 wks</td>
+      <td class="orv-maint">₹70k – ₹3.45L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Visitor Management System</td>
+      <td class="ind">Enterprise, Facilities</td>
+      <td><span class="badge" style="background:#6B6358">Basic</span></td>
+      <td class="mkt-price">₹1.5L–₹4L</td>
+      <td class="mkt-del">3–5 wks</td>
+      <td class="mkt-maint">₹0.22L – ₹1L / yr</td>
+      <td class="orv-price">₹90K-3L</td>
+      <td class="orv-del">3–5 wks</td>
+      <td class="orv-maint">₹17k – ₹95k / yr</td>
+    </tr></tbody></table><div class="group-title">Enterprise & Bespoke Builds</div><table><thead><tr>
+    <th style="width:22%">Category / Service</th>
+    <th style="width:12%">Industries</th>
+    <th style="width:9%">Complexity</th>
+    <th style="width:10%">Market Price</th>
+    <th style="width:8%">Market Delivery</th>
+    <th style="width:10%">Market Maint/yr</th>
+    <th class="th-orv-price" style="width:11%">ORVION Price</th>
+    <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
+    <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
+  </tr></thead><tbody><tr>
+      <td class="cat-name">ERP – Enterprise Resource Planning</td>
+      <td class="ind">Manufacturing, Enterprise</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹15L–₹60L</td>
+      <td class="mkt-del">20–32 wks</td>
+      <td class="mkt-maint">₹2.25L – ₹15L / yr</td>
+      <td class="orv-price">₹14L-50L</td>
+      <td class="orv-del">23–35 wks</td>
+      <td class="orv-maint">₹2.2L – ₹14.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Custom Enterprise Platform</td>
+      <td class="ind">Enterprise</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹15L–₹60L</td>
+      <td class="mkt-del">20–32 wks</td>
+      <td class="mkt-maint">₹2.25L – ₹15L / yr</td>
+      <td class="orv-price">₹14L-55L</td>
+      <td class="orv-del">23–35 wks</td>
+      <td class="orv-maint">₹2.2L – ₹14.95L / yr</td>
+    </tr><tr>
+      <td class="cat-name">Custom Business Software</td>
+      <td class="ind">All Businesses</td>
+      <td><span class="badge" style="background:#C75B3A">High</span></td>
+      <td class="mkt-price">₹8L–₹25L</td>
+      <td class="mkt-del">12–20 wks</td>
+      <td class="mkt-maint">₹1.2L – ₹6.25L / yr</td>
+      <td class="orv-price">₹7L-24L</td>
+      <td class="orv-del">14–22 wks</td>
+      <td class="orv-maint">₹1.15L – ₹6.2L / yr</td>
+    </tr><tr>
+      <td class="cat-name">AI Automation Platform (Enterprise-grade)</td>
+      <td class="ind">Enterprise, SaaS</td>
+      <td><span class="badge" style="background:#1A1A1A">Enterprise</span></td>
+      <td class="mkt-price">₹8L–₹25L</td>
+      <td class="mkt-del">12–18 wks</td>
+      <td class="mkt-maint">₹1.2L – ₹6.25L / yr</td>
+      <td class="orv-price">₹7L-24L</td>
+      <td class="orv-del">15–21 wks</td>
+      <td class="orv-maint">₹1.15L – ₹6.2L / yr</td>
+    </tr></tbody></table>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 04 — SaaS & Custom Software</span><span>Confidential — Client Use Only</span></div>
+  </div><div class="page">
+    <span class="eyebrow">ADD-ONS — ON TOP OF ANY BASE PACKAGE</span>
+    <div class="section-head">
+      <h2>05 — Add-ons Menu</h2>
+      <span class="section-num mono">18 ITEMS · FIXED FEE</span>
+    </div>
+    <div class="rule"></div>
+    <p class="section-blurb">Any add-on below can be bolted onto any base build. Price is fixed — no surprises after scoping.</p>
+    <div class="addon-grid">
+    <div class="addon">
+      <span class="name">Extra Page / Module</span>
+      <span class="price">₹5k – ₹8k</span>
+    </div>
+    <div class="addon">
+      <span class="name">WhatsApp Business API Integration</span>
+      <span class="price">₹30k – ₹1.2L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Payment Gateway Integration (Razorpay/Stripe/PayU)</span>
+      <span class="price">₹30k – ₹1.2L</span>
+    </div>
+    <div class="addon">
+      <span class="name">SMS Gateway Integration</span>
+      <span class="price">₹25k – ₹75k</span>
+    </div>
+    <div class="addon">
+      <span class="name">ERP / Tally / Accounting Sync</span>
+      <span class="price">₹30k – ₹2L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Multi-language Support Pack</span>
+      <span class="price">₹10k – ₹20k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Advanced Analytics / BI Dashboard</span>
+      <span class="price">₹2L – ₹4L</span>
+    </div>
+    <div class="addon">
+      <span class="name">AI Chatbot Widget Add-on</span>
+      <span class="price">₹30k – ₹90k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Native Mobile App Companion</span>
+      <span class="price">₹2L – ₹5.5L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Extra User Roles & Permission Tier</span>
+      <span class="price">₹20k – ₹60k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Public API Access for Developers</span>
+      <span class="price">₹30k – ₹1L</span>
+    </div>
+    <div class="addon">
+      <span class="name">White-label / Multi-tenant Setup</span>
+      <span class="price">₹1L – ₹3.5L</span>
+    </div>
+    <div class="addon">
+      <span class="name">Extended Post-launch Support (beyond 30 days)</span>
+      <span class="price">₹15k – ₹50k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Professional Content Writing & SEO Copy</span>
+      <span class="price">₹10k – ₹35k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Domain + Hosting + SSL Setup</span>
+      <span class="price">₹4k – ₹20k</span>
+    </div>
+    <div class="addon">
+      <span class="name">App Store Deployment & ASO Setup</span>
+      <span class="price">₹20k – ₹55k</span>
+    </div>
+    <div class="addon">
+      <span class="name">UI/UX Redesign Only (no new dev)</span>
+      <span class="price">₹25k – ₹90k</span>
+    </div>
+    <div class="addon">
+      <span class="name">Speed & Technical SEO Audit + Fix</span>
+      <span class="price">₹20k – ₹55k</span>
+    </div></div>
+    <div class="foot"><span>ORVION — Pricing Intelligence Report</span><span>Section 05 — Add-ons</span><span>Confidential — Client Use Only</span></div>
+  </div></div>
+<script>document.body.setAttribute('data-render-done','true');</script>
+</body>
+</html>
