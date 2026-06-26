@@ -1,15 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Download, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { RevealText } from "@/components/RevealText";
 import { NeonButton } from "@/components/ui/neon-button";
-import { BentoTilt } from "@/components/BentoTilt";
+import { SpotlightCard } from "@/components/SpotlightCard";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
+
+const PRICING_LINES = [
+  {
+    index: "01",
+    title: "Website Development",
+    description:
+      "From a single landing page to fully custom headless commerce — 18 categories benchmarked.",
+    priceRange: "₹0.15L – ₹12L",
+    delivery: "1–16 wks",
+    categories: "18 categories",
+    pdf: "/Orvion-Pricing-Website-Development.pdf",
+  },
+  {
+    index: "02",
+    title: "Mobile App Development",
+    description:
+      "Native Android/iOS, cross-platform builds, and full-stack mobile-plus-backend systems.",
+    priceRange: "₹0.75L – ₹25L",
+    delivery: "4–24 wks",
+    categories: "8 categories",
+    pdf: "/Orvion-Pricing-Mobile-App-Development.pdf",
+  },
+  {
+    index: "03",
+    title: "SaaS & Custom Software",
+    description:
+      "Sales, finance, HR, healthcare, logistics, retail and 12 verticals of business software.",
+    priceRange: "₹1.5L – ₹60L",
+    delivery: "4–32 wks",
+    categories: "83 categories · 12 verticals",
+    pdf: "/Orvion-Pricing-SaaS-Custom-Software.pdf",
+  },
+];
 
 const plans = [
   {
@@ -123,95 +156,85 @@ function PricingPage() {
         </div>
       </div>
 
-      {/* Cards */}
-      <div className="relative mx-auto mt-20 grid max-w-7xl gap-8 md:grid-cols-3">
+      {/* Cards — fanned, with the middle plan elevated */}
+      <div className="relative mx-auto mt-24 flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center md:gap-6">
         {plans.map((p, i) => {
-          const cardClass = p.popular
-            ? "bg-[var(--brand-teal)] text-white border-transparent shadow-elegant"
-            : "bg-[var(--card)] border-border hover:border-[var(--brand-pink)]/40 text-foreground";
-
+          const rotate = i === 0 ? -5 : i === plans.length - 1 ? 5 : 0;
           const descClass = p.popular ? "text-white/70" : "text-muted-foreground";
           const subLabelClass = p.popular ? "text-white/50" : "text-muted-foreground";
 
           return (
             <motion.div
               key={p.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: p.popular ? 60 : 40, rotate }}
+              whileInView={{ opacity: 1, y: p.popular ? -20 : 0, rotate }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="h-full flex flex-col"
+              transition={{ type: "spring", duration: p.popular ? 0.7 : 0.5, delay: i * 0.1 }}
+              className={cn(
+                "relative w-full max-w-xs rounded-2xl border p-8 transition-transform hover:scale-[1.03]",
+                p.popular
+                  ? "z-20 md:scale-110 md:hover:scale-[1.12] bg-[var(--brand-teal)] border-transparent text-white shadow-elegant"
+                  : "z-10 bg-[var(--card)] border-border hover:border-[var(--brand-pink)]/40 text-foreground",
+              )}
             >
-              <BentoTilt className="h-full flex flex-col w-full">
-                <div
+              {p.popular && (
+                <motion.span
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[var(--brand-pink)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest font-mono shadow"
+                >
+                  Most loved
+                </motion.span>
+              )}
+
+              <h3 className="font-display text-2xl font-bold">{p.name}</h3>
+
+              <div className="mt-6 flex items-end gap-1">
+                <span
                   className={cn(
-                    "relative rounded-xl p-8 md:p-10 border transition-all flex flex-col justify-between h-full w-full",
-                    cardClass,
+                    "font-display font-bold",
+                    p.popular ? "text-5xl text-white" : "text-4xl text-[var(--brand-pink)]",
                   )}
                 >
-                  {p.popular && (
-                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[var(--brand-pink)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest font-mono">
-                      Most loved
-                    </span>
-                  )}
+                  ${yearly ? p.yearlyPrice : p.price}k
+                </span>
+                <span className={cn("text-xs font-mono pb-2", subLabelClass)}>
+                  /{yearly ? "year" : "engagement"}
+                </span>
+              </div>
 
-                  <div>
-                    <h3 className="font-display text-2xl md:text-3xl font-bold">{p.name}</h3>
+              <p className={cn("mt-4 text-sm leading-relaxed", descClass)}>{p.description}</p>
 
-                    <div className="mt-6 flex items-end gap-1">
-                      <span
-                        className={cn(
-                          "font-display text-6xl font-bold",
-                          p.popular ? "text-white" : "text-[var(--brand-pink)]",
-                        )}
-                      >
-                        ${yearly ? p.yearlyPrice : p.price}k
-                      </span>
-                      <span className={cn("text-xs font-mono pb-2", subLabelClass)}>
-                        /{yearly ? "year" : "engagement"}
-                      </span>
-                    </div>
-
-                    <p className={cn("mt-4 text-sm leading-relaxed", descClass)}>{p.description}</p>
-                  </div>
-
-                  <div>
-                    <NeonButton
-                      variant={p.popular ? "solid" : "default"}
-                      size="lg"
+              <p
+                className={cn(
+                  "text-[10px] font-mono uppercase tracking-widest mt-6 mb-3",
+                  subLabelClass,
+                )}
+              >
+                {p.includes[0]}
+              </p>
+              <ul className="space-y-2.5">
+                {p.includes.slice(1).map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm">
+                    <Check
+                      size={15}
                       className={cn(
-                        "mt-8 w-full",
-                        p.popular && "bg-white text-black hover:bg-white/90",
+                        "mt-0.5 shrink-0",
+                        p.popular ? "text-white" : "text-[var(--brand-pink)]",
                       )}
-                    >
-                      {p.cta}
-                    </NeonButton>
+                    />
+                    <span className="opacity-90">{f}</span>
+                  </li>
+                ))}
+              </ul>
 
-                    <div className="mt-8 space-y-3">
-                      <p
-                        className={cn(
-                          "text-[10px] font-mono uppercase tracking-widest mb-3",
-                          subLabelClass,
-                        )}
-                      >
-                        {p.includes[0]}
-                      </p>
-                      {p.includes.slice(1).map((f) => (
-                        <div key={f} className="flex items-start gap-3 text-sm">
-                          <Check
-                            size={16}
-                            className={cn(
-                              "mt-0.5 shrink-0",
-                              p.popular ? "text-white" : "text-[var(--brand-pink)]",
-                            )}
-                          />
-                          <span className="opacity-90">{f}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </BentoTilt>
+              <NeonButton
+                variant={p.popular ? "solid" : "default"}
+                size="lg"
+                className={cn("mt-8 w-full", p.popular && "bg-white text-black hover:bg-white/90")}
+              >
+                {p.cta}
+              </NeonButton>
             </motion.div>
           );
         })}
@@ -222,6 +245,66 @@ function PricingPage() {
         <a href="/contact" className="text-[var(--brand-pink)] hover:underline">
           Tell us about your project →
         </a>
+      </div>
+
+      {/* India-market category pricing */}
+      <div className="relative mx-auto mt-32 max-w-7xl">
+        <div className="max-w-2xl mb-12">
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)]">
+            — India Market Pricing
+          </span>
+          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
+            Fixed fee, <span className="text-[var(--brand-pink)] italic">not hourly.</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            Every build benchmarked against current India-market rates. Pick a service line below
+            and download the full pricing breakdown for that category.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {PRICING_LINES.map((line) => (
+            <SpotlightCard
+              key={line.index}
+              className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full"
+            >
+              <div>
+                <span className="font-serif text-5xl font-bold text-secondary/15 leading-none">
+                  {line.index}
+                </span>
+                <h3 className="font-display text-2xl font-bold text-foreground mt-4">
+                  {line.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                  {line.description}
+                </p>
+
+                <div className="mt-6 space-y-2 text-sm font-mono">
+                  <div className="flex justify-between border-b border-border/60 pb-2">
+                    <span className="text-muted-foreground">Market Price</span>
+                    <span className="text-foreground font-semibold">{line.priceRange}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-border/60 pb-2">
+                    <span className="text-muted-foreground">Delivery</span>
+                    <span className="text-foreground font-semibold">{line.delivery}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Scope</span>
+                    <span className="text-foreground font-semibold">{line.categories}</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={line.pdf}
+                download
+                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-border hover:border-foreground px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-colors"
+              >
+                Download Pricing PDF <Download size={14} />
+              </a>
+            </SpotlightCard>
+          ))}
+        </div>
       </div>
     </div>
   );

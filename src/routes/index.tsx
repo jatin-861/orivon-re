@@ -9,6 +9,7 @@ import { Marquee } from "@/components/Marquee";
 import { ScrollStoryHorizontal } from "@/components/ScrollStoryHorizontal";
 import { LazyVideo } from "@/components/LazyVideo";
 import { PROJECTS } from "@/data/projects";
+import { useStickyHorizontalScroll } from "@/hooks/useStickyHorizontalScroll";
 
 import { CinematicHero } from "@/components/canvas/CinematicHero";
 import { StoryTeller } from "@/components/StoryTeller";
@@ -91,52 +92,30 @@ function Index() {
 }
 
 function StudioShowreel() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  // ── ONE unified GSAP pinned vertical-drives-horizontal scroll, every device ──
-  // Same approach as ScrollStoryHorizontal: phone gets the cinematic auto-scroll
-  // too. scrub: true (1:1, no second easing layer) + ignoreMobileResize (set in
-  // LenisProvider) + a stable 100svh pin height keep it jiggle-free on touch.
-  useEffect(() => {
-    const container = containerRef.current;
-    const scrollEl = scrollRef.current;
-    if (!container || !scrollEl) return;
-
-    let blurResumeTimeout: number;
-    const FAST_SCROLL_PX_PER_SEC = 900;
-
-    const ctx = gsap.context(() => {
-      const getDistance = () => scrollEl.scrollWidth - window.innerWidth;
-
-      const horizontalTween = gsap.to(scrollEl, {
-        id: "scroll-showreel",
-        x: () => -getDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: container,
-          pin: true,
-          pinType: "transform",
-          anticipatePin: 1,
-          scrub: true,
-          start: "top top",
-          end: () => `+=${getDistance()}`,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (Math.abs(self.getVelocity()) > FAST_SCROLL_PX_PER_SEC) {
-              container.classList.add("no-blur-scrub");
-            }
-            clearTimeout(blurResumeTimeout);
-            blurResumeTimeout = window.setTimeout(() => {
-              container.classList.remove("no-blur-scrub");
-            }, 150);
-          },
-        },
-      });
-
+  // Native-sticky cinematic horizontal scroll — jiggle-free on every device
+  // (the vertical hold is the browser's compositor, not a GSAP pin). See
+  // useStickyHorizontalScroll for the full rationale.
+  useStickyHorizontalScroll(wrapperRef, trackRef, {
+    onUpdate: (self) => {
+      const sticky = stickyRef.current;
+      if (!sticky) return;
+      if (Math.abs(self.getVelocity()) > 900) {
+        sticky.classList.add("no-blur-scrub");
+        clearTimeout((sticky as HTMLElement & { _t?: number })._t);
+        (sticky as HTMLElement & { _t?: number })._t = window.setTimeout(
+          () => sticky.classList.remove("no-blur-scrub"),
+          150,
+        );
+      }
+    },
+    onSetup: (horizontalTween) => {
+      const track = trackRef.current!;
       // Subtle parallax shift for video panels
-      const panels = gsap.utils.toArray<HTMLElement>(".showreel-panel-card");
-      panels.forEach((panel) => {
+      gsap.utils.toArray<HTMLElement>(".showreel-panel-card", track).forEach((panel) => {
         const video = panel.querySelector("video");
         if (video) {
           gsap.fromTo(
@@ -156,13 +135,8 @@ function StudioShowreel() {
           );
         }
       });
-    }, container);
-
-    return () => {
-      clearTimeout(blurResumeTimeout);
-      ctx.revert();
-    };
-  }, []);
+    },
+  });
 
   const items = [
     {
@@ -186,22 +160,23 @@ function StudioShowreel() {
   ];
 
   return (
-    <div
-      ref={containerRef}
-      className="relative bg-[var(--brand-pink)] text-white overflow-hidden z-10 border-y border-white/10"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
+    // Outer wrapper: the hook sets its height to (100svh + horizontal distance);
+    // no overflow-hidden — it must scroll normally.
+    <div ref={wrapperRef} className="relative bg-[var(--brand-pink)] text-white z-10 border-y border-white/10">
+      {/* Sticky inner: native compositor pin — held at top while the wrapper
+          scrolls past, so it can't jitter on mobile. */}
+      <div ref={stickyRef} className="sticky top-0 h-[100svh] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
 
-      {/* Horizontal scroll track: GSAP translates this horizontally as you
-          scroll vertically — no native overflow (no scrollbar) on any device.
-          touch-pan-y tells the browser touches here drive vertical page scroll
-          (which powers the motion), so there's no gesture-axis ambiguity. */}
-      <div
-        ref={scrollRef}
-        className="flex h-[100svh] items-center relative touch-pan-y"
-        style={{ width: "fit-content" }}
-      >
-        {/* Intro Panel */}
+        {/* Horizontal track: GSAP translates this as the wrapper scrolls.
+            touch-pan-y tells the browser touches here are vertical page scroll
+            (which powers the motion), so there's no gesture-axis ambiguity. */}
+        <div
+          ref={trackRef}
+          className="flex h-[100svh] items-center relative touch-pan-y"
+          style={{ width: "fit-content" }}
+        >
+          {/* Intro Panel */}
         <div className="showreel-panel flex h-[100svh] w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 max-w-4xl">
           <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4">
             — Systems In Motion
@@ -271,6 +246,7 @@ function StudioShowreel() {
               See Selected Work <ArrowRight size={18} />
             </Link>
           </div>
+        </div>
         </div>
       </div>
     </div>
