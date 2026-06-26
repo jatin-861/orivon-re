@@ -64,6 +64,30 @@
   --color-brand-ochre: var(--brand-ochre);
   --color-brand-mint: var(--brand-mint);
   --color-brand-coral: var(--brand-coral);
+
+  /* Named distinctly from @keyframes marquee below (different translate target:
+     -100%-minus-gap vs -50%) so the 3D testimonial marquee doesn't fight the
+     site's existing horizontal ticker animation. */
+  --animate-testimonial-marquee: testimonial-marquee var(--duration) infinite linear;
+  --animate-testimonial-marquee-vertical: testimonial-marquee-vertical var(--duration) linear infinite;
+}
+
+@keyframes testimonial-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes testimonial-marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
 }
 
 /* Warm Editorial Color System & Typography */

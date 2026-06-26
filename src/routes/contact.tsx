@@ -138,7 +138,14 @@ export const Route = createFileRoute("/contact")({
 });
 
 const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Something Else"];
-const CONTACT_EMAILS = ["saralbanker1@gmail.com", "jatinbasantani861@gmail.com"];
+// All three are included as "to" on every compose/mailto link, so the message
+// always lands with the founders too if the primary company inbox is ever
+// missed or down — order here is primary first, then the co-founders as backup.
+const CONTACT_EMAILS = [
+  "orvionstudio.co@gmail.com",
+  "saralbanker1@gmail.com",
+  "jatinbasantani861@gmail.com",
+];
 
 const NEXT_STEPS = [
   {

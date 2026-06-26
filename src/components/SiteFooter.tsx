@@ -21,7 +21,7 @@ const dockItems = [
     Icon: <Github size={20} />,
   },
   {
-    link: "mailto:saralbanker1@gmail.com",
+    link: "mailto:orvionstudio.co@gmail.com",
     external: true,
     label: "Email",
     Icon: <Mail size={20} />,
@@ -88,7 +88,7 @@ export function SiteFooter() {
             </ul>
             <ul className="mt-6 space-y-3">
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Mail size={14} className="text-primary" /> saralbanker1@gmail.com
+                <Mail size={14} className="text-primary" /> orvionstudio.co@gmail.com
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin size={14} className="text-primary mt-0.5" /> India

@@ -125,7 +125,7 @@ export function BookingCalendar({
                 // desktop mail client (a bare mailto: silently does nothing when
                 // no mail app is registered).
                 `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                  "saralbanker1@gmail.com",
+                  "orvionstudio.co@gmail.com",
                 )}&su=${encodeURIComponent(
                   `30 min intro call — ${monthName} ${selected}, ${view.year}`,
                 )}&body=${encodeURIComponent(

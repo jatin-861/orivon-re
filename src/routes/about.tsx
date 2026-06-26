@@ -7,9 +7,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { RevealText } from "@/components/RevealText";
 import { Marquee } from "@/components/Marquee";
+import { Marquee as TestimonialMarquee } from "@/components/ui/3d-testimonials";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { AnimatedTestimonials } from "@/components/AnimatedTestimonials";
 import { BentoTilt, BentoStatCard } from "@/components/BentoTilt";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { TESTIMONIALS, type Testimonial } from "@/data/testimonials";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -177,6 +181,75 @@ const HISTORY = [
   },
 ];
 
+function TestimonialCard({ name, role, quote }: Testimonial) {
+  const initials = name
+    .split(" ")
+    .map((part) => part[0])
+    .join("");
+
+  return (
+    <Card className="w-56 shrink-0 bg-[var(--card)] border-border">
+      <CardContent className="p-5">
+        <div className="flex items-center gap-3">
+          <Avatar className="size-9">
+            <AvatarFallback className="bg-[var(--brand-pink)]/10 text-[var(--brand-pink)] font-display text-xs font-bold">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <span className="text-sm font-display font-semibold text-foreground">{name}</span>
+            <span className="text-xs font-mono text-muted-foreground">{role}</span>
+          </div>
+        </div>
+        <blockquote className="mt-4 text-sm text-foreground/80 leading-relaxed">{quote}</blockquote>
+      </CardContent>
+    </Card>
+  );
+}
+
+function TestimonialShowcase() {
+  return (
+    <div
+      className="relative flex h-[26rem] md:h-[30rem] w-full items-center justify-center gap-1.5 overflow-hidden rounded-xl border border-border bg-[var(--card)] [perspective:300px]"
+      data-cursor-text="VOICES"
+    >
+      <div className="flex flex-row items-center gap-4 [transform:translateX(-50px)_translateZ(-60px)_rotateX(15deg)_rotateY(-8deg)_rotateZ(15deg)] md:[transform:translateX(-100px)_translateZ(-100px)_rotateX(20deg)_rotateY(-10deg)_rotateZ(20deg)]">
+        <TestimonialMarquee vertical pauseOnHover repeat={3} className="[--duration:40s]">
+          {TESTIMONIALS.map((t) => (
+            <TestimonialCard key={t.name} {...t} />
+          ))}
+        </TestimonialMarquee>
+        <TestimonialMarquee vertical pauseOnHover reverse repeat={3} className="[--duration:40s]">
+          {TESTIMONIALS.map((t) => (
+            <TestimonialCard key={t.name} {...t} />
+          ))}
+        </TestimonialMarquee>
+        <TestimonialMarquee vertical pauseOnHover repeat={3} className="hidden md:flex [--duration:40s]">
+          {TESTIMONIALS.map((t) => (
+            <TestimonialCard key={t.name} {...t} />
+          ))}
+        </TestimonialMarquee>
+        <TestimonialMarquee
+          vertical
+          pauseOnHover
+          reverse
+          repeat={3}
+          className="hidden md:flex [--duration:40s]"
+        >
+          {TESTIMONIALS.map((t) => (
+            <TestimonialCard key={t.name} {...t} />
+          ))}
+        </TestimonialMarquee>
+      </div>
+
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-[var(--card)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[var(--card)]" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[var(--card)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[var(--card)]" />
+    </div>
+  );
+}
+
 function About() {
   const historyRef = useRef<HTMLDivElement>(null);
   const progressLineRef = useRef<HTMLDivElement>(null);
@@ -306,6 +379,21 @@ function About() {
           >
             <AnimatedTestimonials testimonials={TEAM} autoplay />
           </div>
+        </div>
+        <div className="animated-divider mt-24" />
+
+        {/* Client testimonials — placeholder quotes, swap for real ones as they come in */}
+        <div className="mt-24">
+          <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
+            What it's like to work with us
+          </span>
+          <h2 className="font-serif text-4xl md:text-7xl font-normal mb-4">
+            Client <span className="text-[var(--brand-pink)] font-serif italic">feedback.</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mb-12">
+            A sample of what clients say once the system is live and running.
+          </p>
+          <TestimonialShowcase />
         </div>
         <div className="animated-divider mt-24" />
 
