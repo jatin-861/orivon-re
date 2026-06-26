@@ -9,7 +9,6 @@ import { Marquee } from "@/components/Marquee";
 import { ScrollStoryHorizontal } from "@/components/ScrollStoryHorizontal";
 import { LazyVideo } from "@/components/LazyVideo";
 import { PROJECTS } from "@/data/projects";
-import { useHorizontalScrollCarousel } from "@/hooks/useHorizontalScrollCarousel";
 
 import { CinematicHero } from "@/components/canvas/CinematicHero";
 import { StoryTeller } from "@/components/StoryTeller";
@@ -95,31 +94,11 @@ function StudioShowreel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Desktop = mouse-driven, vertical scroll auto-drives the reel via GSAP.
-  // Touch devices get a real native scroll-snap carousel instead — GSAP's pin
-  // fights Lenis on touch and never settles cleanly on one panel.
-  const [isDesktop, setIsDesktop] = useState(false);
+  // ── ONE unified GSAP pinned vertical-drives-horizontal scroll, every device ──
+  // Same approach as ScrollStoryHorizontal: phone gets the cinematic auto-scroll
+  // too. scrub: true (1:1, no second easing layer) + ignoreMobileResize (set in
+  // LenisProvider) + a stable 100svh pin height keep it jiggle-free on touch.
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px) and (pointer: fine)");
-    const update = () => setIsDesktop(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  // Mobile-only: backdrop-filter is the most expensive thing to recomposite
-  // every frame, so drop it during a fast swipe. No drag here — touch drags
-  // natively, and desktop gets its motion from the GSAP pin below instead.
-  useHorizontalScrollCarousel(scrollRef, {
-    enableDrag: false,
-    onFastScrollChange: isDesktop
-      ? undefined
-      : (fast) => containerRef.current?.classList.toggle("no-blur-scrub", fast),
-  });
-
-  // ── DESKTOP: GSAP pinned vertical-drives-horizontal scroll ──────────────────
-  useEffect(() => {
-    if (!isDesktop) return;
     const container = containerRef.current;
     const scrollEl = scrollRef.current;
     if (!container || !scrollEl) return;
@@ -128,20 +107,20 @@ function StudioShowreel() {
     const FAST_SCROLL_PX_PER_SEC = 900;
 
     const ctx = gsap.context(() => {
+      const getDistance = () => scrollEl.scrollWidth - window.innerWidth;
+
       const horizontalTween = gsap.to(scrollEl, {
         id: "scroll-showreel",
-        x: () => -(scrollEl.scrollWidth - window.innerWidth),
+        x: () => -getDistance(),
         ease: "none",
         scrollTrigger: {
           trigger: container,
           pin: true,
           pinType: "transform",
-          // scrub: true (not a duration) tracks Lenis's already-smoothed position
-          // 1:1 instead of adding a second independent easing lag on top of it —
-          // that double-smoothing is what caused the rubber-band jiggle before.
+          anticipatePin: 1,
           scrub: true,
           start: "top top",
-          end: () => `+=${scrollEl.scrollWidth - window.innerWidth}`,
+          end: () => `+=${getDistance()}`,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (Math.abs(self.getVelocity()) > FAST_SCROLL_PX_PER_SEC) {
@@ -183,8 +162,7 @@ function StudioShowreel() {
       clearTimeout(blurResumeTimeout);
       ctx.revert();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDesktop]);
+  }, []);
 
   const items = [
     {
@@ -214,23 +192,17 @@ function StudioShowreel() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
 
-      {/* Horizontal scroll track. Desktop: GSAP translates this horizontally
-          (no native overflow, no scrollbar). Mobile: a real native scroll-snap
-          carousel — data-lenis-prevent stops Lenis swallowing the swipe, and
-          touch-pan-x avoids the vertical-judder/stuck-swipe from gesture-axis
-          ambiguity. */}
+      {/* Horizontal scroll track: GSAP translates this horizontally as you
+          scroll vertically — no native overflow (no scrollbar) on any device.
+          touch-pan-y tells the browser touches here drive vertical page scroll
+          (which powers the motion), so there's no gesture-axis ambiguity. */}
       <div
         ref={scrollRef}
-        {...(!isDesktop && { "data-lenis-prevent": true })}
-        className={
-          isDesktop
-            ? "flex h-screen items-center relative"
-            : "flex h-screen items-center overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x"
-        }
-        style={{ width: isDesktop ? "fit-content" : "100%" }}
+        className="flex h-[100svh] items-center relative touch-pan-y"
+        style={{ width: "fit-content" }}
       >
         {/* Intro Panel */}
-        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 snap-center snap-always flex-col justify-center px-6 md:px-24 max-w-4xl">
+        <div className="showreel-panel flex h-[100svh] w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 max-w-4xl">
           <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4">
             — Systems In Motion
           </span>
@@ -247,7 +219,7 @@ function StudioShowreel() {
         {items.map((item, idx) => (
           <div
             key={idx}
-            className="showreel-panel-card relative h-[70vh] w-[85vw] md:w-[60vw] flex-shrink-0 snap-center snap-always overflow-hidden rounded-2xl mx-4 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 md:p-12 group"
+            className="showreel-panel-card relative h-[70svh] w-[85vw] md:w-[60vw] flex-shrink-0 overflow-hidden rounded-2xl mx-4 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 md:p-12 group"
             data-cursor-text="PLAY"
           >
             {/* Background Video */}
@@ -278,7 +250,7 @@ function StudioShowreel() {
         ))}
 
         {/* Outro CTA Panel */}
-        <div className="showreel-panel flex h-screen w-screen flex-shrink-0 snap-center snap-always flex-col justify-center px-6 md:px-24 bg-[var(--muted)] text-foreground relative">
+        <div className="showreel-panel flex h-[100svh] w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 bg-[var(--muted)] text-foreground relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
           <div className="max-w-xl">
             <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
