@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "@/components/MagneticButton";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Marquee } from "@/components/Marquee";
@@ -86,8 +86,6 @@ function Index() {
       <div className="animated-divider" />
       <Numbers />
       <div className="animated-divider" />
-      <PricingTeaser />
-      <div className="animated-divider" />
       <BigCTA />
     </div>
   );
@@ -97,24 +95,96 @@ function StudioShowreel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Pointer:fine only — touch devices already drag/swipe this natively.
+  // Desktop = mouse-driven, vertical scroll auto-drives the reel via GSAP.
+  // Touch devices get a real native scroll-snap carousel instead — GSAP's pin
+  // fights Lenis on touch and never settles cleanly on one panel.
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(pointer: fine)");
+    const mq = window.matchMedia("(min-width: 768px) and (pointer: fine)");
     const update = () => setIsDesktop(mq.matches);
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Real native horizontal scroll — no scroll-jacking. Vertical page scroll
-  // is never hijacked; mouse drag, trackpad/shift+wheel, or touch swipe move
-  // the reel. backdrop-filter is dropped during fast scroll/drag since it's
-  // the most expensive thing to recomposite every frame.
+  // Mobile-only: backdrop-filter is the most expensive thing to recomposite
+  // every frame, so drop it during a fast swipe. No drag here — touch drags
+  // natively, and desktop gets its motion from the GSAP pin below instead.
   useHorizontalScrollCarousel(scrollRef, {
-    enableDrag: isDesktop,
-    onFastScrollChange: (fast) => containerRef.current?.classList.toggle("no-blur-scrub", fast),
+    enableDrag: false,
+    onFastScrollChange: isDesktop
+      ? undefined
+      : (fast) => containerRef.current?.classList.toggle("no-blur-scrub", fast),
   });
+
+  // ── DESKTOP: GSAP pinned vertical-drives-horizontal scroll ──────────────────
+  useEffect(() => {
+    if (!isDesktop) return;
+    const container = containerRef.current;
+    const scrollEl = scrollRef.current;
+    if (!container || !scrollEl) return;
+
+    let blurResumeTimeout: number;
+    const FAST_SCROLL_PX_PER_SEC = 900;
+
+    const ctx = gsap.context(() => {
+      const horizontalTween = gsap.to(scrollEl, {
+        id: "scroll-showreel",
+        x: () => -(scrollEl.scrollWidth - window.innerWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          pinType: "transform",
+          // scrub: true (not a duration) tracks Lenis's already-smoothed position
+          // 1:1 instead of adding a second independent easing lag on top of it —
+          // that double-smoothing is what caused the rubber-band jiggle before.
+          scrub: true,
+          start: "top top",
+          end: () => `+=${scrollEl.scrollWidth - window.innerWidth}`,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (Math.abs(self.getVelocity()) > FAST_SCROLL_PX_PER_SEC) {
+              container.classList.add("no-blur-scrub");
+            }
+            clearTimeout(blurResumeTimeout);
+            blurResumeTimeout = window.setTimeout(() => {
+              container.classList.remove("no-blur-scrub");
+            }, 150);
+          },
+        },
+      });
+
+      // Subtle parallax shift for video panels
+      const panels = gsap.utils.toArray<HTMLElement>(".showreel-panel-card");
+      panels.forEach((panel) => {
+        const video = panel.querySelector("video");
+        if (video) {
+          gsap.fromTo(
+            video,
+            { xPercent: -8 },
+            {
+              xPercent: 8,
+              ease: "none",
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: horizontalTween,
+                start: "left right",
+                end: "right left",
+                scrub: true,
+              },
+            },
+          );
+        }
+      });
+    }, container);
+
+    return () => {
+      clearTimeout(blurResumeTimeout);
+      ctx.revert();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDesktop]);
 
   const items = [
     {
@@ -144,15 +214,20 @@ function StudioShowreel() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
 
-      {/* Horizontal scroll track: real native scroll-snap, not scroll-jacked.
-          data-lenis-prevent keeps Lenis from swallowing the gesture; touch-pan-x
-          tells the OS up front this only pans horizontally (no vertical-scroll
-          ambiguity/judder); drag-to-scroll comes from useHorizontalScrollCarousel. */}
+      {/* Horizontal scroll track. Desktop: GSAP translates this horizontally
+          (no native overflow, no scrollbar). Mobile: a real native scroll-snap
+          carousel — data-lenis-prevent stops Lenis swallowing the swipe, and
+          touch-pan-x avoids the vertical-judder/stuck-swipe from gesture-axis
+          ambiguity. */}
       <div
         ref={scrollRef}
-        data-lenis-prevent
-        className="flex h-screen items-center overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x cursor-grab active:cursor-grabbing"
-        style={{ width: "100%" }}
+        {...(!isDesktop && { "data-lenis-prevent": true })}
+        className={
+          isDesktop
+            ? "flex h-screen items-center relative"
+            : "flex h-screen items-center overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar overscroll-x-contain touch-pan-x"
+        }
+        style={{ width: isDesktop ? "fit-content" : "100%" }}
       >
         {/* Intro Panel */}
         <div className="showreel-panel flex h-screen w-screen flex-shrink-0 snap-center snap-always flex-col justify-center px-6 md:px-24 max-w-4xl">
@@ -164,7 +239,7 @@ function StudioShowreel() {
             <span className="text-secondary italic">running</span> in production.
           </h2>
           <p className="mt-6 text-sm md:text-base text-white/60 max-w-md leading-relaxed">
-            Drag or scroll horizontally for a closer look at what's actually live.
+            Scroll horizontally for a closer look at what's actually live.
           </p>
         </div>
 
@@ -453,104 +528,6 @@ function Numbers() {
             <div className="mt-2 text-xs text-muted-foreground font-mono font-medium">{s.l}</div>
           </SpotlightCard>
         ))}
-      </div>
-    </section>
-  );
-}
-
-const PRICING_LINES = [
-  {
-    index: "01",
-    title: "Website Development",
-    description:
-      "From a single landing page to fully custom headless commerce — 18 categories benchmarked.",
-    priceRange: "₹0.15L – ₹12L",
-    delivery: "1–16 wks",
-    categories: "18 categories",
-    pdf: "/Orvion-Pricing-Website-Development.pdf",
-  },
-  {
-    index: "02",
-    title: "Mobile App Development",
-    description:
-      "Native Android/iOS, cross-platform builds, and full-stack mobile-plus-backend systems.",
-    priceRange: "₹0.75L – ₹25L",
-    delivery: "4–24 wks",
-    categories: "8 categories",
-    pdf: "/Orvion-Pricing-Mobile-App-Development.pdf",
-  },
-  {
-    index: "03",
-    title: "SaaS & Custom Software",
-    description:
-      "Sales, finance, HR, healthcare, logistics, retail and 12 verticals of business software.",
-    priceRange: "₹1.5L – ₹60L",
-    delivery: "4–32 wks",
-    categories: "83 categories · 12 verticals",
-    pdf: "/Orvion-Pricing-SaaS-Custom-Software.pdf",
-  },
-];
-
-function PricingTeaser() {
-  return (
-    <section className="py-24 px-6 relative z-10" data-cursor-text="PRICING">
-      <div className="mx-auto max-w-7xl">
-        <div className="max-w-2xl mb-12">
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)]">
-            — India Market Pricing
-          </span>
-          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
-            Fixed fee, <span className="text-[var(--brand-pink)] italic">not hourly.</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            Every build benchmarked against current India-market rates. Pick a service line below
-            and download the full pricing breakdown for that category.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {PRICING_LINES.map((line) => (
-            <SpotlightCard
-              key={line.index}
-              className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full"
-            >
-              <div>
-                <span className="font-serif text-5xl font-bold text-secondary/15 leading-none">
-                  {line.index}
-                </span>
-                <h3 className="font-display text-2xl font-bold text-foreground mt-4">
-                  {line.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                  {line.description}
-                </p>
-
-                <div className="mt-6 space-y-2 text-sm font-mono">
-                  <div className="flex justify-between border-b border-border/60 pb-2">
-                    <span className="text-muted-foreground">Market Price</span>
-                    <span className="text-foreground font-semibold">{line.priceRange}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-border/60 pb-2">
-                    <span className="text-muted-foreground">Delivery</span>
-                    <span className="text-foreground font-semibold">{line.delivery}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Scope</span>
-                    <span className="text-foreground font-semibold">{line.categories}</span>
-                  </div>
-                </div>
-              </div>
-
-              <a
-                href={line.pdf}
-                download
-                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-border hover:border-foreground px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-colors"
-              >
-                Download Pricing PDF <Download size={14} />
-              </a>
-            </SpotlightCard>
-          ))}
-        </div>
       </div>
     </section>
   );
