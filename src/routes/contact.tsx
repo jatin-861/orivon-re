@@ -415,7 +415,7 @@ function Contact() {
               </div>
 
               <div>
-                <Label htmlFor="message">Tell me more</Label>
+                <Label htmlFor="message">Tell us more</Label>
                 <textarea
                   id="message"
                   name="message"

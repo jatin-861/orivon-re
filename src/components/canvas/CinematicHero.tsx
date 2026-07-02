@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Download } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useInView } from "@/hooks/useInView";
 
@@ -109,13 +108,6 @@ class Particle {
     this.y += this.vy;
   }
 }
-
-const METRICS = [
-  { v: "2", l: "Production systems shipped" },
-  { v: "220+", l: "Rental units automated" },
-  { v: "40+", l: "Hours saved every month" },
-  { v: "70k+", l: "Lines of production code" },
-];
 
 export const CinematicHero = () => {
   const [canvasRef, isInView] = useInView({ threshold: 0.01 });
@@ -368,11 +360,11 @@ export const CinematicHero = () => {
           </h2>
 
           <p className="font-sans text-lg sm:text-xl text-foreground/90 font-semibold max-w-xl">
-            I build software that solves real problems.
+            We build software that solves real problems.
           </p>
 
           <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-xl">
-            From business automation to AI-powered platforms — I design, build, and ship production
+            From business automation to AI-powered platforms — we design, build, and ship production
             systems that people actually use. Database to deployment, no shortcuts.
           </p>
 
@@ -383,27 +375,6 @@ export const CinematicHero = () => {
             >
               View Projects
             </Link>
-            <a
-              href="/Orvion_Team_Resume.pdf"
-              download
-              className="rounded-full border border-border hover:border-foreground px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors inline-flex items-center gap-2"
-            >
-              Resume <Download size={14} />
-            </a>
-          </div>
-
-          {/* Proof metrics */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
-            {METRICS.map((m) => (
-              <div key={m.l} className="border-l border-border pl-4">
-                <div className="font-serif text-3xl sm:text-4xl text-[var(--brand-pink)] leading-none">
-                  {m.v}
-                </div>
-                <div className="mt-2 text-xs text-muted-foreground font-mono leading-snug">
-                  {m.l}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 

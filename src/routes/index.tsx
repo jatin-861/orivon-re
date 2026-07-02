@@ -7,12 +7,11 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Marquee } from "@/components/Marquee";
 import { ScrollStoryHorizontal } from "@/components/ScrollStoryHorizontal";
-import { LazyVideo } from "@/components/LazyVideo";
 import { PROJECTS } from "@/data/projects";
-import { useStickyHorizontalScroll } from "@/hooks/useStickyHorizontalScroll";
 
 import { CinematicHero } from "@/components/canvas/CinematicHero";
-import { StoryTeller } from "@/components/StoryTeller";
+import { FeaturedEvidence } from "@/components/FeaturedEvidence";
+import { ProcessSignal } from "@/components/ProcessSignal";
 import { SEO } from "@/components/SEO";
 import { TextRevealByWord } from "@/components/TextRevealByWord";
 
@@ -54,221 +53,25 @@ function Index() {
       />
       <CinematicHero />
       <div className="animated-divider" />
-      <ScrollingTicker />
+      <StudioManifesto />
+      <div className="animated-divider" />
+      <FeaturedEvidence />
       <div className="animated-divider" />
 
-      {/* Horizontal Storytelling Scroll for Selected Work */}
+      {/* Project capability — one section showing range beyond the featured case */}
       <section className="relative">
         <ScrollStoryHorizontal projects={PROJECTS} />
       </section>
       <div className="animated-divider" />
-
-      {/* Cinematic Horizontal Video Showreel */}
-      <StudioShowreel />
+      <ProcessSignal />
       <div className="animated-divider" />
 
-      {/* Storytelling Narrative philosophical block */}
-      <StoryTeller />
-      <div className="animated-divider" />
-
-      <StudioManifesto />
-      <div className="animated-divider" />
       <SkillsMarquee />
       <div className="animated-divider" />
       <Numbers />
       <div className="animated-divider" />
       <BigCTA />
     </div>
-  );
-}
-
-function StudioShowreel() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  // Native-sticky cinematic horizontal scroll — jiggle-free on every device
-  // (the vertical hold is the browser's compositor, not a GSAP pin). See
-  // useStickyHorizontalScroll for the full rationale.
-  useStickyHorizontalScroll(wrapperRef, trackRef, {
-    onUpdate: (self) => {
-      const sticky = stickyRef.current;
-      if (!sticky) return;
-      if (Math.abs(self.getVelocity()) > 900) {
-        sticky.classList.add("no-blur-scrub");
-        clearTimeout((sticky as HTMLElement & { _t?: number })._t);
-        (sticky as HTMLElement & { _t?: number })._t = window.setTimeout(
-          () => sticky.classList.remove("no-blur-scrub"),
-          150,
-        );
-      }
-    },
-    onSetup: (horizontalTween) => {
-      const track = trackRef.current!;
-      // Subtle parallax shift for video panels
-      gsap.utils.toArray<HTMLElement>(".showreel-panel-card", track).forEach((panel) => {
-        const video = panel.querySelector("video");
-        if (video) {
-          gsap.fromTo(
-            video,
-            { xPercent: -8 },
-            {
-              xPercent: 8,
-              ease: "none",
-              scrollTrigger: {
-                trigger: panel,
-                containerAnimation: horizontalTween,
-                start: "left right",
-                end: "right left",
-                scrub: true,
-              },
-            },
-          );
-        }
-      });
-    },
-  });
-
-  const items = [
-    {
-      video: "/videos/hero-2.mp4",
-      tag: "Knowledge Hub",
-      title: "Find answers instantly.",
-      desc: "Semantic search across all your documents and notes — the flagship module inside NeuroDashboard.",
-    },
-    {
-      video: "/videos/feature-2.mp4",
-      tag: "Shade Ledger",
-      title: "Billing that runs itself.",
-      desc: "Automatic invoices, reminders, and penalty tracking — running live for 220 rental units.",
-    },
-    {
-      video: "/videos/feature-3.mp4",
-      tag: "Smart Parking",
-      title: "Real-time, on demand.",
-      desc: "Drivers see open spots in real time and book one instantly.",
-    },
-  ];
-
-  return (
-    // Outer wrapper: the hook sets its height to (100svh + horizontal distance);
-    // no overflow-hidden — it must scroll normally.
-    <div ref={wrapperRef} className="relative bg-[var(--brand-pink)] text-white z-10 border-y border-white/10">
-      {/* Sticky inner: native compositor pin — held at top while the wrapper
-          scrolls past, so it can't jitter on mobile. */}
-      <div ref={stickyRef} className="sticky top-0 h-[100svh] overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(199,91,58,0.05),transparent_40%)] pointer-events-none" />
-
-        {/* Horizontal track: GSAP translates this as the wrapper scrolls.
-            touch-pan-y tells the browser touches here are vertical page scroll
-            (which powers the motion), so there's no gesture-axis ambiguity. */}
-        <div
-          ref={trackRef}
-          className="flex h-[100svh] items-center relative touch-pan-y"
-          style={{ width: "fit-content" }}
-        >
-          {/* Intro Panel */}
-        <div className="showreel-panel flex h-[100svh] w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 max-w-4xl">
-          <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4">
-            — Systems In Motion
-          </span>
-          <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tighter">
-            Real projects, <br />
-            <span className="text-secondary italic">running</span> in production.
-          </h2>
-          <p className="mt-6 text-sm md:text-base text-white/60 max-w-md leading-relaxed">
-            Scroll horizontally for a closer look at what's actually live.
-          </p>
-        </div>
-
-        {/* Video Panels */}
-        {items.map((item, idx) => (
-          <div
-            key={idx}
-            className="showreel-panel-card relative h-[70svh] w-[85vw] md:w-[60vw] flex-shrink-0 overflow-hidden rounded-2xl mx-4 md:mx-20 bg-black/10 border border-white/20 shadow-2xl flex flex-col justify-between p-6 md:p-12 group"
-            data-cursor-text="PLAY"
-          >
-            {/* Background Video */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              <LazyVideo
-                src={item.video}
-                className="w-[115%] h-full object-cover opacity-80 transition-opacity duration-700 group-hover:opacity-100 scale-105 group-hover:scale-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            </div>
-
-            {/* Video Label */}
-            <div className="relative z-10 flex justify-between items-center text-xs font-mono tracking-widest uppercase text-white/50">
-              <span>{item.tag}</span>
-              <span className="text-[var(--brand-pink)]">✦</span>
-            </div>
-
-            {/* Details */}
-            <div className="relative z-10 max-w-md mt-auto">
-              <h3 className="font-serif text-3xl md:text-5xl font-normal tracking-tight leading-tight mb-3">
-                {item.title}
-              </h3>
-              <p className="text-xs md:text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
-                {item.desc}
-              </p>
-            </div>
-          </div>
-        ))}
-
-        {/* Outro CTA Panel */}
-        <div className="showreel-panel flex h-[100svh] w-screen flex-shrink-0 flex-col justify-center px-6 md:px-24 bg-[var(--muted)] text-foreground relative">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(199,91,58,0.04),transparent_35%)] pointer-events-none" />
-          <div className="max-w-xl">
-            <span className="text-xs font-mono text-[var(--brand-pink)] tracking-widest uppercase mb-4 block">
-              — Want To See More?
-            </span>
-            <h2 className="font-serif text-5xl md:text-7xl font-normal leading-none tracking-tighter mb-6">
-              See what's <br />
-              <span className="text-[var(--brand-pink)] font-sans font-bold italic">running.</span>
-            </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-md">
-              Full case studies for NeuroDashboard, Shade Ledger, and more — including architecture,
-              decisions, and what's still on the roadmap.
-            </p>
-            <Link
-              to="/work"
-              className="inline-flex items-center gap-3 rounded-full bg-primary text-primary-foreground px-8 py-4 text-base font-semibold shadow-glow-cyan"
-            >
-              See Selected Work <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ScrollingTicker() {
-  const items = [
-    "Find Answers Instantly",
-    "Automate Manual Work",
-    "Real-Time Collaboration",
-    "Production-Ready Systems",
-    "Full-Stack Engineering",
-    "AI & Automation",
-    "Reliable by Design",
-    "Shipped & Running",
-  ];
-  return (
-    <section
-      className="border-y border-border py-8 bg-background/50 backdrop-blur-sm relative z-10"
-      data-cursor-text="HONORS"
-    >
-      <Marquee>
-        {items.map((it) => (
-          <span key={it} className="flex items-center gap-12 text-2xl font-serif font-normal">
-            <span className="text-foreground/70">{it}</span>
-            <span className="text-[var(--brand-pink)] font-sans">✦</span>
-          </span>
-        ))}
-      </Marquee>
-    </section>
   );
 }
 
@@ -356,6 +159,10 @@ function StudioManifesto() {
           <div data-para-block data-para-speed="-0.4">
             <TextRevealByWord text="Real systems run for real people, every day — Shade Ledger has billed 220 rental units, automatically, every month, for over a year." />
           </div>
+
+          <p className="mt-8 text-base md:text-lg text-muted-foreground font-sans leading-relaxed max-w-2xl">
+            Here's what that looks like in practice.
+          </p>
         </div>
       </div>
     </section>
@@ -568,7 +375,23 @@ function BigCTA() {
           If you've got something worth building, we'd love to hear about it — and help take it from
           idea to something running in production.
         </p>
-        <div className="mt-12">
+
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground font-sans max-w-2xl mx-auto">
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />
+            We reply within 48 hours, personally
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />
+            A quick call to understand scope
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />
+            A real proposal, not a sales deck
+          </span>
+        </div>
+
+        <div className="mt-10">
           <MagneticButton
             as={Link}
             to="/contact"
@@ -578,6 +401,13 @@ function BigCTA() {
             Get in touch <ArrowRight size={18} />
           </MagneticButton>
         </div>
+
+        <p className="mt-6 text-sm text-muted-foreground font-sans">
+          Fixed-fee pricing available.{" "}
+          <Link to="/pricing" className="text-[var(--brand-pink)] hover:underline font-medium">
+            See pricing →
+          </Link>
+        </p>
       </div>
     </section>
   );

@@ -125,6 +125,23 @@ function WorkPage() {
             );
           })}
         </div>
+
+        <div className="mt-24 pt-16 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="font-serif text-2xl md:text-3xl font-normal">
+              Want to know who built this?
+            </p>
+            <p className="text-sm text-muted-foreground mt-1 font-sans">
+              Two engineers. Every system, end to end.
+            </p>
+          </div>
+          <Link
+            to="/about"
+            className="inline-flex items-center gap-2 rounded-full border border-border hover:border-[var(--brand-pink)] hover:text-[var(--brand-pink)] px-6 py-3 text-sm font-semibold transition-colors whitespace-nowrap"
+          >
+            Meet the engineers <ArrowUpRight size={16} />
+          </Link>
+        </div>
       </div>
     </div>
   );

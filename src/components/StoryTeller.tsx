@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "./Button";
 import { AnimatedTitle } from "./AnimatedTitle";
 import { useInView } from "@/hooks/useInView";
@@ -8,6 +9,7 @@ export const StoryTeller = () => {
   const frameRef = useRef<HTMLDivElement>(null);
   const [canvasRef, isInView] = useInView({ threshold: 0.01 });
   const isInViewRef = useRef(isInView);
+  const navigate = useNavigate();
 
   useEffect(() => {
     isInViewRef.current = isInView;
@@ -347,6 +349,7 @@ export const StoryTeller = () => {
               id="realm-btn"
               title="see what's running"
               containerClass="mt-6 bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => navigate({ to: "/work" })}
             />
           </div>
         </div>

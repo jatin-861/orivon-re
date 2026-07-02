@@ -48,7 +48,7 @@ export function SiteFooter() {
               <span className="font-display text-2xl font-bold tracking-tight">ORVION.CO</span>
             </Link>
             <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
-              Product engineer. I design, build, and ship complete systems — database to deployment.
+              Product engineering studio. We design, build, and ship complete systems — database to deployment.
             </p>
           </div>
 

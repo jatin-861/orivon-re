@@ -64,7 +64,7 @@ const SKILLS = [
 const TEAM = [
   {
     name: "Saral Banker",
-    designation: "Product Engineer · Full-Stack & AI Applications",
+    designation: "Full-Stack & AI Engineer · Orvion.co",
     quote:
       "If it doesn't run in production, it doesn't count. I design, build, and ship complete systems — database to deployment — not just the demo.",
     src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%231A1A1A'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%23FAF7F2' text-anchor='middle' dominant-baseline='middle'>S</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>ENGINE</text></svg>",
@@ -184,7 +184,7 @@ function About() {
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Saral Banker",
-            jobTitle: "Product Engineer",
+            jobTitle: "Full-Stack & AI Engineer",
             worksFor: { "@type": "Organization", name: "Orvion.co", url: "https://orvion.co" },
             url: "https://orvion.co/about",
             sameAs: ["https://github.com/saralbanker"],
@@ -464,7 +464,7 @@ function About() {
                         Jatin Basantani
                       </h3>
                       <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
-                        Full-Stack Engineer & AI Systems Builder
+                        Frontend & AI Systems Developer
                       </p>
                     </div>
                     <a
@@ -591,12 +591,20 @@ function About() {
               Tell us what you're building — we'll come back within 48 hours with next steps.
             </p>
           </div>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-4 font-semibold shadow-glow-cyan whitespace-nowrap shrink-0"
-          >
-            Get in touch <ArrowRight size={18} />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-4 font-semibold shadow-glow-cyan whitespace-nowrap"
+            >
+              Get in touch <ArrowRight size={18} />
+            </Link>
+            <Link
+              to="/process"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-pink)] hover:underline whitespace-nowrap"
+            >
+              See how we work <ArrowRight size={16} />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>
