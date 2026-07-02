@@ -88,7 +88,13 @@ export function SiteFooter() {
             </ul>
             <ul className="mt-6 space-y-3">
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Mail size={14} className="text-primary" /> orvionstudio.co@gmail.com
+                <Mail size={14} className="text-primary" />
+                <a
+                  href="mailto:orvionstudio.co@gmail.com"
+                  className="hover:text-primary transition-colors"
+                >
+                  orvionstudio.co@gmail.com
+                </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin size={14} className="text-primary mt-0.5" /> India

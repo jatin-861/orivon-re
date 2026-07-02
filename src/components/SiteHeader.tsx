@@ -53,7 +53,8 @@ export const SiteHeader = () => {
 
         <nav className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1.5">
           {NAV.map((item) => {
-            const active = pathname === item.to;
+            const active =
+              pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
                 key={item.to}
@@ -90,6 +91,12 @@ export const SiteHeader = () => {
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
+          <Link
+            to="/contact"
+            className="rounded-full bg-foreground text-background px-4 py-2 text-xs font-semibold tracking-wide"
+          >
+            Talk →
+          </Link>
           <ThemeToggle />
           <button
             aria-label={open ? "Close menu" : "Open menu"}

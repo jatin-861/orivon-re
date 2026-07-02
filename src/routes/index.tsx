@@ -464,7 +464,7 @@ function Numbers() {
     { v: "2", l: "Production systems, built end to end" },
     { v: "220", l: "Rental units on automated billing" },
     { v: "40+", l: "Hours of manual work saved monthly" },
-    { v: "1", l: "Paid contract, delivered duo" },
+    { v: "70k+", l: "Lines of production code shipped" },
   ];
   return (
     <section className="py-24 px-6 border-b border-border relative z-10" data-cursor-text="STATS">

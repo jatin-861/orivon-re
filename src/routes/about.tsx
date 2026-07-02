@@ -1,19 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Rocket, Gauge, Clock, Code2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { RevealText } from "@/components/RevealText";
 import { Marquee } from "@/components/Marquee";
-import { Marquee as TestimonialMarquee } from "@/components/ui/3d-testimonials";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { AnimatedTestimonials } from "@/components/AnimatedTestimonials";
 import { BentoTilt, BentoStatCard } from "@/components/BentoTilt";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { TESTIMONIALS, type Testimonial } from "@/data/testimonials";
 import { SEO } from "@/components/SEO";
 
 if (typeof window !== "undefined") {
@@ -25,96 +21,25 @@ export const Route = createFileRoute("/about")({
 });
 
 function CodeTypingSimulator() {
-  const [code, setCode] = useState("");
-  const codeSnippet = `const system = buildSystem({
-  stack: "full",
-  scope: "db-to-deploy",
-  reliability: "production",
-});
-
-await system.deploy({
-  ci: "GitHub Actions",
-  monitoring: true,
-  launch: true,
-});`;
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setCode(codeSnippet.slice(0, index));
-      index++;
-      if (index > codeSnippet.length) {
-        setTimeout(() => {
-          index = 0;
-        }, 2500); // Pause before looping
-      }
-    }, 40);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
-      <code className="text-[var(--brand-pink)]">{code}</code>
-      <span className="animate-pulse bg-[var(--brand-pink)] h-3.5 w-1.5 inline-block align-middle ml-0.5" />
-    </pre>
-  );
-}
-
-function TerminalLogSimulator() {
-  const [logs, setLogs] = useState<{ id: number; text: string }[]>([]);
-  const nextId = useRef(0);
-  const logPool = [
-    "$ npm run build",
-    "vite v7.3.1 building for production...",
-    "transforming...",
-    "✓ 285 modules transformed.",
-    "rendering chunks...",
-    "✓ built in 1.45s",
-    "$ node server.js",
-    "server running on port 8080",
-    "database: connected successfully [MySQL]",
-    "redis cache: initialized",
-    "GET /api/v1/projects 200 OK - 12ms",
-    "POST /api/v1/inquiries 201 Created - 48ms",
-    "backup system: cron scheduled",
-    "status: operational (100%)",
+  const lines = [
+    { text: "const system = buildSystem({", color: "text-[var(--brand-pink)]" },
+    { text: '  stack: "full",', color: "text-[#FAF7F2]/80" },
+    { text: '  scope: "db-to-deploy",', color: "text-[#FAF7F2]/80" },
+    { text: "});", color: "text-[var(--brand-pink)]" },
+    { text: "", color: "" },
+    { text: "await system.deploy({", color: "text-[var(--brand-pink)]" },
+    { text: '  ci: "GitHub Actions",', color: "text-[#FAF7F2]/80" },
+    { text: "  monitoring: true,", color: "text-[#FAF7F2]/80" },
+    { text: "});", color: "text-[var(--brand-pink)]" },
   ];
 
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setLogs((prev) => {
-        const next = [...prev, { id: nextId.current++, text: logPool[index] }];
-        if (next.length > 5) next.shift(); // Keep last 5 lines
-        return next;
-      });
-      index = (index + 1) % logPool.length;
-    }, 1100);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
-      {logs.map((log) => (
-        <div
-          key={log.id}
-          className={
-            log.text.startsWith("$")
-              ? "text-[var(--brand-peach)]"
-              : log.text.includes("✓") || log.text.includes("200")
-                ? "text-[var(--brand-pink)]"
-                : "text-[#FAF7F2]/70"
-          }
-        >
-          {log.text}
+      {lines.map((l, i) => (
+        <div key={i} className={l.color || "text-[#FAF7F2]/70"}>
+          {l.text || " "}
         </div>
       ))}
-      <div className="flex items-center gap-1.5 text-[#FAF7F2]/50">
-        <span>sys-log: active</span>
-        <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-ping" />
-      </div>
     </pre>
   );
 }
@@ -126,13 +51,14 @@ const SKILLS = [
   "GSAP",
   "Framer Motion",
   "Tailwind CSS",
-  "WebGL / Three.js",
   "Node.js / Express",
-  "Python / Django",
-  "Shopify",
-  "WordPress",
+  "PostgreSQL",
+  "Redis",
+  "pgvector / RAG",
+  "Socket.IO",
+  "BullMQ",
+  "GitHub Actions",
   "Figma",
-  "Flutter",
 ];
 
 const TEAM = [
@@ -182,74 +108,6 @@ const HISTORY = [
   },
 ];
 
-function TestimonialCard({ name, role, quote }: Testimonial) {
-  const initials = name
-    .split(" ")
-    .map((part) => part[0])
-    .join("");
-
-  return (
-    <Card className="w-56 shrink-0 bg-[var(--card)] border-border">
-      <CardContent className="p-5">
-        <div className="flex items-center gap-3">
-          <Avatar className="size-9">
-            <AvatarFallback className="bg-[var(--brand-pink)]/10 text-[var(--brand-pink)] font-display text-xs font-bold">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <span className="text-sm font-display font-semibold text-foreground">{name}</span>
-            <span className="text-xs font-mono text-muted-foreground">{role}</span>
-          </div>
-        </div>
-        <blockquote className="mt-4 text-sm text-foreground/80 leading-relaxed">{quote}</blockquote>
-      </CardContent>
-    </Card>
-  );
-}
-
-function TestimonialShowcase() {
-  return (
-    <div
-      className="relative flex h-[26rem] md:h-[30rem] w-full items-center justify-center gap-1.5 overflow-hidden rounded-xl border border-border bg-[var(--card)] [perspective:300px]"
-      data-cursor-text="VOICES"
-    >
-      <div className="flex flex-row items-center gap-4 [transform:translateX(-50px)_translateZ(-60px)_rotateX(15deg)_rotateY(-8deg)_rotateZ(15deg)] md:[transform:translateX(-100px)_translateZ(-100px)_rotateX(20deg)_rotateY(-10deg)_rotateZ(20deg)]">
-        <TestimonialMarquee vertical pauseOnHover repeat={3} className="[--duration:40s]">
-          {TESTIMONIALS.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
-          ))}
-        </TestimonialMarquee>
-        <TestimonialMarquee vertical pauseOnHover reverse repeat={3} className="[--duration:40s]">
-          {TESTIMONIALS.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
-          ))}
-        </TestimonialMarquee>
-        <TestimonialMarquee vertical pauseOnHover repeat={3} className="hidden md:flex [--duration:40s]">
-          {TESTIMONIALS.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
-          ))}
-        </TestimonialMarquee>
-        <TestimonialMarquee
-          vertical
-          pauseOnHover
-          reverse
-          repeat={3}
-          className="hidden md:flex [--duration:40s]"
-        >
-          {TESTIMONIALS.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
-          ))}
-        </TestimonialMarquee>
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-[var(--card)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[var(--card)]" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[var(--card)]" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[var(--card)]" />
-    </div>
-  );
-}
 
 function About() {
   const historyRef = useRef<HTMLDivElement>(null);
@@ -321,6 +179,26 @@ function About() {
         description="Meet the product engineers behind Orvion.co. We build complete systems — from database to deployment — with production-grade code and real-world client results."
         canonical="https://orvion.co/about"
         ogImage="https://orvion.co/og-image.png"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Saral Banker",
+            jobTitle: "Product Engineer",
+            worksFor: { "@type": "Organization", name: "Orvion.co", url: "https://orvion.co" },
+            url: "https://orvion.co/about",
+            sameAs: ["https://github.com/saralbanker"],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Jatin Basantani",
+            jobTitle: "Frontend & AI Systems Developer",
+            worksFor: { "@type": "Organization", name: "Orvion.co", url: "https://orvion.co" },
+            url: "https://orvion.co/about",
+            sameAs: ["https://github.com/jatin-861"],
+          },
+        ]}
       />
       <div className="mx-auto max-w-7xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
@@ -333,7 +211,7 @@ function About() {
         />
         <RevealText
           text="real systems."
-          as="h1"
+          as="p"
           className="font-serif text-4xl sm:text-6xl md:text-9xl font-normal leading-[1.1] pb-1 block text-[var(--brand-pink)] italic"
           delay={300}
         />
@@ -389,18 +267,43 @@ function About() {
         </div>
         <div className="animated-divider mt-24" />
 
-        {/* Client testimonials — placeholder quotes, swap for real ones as they come in */}
+        {/* Shade Ledger proof callout — replace with real attributed quote once collected */}
         <div className="mt-24">
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
-            What it's like to work with us
+            Proof from production
           </span>
           <h2 className="font-serif text-4xl md:text-7xl font-normal mb-4">
-            Client <span className="text-[var(--brand-pink)] font-serif italic">feedback.</span>
+            Real <span className="text-[var(--brand-pink)] font-serif italic">results.</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-12">
-            A sample of what clients say once the system is live and running.
+            Our first paid system has been live and running without interruption since 2025.
           </p>
-          <TestimonialShowcase />
+          <BentoTilt className="max-w-3xl w-full">
+            <SpotlightCard className="p-8 md:p-12 bg-[var(--card)] border border-border w-full">
+              <div className="flex items-start gap-4 mb-6">
+                <span className="text-4xl text-[var(--brand-pink)] font-serif leading-none">"</span>
+                <p className="font-serif text-xl md:text-2xl font-normal text-foreground leading-snug">
+                  Billing used to eat a whole afternoon every month. Now it just runs — invoices,
+                  reminders, the lot.
+                </p>
+              </div>
+              <div className="border-t border-border/60 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Property Management Client</p>
+                  <p className="text-xs text-muted-foreground font-mono mt-0.5">
+                    Mumbai · 220 rental units · Shade Ledger, 2025
+                  </p>
+                </div>
+                <Link
+                  to="/work/$slug"
+                  params={{ slug: "shade-ledger" }}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-pink)] hover:underline shrink-0"
+                >
+                  See the case study <ArrowRight size={14} />
+                </Link>
+              </div>
+            </SpotlightCard>
+          </BentoTilt>
         </div>
         <div className="animated-divider mt-24" />
 
@@ -538,9 +441,15 @@ function About() {
 
                 <div className="mt-4">
                   <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
-                    System Deployment Log
+                    Production Systems
                   </span>
-                  <TerminalLogSimulator />
+                  <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 leading-relaxed shadow-inner">
+                    <div className="text-[var(--brand-pink)]">✓ Shade Ledger — live since 2025</div>
+                    <div className="text-[#FAF7F2]/70">  220 rental units · automated billing</div>
+                    <div className="text-[var(--brand-pink)] mt-2">✓ NeuroDashboard — in active use</div>
+                    <div className="text-[#FAF7F2]/70">  Knowledge Hub · Notes · Tasks · AI Insights</div>
+                    <div className="text-[#FAF7F2]/50 mt-2">stack: Node.js · PostgreSQL · Redis · RAG</div>
+                  </pre>
                 </div>
               </SpotlightCard>
             </BentoTilt>

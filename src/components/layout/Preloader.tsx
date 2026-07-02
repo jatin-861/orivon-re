@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Preloader() {
+  // useRef freezes this value at mount time — reading sessionStorage on every render
+  // would flip alreadySeen from false→true the moment the effect sets the key,
+  // which triggers effect cleanup (clearInterval) mid-animation and freezes the loader.
+  const alreadySeenRef = useRef(
+    typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen"),
+  );
   const [progress, setProgress] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState(alreadySeenRef.current);
 
   useEffect(() => {
-    // Lock body scroll during load
+    if (alreadySeenRef.current) return;
+
+    sessionStorage.setItem("preloaderSeen", "1");
     document.body.style.overflow = "hidden";
 
-    // Progress counter simulation
-    const duration = 2000; // 2 seconds total loading
+    const duration = 2000;
     const intervalTime = 30;
     const steps = duration / intervalTime;
     let currentStep = 0;
@@ -24,9 +31,8 @@ export function Preloader() {
         clearInterval(timer);
         setTimeout(() => {
           setIsComplete(true);
-          // Unlock body scroll
           document.body.style.overflow = "";
-        }, 600); // Hold at 100% for a brief moment
+        }, 600);
       }
     }, intervalTime);
 
@@ -34,7 +40,7 @@ export function Preloader() {
       clearInterval(timer);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, []); // Empty — runs once on mount; alreadySeenRef is stable and never changes
 
   const brandWords = "ORVION.CO".split("");
 

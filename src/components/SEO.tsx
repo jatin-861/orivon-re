@@ -5,6 +5,7 @@ export interface SEOProps {
   description?: string;
   keywords?: string;
   canonical?: string;
+  ogUrl?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
@@ -20,6 +21,7 @@ export const SEO: React.FC<SEOProps> = ({
   description,
   keywords,
   canonical,
+  ogUrl,
   ogTitle,
   ogDescription,
   ogImage,
@@ -30,6 +32,7 @@ export const SEO: React.FC<SEOProps> = ({
   schema,
 }) => {
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+  const resolvedUrl = ogUrl ?? canonical;
 
   return (
     <>
@@ -40,6 +43,7 @@ export const SEO: React.FC<SEOProps> = ({
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
+      {resolvedUrl && <meta property="og:url" content={resolvedUrl} />}
       {ogTitle || title ? <meta property="og:title" content={ogTitle || title} /> : null}
       {ogDescription || description ? (
         <meta property="og:description" content={ogDescription || description} />

@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Download } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useInView } from "@/hooks/useInView";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function ScrambleText({ text, delay = 0.5 }: { text: string; delay?: number }) {
   const [displayText, setDisplayText] = useState(text);
@@ -117,7 +114,7 @@ const METRICS = [
   { v: "2", l: "Production systems shipped" },
   { v: "220+", l: "Rental units automated" },
   { v: "40+", l: "Hours saved every month" },
-  { v: "100%", l: "Built for production" },
+  { v: "70k+", l: "Lines of production code" },
 ];
 
 export const CinematicHero = () => {
@@ -131,8 +128,13 @@ export const CinematicHero = () => {
     isInViewRef.current = isInView;
   }, [isInView]);
 
-  // Preloader always plays in full now, so the hero entrance always waits for it.
-  const delayBase = 2.5;
+  // On first visit the preloader plays for ~2.6s; on return visits it's skipped entirely.
+  // Compute once at mount (useState initializer) so re-renders never flip this value.
+  const [delayBase] = useState(() => {
+    const seen =
+      typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen");
+    return seen ? 0 : 2.5;
+  });
 
   useEffect(() => {
     // Entry elements reveal animations
@@ -237,10 +239,12 @@ export const CinematicHero = () => {
     initParticles();
 
     // Re-build particles once the display font has actually loaded — measuring/drawing
-    // text with a fallback font produces a mis-shaped, hard-to-read result on first paint
+    // text with a fallback font produces a mis-shaped, hard-to-read result on first paint.
+    // `alive` prevents the callback from firing after cleanup in React StrictMode double-invoke.
+    let alive = true;
     if (typeof document !== "undefined" && "fonts" in document) {
       document.fonts.ready.then(() => {
-        initParticles();
+        if (alive) initParticles();
       });
     }
 
@@ -313,6 +317,8 @@ export const CinematicHero = () => {
     window.addEventListener("themechange", initParticles);
 
     return () => {
+      alive = false;
+      clearTimeout(resizeTimeout);
       ctx.revert();
       cancelAnimationFrame(animId);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -410,10 +416,10 @@ export const CinematicHero = () => {
 };
 
 function ProductPreview() {
-  const activity = [
-    { label: "Knowledge Hub indexed 312 documents", time: "2m ago" },
-    { label: "Shade Ledger sent 18 invoices", time: "1h ago" },
-    { label: "Workflow automation run completed", time: "3h ago" },
+  const highlights = [
+    { label: "Knowledge Hub — RAG over 12k+ docs", tag: "AI" },
+    { label: "Shade Ledger — 220 units, automated billing", tag: "LIVE" },
+    { label: "BullMQ job queue — async workflows", tag: "INFRA" },
   ];
 
   return (
@@ -433,7 +439,7 @@ function ProductPreview() {
 
       <div className="p-5 sm:p-6">
         <p className="text-sm text-muted-foreground mb-5">
-          Welcome back, Saral. Here's what's running right now.
+          NeuroDashboard — production snapshot
         </p>
 
         {/* Stat tiles */}
@@ -487,15 +493,17 @@ function ProductPreview() {
           </svg>
         </div>
 
-        {/* Activity */}
+        {/* What's inside */}
         <div className="flex flex-col gap-2.5">
-          {activity.map((item) => (
+          {highlights.map((item) => (
             <div
               key={item.label}
               className="flex items-center justify-between text-xs gap-4 border-b border-border/60 pb-2.5 last:border-0 last:pb-0"
             >
               <span className="text-foreground/80">{item.label}</span>
-              <span className="text-muted-foreground font-mono shrink-0">{item.time}</span>
+              <span className="text-[var(--brand-pink)] font-mono shrink-0 text-[10px] border border-[var(--brand-pink)]/30 rounded-full px-2 py-0.5">
+                {item.tag}
+              </span>
             </div>
           ))}
         </div>

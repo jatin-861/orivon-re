@@ -139,14 +139,10 @@ export const Route = createFileRoute("/contact")({
 });
 
 const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Something Else"];
-// All three are included as "to" on every compose/mailto link, so the message
-// always lands with the founders too if the primary company inbox is ever
-// missed or down — order here is primary first, then the co-founders as backup.
-const CONTACT_EMAILS = [
-  ["orvionstudio.co", "gmail.com"].join("@"),
-  ["saralbanker1", "gmail.com"].join("@"),
-  ["jatinbasantani861", "gmail.com"].join("@"),
-];
+const CONTACT_EMAILS = [["orvionstudio.co", "gmail.com"].join("@")];
+
+// Calendar is only required when scoping a project — not for role inquiries.
+const CALENDAR_REQUIRED_TYPES = ["Contract Work", "Freelance Project"];
 
 const NEXT_STEPS = [
   {
@@ -185,7 +181,8 @@ function Contact() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!bookedDate) {
+    const needsDate = selected.some((s) => CALENDAR_REQUIRED_TYPES.includes(s));
+    if (needsDate && !bookedDate) {
       setDateError(true);
       return;
     }
@@ -203,7 +200,7 @@ function Contact() {
       `Email: ${email}`,
       company && `Company: ${company}`,
       selected.length && `Reason: ${selected.join(", ")}`,
-      `Preferred date: ${bookedDate.month} ${bookedDate.day}, ${bookedDate.year}`,
+      bookedDate && `Preferred date: ${bookedDate.month} ${bookedDate.day}, ${bookedDate.year}`,
       "",
       "Message:",
       message || "(no message provided)",
@@ -276,12 +273,12 @@ function Contact() {
             />
             <RevealText
               text="what you're building."
-              as="h1"
+              as="p"
               className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-[0.9] block text-[var(--brand-pink)]"
               delay={300}
             />
             <p className="mt-6 text-muted-foreground max-w-md">
-              Tell me about the project or role — I reply within 48 hours.
+              Tell us about the project or role — we reply within 48 hours.
             </p>
           </div>
 
@@ -430,7 +427,7 @@ function Contact() {
 
               {dateError && (
                 <p className="text-sm text-destructive">
-                  Pick a preferred date in the booking calendar (right side) before sending.
+                  Please pick a preferred start date in the calendar — helps us scope the timeline.
                 </p>
               )}
 
@@ -456,15 +453,15 @@ function Contact() {
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Response time</h3>
               <p className="text-sm text-muted-foreground">
-                I reply to every message within 48 hours, Monday to Friday.
+                We reply to every message within 48 hours, Monday to Friday — no auto-responder.
               </p>
             </div>
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Open to</h3>
               <p className="text-sm text-muted-foreground">
                 Full-time roles, contract work, and freelance projects:{" "}
-                <a className="text-primary" href={`mailto:${CONTACT_EMAILS.join(",")}`}>
-                  {CONTACT_EMAILS.join(", ")}
+                <a className="text-primary" href={`mailto:${CONTACT_EMAILS[0]}`}>
+                  {CONTACT_EMAILS[0]}
                 </a>
               </p>
             </div>

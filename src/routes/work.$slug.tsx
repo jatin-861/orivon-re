@@ -60,6 +60,20 @@ function CaseStudy() {
         description={p.description}
         canonical={`https://orvion.co/work/${p.slug}`}
         ogImage="https://orvion.co/og-image.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: p.title,
+          description: p.description,
+          applicationCategory: "BusinessApplication",
+          dateCreated: p.year.split("–")[0],
+          creator: {
+            "@type": "Organization",
+            name: "Orvion.co",
+            url: "https://orvion.co",
+          },
+          ...(p.link ? { url: p.link } : {}),
+        }}
       />
       <div className="mx-auto max-w-7xl px-6">
         <Link
