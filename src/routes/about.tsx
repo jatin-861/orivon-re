@@ -71,7 +71,7 @@ const TEAM = [
   },
   {
     name: "Jatin Basantani",
-    designation: "Co-Founder · Designer & Frontend Developer",
+    designation: "Co-Founder · Frontend & AI Systems Developer",
     quote:
       "We believe that a website should be more than just a template. It should feel like a physical, tactile editorial book — custom crafted, fast, and responsive to the user's focus.",
     src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23F0EAE0'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%231A1A1A' text-anchor='middle' dominant-baseline='middle'>J</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>DESIGN</text></svg>",

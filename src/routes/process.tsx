@@ -140,6 +140,15 @@ function Process() {
         description="How Orvion.co builds. Our engineering process from scoping to deployment — fixed scope, clear milestones, and production-grade delivery every time."
         canonical="https://orvion.co/process"
         ogImage="https://orvion.co/og-image.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }}
       />
       <div className="mx-auto max-w-6xl">
         <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
@@ -152,7 +161,7 @@ function Process() {
         />
         <RevealText
           text="work."
-          as="h1"
+          as="p"
           className="font-serif text-4xl sm:text-6xl md:text-9xl font-normal leading-[1.1] pb-1 block text-[var(--brand-pink)] italic"
           delay={150}
         />

@@ -25,29 +25,19 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  // WebSite schema enables sitelinks search and confirms the canonical URL.
+  // The Organization entity lives in index.html (static HTML, visible to all crawlers).
   const homeSchema = {
     "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    name: "Orvion.co — Product Engineers",
+    "@type": "WebSite",
+    name: "Orvion.co",
+    url: "https://orvion.co",
     description:
-      "Orvion.co is a product engineering studio that builds complete, production systems — from database to deployment.",
-    mainEntity: {
+      "Product engineering studio that builds complete, production systems — from database to deployment.",
+    publisher: {
       "@type": "Organization",
       name: "Orvion.co",
-      member: [
-        {
-          "@type": "Person",
-          name: "Saral Banker",
-          jobTitle: "Product Engineer",
-          sameAs: ["https://github.com/saralbanker"],
-        },
-        {
-          "@type": "Person",
-          name: "Jatin Basantani",
-          jobTitle: "Frontend & AI Systems Developer",
-          sameAs: ["https://github.com/jatin-861"],
-        },
-      ],
+      url: "https://orvion.co",
     },
   };
 
@@ -575,7 +565,7 @@ function BigCTA() {
           </span>
         </h2>
         <p className="mt-8 text-muted-foreground text-base md:text-lg max-w-xl mx-auto leading-relaxed font-sans">
-          If you've got something worth building, I'd like to hear about it — and help take it from
+          If you've got something worth building, we'd love to hear about it — and help take it from
           idea to something running in production.
         </p>
         <div className="mt-12">

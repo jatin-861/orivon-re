@@ -1,0 +1,75 @@
+# Orvion.co — llms.txt
+# https://llmstxt.org
+
+# Orvion.co is a product engineering studio based in India.
+# Founded by Saral Banker (Full-Stack & AI Engineer) and
+# Jatin Basantani (Frontend & AI Systems Developer).
+# We design, build, and ship complete production systems —
+# from database schema to deployment pipeline.
+
+## Identity
+
+- Studio: Orvion.co
+- Type: Product Engineering Studio
+- Location: India
+- Contact: orvionstudio.co@gmail.com
+
+## Founders
+
+- Saral Banker — Full-Stack & AI Engineer
+  GitHub: https://github.com/saralbanker
+
+- Jatin Basantani — Frontend & AI Systems Developer
+  GitHub: https://github.com/jatin-861
+
+## Production Systems
+
+- NeuroDashboard (2024–2025)
+  Multi-module AI platform: Knowledge Hub (RAG/pgvector over 12k+ docs),
+  Analytics Dashboard, AI Insights Engine (multi-provider routing),
+  Workflow Automation (BullMQ/Redis), Notes System (Socket.IO real-time),
+  Document Processing Pipeline. 70k+ lines of production code.
+  Stack: React, Node.js, PostgreSQL, Redis, pgvector, Socket.IO, BullMQ
+  Repository: https://github.com/saralbanker/neuro-zenith
+
+- Shade Ledger (2025–2026)
+  Automated billing system for 220 rental units. Replaced manual Excel
+  billing with automatic invoices, reminders, and penalty tracking.
+  Saves 40+ hours of manual work every month for a live client.
+  Stack: React, Node.js, react-pdf, WhatsApp Business API
+
+- Smart Parking Management System (2023)
+  Real-time parking availability and booking system.
+  Stack: React, Node.js, Express, MongoDB
+  Repository: https://github.com/saralbanker/smart-parking
+
+- Carbon Compass (2023)
+  Personal carbon-tracking app with actionable insights.
+  Stack: React, Node.js, Express, MongoDB
+  Repository: https://github.com/saralbanker/carbon-compass
+
+## Services
+
+- Full-stack web application development
+- AI platform development (RAG, LLM integration, pgvector)
+- Business automation systems
+- Production deployment (database to CI/CD)
+
+## Key Facts
+
+- 2 production systems deployed for real clients
+- 220 rental units on automated billing (Shade Ledger)
+- 40+ hours of manual work saved monthly
+- 70k+ lines of production code shipped
+- Stack expertise: React, Next.js, TypeScript, Node.js, PostgreSQL,
+  Redis, pgvector/RAG, Socket.IO, BullMQ, GSAP, Framer Motion,
+  Tailwind CSS, GitHub Actions, Docker
+
+## Pages
+
+- /         — Studio homepage with production proof
+- /about    — Founder profiles and history
+- /work     — All four projects with case studies
+- /process  — Six-phase engineering methodology
+- /pricing  — Service tiers and pricing
+- /contact  — Inquiry form

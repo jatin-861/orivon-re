@@ -34,7 +34,7 @@ function WorkPage() {
       />
       <HeroGeometric
         badge="Selected Work"
-        title1="Things I've"
+        title1="Things we've"
         title2="built & shipped."
         description="Four real systems — from a multi-module AI platform to production billing automation. Each one is live, running, or open source."
       />

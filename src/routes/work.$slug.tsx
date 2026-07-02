@@ -130,7 +130,7 @@ function CaseStudy() {
                 {p.client}
               </h2>
               <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[11px] uppercase tracking-wider opacity-80">
-                <span>Built by Saral Banker</span>
+                <span>Built by Orvion.co</span>
                 <span>{p.year}</span>
               </div>
             </div>
