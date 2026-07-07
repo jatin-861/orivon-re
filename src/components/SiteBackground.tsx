@@ -52,35 +52,39 @@ export function SiteBackground() {
         </Suspense>
       )}
 
-      {/* Interactive cursor blob — positioned via transform (GPU-composited) instead
-          of left/top so moving the mouse doesn't repaint this huge blurred layer. */}
-      <div
-        className="absolute left-0 top-0 w-[45vw] h-[45vw] rounded-full bg-[var(--brand-pink)] filter blur-[150px] opacity-15 z-0"
-        style={{
-          transform: "translate3d(calc(var(--mouse-x) - 50%), calc(var(--mouse-y) - 50%), 0)",
-          transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
-          willChange: "transform",
-        }}
-      />
+      {isDesktop && (
+        <>
+          {/* Interactive cursor blob — positioned via transform (GPU-composited) instead
+              of left/top so moving the mouse doesn't repaint this huge blurred layer. */}
+          <div
+            className="absolute left-0 top-0 w-[45vw] h-[45vw] rounded-full bg-[var(--brand-pink)] filter blur-[150px] opacity-15 z-0"
+            style={{
+              transform: "translate3d(calc(var(--mouse-x) - 50%), calc(var(--mouse-y) - 50%), 0)",
+              transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
+              willChange: "transform",
+            }}
+          />
 
-      {/* Floating ambient blobs */}
-      <div
-        className="absolute w-[40vw] h-[40vw] rounded-full bg-[var(--brand-teal)] filter blur-[130px] opacity-15 animate-[aurora-drift-1_25s_ease-in-out_infinite]"
-        style={{
-          right: "15%",
-          top: "10%",
-          willChange: "transform",
-        }}
-      />
+          {/* Floating ambient blobs */}
+          <div
+            className="absolute w-[40vw] h-[40vw] rounded-full bg-[var(--brand-teal)] filter blur-[130px] opacity-15 animate-[aurora-drift-1_25s_ease-in-out_infinite]"
+            style={{
+              right: "15%",
+              top: "10%",
+              willChange: "transform",
+            }}
+          />
 
-      <div
-        className="absolute w-[35vw] h-[35vw] rounded-full bg-[var(--brand-lavender)] filter blur-[140px] opacity-15 animate-[aurora-drift-2_30s_ease-in-out_infinite]"
-        style={{
-          left: "10%",
-          bottom: "10%",
-          willChange: "transform",
-        }}
-      />
+          <div
+            className="absolute w-[35vw] h-[35vw] rounded-full bg-[var(--brand-lavender)] filter blur-[140px] opacity-15 animate-[aurora-drift-2_30s_ease-in-out_infinite]"
+            style={{
+              left: "10%",
+              bottom: "10%",
+              willChange: "transform",
+            }}
+          />
+        </>
+      )}
     </div>
   );
 }
