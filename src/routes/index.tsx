@@ -382,12 +382,12 @@ function BigCTA() {
             We reply within 48 hours, personally
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />
-            A quick call to understand scope
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />A quick
+            call to understand scope
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />
-            A real proposal, not a sales deck
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />A real
+            proposal, not a sales deck
           </span>
         </div>
 

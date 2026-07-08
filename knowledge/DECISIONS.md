@@ -1,4 +1,5 @@
 # Architectural Decisions
+
 ## Every accepted decision — with rationale
 
 > Only record decisions that are non-obvious, were debated, or have been reversed before.  
@@ -13,16 +14,12 @@
 **Reason:** The brand aesthetic and visual identity (dark backgrounds, terracotta accent) are designed for dark mode. Light mode is available as a preference, not the default.
 
 **Implementation:**
+
 ```html
 <!-- index.html, inline script before <head> content -->
-(function () {
-  try {
-    var theme = localStorage.getItem("theme");
-    if (theme !== "light") document.documentElement.classList.add("dark");
-  } catch (e) {
-    document.documentElement.classList.add("dark");
-  }
-})();
+(function () { try { var theme = localStorage.getItem("theme"); if (theme !== "light")
+document.documentElement.classList.add("dark"); } catch (e) {
+document.documentElement.classList.add("dark"); } })();
 ```
 
 **Alternative considered:** Light mode as default (standard web convention). Rejected because the site's visual identity reads as incomplete in light mode.
@@ -56,6 +53,7 @@
 **Reason:** The only architecture that survives partnership restructuring AND serves both B2B consulting clients (who hire the studio) and recruiters (who hire individuals).
 
 **Alternatives considered:**
+
 - Person-First (Saral only): Erases co-founder. Rejected.
 - Dual-Founder-Equal: Produces three diluted entities, slow trust accumulation. Rejected.
 - Studio-Only: Blocks individual hiring. Rejected.
@@ -70,6 +68,7 @@
 ## D-004: Canonical Titles
 
 **Decision:**
+
 - Saral Banker: `"Full-Stack & AI Engineer"` (canonical across all schema, cards, bio)
 - Jatin Basantani: `"Frontend & AI Systems Developer"` (canonical across all schema, cards, bio)
 
@@ -140,6 +139,7 @@
 **Reason:** React 19 StrictMode double-invokes effects (mount → cleanup → remount). If `alreadySeen` was a variable inside the effect deps array, the effect would set `sessionStorage`, trigger a re-render, the dep would change from `false` to `true`, and cleanup would fire `clearInterval`, freezing the animation at ~2%.
 
 **Pattern:**
+
 ```tsx
 const alreadySeenRef = useRef(
   typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen"),
@@ -163,10 +163,10 @@ useEffect(() => {
 **Reason:** `const delayBase = 2.5` was hardcoded, meaning hero content was invisible for 2.5 seconds on return visits (when the preloader is skipped). The lazy initializer reads `sessionStorage` synchronously on first render — before any effects fire.
 
 **Pattern:**
+
 ```tsx
 const [delayBase] = useState(() => {
-  const seen =
-    typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen");
+  const seen = typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen");
   return seen ? 0 : 2.5;
 });
 ```

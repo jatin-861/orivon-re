@@ -1,4 +1,5 @@
 # Frontend Architecture
+
 ## React patterns, animation system, and component hierarchy
 
 ---
@@ -35,23 +36,30 @@ LenisProvider                    — smooth scroll (Lenis 1.3.3)
 Two distinct systems, different scopes:
 
 ### GSAP (^3.15.0) — scroll-driven + canvas
+
 Used for: scroll-triggered reveals, parallax, canvas particles, kinetic text effects
 
 **Always wrap in `gsap.context()` for cleanup:**
+
 ```tsx
 useEffect(() => {
   const ctx = gsap.context(() => {
     gsap.from(".hero-element", { y: 40, opacity: 0, stagger: 0.1, delay: delayBase });
-    gsap.fromTo(progressLineRef.current, { scaleY: 0 }, {
-      scaleY: 1,
-      scrollTrigger: { trigger: containerRef.current, start: "top 40%", scrub: true },
-    });
+    gsap.fromTo(
+      progressLineRef.current,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        scrollTrigger: { trigger: containerRef.current, start: "top 40%", scrub: true },
+      },
+    );
   }, containerRef);
   return () => ctx.revert();
 }, []);
 ```
 
 **Plugin registration — always guarded:**
+
 ```tsx
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -59,6 +67,7 @@ if (typeof window !== "undefined") {
 ```
 
 ### Framer Motion (^12.38.0) — component-level
+
 Used for: page transitions, card entrance animations, hover states, pricing card spring physics
 
 ```tsx
@@ -72,6 +81,7 @@ Used for: page transitions, card entrance animations, hover states, pricing card
 ```
 
 ### Smooth Scroll (Lenis ^1.3.3)
+
 Lenis provides smooth inertial scrolling. It coordinates with GSAP ScrollTrigger via its `requestAnimationFrame` integration configured in `LenisProvider.tsx`.
 
 ---
@@ -81,21 +91,26 @@ Lenis provides smooth inertial scrolling. It coordinates with GSAP ScrollTrigger
 Two canvas components render interactive particle/animation experiences:
 
 **`CinematicHero` (`src/components/canvas/CinematicHero.tsx`):**
+
 - Renders particle text "USEFUL OVER IMPRESSIVE" on a canvas
 - Particles spring to home positions, disperse on mouse proximity
 - Dark/light theme aware (reinitializes on `themechange` event)
 - SR-only H1 provides accessible headline
 
 **`StoryTeller` (`src/components/StoryTeller.tsx`):**
+
 - Renders concentric rings, floating nodes, and sine wave animations
 - Mouse-tracking 3D tilt on the frame container
 - Contains `realm-btn` CTA (P0-5 dead-end)
 
 **Both follow the IntersectionObserver pause pattern:**
+
 ```tsx
 const [canvasRef, isInView] = useInView({ threshold: 0.01 });
 const isInViewRef = useRef(isInView);
-useEffect(() => { isInViewRef.current = isInView; }, [isInView]);
+useEffect(() => {
+  isInViewRef.current = isInView;
+}, [isInView]);
 
 const render = () => {
   if (!isInViewRef.current) {
@@ -121,12 +136,15 @@ const render = () => {
 ## Key Custom Hooks
 
 ### `useInView(options)`
+
 Returns `[ref, isInView]`. Used for canvas render loop pausing and Framer Motion `viewport` alternatives.
 
 ### `useStickyHorizontalScroll(wrapperRef, trackRef, options)`
+
 Native-sticky horizontal scroll. Used in `StudioShowreel`. Converts vertical scroll to horizontal translation via GSAP, with browser compositor handling the vertical stick (no GSAP pin). Eliminates jitter on mobile.
 
 ### `useTextSplit`
+
 Character/word splitting for text animation.
 
 ---
@@ -136,6 +154,7 @@ Character/word splitting for text animation.
 `src/components/SEO.tsx` renders `<title>`, `<meta>`, `<link>`, and `<script type="application/ld+json">` elements. React 19 hoists these to `<head>` automatically regardless of where `<SEO>` appears in the component tree.
 
 Usage pattern — first child in every route component:
+
 ```tsx
 function CaseStudy() {
   return (
@@ -152,6 +171,7 @@ function CaseStudy() {
 ## Contact Form Architecture
 
 `contact.tsx` — no backend. On submit:
+
 1. Builds formatted email body from form data
 2. Detects visitor's email provider from their address
 3. Opens pre-filled compose window in detected provider (Gmail/Outlook/Yahoo/mailto)

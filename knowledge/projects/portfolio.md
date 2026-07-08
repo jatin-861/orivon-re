@@ -1,4 +1,5 @@
 # Portfolio — orvion.co
+
 ## This repository
 
 ---
@@ -17,6 +18,7 @@ The Orvion.co portfolio website. A production-deployed SPA at `https://orvion.co
 ## Purpose
 
 Three simultaneous goals:
+
 1. Attract B2B clients for Orvion.co consulting work
 2. Attract freelance/contract engineering projects
 3. Support individual hiring (recruiter path) for Saral Banker and Jatin Basantani
@@ -58,56 +60,56 @@ src/
 
 ## Tech Stack
 
-| Technology | Version | Purpose |
-|---|---|---|
-| React | 19.2.0 | UI framework |
-| TanStack Router | 1.168.0 | File-based routing, typed params |
-| Vite | latest | Build tool |
-| Tailwind CSS | 4.2.1 | Styling |
-| @tailwindcss/vite | 4.2.1 | Tailwind v4 Vite integration |
-| GSAP | 3.15.0 | Scroll animations, kinetic text, particle canvas |
-| Framer Motion | 12.38.0 | Component-level animations, page transitions |
-| Lenis | 1.3.3 | Smooth scroll |
-| Radix UI | various | Accessible UI primitives |
-| Lucide React | 0.575.0 | Icon set |
-| next-themes | 0.4.6 | Theme management |
-| Zod | 3.24.2 | Schema validation (used in router/form) |
+| Technology        | Version | Purpose                                          |
+| ----------------- | ------- | ------------------------------------------------ |
+| React             | 19.2.0  | UI framework                                     |
+| TanStack Router   | 1.168.0 | File-based routing, typed params                 |
+| Vite              | latest  | Build tool                                       |
+| Tailwind CSS      | 4.2.1   | Styling                                          |
+| @tailwindcss/vite | 4.2.1   | Tailwind v4 Vite integration                     |
+| GSAP              | 3.15.0  | Scroll animations, kinetic text, particle canvas |
+| Framer Motion     | 12.38.0 | Component-level animations, page transitions     |
+| Lenis             | 1.3.3   | Smooth scroll                                    |
+| Radix UI          | various | Accessible UI primitives                         |
+| Lucide React      | 0.575.0 | Icon set                                         |
+| next-themes       | 0.4.6   | Theme management                                 |
+| Zod               | 3.24.2  | Schema validation (used in router/form)          |
 
 ---
 
 ## Key Components
 
-| Component | Purpose | Notable |
-|---|---|---|
-| `CinematicHero` | Homepage hero with particle canvas | Particle text "USEFUL OVER IMPRESSIVE"; StrictMode-safe preloader coordination |
-| `Preloader` | First-visit loading animation | useRef pattern for sessionStorage flag (D-009) |
-| `StoryTeller` | Belief statement section | Canvas animation + suspected dead-end CTA (P0-5) |
-| `StudioManifesto` | Core belief text | Scroll-parallax paragraphs; strongest written section |
-| `ScrollStoryHorizontal` | Horizontal project scroll | useStickyHorizontalScroll hook |
-| `SEO` | Per-page meta + schema | React 19 document metadata hoisting |
-| `SiteHeader` | Fixed navigation | Active route detection, mobile menu |
-| `SiteFooter` | Footer with dock | AnimatedDock + GooeyText morphing wordmark |
-| `AnimatedTestimonials` | TEAM cards on /about | Auto-advancing card stack |
-| `BookingCalendar` | Calendar on /contact | Date picker for project start date |
-| `PulseBeams` | Decorative SVG beams | Contact page right-column decoration |
+| Component               | Purpose                            | Notable                                                                        |
+| ----------------------- | ---------------------------------- | ------------------------------------------------------------------------------ |
+| `CinematicHero`         | Homepage hero with particle canvas | Particle text "USEFUL OVER IMPRESSIVE"; StrictMode-safe preloader coordination |
+| `Preloader`             | First-visit loading animation      | useRef pattern for sessionStorage flag (D-009)                                 |
+| `StoryTeller`           | Belief statement section           | Canvas animation + suspected dead-end CTA (P0-5)                               |
+| `StudioManifesto`       | Core belief text                   | Scroll-parallax paragraphs; strongest written section                          |
+| `ScrollStoryHorizontal` | Horizontal project scroll          | useStickyHorizontalScroll hook                                                 |
+| `SEO`                   | Per-page meta + schema             | React 19 document metadata hoisting                                            |
+| `SiteHeader`            | Fixed navigation                   | Active route detection, mobile menu                                            |
+| `SiteFooter`            | Footer with dock                   | AnimatedDock + GooeyText morphing wordmark                                     |
+| `AnimatedTestimonials`  | TEAM cards on /about               | Auto-advancing card stack                                                      |
+| `BookingCalendar`       | Calendar on /contact               | Date picker for project start date                                             |
+| `PulseBeams`            | Decorative SVG beams               | Contact page right-column decoration                                           |
 
 ---
 
 ## Public Assets
 
-| Asset | Location | Purpose |
-|---|---|---|
-| og-image.png | /public/ | 1200×630 OG image for all pages |
-| sitemap.xml | /public/ | 10-URL sitemap |
-| robots.txt | /public/ | Crawl directives |
-| llms.txt | /public/ | AI-readable studio identity |
-| favicon.ico | /public/ | Site favicon |
-| Saral_Banker_Resume.pdf | /public/ | Individual resume |
-| Jatin_Basantani_Resume.pdf | /public/ | Individual resume |
-| Orvion_Team_Resume.pdf | /public/ | Combined team resume |
-| Orvion-Pricing-*.pdf | /public/ | Three pricing PDFs + full report |
-| images/ | /public/images/ | Project screenshots (webp) |
-| videos/ | /public/videos/ | Showreel video files |
+| Asset                      | Location        | Purpose                          |
+| -------------------------- | --------------- | -------------------------------- |
+| og-image.png               | /public/        | 1200×630 OG image for all pages  |
+| sitemap.xml                | /public/        | 10-URL sitemap                   |
+| robots.txt                 | /public/        | Crawl directives                 |
+| llms.txt                   | /public/        | AI-readable studio identity      |
+| favicon.ico                | /public/        | Site favicon                     |
+| Saral_Banker_Resume.pdf    | /public/        | Individual resume                |
+| Jatin_Basantani_Resume.pdf | /public/        | Individual resume                |
+| Orvion_Team_Resume.pdf     | /public/        | Combined team resume             |
+| Orvion-Pricing-\*.pdf      | /public/        | Three pricing PDFs + full report |
+| images/                    | /public/images/ | Project screenshots (webp)       |
+| videos/                    | /public/videos/ | Showreel video files             |
 
 ---
 

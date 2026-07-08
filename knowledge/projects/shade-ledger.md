@@ -1,4 +1,5 @@
 # Shade Ledger
+
 ## Automated billing system — primary client proof
 
 ---
@@ -19,6 +20,7 @@ Shade Ledger is the highest-trust evidence in the Orvion.co portfolio. It is a r
 ## The Problem (Before State)
 
 A property owner managing 220 rental units in Mumbai was processing monthly billing manually:
+
 - Excel spreadsheets for tracking each unit's payment status
 - Phone calls and manual messages for payment reminders
 - Manual calculation of late fees and penalties
@@ -29,6 +31,7 @@ A property owner managing 220 rental units in Mumbai was processing monthly bill
 ## The Solution (After State)
 
 Shade Ledger replaces every manual step:
+
 1. **Automatic invoice generation** — PDF invoices created and sent to each tenant every billing cycle (react-pdf)
 2. **WhatsApp reminders** — Automated payment reminders and due-date notices via WhatsApp Business API
 3. **Penalty tracking** — Late fees calculated and applied automatically based on rules
@@ -41,7 +44,7 @@ Shade Ledger replaces every manual step:
 **Frontend:** React  
 **Backend:** Node.js  
 **Invoice generation:** react-pdf  
-**Tenant communication:** WhatsApp Business API  
+**Tenant communication:** WhatsApp Business API
 
 ---
 
@@ -61,13 +64,13 @@ React · Node.js · react-pdf · WhatsApp Business API
 
 ## Verified Evidence
 
-| Metric | Value | Type |
-|---|---|---|
-| Rental units on the system | 220 | Specific, ongoing |
-| Manual work saved monthly | 40+ hours | Client-reported |
-| System status | Live since 2025 | Ongoing |
-| Client location | Mumbai, India | Named city |
-| Client type | Confidential (contractual) | Anonymized per agreement |
+| Metric                     | Value                      | Type                     |
+| -------------------------- | -------------------------- | ------------------------ |
+| Rental units on the system | 220                        | Specific, ongoing        |
+| Manual work saved monthly  | 40+ hours                  | Client-reported          |
+| System status              | Live since 2025            | Ongoing                  |
+| Client location            | Mumbai, India              | Named city               |
+| Client type                | Confidential (contractual) | Anonymized per agreement |
 
 ---
 

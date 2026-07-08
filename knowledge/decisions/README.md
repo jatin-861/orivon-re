@@ -5,9 +5,10 @@ This directory stores decisions that are too large or too context-dependent to f
 ## When to add a file here
 
 Add an ADR file here when a decision:
+
 - Involved significant trade-off evaluation (3+ options considered)
 - Has a complex rationale that future sessions need to understand fully
-- May be revisited and requires knowing *why* the current approach was chosen
+- May be revisited and requires knowing _why_ the current approach was chosen
 
 For straightforward decisions, record them directly in `DECISIONS.md` as a numbered entry (D-001, D-002, etc.).
 

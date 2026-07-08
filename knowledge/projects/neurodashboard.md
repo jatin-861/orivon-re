@@ -1,4 +1,5 @@
 # NeuroDashboard
+
 ## Multi-module AI platform
 
 ---
@@ -43,14 +44,14 @@ A unified platform that puts all information in one place, makes it instantly se
 
 ## Modules
 
-| Module | Flagship? | Description |
-|---|---|---|
-| Knowledge Hub | YES | Semantic search across all documents and notes via pgvector (RAG over 12k+ docs) |
-| Analytics Dashboard | — | Activity, trends, and usage breakdown by workspace |
-| AI Insights Engine | — | Multi-provider LLM routing (OpenRouter/Gemini/Qwen) — no single point of failure |
-| Workflow Automation | — | Async background jobs via BullMQ/Redis — heavy tasks don't block UI |
-| Notes System | — | Real-time collaborative notes via Socket.IO |
-| Document Processing Pipeline | — | Auto-ingestion, chunking, and indexing on upload |
+| Module                       | Flagship? | Description                                                                      |
+| ---------------------------- | --------- | -------------------------------------------------------------------------------- |
+| Knowledge Hub                | YES       | Semantic search across all documents and notes via pgvector (RAG over 12k+ docs) |
+| Analytics Dashboard          | —         | Activity, trends, and usage breakdown by workspace                               |
+| AI Insights Engine           | —         | Multi-provider LLM routing (OpenRouter/Gemini/Qwen) — no single point of failure |
+| Workflow Automation          | —         | Async background jobs via BullMQ/Redis — heavy tasks don't block UI              |
+| Notes System                 | —         | Real-time collaborative notes via Socket.IO                                      |
+| Document Processing Pipeline | —         | Auto-ingestion, chunking, and indexing on upload                                 |
 
 ---
 

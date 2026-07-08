@@ -1,4 +1,5 @@
 # Repository Architecture
+
 ## Structure and organization
 
 ---
@@ -154,9 +155,9 @@ Usage: `import { SEO } from "@/components/SEO"` instead of relative paths.
 
 ## Key Configuration Files
 
-| File | Purpose |
-|---|---|
-| `index.html` | Entry point; contains dark-mode inline script + static schemas (DO NOT AUTO-GENERATE) |
-| `vite.config.ts` | Vite + `@tanstack/router-plugin` + `@vitejs/plugin-react` + `vite-tsconfig-paths` |
-| `tsconfig.json` | TypeScript strict mode, path aliases |
-| `package.json` | All dependency versions |
+| File             | Purpose                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| `index.html`     | Entry point; contains dark-mode inline script + static schemas (DO NOT AUTO-GENERATE) |
+| `vite.config.ts` | Vite + `@tanstack/router-plugin` + `@vitejs/plugin-react` + `vite-tsconfig-paths`     |
+| `tsconfig.json`  | TypeScript strict mode, path aliases                                                  |
+| `package.json`   | All dependency versions                                                               |

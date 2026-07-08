@@ -1,4 +1,5 @@
 # Brand Guide
+
 ## Communication, voice, and positioning rules
 
 ---
@@ -56,6 +57,7 @@ Most agencies deliver demos. Orvion delivers running systems. The Shade Ledger c
 ## Tone
 
 **What it is:**
+
 - Direct — say the thing plainly, then stop
 - Specific — "220 rental units" not "many clients"
 - Grounded — no hype, no superlatives without proof
@@ -63,6 +65,7 @@ Most agencies deliver demos. Orvion delivers running systems. The Shade Ledger c
 - Engineering-minded but human-readable
 
 **What it isn't:**
+
 - Breathless marketing copy ("revolutionary," "game-changing," "world-class")
 - Vague capability claims ("great at software," "passionate about code")
 - Agency filler ("we partner with," "we leverage," "best-in-class")
@@ -73,18 +76,23 @@ Most agencies deliver demos. Orvion delivers running systems. The Shade Ledger c
 ## Messaging Hierarchy
 
 **Level 1 — Positioning:** What Orvion.co is
+
 > "A product engineering studio that builds complete, production systems — from database to deployment."
 
-**Level 2 — Belief:** What drives the work  
+**Level 2 — Belief:** What drives the work
+
 > "If it doesn't run in production, it doesn't count."
 
 **Level 3 — Evidence:** What has been built
+
 > "Shade Ledger has automated billing for 220 rental units since 2025."
 
 **Level 4 — Process:** How they work
+
 > "Discover → Define → Design → Build → Ship → Grow. Fixed scope, no surprises."
 
 **Level 5 — Call to action**
+
 > "Get in touch. We reply within 48 hours, personally — no auto-responder."
 
 Each level requires the previous to be credible. Never lead with Level 5 without establishing Level 1.
@@ -94,17 +102,20 @@ Each level requires the previous to be credible. Never lead with Level 5 without
 ## Audience Communication
 
 ### For business owners / founders
+
 - Lead with outcome, not process
 - Use the Shade Ledger story — it's the most relatable proof
 - Surface the fixed-fee positioning early
 - Never lead with tech stack (they don't care what stack you used)
 
 ### For recruiters
+
 - Defer to the `/about` page — individual founder cards with resume downloads
 - Do not obscure individual identities with studio-only messaging
 - Both founders have individual resume PDFs available
 
 ### For technical founders / senior engineers
+
 - Tech stack is visible and correct: React, Node.js, PostgreSQL, Redis, pgvector, GSAP
 - GitHub links are available for all independent projects
 - NeuroDashboard architecture decisions are documented in the case study
@@ -113,13 +124,13 @@ Each level requires the previous to be credible. Never lead with Level 5 without
 
 ## Brand Personality
 
-| Dimension | Description |
-|---|---|
-| Expertise | Senior engineer who has shipped real systems |
-| Communication | Clear, direct, no fluff — like the best engineers you've worked with |
-| Confidence | Earns trust with evidence, not claims |
-| Honesty | "Confidential client" rather than a fake name; "40+" rather than "thousands" |
-| Craft | Deliberately chosen tools, deliberate typography, deliberate animations |
+| Dimension     | Description                                                                  |
+| ------------- | ---------------------------------------------------------------------------- |
+| Expertise     | Senior engineer who has shipped real systems                                 |
+| Communication | Clear, direct, no fluff — like the best engineers you've worked with         |
+| Confidence    | Earns trust with evidence, not claims                                        |
+| Honesty       | "Confidential client" rather than a fake name; "40+" rather than "thousands" |
+| Craft         | Deliberately chosen tools, deliberate typography, deliberate animations      |
 
 ---
 
@@ -146,14 +157,14 @@ Labels are concrete nouns. No clever alternatives.
 
 ## CTA Copy Conventions
 
-| CTA type | Copy convention |
-|---|---|
-| Primary contact | "Get in touch" |
-| See work | "See Selected Work" / "View Projects" |
-| Case study | "See the case study →" |
-| Process | "How we work →" |
-| Pricing | "See pricing →" |
-| Resume | "Download Resume" |
+| CTA type        | Copy convention                       |
+| --------------- | ------------------------------------- |
+| Primary contact | "Get in touch"                        |
+| See work        | "See Selected Work" / "View Projects" |
+| Case study      | "See the case study →"                |
+| Process         | "How we work →"                       |
+| Pricing         | "See pricing →"                       |
+| Resume          | "Download Resume"                     |
 
 Arrow `→` is used for secondary/inline text links. Button CTAs use it only when paired with ArrowRight icon.
 

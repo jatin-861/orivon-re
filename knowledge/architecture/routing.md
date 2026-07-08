@@ -1,4 +1,5 @@
 # Routing Architecture
+
 ## TanStack Router patterns and conventions
 
 ---
@@ -13,16 +14,16 @@
 
 Routes are defined in `src/routes/`. TanStack Router generates a typed route tree.
 
-| File | Route | Pattern |
-|---|---|---|
-| `__root.tsx` | (all routes) | Root layout |
-| `index.tsx` | `/` | Index route |
-| `about.tsx` | `/about` | Static route |
-| `work.index.tsx` | `/work` | Index route for nested `/work` |
-| `work.$slug.tsx` | `/work/:slug` | Dynamic param route |
-| `process.tsx` | `/process` | Static route |
-| `pricing.tsx` | `/pricing` | Static route |
-| `contact.tsx` | `/contact` | Static route |
+| File             | Route         | Pattern                        |
+| ---------------- | ------------- | ------------------------------ |
+| `__root.tsx`     | (all routes)  | Root layout                    |
+| `index.tsx`      | `/`           | Index route                    |
+| `about.tsx`      | `/about`      | Static route                   |
+| `work.index.tsx` | `/work`       | Index route for nested `/work` |
+| `work.$slug.tsx` | `/work/:slug` | Dynamic param route            |
+| `process.tsx`    | `/process`    | Static route                   |
+| `pricing.tsx`    | `/pricing`    | Static route                   |
+| `contact.tsx`    | `/contact`    | Static route                   |
 
 ---
 
@@ -116,11 +117,11 @@ LenisProvider
 
 ## Case Study Slugs
 
-| Slug | Project |
-|---|---|
-| `neurodashboard` | NeuroDashboard — AI platform |
-| `shade-ledger` | Shade Ledger — automated billing |
-| `smart-parking` | Smart Parking Management System |
-| `carbon-compass` | Carbon Compass |
+| Slug             | Project                          |
+| ---------------- | -------------------------------- |
+| `neurodashboard` | NeuroDashboard — AI platform     |
+| `shade-ledger`   | Shade Ledger — automated billing |
+| `smart-parking`  | Smart Parking Management System  |
+| `carbon-compass` | Carbon Compass                   |
 
 Slugs are defined in `src/data/projects.ts` PROJECTS array. Adding a new project requires adding a new entry there — no new route file needed.

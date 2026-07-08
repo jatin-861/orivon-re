@@ -1,4 +1,5 @@
 # Narrative Architecture
+
 ## Homepage communication structure and visitor journey
 
 > Source: HOMEPAGE_DECISION_ARCHITECTURE_BLUEPRINT.md, NARRATIVE_DECISION_ARCHITECTURE_REPORT.md  
@@ -14,16 +15,16 @@ The homepage is a sequential trust-building machine. Every section removes exact
 
 ## Canonical Homepage Section Order
 
-| Position | Component | Responsibility | Uncertainty removed |
-|---|---|---|---|
-| 1 | `CinematicHero` | Establish identity | "Who is this?" |
-| 2 | `StudioManifesto` | Establish belief | "What makes them different?" |
-| 3 | `FeaturedEvidence` *(new)* | Primary proof | "Is this real or just claims?" |
-| 4 | `ScrollStoryHorizontal` | Capability breadth | "Is this a one-project studio?" |
-| 5 | `ProcessSignal` *(new)* | Methodology preview | "What happens if I contact them?" |
-| 6 | `SkillsMarquee` | Technical signals | "Do they use the stack I need?" |
-| 7 | `Numbers` | Quantified proof | "How much have they actually done?" |
-| 8 | `BigCTA` | Convert | "How do I start?" |
+| Position | Component                  | Responsibility      | Uncertainty removed                 |
+| -------- | -------------------------- | ------------------- | ----------------------------------- |
+| 1        | `CinematicHero`            | Establish identity  | "Who is this?"                      |
+| 2        | `StudioManifesto`          | Establish belief    | "What makes them different?"        |
+| 3        | `FeaturedEvidence` _(new)_ | Primary proof       | "Is this real or just claims?"      |
+| 4        | `ScrollStoryHorizontal`    | Capability breadth  | "Is this a one-project studio?"     |
+| 5        | `ProcessSignal` _(new)_    | Methodology preview | "What happens if I contact them?"   |
+| 6        | `SkillsMarquee`            | Technical signals   | "Do they use the stack I need?"     |
+| 7        | `Numbers`                  | Quantified proof    | "How much have they actually done?" |
+| 8        | `BigCTA`                   | Convert             | "How do I start?"                   |
 
 **Removed sections:** `ScrollingTicker`, `StudioShowreel`, `StoryTeller`  
 (All three are redundant with other sections — see Decision D-014)
@@ -37,12 +38,14 @@ The homepage is a sequential trust-building machine. Every section removes exact
 **Single responsibility:** Establish studio identity and surface the positioning signal.
 
 **What it must communicate:**
+
 - Who: Orvion.co — two engineers (Saral + Jatin)
 - What: We build software that ships (consistent "we" voice — no "I")
 - Canvas: "USEFUL OVER IMPRESSIVE" (positioning signal, pre-verbal)
 - Signal: "Open to new projects"
 
 **What it must NOT do:**
+
 - Show metrics (moved to section 7)
 - Include a Resume CTA (recruiter path is on /about)
 - Switch voice from "we" to "I"
@@ -58,6 +61,7 @@ The homepage is a sequential trust-building machine. Every section removes exact
 **Why this position:** Without the belief, "220 rental units" is just a number. With the belief ("shipping the whole stack is what turns a prototype into a product"), it becomes proof of a philosophy.
 
 **Content (existing, no changes needed):**
+
 1. "Most software stays a demo — a prototype that never reaches a real user."
 2. "Shipping the whole stack, database to deployment, is what turns a prototype into a product."
 3. "Real systems run for real people, every day — Shade Ledger has billed 220 rental units, automatically, every month, for over a year."
@@ -68,13 +72,14 @@ The homepage is a sequential trust-building machine. Every section removes exact
 
 ---
 
-### 3 — FeaturedEvidence *(new component)*
+### 3 — FeaturedEvidence _(new component)_
 
 **Single responsibility:** Present the Shade Ledger story completely, in one place.
 
 **Why this section exists:** The Shade Ledger evidence is distributed across 5 sections on the current homepage but presented completely in 0 sections. The "before" context (manual Excel billing, phone calls) is only in the case study. Without the before state, "220 units" has no emotional resonance.
 
 **Required content:**
+
 - Before state: "Replaced manual Excel billing and phone calls"
 - After state: Automatic invoices, WhatsApp reminders, PDF generation, penalty tracking
 - Live status: Running since 2025, no interruption
@@ -99,7 +104,7 @@ The homepage is a sequential trust-building machine. Every section removes exact
 
 ---
 
-### 5 — ProcessSignal *(new component)*
+### 5 — ProcessSignal _(new component)_
 
 **Single responsibility:** Eliminate methodology fear before conversion.
 
@@ -136,6 +141,7 @@ The homepage is a sequential trust-building machine. Every section removes exact
 **Single responsibility:** Convert qualified visitors.
 
 **Additions (P2 backlog):**
+
 - 3-item "what happens next" above the CTA (reply → call → proposal)
 - One pricing signal line below the CTA: "Fixed-fee pricing available. [See pricing →]"
 
@@ -145,16 +151,16 @@ The homepage is a sequential trust-building machine. Every section removes exact
 
 ## Question Flow (from HOMEPAGE_DECISION_ARCHITECTURE_BLUEPRINT.md)
 
-| Question | Answered by | When |
-|---|---|---|
-| "Who is this?" | Section 1 — Hero | 0–30 seconds |
-| "What makes them different?" | Section 2 — Manifesto | 30–90 seconds |
-| "Is this real?" | Section 3 — FeaturedEvidence | 90–180 seconds |
-| "What else have they built?" | Section 4 — Projects | 2–3 minutes |
-| "What does working with them look like?" | Section 5 — ProcessSignal | 3–4 minutes |
-| "Do they use my stack?" | Section 6 — SkillsMarquee | 4–5 minutes |
-| "How much have they done?" | Section 7 — Numbers | 5 minutes |
-| "How do I start?" | Section 8 — BigCTA | 5+ minutes |
+| Question                                 | Answered by                  | When           |
+| ---------------------------------------- | ---------------------------- | -------------- |
+| "Who is this?"                           | Section 1 — Hero             | 0–30 seconds   |
+| "What makes them different?"             | Section 2 — Manifesto        | 30–90 seconds  |
+| "Is this real?"                          | Section 3 — FeaturedEvidence | 90–180 seconds |
+| "What else have they built?"             | Section 4 — Projects         | 2–3 minutes    |
+| "What does working with them look like?" | Section 5 — ProcessSignal    | 3–4 minutes    |
+| "Do they use my stack?"                  | Section 6 — SkillsMarquee    | 4–5 minutes    |
+| "How much have they done?"               | Section 7 — Numbers          | 5 minutes      |
+| "How do I start?"                        | Section 8 — BigCTA           | 5+ minutes     |
 
 ---
 
@@ -194,6 +200,7 @@ Homepage (WHO + WHY + PROOF)
 ```
 
 Cross-page CTAs supporting this sequence:
+
 - Work index → About: "Meet the engineers →" (P2-5)
 - About → Process: "See how we work →" (P2-6)
 - Process → Contact: ✅ exists

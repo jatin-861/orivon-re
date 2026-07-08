@@ -108,7 +108,6 @@ const HISTORY = [
   },
 ];
 
-
 function About() {
   const historyRef = useRef<HTMLDivElement>(null);
   const progressLineRef = useRef<HTMLDivElement>(null);
@@ -289,7 +288,9 @@ function About() {
               </div>
               <div className="border-t border-border/60 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Property Management Client</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    Property Management Client
+                  </p>
                   <p className="text-xs text-muted-foreground font-mono mt-0.5">
                     Mumbai · 220 rental units · Shade Ledger, 2025
                   </p>
@@ -445,10 +446,17 @@ function About() {
                   </span>
                   <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 leading-relaxed shadow-inner">
                     <div className="text-[var(--brand-pink)]">✓ Shade Ledger — live since 2025</div>
-                    <div className="text-[#FAF7F2]/70">  220 rental units · automated billing</div>
-                    <div className="text-[var(--brand-pink)] mt-2">✓ NeuroDashboard — in active use</div>
-                    <div className="text-[#FAF7F2]/70">  Knowledge Hub · Notes · Tasks · AI Insights</div>
-                    <div className="text-[#FAF7F2]/50 mt-2">stack: Node.js · PostgreSQL · Redis · RAG</div>
+                    <div className="text-[#FAF7F2]/70"> 220 rental units · automated billing</div>
+                    <div className="text-[var(--brand-pink)] mt-2">
+                      ✓ NeuroDashboard — in active use
+                    </div>
+                    <div className="text-[#FAF7F2]/70">
+                      {" "}
+                      Knowledge Hub · Notes · Tasks · AI Insights
+                    </div>
+                    <div className="text-[#FAF7F2]/50 mt-2">
+                      stack: Node.js · PostgreSQL · Redis · RAG
+                    </div>
                   </pre>
                 </div>
               </SpotlightCard>

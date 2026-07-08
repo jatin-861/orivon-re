@@ -1,4 +1,5 @@
 # Engineering Guidelines
+
 ## Standards and patterns for this repository
 
 ---
@@ -27,6 +28,7 @@ These apply to all TypeScript/TSX files in `src/`:
 React 19 StrictMode double-invokes effects (mount → cleanup → remount). If the derived value changes between invocations (because the effect wrote to storage), cleanup fires prematurely.
 
 **Pattern for one-time initialization from sessionStorage:**
+
 ```tsx
 // CORRECT
 const alreadySeenRef = useRef(
@@ -80,6 +82,7 @@ useEffect(() => {
 ```
 
 Register plugins once per component, inside a `typeof window !== "undefined"` guard (SSR safety):
+
 ```tsx
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -94,7 +97,9 @@ Pattern for canvas components (`CinematicHero`, `StoryTeller`, `InteractiveParti
 // Pause render loop when off-screen
 const [canvasRef, isInView] = useInView({ threshold: 0.01 });
 const isInViewRef = useRef(isInView);
-useEffect(() => { isInViewRef.current = isInView; }, [isInView]);
+useEffect(() => {
+  isInViewRef.current = isInView;
+}, [isInView]);
 
 const render = () => {
   if (!isInViewRef.current) {
@@ -125,7 +130,9 @@ export const Route = createFileRoute("/work/$slug")({
 });
 
 // Typed params in Link
-<Link to="/work/$slug" params={{ slug: p.slug }}>...</Link>
+<Link to="/work/$slug" params={{ slug: p.slug }}>
+  ...
+</Link>;
 
 // Loader data
 const p = Route.useLoaderData();
@@ -152,9 +159,10 @@ Never use `href` for internal navigation. Always use `<Link to="..." />`.
 No `tailwind.config.js`. Configuration is in CSS files using `@theme {}` directive (Tailwind v4 syntax). Brand tokens are CSS custom properties on `:root`.
 
 Class merging: `tailwind-merge` via `cn()` utility in `src/lib/utils.ts`:
+
 ```tsx
 import { cn } from "@/lib/utils";
-cn("base-class", condition && "conditional-class", "other-class")
+cn("base-class", condition && "conditional-class", "other-class");
 ```
 
 ---
@@ -162,6 +170,7 @@ cn("base-class", condition && "conditional-class", "other-class")
 ## Component Architecture
 
 ### Layout components (always rendered)
+
 - `LenisProvider` — smooth scroll (outermost wrapper)
 - `CustomCursor` — custom cursor (after LenisProvider)
 - `Preloader` — first-visit preloader (before SiteBackground)
@@ -172,9 +181,11 @@ cn("base-class", condition && "conditional-class", "other-class")
 - `AppErrorBoundary` — error boundary class component
 
 ### Route components
+
 Each route file exports exactly one route (`Route`) and one component function named after the route.
 
 ### SEO component
+
 `<SEO />` is rendered as the first child inside every route component. It uses React 19's document metadata hoisting — `<title>`, `<meta>`, `<link>`, and `<script>` elements rendered anywhere in the tree are hoisted to `<head>`.
 
 ---
@@ -182,6 +193,7 @@ Each route file exports exactly one route (`Route`) and one component function n
 ## Definition of Production Quality
 
 A feature is production-quality when:
+
 1. It works correctly on first visit and return visits
 2. It works in React 19 StrictMode (no double-invoke side effects)
 3. It degrades gracefully when sessionStorage/localStorage is unavailable
@@ -213,15 +225,15 @@ Path alias: `@/` maps to `src/` via `vite-tsconfig-paths`.
 
 ## No-Go Patterns
 
-| Pattern | Why forbidden |
-|---|---|
-| `useState(false)` for DOM-derived initial state | Causes flash; use lazy initializer |
-| `useEffect` deps include sessionStorage-derived values that the effect also writes | Causes StrictMode double-invoke bugs |
-| `href` for internal navigation | Use `<Link to="..." />` |
-| Hardcoded contact email in JSX | Assemble in `src/lib/mail.ts` |
-| `gsap` animations without `ctx.revert()` cleanup | Memory leak, ScrollTrigger accumulation |
-| Canvas render loops without `isInView` pause | Performance drain when scrolled off-screen |
-| Dead-end CTA buttons | Brand trust incident |
+| Pattern                                                                            | Why forbidden                              |
+| ---------------------------------------------------------------------------------- | ------------------------------------------ |
+| `useState(false)` for DOM-derived initial state                                    | Causes flash; use lazy initializer         |
+| `useEffect` deps include sessionStorage-derived values that the effect also writes | Causes StrictMode double-invoke bugs       |
+| `href` for internal navigation                                                     | Use `<Link to="..." />`                    |
+| Hardcoded contact email in JSX                                                     | Assemble in `src/lib/mail.ts`              |
+| `gsap` animations without `ctx.revert()` cleanup                                   | Memory leak, ScrollTrigger accumulation    |
+| Canvas render loops without `isInView` pause                                       | Performance drain when scrolled off-screen |
+| Dead-end CTA buttons                                                               | Brand trust incident                       |
 
 ---
 

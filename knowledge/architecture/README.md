@@ -2,12 +2,12 @@
 
 Technical implementation reference for the Orvion.co portfolio repository.
 
-| File | What it covers |
-|---|---|
-| [repository.md](repository.md) | Directory structure, all files in src/, path aliases, config files |
-| [routing.md](routing.md) | TanStack Router patterns, route definitions, navigation, loader data |
-| [frontend.md](frontend.md) | React 19, component hierarchy, GSAP, Framer Motion, canvas components, theme system |
-| [seo.md](seo.md) | SEO.tsx component, static schemas in index.html, sitemap, llms.txt, OG image |
+| File                           | What it covers                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| [repository.md](repository.md) | Directory structure, all files in src/, path aliases, config files                  |
+| [routing.md](routing.md)       | TanStack Router patterns, route definitions, navigation, loader data                |
+| [frontend.md](frontend.md)     | React 19, component hierarchy, GSAP, Framer Motion, canvas components, theme system |
+| [seo.md](seo.md)               | SEO.tsx component, static schemas in index.html, sitemap, llms.txt, OG image        |
 
 ## How to use these files
 

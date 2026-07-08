@@ -109,6 +109,38 @@ class Particle {
   }
 }
 
+interface ParticleSystemConfig {
+  baseFontSizeRatio: number;
+  maxFontSize: number;
+  lineHeightRatio: number;
+  stepMin: number;
+  stepMax: number;
+  stepScale: number;
+  overlapRatio: number;
+  sizeRange: number;
+  interactionRadiusMobile: number;
+  interactionRadiusDesktop: number;
+  repelForce: number;
+  friction: number;
+  springForce: number;
+}
+
+const CONFIG: ParticleSystemConfig = {
+  baseFontSizeRatio: 0.125,
+  maxFontSize: 190,
+  lineHeightRatio: 1.08,
+  stepMin: 3.2,
+  stepMax: 5.0,
+  stepScale: 0.026,
+  overlapRatio: 0.76,
+  sizeRange: 1.2,
+  interactionRadiusMobile: 95,
+  interactionRadiusDesktop: 155,
+  repelForce: 14,
+  friction: 0.83,
+  springForce: 0.055,
+};
+
 export const CinematicHero = () => {
   const [canvasRef, isInView] = useInView({ threshold: 0.01 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -123,8 +155,7 @@ export const CinematicHero = () => {
   // On first visit the preloader plays for ~2.6s; on return visits it's skipped entirely.
   // Compute once at mount (useState initializer) so re-renders never flip this value.
   const [delayBase] = useState(() => {
-    const seen =
-      typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen");
+    const seen = typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("preloaderSeen");
     return seen ? 0 : 2.5;
   });
 
@@ -148,67 +179,80 @@ export const CinematicHero = () => {
     if (!canvasCtx) return;
 
     const initParticles = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
       const cssWidth = canvas.clientWidth;
       const cssHeight = canvas.clientHeight;
+      const isMobile = cssWidth < 768;
+
       canvas.width = cssWidth * dpr;
       canvas.height = cssHeight * dpr;
       canvasCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      let fontSize = Math.min(
+        cssWidth * (isMobile ? 0.21 : CONFIG.baseFontSizeRatio),
+        CONFIG.maxFontSize,
+      );
+
+      const measureCanvas = document.createElement("canvas");
+      const measureCtx = measureCanvas.getContext("2d");
+      if (!measureCtx) return;
+
+      const lines = ["USEFUL OVER", "IMPRESSIVE"];
+      measureCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
+      const maxWidth = cssWidth * 0.94;
+      const widest = Math.max(...lines.map((line) => measureCtx.measureText(line).width));
+      if (widest > maxWidth) {
+        fontSize = fontSize * (maxWidth / widest);
+      }
+
+      const maxFontSizeByHeight = (cssHeight / (lines.length * CONFIG.lineHeightRatio)) * 0.88;
+      fontSize = Math.min(fontSize, maxFontSizeByHeight);
+
+      const stepCSS = Math.max(
+        CONFIG.stepMin,
+        Math.min(CONFIG.stepMax, fontSize * CONFIG.stepScale),
+      );
+      const targetAverageRadius = (stepCSS * CONFIG.overlapRatio) / 2;
+      const dprFactor = 0.9 + 0.2 / dpr;
+      const avgRadiusCSS = targetAverageRadius * dprFactor;
+      const rangeCSS = Math.min(CONFIG.sizeRange, avgRadiusCSS * 0.6);
+      const minSizeCSS = avgRadiusCSS - rangeCSS / 2;
 
       const tempCanvas = document.createElement("canvas");
       const tempCtx = tempCanvas.getContext("2d");
       if (!tempCtx) return;
 
-      tempCanvas.width = cssWidth;
-      tempCanvas.height = cssHeight;
+      tempCanvas.width = cssWidth * dpr;
+      tempCanvas.height = cssHeight * dpr;
 
-      // Draw the belief statement, dynamically scaled to fit width, across two lines
-      const isMobile = cssWidth < 768;
-      const lines = ["USEFUL OVER", "IMPRESSIVE"];
-      let fontSize = Math.min(cssWidth * (isMobile ? 0.21 : 0.125), 190);
-      tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
-      const maxWidth = cssWidth * 0.94;
-      const widest = Math.max(...lines.map((line) => tempCtx.measureText(line).width));
-      if (widest > maxWidth) {
-        fontSize = fontSize * (maxWidth / widest);
-      }
-
-      // Also clamp by the canvas's actual height. Font size above was sized purely from
-      // width, so on viewports where width >> height the two stacked lines were taller than
-      // the canvas itself — that's what was clipping the top/bottom of the letters.
-      const lineHeightRatio = 1.08;
-      const maxFontSizeByHeight = (cssHeight / (lines.length * lineHeightRatio)) * 0.88;
-      fontSize = Math.min(fontSize, maxFontSizeByHeight);
-      tempCtx.font = `900 ${fontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
-
+      const physicalFontSize = fontSize * dpr;
+      tempCtx.font = `900 ${physicalFontSize}px "Cabinet Grotesk", system-ui, sans-serif`;
       tempCtx.fillStyle = "#000000";
       tempCtx.textAlign = "center";
       tempCtx.textBaseline = "middle";
 
-      const lineHeight = fontSize * 1.08;
-      const totalHeight = lineHeight * lines.length;
-      const startY = tempCanvas.height / 2 - totalHeight / 2 + lineHeight / 2;
+      const lineHeightCSS = fontSize * CONFIG.lineHeightRatio;
+      const totalHeightCSS = lineHeightCSS * lines.length;
+      const startYCSS = cssHeight / 2 - totalHeightCSS / 2 + lineHeightCSS / 2;
 
       lines.forEach((line, i) => {
-        tempCtx.fillText(line, tempCanvas.width / 2, startY + i * lineHeight);
+        const physicalX = (cssWidth / 2) * dpr;
+        const physicalY = (startYCSS + i * lineHeightCSS) * dpr;
+        tempCtx.fillText(line, physicalX, physicalY);
       });
 
+      const stepPhysical = Math.max(1, Math.round(stepCSS * dpr));
       const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
       const data = imgData.data;
       const newParticles: Particle[] = [];
 
-      // Theme-aware particle palette
       const isDark = document.documentElement.classList.contains("dark");
       const baseColor = isDark ? "#F5F1EA" : "#1A1A1A";
-      const accentColor = "#C75B3A"; // Burnt Terracotta — consistent across themes
+      const accentColor = "#C75B3A";
       const tertiaryColor = isDark ? "#C37B68" : "#8B5E3C";
 
-      // Densities: mobile letters render smaller in absolute px, so they need a
-      // finer (smaller) sampling step than desktop to stay legible, not a coarser one
-      const step = isMobile ? 3 : 5;
-
-      for (let y = 0; y < tempCanvas.height; y += step) {
-        for (let x = 0; x < tempCanvas.width; x += step) {
+      for (let y = 0; y < tempCanvas.height; y += stepPhysical) {
+        for (let x = 0; x < tempCanvas.width; x += stepPhysical) {
           const index = (y * tempCanvas.width + x) * 4;
           const alpha = data[index + 3];
           if (alpha > 128) {
@@ -220,8 +264,10 @@ export const CinematicHero = () => {
               color = tertiaryColor;
             }
 
-            const size = (isMobile ? 0.8 : 1.2) + Math.random() * 1.5;
-            newParticles.push(new Particle(x, y, color, size));
+            const cssX = x / dpr;
+            const cssY = y / dpr;
+            const size = minSizeCSS + Math.random() * rangeCSS;
+            newParticles.push(new Particle(cssX, cssY, color, size));
           }
         }
       }
@@ -257,7 +303,8 @@ export const CinematicHero = () => {
       const len = parts.length;
       const mx = mouse.current.x;
       const my = mouse.current.y;
-      const radius = canvas.clientWidth < 768 ? 95 : 155;
+      const radius =
+        canvas.clientWidth < 768 ? CONFIG.interactionRadiusMobile : CONFIG.interactionRadiusDesktop;
 
       for (let i = 0; i < len; i++) {
         const p = parts[i];
@@ -409,9 +456,7 @@ function ProductPreview() {
       </div>
 
       <div className="p-5 sm:p-6">
-        <p className="text-sm text-muted-foreground mb-5">
-          NeuroDashboard — production snapshot
-        </p>
+        <p className="text-sm text-muted-foreground mb-5">NeuroDashboard — production snapshot</p>
 
         {/* Stat tiles */}
         <div className="grid grid-cols-3 gap-3 mb-6">

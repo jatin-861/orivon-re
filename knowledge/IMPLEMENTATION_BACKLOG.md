@@ -1,4 +1,5 @@
 # Implementation Backlog
+
 ## Prioritized engineering tasks — no speculation, only decided work
 
 > Source: HOMEPAGE_DECISION_ARCHITECTURE_BLUEPRINT.md, NARRATIVE_DECISION_ARCHITECTURE_REPORT.md, CANONICAL_IDENTITY_ARCHITECTURE_REPORT.md  
@@ -58,11 +59,12 @@ These are bugs, not features. Complete before any other work.
 ### P0-7: Fix Saral Person JSON-LD jobTitle
 
 **Current:** `jobTitle: "Product Engineer"` in two places:
-  - `about.tsx` Person JSON-LD schema
-  - `index.html` Organization member[0] jobTitle  
-**Target:** `"Full-Stack & AI Engineer"` in both locations.  
-**Engineering complexity:** Two targeted edits.  
-**Dependencies:** None.
+
+- `about.tsx` Person JSON-LD schema
+- `index.html` Organization member[0] jobTitle  
+  **Target:** `"Full-Stack & AI Engineer"` in both locations.  
+  **Engineering complexity:** Two targeted edits.  
+  **Dependencies:** None.
 
 ---
 
@@ -123,9 +125,10 @@ These are bugs, not features. Complete before any other work.
 ### P2-1: FeaturedEvidence component
 
 **Current:** Shade Ledger evidence is distributed across 5 sections, presented completely in 0 sections.  
-**Target:** A new homepage section that presents the complete Shade Ledger story: before state → after state → live status → outcome.  
+**Target:** A new homepage section that presents the complete Shade Ledger story: before state → after state → live status → outcome.
 
 **Content source (no new copy needed):**
+
 - Before: "Replaced manual Excel billing and phone calls" — from `SIMPLE_CONTENT['shade-ledger'].whatItDoes` in `work.$slug.tsx`
 - After: invoice generation, WhatsApp reminders, penalty tracking — from `howItWorks` array
 - Outcome: 220 rental units, 40+ hours saved — from METRICS and Numbers data
@@ -138,7 +141,7 @@ These are bugs, not features. Complete before any other work.
 ### P2-2: ProcessSignal component
 
 **Current:** No process information on homepage. Methodology is on `/process` only.  
-**Target:** A new lightweight section (3 steps: Discover → Build → Ship) that answers "what happens if I contact them?" before the CTA.  
+**Target:** A new lightweight section (3 steps: Discover → Build → Ship) that answers "what happens if I contact them?" before the CTA.
 
 **Content source:** `STEPS` array in `process.tsx` — first 3 steps (Discover, Define, Build — or adapt to Discover/Build/Ship for homepage compression).  
 **CTA:** `"How we work →"` → `/process`  

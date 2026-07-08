@@ -25,6 +25,7 @@ Superseded investigation reports and deprecated knowledge files live here.
 _(None yet — archive is empty at EKB creation.)_
 
 **Candidates for archiving** (after their content is fully absorbed):
+
 - `/CANONICAL_IDENTITY_ARCHITECTURE_REPORT.md` → content captured in `ENTITY_ARCHITECTURE.md` + `DECISIONS.md`
 - `/NARRATIVE_DECISION_ARCHITECTURE_REPORT.md` → content captured in `NARRATIVE_ARCHITECTURE.md`
 - `/HOMEPAGE_DECISION_ARCHITECTURE_BLUEPRINT.md` → content captured in `NARRATIVE_ARCHITECTURE.md` + `IMPLEMENTATION_BACKLOG.md`

@@ -1,4 +1,5 @@
 # SEO Architecture
+
 ## Implementation details for the SEO system
 
 > For strategy and gaps, see [`SEO_AI_DISCOVERABILITY.md`](../SEO_AI_DISCOVERABILITY.md).  
@@ -11,25 +12,27 @@
 `src/components/SEO.tsx` — renders per-page metadata using React 19's document metadata hoisting.
 
 **Props interface:**
+
 ```tsx
 interface SEOProps {
   title?: string;
   description?: string;
   keywords?: string;
   canonical?: string;
-  ogUrl?: string;           // falls back to canonical if not provided
-  ogTitle?: string;         // falls back to title
-  ogDescription?: string;   // falls back to description
+  ogUrl?: string; // falls back to canonical if not provided
+  ogTitle?: string; // falls back to title
+  ogDescription?: string; // falls back to description
   ogImage?: string;
-  ogType?: string;          // default: "website"
-  twitterCard?: string;     // default: "summary_large_image"
+  ogType?: string; // default: "website"
+  twitterCard?: string; // default: "summary_large_image"
   twitterSite?: string;
   twitterCreator?: string;
-  schema?: Record<string, unknown> | Record<string, unknown>[];  // single or array
+  schema?: Record<string, unknown> | Record<string, unknown>[]; // single or array
 }
 ```
 
 **Schema injection pattern:**
+
 ```tsx
 // Single schema
 <SEO schema={{ "@context": "https://schema.org", "@type": "WebSite", ... }} />
@@ -79,6 +82,7 @@ The dark-mode inline script must appear as the very first element inside `<head>
 Location: `/public/sitemap.xml`
 
 10 URLs:
+
 ```
 / (priority 1.0, monthly)
 /about (priority 0.8, monthly)
@@ -102,6 +106,7 @@ Location: `/public/llms.txt`
 Format: Plain text, section headers with `##`, bullet items with `-`
 
 **Mandatory sections:**
+
 - Identity (studio name, type, location, contact)
 - Founders (name, role, GitHub per person)
 - Production Systems (all projects with stack, metrics, repos)

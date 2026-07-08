@@ -1,4 +1,5 @@
 # Canonical Context
+
 ## The single reference document for new Claude Code sessions
 
 > Read this before any implementation. If only one knowledge file is read, this is it.
@@ -10,6 +11,7 @@
 This repository is the production portfolio website for **Orvion.co**, a product engineering studio founded by Saral Banker and Jatin Basantani. It is deployed at `https://orvion.co`.
 
 The site serves three business objectives simultaneously:
+
 1. Attract B2B clients — founders and business owners with a project to build
 2. Attract freelance/contract engineering work
 3. Support individual hiring (recruiter path) for both founders
@@ -19,15 +21,18 @@ The site serves three business objectives simultaneously:
 ## Identity
 
 ### The studio
+
 **Orvion.co** — a product engineering studio based in India. Two engineers who design, build, and ship complete systems from database to deployment.
 
 ### The founders
-| Person | Role | GitHub |
-|---|---|---|
-| Saral Banker | Full-Stack & AI Engineer | github.com/saralbanker |
-| Jatin Basantani | Frontend & AI Systems Developer | github.com/jatin-861 |
+
+| Person          | Role                            | GitHub                 |
+| --------------- | ------------------------------- | ---------------------- |
+| Saral Banker    | Full-Stack & AI Engineer        | github.com/saralbanker |
+| Jatin Basantani | Frontend & AI Systems Developer | github.com/jatin-861   |
 
 ### Identity architecture
+
 **Hybrid Authority with Studio-Primary Canvas.** Orvion.co accumulates B2B, consulting, and project authority. Saral and Jatin each accumulate individual hiring and technical authority on the same site. Three entities, each sharply defined, each pointing to the others.
 
 → See [`ENTITY_ARCHITECTURE.md`](ENTITY_ARCHITECTURE.md) for schema implementation.
@@ -63,6 +68,7 @@ The Shade Ledger story is the primary proof: automated billing for 220 rental un
 **Founders, business owners, non-technical buyers** evaluating whether to hire Orvion.co.
 
 They need:
+
 - Evidence the team understands the type of problem they have
 - Evidence the team has solved that problem before
 - Confidence in how the engagement works
@@ -108,16 +114,16 @@ They do not need: tech stack lists, animations, or GPAs.
 
 ## Architecture (overview)
 
-| Layer | Technology | Version |
-|---|---|---|
-| Framework | React | 19.2.0 |
-| Router | TanStack Router (file-based) | 1.168.0 |
-| Build | Vite | latest |
-| Styling | Tailwind CSS v4 | 4.2.1 |
-| Animation | GSAP + Framer Motion | 3.15.0 / 12.38.0 |
-| Scroll | Lenis (smooth scroll) | 1.3.3 |
-| Fonts | Bodoni Moda, Cabinet Grotesk, JetBrains Mono | Google Fonts |
-| State | React useState / useRef (no external state library) | — |
+| Layer     | Technology                                          | Version          |
+| --------- | --------------------------------------------------- | ---------------- |
+| Framework | React                                               | 19.2.0           |
+| Router    | TanStack Router (file-based)                        | 1.168.0          |
+| Build     | Vite                                                | latest           |
+| Styling   | Tailwind CSS v4                                     | 4.2.1            |
+| Animation | GSAP + Framer Motion                                | 3.15.0 / 12.38.0 |
+| Scroll    | Lenis (smooth scroll)                               | 1.3.3            |
+| Fonts     | Bodoni Moda, Cabinet Grotesk, JetBrains Mono        | Google Fonts     |
+| State     | React useState / useRef (no external state library) | —                |
 
 SPA with client-side routing. No SSR. No SSG (open gap — see IMPLEMENTATION_BACKLOG.md).
 
@@ -127,15 +133,15 @@ SPA with client-side routing. No SSR. No SSG (open gap — see IMPLEMENTATION_BA
 
 ## Routes
 
-| Route | File | Purpose |
-|---|---|---|
-| `/` | `routes/index.tsx` | Homepage |
-| `/about` | `routes/about.tsx` | Founder profiles + studio history |
-| `/work` | `routes/work.index.tsx` | Project gallery |
-| `/work/$slug` | `routes/work.$slug.tsx` | Individual case studies |
-| `/process` | `routes/process.tsx` | Engineering methodology |
-| `/pricing` | `routes/pricing.tsx` | Fixed-fee pricing |
-| `/contact` | `routes/contact.tsx` | Contact form |
+| Route         | File                    | Purpose                           |
+| ------------- | ----------------------- | --------------------------------- |
+| `/`           | `routes/index.tsx`      | Homepage                          |
+| `/about`      | `routes/about.tsx`      | Founder profiles + studio history |
+| `/work`       | `routes/work.index.tsx` | Project gallery                   |
+| `/work/$slug` | `routes/work.$slug.tsx` | Individual case studies           |
+| `/process`    | `routes/process.tsx`    | Engineering methodology           |
+| `/pricing`    | `routes/pricing.tsx`    | Fixed-fee pricing                 |
+| `/contact`    | `routes/contact.tsx`    | Contact form                      |
 
 Case study slugs: `neurodashboard`, `shade-ledger`, `smart-parking`, `carbon-compass`
 
@@ -143,12 +149,12 @@ Case study slugs: `neurodashboard`, `shade-ledger`, `smart-parking`, `carbon-com
 
 ## Production Evidence
 
-| System | Client | Status | Key metric |
-|---|---|---|---|
-| Shade Ledger | Confidential (Mumbai) | Live since 2025 | 220 rental units automated, 40+ hrs saved/month |
-| NeuroDashboard | Independent | Active use | 70k+ lines, 6 modules |
-| Smart Parking | Independent | Open source | GitHub: saralbanker/smart-parking |
-| Carbon Compass | Independent | Open source | GitHub: saralbanker/carbon-compass |
+| System         | Client                | Status          | Key metric                                      |
+| -------------- | --------------------- | --------------- | ----------------------------------------------- |
+| Shade Ledger   | Confidential (Mumbai) | Live since 2025 | 220 rental units automated, 40+ hrs saved/month |
+| NeuroDashboard | Independent           | Active use      | 70k+ lines, 6 modules                           |
+| Smart Parking  | Independent           | Open source     | GitHub: saralbanker/smart-parking               |
+| Carbon Compass | Independent           | Open source     | GitHub: saralbanker/carbon-compass              |
 
 ---
 

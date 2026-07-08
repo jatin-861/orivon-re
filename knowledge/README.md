@@ -33,6 +33,7 @@ Run this sequence at the start of every session. Steps 1–3 are always required
 ```
 
 After completing work:
+
 ```
 6. Update affected knowledge files  — if your change invalidates a fact, fix it here
 7. Update CURRENT_STATE.md          — mark completed items, add new bugs if found
@@ -46,53 +47,53 @@ After completing work:
 
 ### Core Reference (always read 1–3)
 
-| File | Purpose | Read when |
-|---|---|---|
+| File                                         | Purpose                                       | Read when     |
+| -------------------------------------------- | --------------------------------------------- | ------------- |
 | [CANONICAL_CONTEXT.md](CANONICAL_CONTEXT.md) | Studio identity, voice, architecture overview | Every session |
-| [CURRENT_STATE.md](CURRENT_STATE.md) | Live P0s, bugs, completed milestones | Every session |
-| [DECISIONS.md](DECISIONS.md) | 14 architectural decisions (D-001 – D-014) | Every session |
+| [CURRENT_STATE.md](CURRENT_STATE.md)         | Live P0s, bugs, completed milestones          | Every session |
+| [DECISIONS.md](DECISIONS.md)                 | 14 architectural decisions (D-001 – D-014)    | Every session |
 
 ### Strategy & Architecture
 
-| File | Purpose | Read when |
-|---|---|---|
-| [IMPLEMENTATION_BACKLOG.md](IMPLEMENTATION_BACKLOG.md) | P0–P3 prioritized task list | Before implementing anything |
-| [NARRATIVE_ARCHITECTURE.md](NARRATIVE_ARCHITECTURE.md) | Homepage section order, trust flow, CTAs | Copy/UX/homepage work |
-| [ENTITY_ARCHITECTURE.md](ENTITY_ARCHITECTURE.md) | Three entities, schemas, knowledge graph | Identity/SEO/schema work |
-| [SEO_AI_DISCOVERABILITY.md](SEO_AI_DISCOVERABILITY.md) | Meta tags, OG, sitemap, llms.txt, gaps | SEO audit or discoverability work |
+| File                                                   | Purpose                                  | Read when                         |
+| ------------------------------------------------------ | ---------------------------------------- | --------------------------------- |
+| [IMPLEMENTATION_BACKLOG.md](IMPLEMENTATION_BACKLOG.md) | P0–P3 prioritized task list              | Before implementing anything      |
+| [NARRATIVE_ARCHITECTURE.md](NARRATIVE_ARCHITECTURE.md) | Homepage section order, trust flow, CTAs | Copy/UX/homepage work             |
+| [ENTITY_ARCHITECTURE.md](ENTITY_ARCHITECTURE.md)       | Three entities, schemas, knowledge graph | Identity/SEO/schema work          |
+| [SEO_AI_DISCOVERABILITY.md](SEO_AI_DISCOVERABILITY.md) | Meta tags, OG, sitemap, llms.txt, gaps   | SEO audit or discoverability work |
 
 ### Brand & Design
 
-| File | Purpose | Read when |
-|---|---|---|
-| [BRAND_GUIDE.md](BRAND_GUIDE.md) | Voice rules, tone, CTA copy, what not to write | Any copy or messaging changes |
-| [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) | Typography, color tokens, animation, Tailwind v4 | Visual or design work |
+| File                                 | Purpose                                          | Read when                     |
+| ------------------------------------ | ------------------------------------------------ | ----------------------------- |
+| [BRAND_GUIDE.md](BRAND_GUIDE.md)     | Voice rules, tone, CTA copy, what not to write   | Any copy or messaging changes |
+| [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) | Typography, color tokens, animation, Tailwind v4 | Visual or design work         |
 
 ### Technical Implementation
 
-| File | Purpose | Read when |
-|---|---|---|
-| [architecture/repository.md](architecture/repository.md) | Full directory tree, all components, config files | General orientation |
-| [architecture/routing.md](architecture/routing.md) | TanStack Router patterns, route definitions | Navigation/routing work |
-| [architecture/frontend.md](architecture/frontend.md) | React 19, GSAP, Framer Motion, canvas, theme | Animation or component work |
-| [architecture/seo.md](architecture/seo.md) | SEO.tsx, static schemas, dark-mode script | Schema or meta tag work |
-| [ENGINEERING_GUIDELINES.md](ENGINEERING_GUIDELINES.md) | TypeScript rules, no-go patterns, code standards | Before writing any code |
+| File                                                     | Purpose                                           | Read when                   |
+| -------------------------------------------------------- | ------------------------------------------------- | --------------------------- |
+| [architecture/repository.md](architecture/repository.md) | Full directory tree, all components, config files | General orientation         |
+| [architecture/routing.md](architecture/routing.md)       | TanStack Router patterns, route definitions       | Navigation/routing work     |
+| [architecture/frontend.md](architecture/frontend.md)     | React 19, GSAP, Framer Motion, canvas, theme      | Animation or component work |
+| [architecture/seo.md](architecture/seo.md)               | SEO.tsx, static schemas, dark-mode script         | Schema or meta tag work     |
+| [ENGINEERING_GUIDELINES.md](ENGINEERING_GUIDELINES.md)   | TypeScript rules, no-go patterns, code standards  | Before writing any code     |
 
 ### Project Reference
 
-| File | Purpose | Read when |
-|---|---|---|
-| [projects/neurodashboard.md](projects/neurodashboard.md) | NeuroDashboard architecture, modules, decisions | NeuroDashboard case study work |
-| [projects/shade-ledger.md](projects/shade-ledger.md) | Shade Ledger evidence, testimonial, communication rules | Any mention of Shade Ledger |
-| [projects/portfolio.md](projects/portfolio.md) | This repository — tech stack, components, assets | Meta-work on the site itself |
-| [projects/README.md](projects/README.md) | Index + guidance on adding project files | Adding a new project |
+| File                                                     | Purpose                                                 | Read when                      |
+| -------------------------------------------------------- | ------------------------------------------------------- | ------------------------------ |
+| [projects/neurodashboard.md](projects/neurodashboard.md) | NeuroDashboard architecture, modules, decisions         | NeuroDashboard case study work |
+| [projects/shade-ledger.md](projects/shade-ledger.md)     | Shade Ledger evidence, testimonial, communication rules | Any mention of Shade Ledger    |
+| [projects/portfolio.md](projects/portfolio.md)           | This repository — tech stack, components, assets        | Meta-work on the site itself   |
+| [projects/README.md](projects/README.md)                 | Index + guidance on adding project files                | Adding a new project           |
 
 ### Decisions & Archive
 
-| File | Purpose |
-|---|---|
-| [decisions/README.md](decisions/README.md) | ADR format; overflow from DECISIONS.md |
-| [archive/README.md](archive/README.md) | What belongs in archive; current archive candidates |
+| File                                       | Purpose                                             |
+| ------------------------------------------ | --------------------------------------------------- |
+| [decisions/README.md](decisions/README.md) | ADR format; overflow from DECISIONS.md              |
+| [archive/README.md](archive/README.md)     | What belongs in archive; current archive candidates |
 
 ---
 
@@ -117,4 +118,4 @@ After completing work:
 
 ---
 
-*EKB created: 2026-07-02. Update this file only to add/remove files from the index or to update the session protocol.*
+_EKB created: 2026-07-02. Update this file only to add/remove files from the index or to update the session protocol._

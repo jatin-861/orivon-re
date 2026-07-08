@@ -53,8 +53,7 @@ export const SiteHeader = () => {
 
         <nav className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1.5">
           {NAV.map((item) => {
-            const active =
-              pathname === item.to || pathname.startsWith(item.to + "/");
+            const active = pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
                 key={item.to}

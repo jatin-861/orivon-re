@@ -3,38 +3,38 @@
  * Reads Excel data (via excel-data.json), generates 3 styled HTML/PDF pricing docs,
  * saves PDFs to public/ for the website pricing cards.
  */
-import { chromium } from 'playwright';
-import { readFileSync, writeFileSync } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { chromium } from "playwright";
+import { readFileSync, writeFileSync } from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT      = path.join(__dirname, '..');
-const PUBLIC    = path.join(ROOT, 'public');
+const ROOT = path.join(__dirname, "..");
+const PUBLIC = path.join(ROOT, "public");
 
 // ── Load Excel data ───────────────────────────────────────────────────────────
-const RAW = JSON.parse(readFileSync(path.join(__dirname, 'excel-data.json'), 'utf8'));
+const RAW = JSON.parse(readFileSync(path.join(__dirname, "excel-data.json"), "utf8"));
 
 // Excel columns: [name, industries, complexity, mktPrice, mktDelivery, mktMaint, orvPrice, orvDelivery, orvMaint]
-const WEB  = RAW['01 — Website'];
-const MOB  = RAW['02 — Mobile Apps'];
-const AUTO = RAW['03 — Automation'];
-const ALL_SAAS = RAW['04 — SaaS & Custom Software'];
+const WEB = RAW["01 — Website"];
+const MOB = RAW["02 — Mobile Apps"];
+const AUTO = RAW["03 — Automation"];
+const ALL_SAAS = RAW["04 — SaaS & Custom Software"];
 
 // Re-group SaaS by known group sizes (matches original HTML structure)
 const SAAS_GROUPS = [
-  ['Sales, CRM & Growth',            8],
-  ['Finance, Billing & Compliance',  7],
-  ['HR & People Ops',                7],
-  ['Operations, Assets & Workflow', 12],
-  ['Education',                      6],
-  ['Healthcare',                     6],
-  ['Logistics, Fleet & Field Ops',   7],
-  ['Real Estate, Property & Hospitality', 7],
-  ['Retail, Commerce & Marketplaces', 7],
-  ['Manufacturing & Production',     3],
-  ['Niche & Community Platforms',    9],
-  ['Enterprise & Bespoke Builds',    4],
+  ["Sales, CRM & Growth", 8],
+  ["Finance, Billing & Compliance", 7],
+  ["HR & People Ops", 7],
+  ["Operations, Assets & Workflow", 12],
+  ["Education", 6],
+  ["Healthcare", 6],
+  ["Logistics, Fleet & Field Ops", 7],
+  ["Real Estate, Property & Hospitality", 7],
+  ["Retail, Commerce & Marketplaces", 7],
+  ["Manufacturing & Production", 3],
+  ["Niche & Community Platforms", 9],
+  ["Enterprise & Bespoke Builds", 4],
 ];
 let si = 0;
 const SAAS = SAAS_GROUPS.map(([name, count]) => {
@@ -45,32 +45,32 @@ const SAAS = SAAS_GROUPS.map(([name, count]) => {
 
 // [name, price] — prices from Excel 06 — Add-ons sheet
 const ADDONS = [
-  ['Extra Page / Module',                                  '₹5k – ₹8k'],
-  ['WhatsApp Business API Integration',                    '₹30k – ₹1.2L'],
-  ['Payment Gateway Integration (Razorpay/Stripe/PayU)',   '₹30k – ₹1.2L'],
-  ['SMS Gateway Integration',                              '₹25k – ₹75k'],
-  ['ERP / Tally / Accounting Sync',                        '₹30k – ₹2L'],
-  ['Multi-language Support Pack',                          '₹10k – ₹20k'],
-  ['Advanced Analytics / BI Dashboard',                    '₹2L – ₹4L'],
-  ['AI Chatbot Widget Add-on',                             '₹30k – ₹90k'],
-  ['Native Mobile App Companion',                          '₹2L – ₹5.5L'],
-  ['Extra User Roles & Permission Tier',                   '₹20k – ₹60k'],
-  ['Public API Access for Developers',                     '₹30k – ₹1L'],
-  ['White-label / Multi-tenant Setup',                     '₹1L – ₹3.5L'],
-  ['Extended Post-launch Support (beyond 30 days)',        '₹15k – ₹50k'],
-  ['Professional Content Writing & SEO Copy',              '₹10k – ₹35k'],
-  ['Domain + Hosting + SSL Setup',                         '₹4k – ₹20k'],
-  ['App Store Deployment & ASO Setup',                     '₹20k – ₹55k'],
-  ['UI/UX Redesign Only (no new dev)',                     '₹25k – ₹90k'],
-  ['Speed & Technical SEO Audit + Fix',                    '₹20k – ₹55k'],
+  ["Extra Page / Module", "₹5k – ₹8k"],
+  ["WhatsApp Business API Integration", "₹30k – ₹1.2L"],
+  ["Payment Gateway Integration (Razorpay/Stripe/PayU)", "₹30k – ₹1.2L"],
+  ["SMS Gateway Integration", "₹25k – ₹75k"],
+  ["ERP / Tally / Accounting Sync", "₹30k – ₹2L"],
+  ["Multi-language Support Pack", "₹10k – ₹20k"],
+  ["Advanced Analytics / BI Dashboard", "₹2L – ₹4L"],
+  ["AI Chatbot Widget Add-on", "₹30k – ₹90k"],
+  ["Native Mobile App Companion", "₹2L – ₹5.5L"],
+  ["Extra User Roles & Permission Tier", "₹20k – ₹60k"],
+  ["Public API Access for Developers", "₹30k – ₹1L"],
+  ["White-label / Multi-tenant Setup", "₹1L – ₹3.5L"],
+  ["Extended Post-launch Support (beyond 30 days)", "₹15k – ₹50k"],
+  ["Professional Content Writing & SEO Copy", "₹10k – ₹35k"],
+  ["Domain + Hosting + SSL Setup", "₹4k – ₹20k"],
+  ["App Store Deployment & ASO Setup", "₹20k – ₹55k"],
+  ["UI/UX Redesign Only (no new dev)", "₹25k – ₹90k"],
+  ["Speed & Technical SEO Audit + Fix", "₹20k – ₹55k"],
 ];
 
 // ── Complexity colours ────────────────────────────────────────────────────────
 const TIER = {
-  Basic:      { bg: '#6B6358', fg: '#fff', label: 'Basic' },
-  Medium:     { bg: '#8B5E3C', fg: '#fff', label: 'Medium' },
-  High:       { bg: '#C75B3A', fg: '#fff', label: 'High' },
-  Enterprise: { bg: '#1A1A1A', fg: '#fff', label: 'Enterprise' },
+  Basic: { bg: "#6B6358", fg: "#fff", label: "Basic" },
+  Medium: { bg: "#8B5E3C", fg: "#fff", label: "Medium" },
+  High: { bg: "#C75B3A", fg: "#fff", label: "High" },
+  Enterprise: { bg: "#1A1A1A", fg: "#fff", label: "Enterprise" },
 };
 
 // ── HTML shell ────────────────────────────────────────────────────────────────
@@ -208,7 +208,7 @@ function tableHTML(rows) {
     <th class="th-orv-del"   style="width:9%">ORVION Delivery</th>
     <th class="th-orv-maint" style="width:9%">ORVION Maint/yr</th>
   </tr></thead><tbody>`;
-  rows.forEach(r => {
+  rows.forEach((r) => {
     // r = [name, industries, complexity, mktPrice, mktDelivery, mktMaint, orvPrice, orvDelivery, orvMaint]
     h += `<tr>
       <td class="cat-name">${r[0]}</td>
@@ -217,12 +217,12 @@ function tableHTML(rows) {
       <td class="mkt-price">${r[3]}</td>
       <td class="mkt-del">${r[4]}</td>
       <td class="mkt-maint">${r[5]}</td>
-      <td class="orv-price">${r[6] || '—'}</td>
-      <td class="orv-del">${r[7] || '—'}</td>
-      <td class="orv-maint">${r[8] || '—'}</td>
+      <td class="orv-price">${r[6] || "—"}</td>
+      <td class="orv-del">${r[7] || "—"}</td>
+      <td class="orv-maint">${r[8] || "—"}</td>
     </tr>`;
   });
-  return h + '</tbody></table>';
+  return h + "</tbody></table>";
 }
 
 function footer(label) {
@@ -230,7 +230,11 @@ function footer(label) {
 }
 
 function coverPage(sectionTitle, subtitle, stats, eyebrow) {
-  const statsHtml = stats.map(s => `<div class="stat"><div class="num">${s[0]}</div><div class="lbl">${s[1]}</div></div>`).join('');
+  const statsHtml = stats
+    .map(
+      (s) => `<div class="stat"><div class="num">${s[0]}</div><div class="lbl">${s[1]}</div></div>`,
+    )
+    .join("");
   return `<div class="page cover">
     <div style="display:flex;justify-content:space-between;">
       <span class="brand" style="font-family:var(--sans);font-weight:900;font-size:15px;">ORVION</span>
@@ -251,17 +255,33 @@ function coverPage(sectionTitle, subtitle, stats, eyebrow) {
 
 function legendPage() {
   const legend = [
-    ['Basic', '#6B6358'], ['Medium', '#8B5E3C'], ['High', '#C75B3A'], ['Enterprise', '#1A1A1A']
-  ].map(([l, c]) => `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:${c};display:inline-block;"></span>${l}</span>`).join('');
+    ["Basic", "#6B6358"],
+    ["Medium", "#8B5E3C"],
+    ["High", "#C75B3A"],
+    ["Enterprise", "#1A1A1A"],
+  ]
+    .map(
+      ([l, c]) =>
+        `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;"><span style="width:9px;height:9px;border-radius:50%;background:${c};display:inline-block;"></span>${l}</span>`,
+    )
+    .join("");
 
   const colLegend = [
-    ['#C75B3A', 'ORVION Price', 'Your fixed-fee build price'],
-    ['#1B7A4A', 'ORVION Delivery', 'Orvion delivery window'],
-    ['#2D6E6A', 'ORVION Maint/yr', 'Annual maintenance retainer'],
-  ].map(([bg, label, desc]) => `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-    <div style="width:80px;height:24px;background:${bg};border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">${label.split(' ')[1]}</div>
+    ["#C75B3A", "ORVION Price", "Your fixed-fee build price"],
+    ["#1B7A4A", "ORVION Delivery", "Orvion delivery window"],
+    ["#2D6E6A", "ORVION Maint/yr", "Annual maintenance retainer"],
+  ]
+    .map(
+      ([
+        bg,
+        label,
+        desc,
+      ]) => `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <div style="width:80px;height:24px;background:${bg};border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:#fff;font-weight:700;">${label.split(" ")[1]}</div>
     <div><div style="font-weight:700;font-size:10px;">${label}</div><div style="font-size:9px;color:var(--muted-fg);">${desc}</div></div>
-  </div>`).join('');
+  </div>`,
+    )
+    .join("");
 
   return `<div class="page">
     <span class="eyebrow">HOW TO READ THIS REPORT</span>
@@ -285,17 +305,19 @@ function legendPage() {
         </div>
       </div>
     </div>
-    ${footer('How to Read')}
+    ${footer("How to Read")}
   </div>`;
 }
 
 // ── Shared Add-ons page (used in all PDFs) ───────────────────────────────────
-function addonsPage(sectionNum = '05') {
-  const grid = ADDONS.map(([name, price]) => `
+function addonsPage(sectionNum = "05") {
+  const grid = ADDONS.map(
+    ([name, price]) => `
     <div class="addon">
       <span class="name">${name}</span>
       <span class="price">${price}</span>
-    </div>`).join('');
+    </div>`,
+  ).join("");
 
   return `<div class="page">
     <span class="eyebrow">ADD-ONS — ON TOP OF ANY BASE PACKAGE</span>
@@ -313,10 +335,14 @@ function addonsPage(sectionNum = '05') {
 // ── Build PDF 1: Website ──────────────────────────────────────────────────────
 function buildWebsiteHTML() {
   const cover = coverPage(
-    'Website Development',
-    '<br>Pricing — 2026',
-    [['18', 'Categories'], ['Fixed', 'Fee Model'], ['< Market', 'Always']],
-    'WEBSITE DEVELOPMENT'
+    "Website Development",
+    "<br>Pricing — 2026",
+    [
+      ["18", "Categories"],
+      ["Fixed", "Fee Model"],
+      ["< Market", "Always"],
+    ],
+    "WEBSITE DEVELOPMENT",
   );
   const dataPage = `<div class="page">
     <div class="section-head">
@@ -325,18 +351,25 @@ function buildWebsiteHTML() {
     </div>
     <p class="section-blurb">From a single static landing page to fully custom headless commerce — every website type benchmarked against current India-market rates.</p>
     ${tableHTML(WEB)}
-    ${footer('Section 01 — Website Development')}
+    ${footer("Section 01 — Website Development")}
   </div>`;
-  return shell('Orvion — Website Development Pricing 2026', cover + legendPage() + dataPage + addonsPage('02'));
+  return shell(
+    "Orvion — Website Development Pricing 2026",
+    cover + legendPage() + dataPage + addonsPage("02"),
+  );
 }
 
 // ── Build PDF 2: Mobile ───────────────────────────────────────────────────────
 function buildMobileHTML() {
   const cover = coverPage(
-    'Mobile App Development',
-    '<br>Pricing — 2026',
-    [['8', 'Categories'], ['Fixed', 'Fee Model'], ['< Market', 'Always']],
-    'MOBILE APP DEVELOPMENT'
+    "Mobile App Development",
+    "<br>Pricing — 2026",
+    [
+      ["8", "Categories"],
+      ["Fixed", "Fee Model"],
+      ["< Market", "Always"],
+    ],
+    "MOBILE APP DEVELOPMENT",
   );
   const dataPage = `<div class="page">
     <div class="section-head">
@@ -345,19 +378,26 @@ function buildMobileHTML() {
     </div>
     <p class="section-blurb">Native Android/iOS, cross-platform Flutter/React Native builds, and full-stack mobile-plus-backend systems — priced by platform and complexity.</p>
     ${tableHTML(MOB)}
-    ${footer('Section 02 — Mobile Apps')}
+    ${footer("Section 02 — Mobile Apps")}
   </div>`;
-  return shell('Orvion — Mobile App Pricing 2026', cover + legendPage() + dataPage + addonsPage('03'));
+  return shell(
+    "Orvion — Mobile App Pricing 2026",
+    cover + legendPage() + dataPage + addonsPage("03"),
+  );
 }
 
 // ── Build PDF 3: Automation + SaaS ───────────────────────────────────────────
 function buildSaaSHTML() {
   const totalSaaS = ALL_SAAS.length;
   const cover = coverPage(
-    'Automation, SaaS &',
-    '<br>Custom Software — 2026',
-    [['22', 'Automation'], [String(totalSaaS), 'SaaS Categories'], ['12', 'Verticals']],
-    'SAAS & CUSTOM SOFTWARE'
+    "Automation, SaaS &",
+    "<br>Custom Software — 2026",
+    [
+      ["22", "Automation"],
+      [String(totalSaaS), "SaaS Categories"],
+      ["12", "Verticals"],
+    ],
+    "SAAS & CUSTOM SOFTWARE",
   );
   const autoPage = `<div class="page">
     <div class="section-head">
@@ -366,11 +406,11 @@ function buildSaaSHTML() {
     </div>
     <p class="section-blurb">WhatsApp bots, AI chatbots, RPA, agentic workflows, document automation and marketing/data pipelines.</p>
     ${tableHTML(AUTO)}
-    ${footer('Section 03 — Automation')}
+    ${footer("Section 03 — Automation")}
   </div>`;
-  const saasGroupPages = SAAS.map(([groupName, items]) =>
-    `<div class="group-title">${groupName}</div>${tableHTML(items)}`
-  ).join('');
+  const saasGroupPages = SAAS.map(
+    ([groupName, items]) => `<div class="group-title">${groupName}</div>${tableHTML(items)}`,
+  ).join("");
   const saasPage = `<div class="page">
     <div class="section-head">
       <h2>04 — SaaS & Custom Business Software</h2>
@@ -378,85 +418,110 @@ function buildSaaSHTML() {
     </div>
     <p class="section-blurb">Every business-software vertical grouped by function — Sales, Finance, HR, Operations, Education, Healthcare, Logistics, Real Estate, Retail, Manufacturing, Niche, and Enterprise.</p>
     ${saasGroupPages}
-    ${footer('Section 04 — SaaS & Custom Software')}
+    ${footer("Section 04 — SaaS & Custom Software")}
   </div>`;
-  return shell('Orvion — SaaS & Custom Software Pricing 2026',
-    cover + legendPage() + autoPage + saasPage + addonsPage('05'));
+  return shell(
+    "Orvion — SaaS & Custom Software Pricing 2026",
+    cover + legendPage() + autoPage + saasPage + addonsPage("05"),
+  );
 }
 
 // ── Build Combined PDF (all sections) ────────────────────────────────────────
 function buildCombinedHTML() {
   const totalAll = WEB.length + MOB.length + AUTO.length + ALL_SAAS.length;
   const cover = coverPage(
-    'Pricing Intelligence',
-    '<br>Report — 2026',
-    [[String(totalAll) + '+', 'Priced Categories'], ['4', 'Service Lines'], ['12', 'SaaS Verticals'], ['Fixed', 'Fee Model']],
-    'PRICING INTELLIGENCE'
+    "Pricing Intelligence",
+    "<br>Report — 2026",
+    [
+      [String(totalAll) + "+", "Priced Categories"],
+      ["4", "Service Lines"],
+      ["12", "SaaS Verticals"],
+      ["Fixed", "Fee Model"],
+    ],
+    "PRICING INTELLIGENCE",
   );
   const webPage = `<div class="page">
     <div class="section-head"><h2>01 — Website Development</h2><span class="section-num mono">${WEB.length} CATEGORIES</span></div>
     <p class="section-blurb">From a single landing page to fully custom headless commerce.</p>
     ${tableHTML(WEB)}
-    ${footer('Section 01 — Website Development')}
+    ${footer("Section 01 — Website Development")}
   </div>`;
   const mobPage = `<div class="page">
     <div class="section-head"><h2>02 — Mobile App Development</h2><span class="section-num mono">${MOB.length} CATEGORIES</span></div>
     <p class="section-blurb">Native Android/iOS, cross-platform builds, and full-stack mobile-plus-backend systems.</p>
     ${tableHTML(MOB)}
-    ${footer('Section 02 — Mobile Apps')}
+    ${footer("Section 02 — Mobile Apps")}
   </div>`;
   const autoPage = `<div class="page">
     <div class="section-head"><h2>03 — Automation</h2><span class="section-num mono">${AUTO.length} CATEGORIES</span></div>
     <p class="section-blurb">WhatsApp bots, AI chatbots, RPA, agentic workflows, document automation and marketing/data pipelines.</p>
     ${tableHTML(AUTO)}
-    ${footer('Section 03 — Automation')}
+    ${footer("Section 03 — Automation")}
   </div>`;
-  const saasGroupPages = SAAS.map(([groupName, items]) =>
-    `<div class="group-title">${groupName}</div>${tableHTML(items)}`
-  ).join('');
+  const saasGroupPages = SAAS.map(
+    ([groupName, items]) => `<div class="group-title">${groupName}</div>${tableHTML(items)}`,
+  ).join("");
   const saasPage = `<div class="page">
     <div class="section-head"><h2>04 — SaaS & Custom Business Software</h2><span class="section-num mono">${ALL_SAAS.length} CATEGORIES · 12 VERTICALS</span></div>
     <p class="section-blurb">Every business-software vertical — Sales, Finance, HR, Operations, Education, Healthcare, Logistics, Real Estate, Retail, Manufacturing, Niche, and Enterprise.</p>
     ${saasGroupPages}
-    ${footer('Section 04 — SaaS & Custom Software')}
+    ${footer("Section 04 — SaaS & Custom Software")}
   </div>`;
-  return shell('Orvion — Full Pricing Intelligence Report 2026',
-    cover + legendPage() + webPage + mobPage + autoPage + saasPage + addonsPage('05'));
+  return shell(
+    "Orvion — Full Pricing Intelligence Report 2026",
+    cover + legendPage() + webPage + mobPage + autoPage + saasPage + addonsPage("05"),
+  );
 }
 
 // ── Write HTML & generate PDFs ────────────────────────────────────────────────
 const htmlFiles = [
-  { file: 'pricing-website.html',  html: buildWebsiteHTML(),  pdf: 'Orvion-Pricing-Website-Development.pdf' },
-  { file: 'pricing-mobile.html',   html: buildMobileHTML(),   pdf: 'Orvion-Pricing-Mobile-App-Development.pdf' },
-  { file: 'pricing-saas.html',     html: buildSaaSHTML(),     pdf: 'Orvion-Pricing-SaaS-Custom-Software.pdf' },
-  { file: 'pricing-combined.html', html: buildCombinedHTML(), pdf: 'Orvion-Pricing-Intelligence-Report.pdf' },
+  {
+    file: "pricing-website.html",
+    html: buildWebsiteHTML(),
+    pdf: "Orvion-Pricing-Website-Development.pdf",
+  },
+  {
+    file: "pricing-mobile.html",
+    html: buildMobileHTML(),
+    pdf: "Orvion-Pricing-Mobile-App-Development.pdf",
+  },
+  {
+    file: "pricing-saas.html",
+    html: buildSaaSHTML(),
+    pdf: "Orvion-Pricing-SaaS-Custom-Software.pdf",
+  },
+  {
+    file: "pricing-combined.html",
+    html: buildCombinedHTML(),
+    pdf: "Orvion-Pricing-Intelligence-Report.pdf",
+  },
 ];
 
 for (const { file, html } of htmlFiles) {
-  writeFileSync(path.join(__dirname, file), html, 'utf8');
-  console.log('✓ HTML written:', file);
+  writeFileSync(path.join(__dirname, file), html, "utf8");
+  console.log("✓ HTML written:", file);
 }
 
-console.log('\nLaunching browser...');
+console.log("\nLaunching browser...");
 const browser = await chromium.launch();
 
 for (const { file, pdf } of htmlFiles) {
-  const htmlPath = path.join(__dirname, file).replace(/\\/g, '/');
-  const pdfPath  = path.join(PUBLIC, pdf);
+  const htmlPath = path.join(__dirname, file).replace(/\\/g, "/");
+  const pdfPath = path.join(PUBLIC, pdf);
   const page = await browser.newPage();
-  await page.goto(`file:///${htmlPath}`, { waitUntil: 'networkidle' });
+  await page.goto(`file:///${htmlPath}`, { waitUntil: "networkidle" });
   await page.waitForSelector('body[data-render-done="true"]');
-  await page.evaluateHandle('document.fonts.ready');
+  await page.evaluateHandle("document.fonts.ready");
   await page.pdf({
     path: pdfPath,
-    format: 'A4',
+    format: "A4",
     landscape: true,
     printBackground: true,
-    margin: { top: '0mm', bottom: '0mm', left: '0mm', right: '0mm' },
+    margin: { top: "0mm", bottom: "0mm", left: "0mm", right: "0mm" },
   });
   await page.close();
-  console.log('✓ PDF saved:', pdf);
+  console.log("✓ PDF saved:", pdf);
 }
 
 await browser.close();
-console.log('\n✅ All 4 PDFs written to public/');
+console.log("\n✅ All 4 PDFs written to public/");
