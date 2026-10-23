@@ -34,7 +34,7 @@ function CodeTypingSimulator() {
   ];
 
   return (
-    <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-y-auto leading-relaxed shadow-inner">
+    <pre className="font-mono text-sm text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-x-auto overflow-y-auto leading-relaxed shadow-inner">
       {lines.map((l, i) => (
         <div key={i} className={l.color || "text-[#FAF7F2]/70"}>
           {l.text || " "}
@@ -200,7 +200,7 @@ function About() {
         ]}
       />
       <div className="mx-auto max-w-7xl">
-        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.12em]">
           — About
         </span>
         <RevealText
@@ -251,7 +251,7 @@ function About() {
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
             The people behind the work
           </span>
-          <h2 className="font-serif text-4xl md:text-7xl font-normal mb-4">
+          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] mb-4">
             Meet the <span className="text-[var(--brand-pink)] font-serif italic">team.</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-12">
@@ -271,7 +271,7 @@ function About() {
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
             Proof from production
           </span>
-          <h2 className="font-serif text-4xl md:text-7xl font-normal mb-4">
+          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] mb-4">
             Real <span className="text-[var(--brand-pink)] font-serif italic">results.</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-12">
@@ -315,14 +315,14 @@ function About() {
           data-cursor-text="TIMELINE"
         >
           <div>
-            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.12em]">
               — Background
             </span>
-            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-tight">
+            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05]">
               Our{" "}
               <span className="text-[var(--brand-pink)] font-serif italic block">Milestones.</span>
             </h2>
-            <p className="text-muted-foreground text-sm font-sans mt-6 leading-relaxed max-w-sm">
+            <p className="text-muted-foreground text-base font-sans mt-6 leading-relaxed max-w-sm">
               From first deployed projects to a multi-module AI platform and a paying client — a
               short history of things we've shipped and kept running.
             </p>
@@ -351,10 +351,10 @@ function About() {
                   {h.year}
                 </div>
                 <div>
-                  <h3 className="font-serif text-2xl font-normal mb-2 text-foreground tracking-tight transition-colors duration-300 group-[.is-active]:text-[var(--brand-pink)]">
+                  <h3 className="font-serif text-2xl font-normal leading-tight mb-2 text-foreground tracking-tight transition-colors duration-300 group-[.is-active]:text-[var(--brand-pink)]">
                     {h.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base font-sans max-w-xl">
+                  <p className="text-muted-foreground leading-relaxed text-base font-sans max-w-xl">
                     {h.desc}
                   </p>
                 </div>
@@ -369,21 +369,21 @@ function About() {
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
             Two focuses, one standard
           </span>
-          <h2 className="font-serif text-4xl md:text-7xl font-normal mb-12">
+          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] mb-12">
             Founder <span className="text-[var(--brand-pink)] font-serif italic">spotlights.</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid min-w-0 md:grid-cols-2 gap-8">
             {/* Saral Card */}
-            <BentoTilt className="h-full w-full">
-              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
+            <BentoTilt className="h-full w-full min-w-0">
+              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full min-w-0">
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <div>
                       <h3 className="font-display text-3xl font-bold text-foreground">
                         Saral Banker
                       </h3>
-                      <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
+                      <p className="text-xs uppercase tracking-wide text-[var(--brand-pink)] font-mono font-bold mt-1">
                         Full Stack Engineer · AI Application Developer
                       </p>
                     </div>
@@ -398,21 +398,21 @@ function About() {
                     </a>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                  <p className="text-base text-muted-foreground mb-6 leading-relaxed">
                     I design, build, and ship complete systems — database to deployment. Built
                     NeuroDashboard, a multi-module AI platform (Knowledge Hub finds answers
                     instantly across your information, plus analytics, automation, and more), and
                     Shade Ledger, an automated billing system running for 220 rental units today.{" "}
                     <br />
                     <br />
-                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">
+                    <strong className="text-foreground/80 font-mono text-xs tracking-wide uppercase">
                       Academic Excellence:
                     </strong>{" "}
                     8.36 / 10 GPA
                   </p>
 
                   <div className="mb-6">
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                    <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block mb-2">
                       Core Tech Stack
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -431,7 +431,7 @@ function About() {
                       ].map((sk) => (
                         <span
                           key={sk}
-                          className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80"
+                          className="text-xs font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80"
                         >
                           {sk}
                         </span>
@@ -441,10 +441,10 @@ function About() {
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                  <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block mb-2">
                     Production Systems
                   </span>
-                  <pre className="font-mono text-[10px] md:text-xs text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 leading-relaxed shadow-inner">
+                  <pre className="font-mono text-sm text-[#FAF7F2] bg-[#1A1A1A] p-4 rounded-xl border border-white/5 h-36 overflow-x-auto overflow-y-auto leading-relaxed shadow-inner">
                     <div className="text-[var(--brand-pink)]">✓ Shade Ledger — live since 2025</div>
                     <div className="text-[#FAF7F2]/70"> 220 rental units · automated billing</div>
                     <div className="text-[var(--brand-pink)] mt-2">
@@ -463,15 +463,15 @@ function About() {
             </BentoTilt>
 
             {/* Jatin Card */}
-            <BentoTilt className="h-full w-full">
-              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full">
+            <BentoTilt className="h-full w-full min-w-0">
+              <SpotlightCard className="p-8 bg-[var(--card)] border border-border flex flex-col justify-between h-full w-full min-w-0">
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <div>
                       <h3 className="font-display text-3xl font-bold text-foreground">
                         Jatin Basantani
                       </h3>
-                      <p className="text-xs uppercase tracking-widest text-[var(--brand-pink)] font-mono font-bold mt-1">
+                      <p className="text-xs uppercase tracking-wide text-[var(--brand-pink)] font-mono font-bold mt-1">
                         Frontend & AI Systems Developer
                       </p>
                     </div>
@@ -486,20 +486,20 @@ function About() {
                     </a>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                  <p className="text-base text-muted-foreground mb-6 leading-relaxed">
                     Specializing in AI-centric application development, agent architectures, and
                     automated research systems. Creator of Knowledge Hub. I leverage frontier AI
                     models (Gemini, Claude, GPT) and modern stacks to build scalable, highly
                     performant products. <br />
                     <br />
-                    <strong className="text-foreground/80 font-mono text-xs tracking-widest uppercase">
+                    <strong className="text-foreground/80 font-mono text-xs tracking-wide uppercase">
                       Academic Excellence:
                     </strong>{" "}
                     8.61 / 10 GPA
                   </p>
 
                   <div className="mb-6">
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                    <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block mb-2">
                       Core Tech Stack
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -515,7 +515,7 @@ function About() {
                       ].map((sk) => (
                         <span
                           key={sk}
-                          className="text-[10px] font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80"
+                          className="text-xs font-mono border border-border bg-muted/40 rounded-full px-2.5 py-1 text-foreground/80"
                         >
                           {sk}
                         </span>
@@ -525,7 +525,7 @@ function About() {
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-2">
+                  <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block mb-2">
                     Live Code Preview
                   </span>
                   <CodeTypingSimulator />
@@ -541,7 +541,7 @@ function About() {
           <span className="text-sm text-[var(--brand-pink)] font-serif italic block mb-4">
             Tools of the trade
           </span>
-          <h2 className="font-serif text-4xl md:text-7xl font-normal mb-12">
+          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] mb-12">
             What <span className="text-[var(--brand-pink)] font-serif italic">we use.</span>
           </h2>
           <Marquee className="-mx-6">
@@ -575,7 +575,7 @@ function About() {
                 <h3 className="font-serif text-2xl font-normal mb-3 text-[var(--brand-pink)]">
                   {v.t}
                 </h3>
-                <p className="text-muted-foreground text-sm font-sans leading-relaxed">{v.c}</p>
+                <p className="text-muted-foreground text-base font-sans leading-relaxed">{v.c}</p>
               </SpotlightCard>
             </BentoTilt>
           ))}

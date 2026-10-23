@@ -290,7 +290,7 @@ export const StoryTeller = () => {
       className="min-h-[100dvh] w-full bg-transparent text-foreground relative py-20 overflow-hidden"
     >
       <div className="flex w-full flex-col items-center pb-24 relative z-10">
-        <p className="font-mono text-xs uppercase tracking-widest text-secondary">
+        <p className="font-mono text-xs uppercase tracking-wide text-secondary">
           THE CORE BELIEF
         </p>
 
@@ -313,7 +313,7 @@ export const StoryTeller = () => {
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
-                  <div className="absolute top-6 left-6 text-[10px] font-mono text-white/40 tracking-[0.2em] uppercase select-none">
+                  <div className="absolute top-6 left-6 text-xs font-mono text-white/70 tracking-[0.12em] uppercase select-none">
                     Production System // Log. 01
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export const StoryTeller = () => {
 
         <div className="-mt-80 sm:-mt-60 md:-mt-48 flex w-full justify-center md:me-44 md:justify-end relative z-20">
           <div className="flex h-full w-fit flex-col items-center md:items-start px-6">
-            <p className="mt-3 max-w-sm text-center font-sans text-muted-foreground text-sm sm:text-base md:text-start leading-relaxed">
+            <p className="mt-3 max-w-sm text-center font-sans text-muted-foreground text-base md:text-start leading-relaxed">
               Most software stays a prototype. The systems here are different — they're live, in
               use, and solving real problems for real people, today.
             </p>

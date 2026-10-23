@@ -83,7 +83,7 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
       onMouseMove={handleCardMouseMove}
       onMouseEnter={() => setHoverOpacity(1)}
       onMouseLeave={() => setHoverOpacity(0)}
-      className="relative w-full h-full overflow-hidden rounded-[28px] border border-border bg-card transition-shadow duration-300 hover:border-[var(--brand-pink)]/35 hover:shadow-[0_30px_70px_-20px_rgba(199,91,58,0.3)]"
+      className="relative w-full min-h-[18rem] h-auto overflow-hidden rounded-[28px] border border-border bg-card transition-shadow duration-300 hover:border-[var(--brand-pink)]/35 hover:shadow-[0_30px_70px_-20px_rgba(199,91,58,0.3)] md:h-full"
     >
       {children ? (
         <div className="absolute inset-0 w-full h-full z-0">{children}</div>
@@ -109,11 +109,11 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
 
       <div className="absolute inset-0 bg-gradient-to-t from-card/85 via-card/20 to-transparent pointer-events-none z-10" />
 
-      <div className="absolute inset-0 z-20 flex w-full h-full flex-col justify-between p-6 text-foreground pointer-events-none">
+      <div className="relative z-20 flex min-h-[18rem] w-full flex-col justify-between p-6 text-foreground pointer-events-none md:absolute md:inset-0 md:h-full">
         <div className="pointer-events-none">
           <h3 className="text-3xl font-serif tracking-tight">{title}</h3>
           {description && (
-            <p className="mt-3 max-w-xs font-sans text-xs md:text-sm text-muted-foreground">
+            <p className="mt-3 max-w-xs font-sans text-base leading-relaxed text-muted-foreground">
               {description}
             </p>
           )}
@@ -125,7 +125,7 @@ export const BentoCard = ({ src, title, description, isComingSoon, children }: B
             onMouseMove={handleButtonMouseMove}
             onMouseEnter={() => setButtonHoverOpacity(1)}
             onMouseLeave={() => setButtonHoverOpacity(0)}
-            className="relative z-30 flex w-fit cursor-pointer items-center gap-1.5 overflow-hidden rounded-full border border-border bg-card px-4 py-2 text-xs uppercase tracking-wider font-mono text-foreground pointer-events-auto shadow-sm"
+            className="relative z-30 flex w-fit cursor-pointer items-center gap-1.5 overflow-hidden rounded-full border border-border bg-card px-4 py-2 text-sm font-medium uppercase tracking-wide font-mono text-foreground pointer-events-auto shadow-sm"
           >
             {/* Radial gradient hover effect */}
             <div

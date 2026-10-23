@@ -123,13 +123,13 @@ function CaseStudy() {
           >
             {/* Text — frosted glass panel */}
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-xl md:p-7">
-              <span className="block font-mono text-[11px] uppercase tracking-[0.2em] opacity-80">
+              <span className="block font-mono text-xs uppercase tracking-[0.12em] opacity-80">
                 Case Study — {p.category}
               </span>
               <h2 className="mt-4 font-display text-4xl font-bold leading-[0.95] tracking-tight md:text-5xl">
                 {p.client}
               </h2>
-              <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[11px] uppercase tracking-wider opacity-80">
+              <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-xs uppercase tracking-wider opacity-80">
                 <span>Built by Orviontech</span>
                 <span>{p.year}</span>
               </div>
@@ -227,7 +227,7 @@ function CaseStudy() {
                       <h4 className="font-display text-3xl font-bold tracking-tight mb-2 group-hover:underline">
                         {o.title.split(" — ")[0]}
                       </h4>
-                      <p className="text-xs opacity-80 font-mono">EXPLORE CASE STUDY →</p>
+                      <p className="text-sm font-medium opacity-80 font-mono">EXPLORE CASE STUDY →</p>
                     </div>
                   </div>
                 </Link>
@@ -243,7 +243,7 @@ function CaseStudy() {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div className="border-t border-border pt-4">
-      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2 font-mono">
+      <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2 font-mono">
         {label}
       </div>
       <div className="font-display text-xl">{value}</div>
@@ -318,11 +318,11 @@ function NeuroDashboardCaseStudy() {
               transition={{ duration: 0.6, delay: i * 0.05 }}
               className="rounded-xl border border-border bg-[var(--card)] p-6"
             >
-              <span className="text-[10px] font-mono text-[var(--brand-pink)] uppercase tracking-wider block mb-3">
+              <span className="text-xs font-mono text-[var(--brand-pink)] uppercase tracking-wider block mb-3">
                 MODULE // {i === 0 ? "FLAGSHIP" : `0${i + 1}`}
               </span>
               <h4 className="font-display text-xl font-bold mb-2">{m}</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {MODULE_DETAILS[m] ?? "Part of the integrated NeuroDashboard platform."}
               </p>
             </motion.div>

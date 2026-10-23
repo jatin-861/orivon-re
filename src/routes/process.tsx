@@ -151,7 +151,7 @@ function Process() {
         }}
       />
       <div className="mx-auto max-w-6xl">
-        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+        <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.12em]">
           — Methodology
         </span>
         <RevealText
@@ -216,13 +216,13 @@ function Process() {
               <div data-step-text className="opacity-50 transition-all duration-500">
                 <BentoTilt className="h-full w-full">
                   <SpotlightCard className="p-8 bg-[var(--card)] border border-border shadow-elegant">
-                    <span className="text-xs text-[var(--brand-pink)] font-mono block mb-2 uppercase tracking-[0.2em]">
+                    <span className="text-xs text-[var(--brand-pink)] font-mono block mb-2 uppercase tracking-[0.12em]">
                       Phase 0{idx + 1}
                     </span>
-                    <h2 className="font-serif text-2xl md:text-4xl font-normal leading-tight mb-4 text-foreground">
+                    <h2 className="font-serif text-2xl md:text-4xl font-normal leading-[1.1] mb-4 text-foreground">
                       {s.title}
                     </h2>
-                    <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
+                    <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
                       {s.copy}
                     </p>
                   </SpotlightCard>
@@ -236,10 +236,10 @@ function Process() {
 
         {/* What you get */}
         <div className="mt-24">
-          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.12em]">
             — What you get
           </span>
-          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-tight mb-12">
+          <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05] mb-12">
             No middlemen, <span className="text-[var(--brand-pink)] italic">no fluff.</span>
           </h2>
 
@@ -251,7 +251,7 @@ function Process() {
                   <h3 className="font-serif text-2xl md:text-3xl font-normal leading-snug text-foreground mb-3">
                     You talk to the people writing the code.
                   </h3>
-                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
+                  <p className="text-base text-muted-foreground leading-relaxed max-w-md">
                     Saral and Jatin, directly — every call, every update, every decision. No account
                     managers relaying messages back and forth.
                   </p>
@@ -266,7 +266,7 @@ function Process() {
                   <h3 className="font-serif text-xl font-normal text-foreground mb-2">
                     Fixed scope, fixed price.
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     A real estimate once the brief locks in Define — not a guess on day one.
                   </p>
                 </div>
@@ -281,7 +281,7 @@ function Process() {
                     Built with modern, boring-on-purpose tools.
                   </h3>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+                <p className="text-base text-muted-foreground leading-relaxed max-w-md">
                   TanStack, GSAP, Tailwind CSS — maintainable code, not framework-of-the-week
                   experiments.
                 </p>
@@ -295,10 +295,10 @@ function Process() {
         {/* FAQ */}
         <div className="mt-24 grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
           <div>
-            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.12em]">
               — Questions
             </span>
-            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-tight">
+            <h2 className="font-serif text-4xl md:text-7xl font-normal leading-[1.05]">
               Before you{" "}
               <span className="text-[var(--brand-pink)] font-serif italic block">reach out.</span>
             </h2>
@@ -331,7 +331,7 @@ function Process() {
           className="mt-24 glass rounded-2xl p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
         >
           <div>
-            <h3 className="font-serif text-3xl md:text-5xl font-normal leading-tight">
+            <h3 className="font-serif text-3xl md:text-5xl font-normal leading-[1.05]">
               Ready for <span className="text-[var(--brand-pink)] italic">phase one?</span>
             </h3>
             <p className="text-muted-foreground mt-3 max-w-md">

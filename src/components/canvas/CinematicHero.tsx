@@ -372,7 +372,7 @@ export const CinematicHero = () => {
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
       {/* Top identity bar */}
-      <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
+      <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.12em] font-mono text-foreground/75 uppercase hero-element">
         <div>Orviontech — Product Engineers, India</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
@@ -449,17 +449,17 @@ function ProductPreview() {
       <div className="flex items-center justify-between px-5 py-3 border-b border-border">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[var(--brand-pink)]" />
-          <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          <span className="text-xs font-mono uppercase tracking-wide text-foreground/75">
             NeuroDashboard
           </span>
         </div>
-        <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border rounded-full px-2.5 py-1">
+        <span className="text-xs font-mono uppercase tracking-wide text-foreground/75 border border-border rounded-full px-2.5 py-1">
           Currently Building
         </span>
       </div>
 
       <div className="p-5 sm:p-6">
-        <p className="text-sm text-muted-foreground mb-5">NeuroDashboard — production snapshot</p>
+        <p className="text-base text-muted-foreground leading-relaxed mb-5">NeuroDashboard — production snapshot</p>
 
         {/* Stat tiles */}
         <div className="grid grid-cols-3 gap-3 mb-6">
@@ -467,13 +467,13 @@ function ProductPreview() {
             <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">
               12,543
             </div>
-            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <div className="mt-1 text-xs font-mono uppercase tracking-wide text-foreground/70">
               Docs indexed
             </div>
           </div>
           <div className="rounded-xl border border-border p-3">
             <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">1,247</div>
-            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <div className="mt-1 text-xs font-mono uppercase tracking-wide text-foreground/70">
               Queries / day
             </div>
           </div>
@@ -481,7 +481,7 @@ function ProductPreview() {
             <div className="font-serif text-xl sm:text-2xl text-[var(--brand-pink)] leading-none">
               99.6%
             </div>
-            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <div className="mt-1 text-xs font-mono uppercase tracking-wide text-foreground/70">
               Uptime
             </div>
           </div>
@@ -520,7 +520,7 @@ function ProductPreview() {
               className="flex items-center justify-between text-xs gap-4 border-b border-border/60 pb-2.5 last:border-0 last:pb-0"
             >
               <span className="text-foreground/80">{item.label}</span>
-              <span className="text-[var(--brand-pink)] font-mono shrink-0 text-[10px] border border-[var(--brand-pink)]/30 rounded-full px-2 py-0.5">
+              <span className="text-[var(--brand-pink)] font-mono shrink-0 text-xs border border-[var(--brand-pink)]/30 rounded-full px-2 py-0.5">
                 {item.tag}
               </span>
             </div>

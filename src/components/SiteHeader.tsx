@@ -92,7 +92,7 @@ export const SiteHeader = () => {
         <div className="flex items-center gap-3 md:hidden">
           <Link
             to="/contact"
-            className="rounded-full bg-foreground text-background px-4 py-2 text-xs font-semibold tracking-wide"
+            className="rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium tracking-wide"
           >
             Talk →
           </Link>

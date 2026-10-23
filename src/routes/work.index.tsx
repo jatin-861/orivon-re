@@ -45,7 +45,7 @@ function WorkPage() {
             <button
               key={c}
               onClick={() => setFilter(c)}
-              className={`rounded-full px-4 py-2 text-sm transition-all border ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all border ${
                 filter === c
                   ? "bg-primary text-primary-foreground border-primary shadow-glow-cyan"
                   : "border-border glass hover:border-primary/40 text-foreground"
@@ -131,7 +131,7 @@ function WorkPage() {
             <p className="font-serif text-2xl md:text-3xl font-normal">
               Want to know who built this?
             </p>
-            <p className="text-sm text-muted-foreground mt-1 font-sans">
+            <p className="text-base text-muted-foreground mt-1 font-sans leading-relaxed">
               Two engineers. Every system, end to end.
             </p>
           </div>

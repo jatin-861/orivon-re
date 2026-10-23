@@ -21,7 +21,7 @@ const dockItems = [
     Icon: <Github size={20} />,
   },
   {
-    link: "mailto:orvionstudio.co@gmail.com",
+    link: "mailto:hello@orviontech.xyz",
     external: true,
     label: "Email",
     Icon: <Mail size={20} />,
@@ -47,7 +47,7 @@ export function SiteFooter() {
               </span>
               <span className="font-display text-2xl font-bold tracking-tight">ORVIONTECH</span>
             </Link>
-            <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+            <p className="mt-5 text-base text-muted-foreground leading-relaxed">
               Product engineering studio. We design, build, and ship complete systems — database to
               deployment.
             </p>
@@ -91,10 +91,10 @@ export function SiteFooter() {
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail size={14} className="text-primary" />
                 <a
-                  href="mailto:orvionstudio.co@gmail.com"
+                  href="mailto:hello@orviontech.xyz"
                   className="hover:text-primary transition-colors"
                 >
-                  orvionstudio.co@gmail.com
+                  hello@orviontech.xyz
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -115,7 +115,7 @@ export function SiteFooter() {
           />
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-base text-muted-foreground">
           <p>© {new Date().getFullYear()} Orviontech.</p>
           <p>If it doesn't run in production, it doesn't count.</p>
         </div>

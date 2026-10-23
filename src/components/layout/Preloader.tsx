@@ -56,7 +56,7 @@ export function Preloader() {
           className="fixed inset-0 z-[99999] flex flex-col justify-between bg-[var(--background)] p-8 md:p-16 text-[var(--foreground)]"
         >
           {/* Top text */}
-          <div className="flex justify-between items-center text-xs font-mono tracking-widest text-muted-foreground uppercase opacity-60">
+          <div className="flex justify-between items-center text-xs font-mono tracking-wide text-foreground/75 uppercase">
             <span>Orviontech</span>
             <span>Product Engineers</span>
           </div>
@@ -85,9 +85,9 @@ export function Preloader() {
             </div>
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4 }}
+              animate={{ opacity: 0.8 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--secondary)] font-bold"
+              className="text-xs font-mono tracking-[0.12em] uppercase mt-4 text-[var(--secondary)] font-bold"
             >
               Built To Run In Production
             </motion.p>
@@ -103,7 +103,7 @@ export function Preloader() {
             aria-label="Loading progress"
           >
             <div className="flex justify-between items-end">
-              <span className="text-[10px] font-mono tracking-widest text-muted-foreground opacity-50 uppercase">
+              <span className="text-xs font-mono tracking-wide text-foreground/70 uppercase">
                 Loading
               </span>
               <span className="font-mono text-4xl md:text-6xl font-bold text-[var(--foreground)]/90">

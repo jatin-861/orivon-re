@@ -139,7 +139,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const REASONS = ["Full-Time Role", "Contract Work", "Freelance Project", "Something Else"];
-const CONTACT_EMAILS = [["orvionstudio.co", "gmail.com"].join("@")];
+const CONTACT_EMAILS = ["hello@orviontech.xyz"];
 
 // Calendar is only required when scoping a project — not for role inquiries.
 const CALENDAR_REQUIRED_TYPES = ["Contract Work", "Freelance Project"];
@@ -263,7 +263,7 @@ function Contact() {
       <div className="mx-auto max-w-6xl">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
           <div>
-            <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4">
+            <span className="text-sm font-medium text-[var(--brand-pink)] font-mono block mb-4">
               — Get In Touch
             </span>
             <RevealText
@@ -337,7 +337,7 @@ function Contact() {
                 {/* Every other provider, so anyone can pick their own */}
                 {mailUrls && (
                   <>
-                    <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
+                    <div className="mt-1 text-sm font-medium uppercase tracking-wide text-muted-foreground">
                       Use a different app
                     </div>
                     <div className="flex flex-wrap justify-center gap-2">
@@ -366,13 +366,13 @@ function Contact() {
                 <button
                   type="button"
                   onClick={copyMessage}
-                  className="mt-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="mt-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {copied ? "Copied to clipboard ✓" : "Copy the message instead"}
                 </button>
               </div>
 
-              <p className="mt-6 text-sm text-muted-foreground">
+              <p className="mt-6 text-base text-muted-foreground leading-relaxed">
                 Or email us directly at{" "}
                 <a href={mailUrls?.mailto} className="text-primary underline break-words">
                   {CONTACT_EMAILS.join(", ")}
@@ -403,7 +403,7 @@ function Contact() {
                       key={s}
                       onClick={() => toggle(s)}
                       aria-pressed={selected.includes(s)}
-                      className={`rounded-full px-4 py-2 text-sm border transition-all ${
+                      className={`rounded-full px-4 py-2 text-sm font-medium border transition-all ${
                         selected.includes(s)
                           ? "bg-primary text-primary-foreground border-primary shadow-glow-cyan"
                           : "border-border glass hover:border-primary/40"
@@ -427,12 +427,12 @@ function Contact() {
               </div>
 
               {dateError && (
-                <p className="text-sm text-destructive">
+                <p className="text-base leading-relaxed text-destructive">
                   Please pick a preferred start date in the calendar — helps us scope the timeline.
                 </p>
               )}
 
-              <p className="text-sm text-muted-foreground">
+              <p className="text-base leading-relaxed text-muted-foreground">
                 This opens a prefilled email. Your message is sent when you press Send in your email
                 app.
               </p>
@@ -458,13 +458,13 @@ function Contact() {
             />
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Response time</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-base leading-relaxed text-muted-foreground">
                 We reply to every message within 48 hours, Monday to Friday — no auto-responder.
               </p>
             </div>
             <div className="glass rounded-2xl p-6">
               <h3 className="font-display text-lg font-bold mb-2">Open to</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-base leading-relaxed text-muted-foreground">
                 Full-time roles, contract work, and freelance projects:{" "}
                 <a className="text-primary" href={`mailto:${CONTACT_EMAILS[0]}`}>
                   {CONTACT_EMAILS[0]}
@@ -476,7 +476,7 @@ function Contact() {
 
         {/* What happens after you reach out */}
         <div className="mt-24 md:mt-32">
-          <span className="text-xs text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-[0.2em]">
+          <span className="text-sm font-medium text-[var(--brand-pink)] font-mono block mb-4 uppercase tracking-wide">
             — After you hit send
           </span>
           <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-10">
@@ -497,7 +497,7 @@ function Contact() {
                     <h3 className="font-display text-lg font-bold text-foreground mb-2">
                       {s.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{s.copy}</p>
+                    <p className="text-base text-muted-foreground leading-relaxed">{s.copy}</p>
                   </div>
                 </div>
               </BentoTilt>
@@ -512,7 +512,7 @@ function Contact() {
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label
     htmlFor={htmlFor}
-    className="block text-xs uppercase tracking-widest text-muted-foreground mb-3"
+    className="block text-sm font-medium uppercase tracking-wide text-muted-foreground mb-3"
   >
     {children}
   </label>
@@ -583,7 +583,7 @@ function Info({
         <Icon className="text-primary" size={18} />
       </div>
       <div>
-        <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{label}</div>
+        <div className="text-sm font-medium uppercase tracking-wide text-muted-foreground mb-1">{label}</div>
         {values.map((v) => (
           <div key={v} className="font-display text-xl">
             {v}

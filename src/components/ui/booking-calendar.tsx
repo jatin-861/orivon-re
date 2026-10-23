@@ -56,7 +56,7 @@ export function BookingCalendar({
     <div className={cn("relative overflow-hidden rounded-2xl glass p-6 shadow-elegant", className)}>
       <div className="relative flex items-center justify-between mb-5">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-primary mb-1">Book a call</p>
+          <p className="text-xs uppercase tracking-wide text-primary mb-1">Book a call</p>
           <h3 className="font-display text-xl font-bold">
             {monthName} {view.year}
           </h3>
@@ -83,7 +83,7 @@ export function BookingCalendar({
 
       <div className="relative grid grid-cols-7 gap-1.5 text-center">
         {DAYS.map((d) => (
-          <div key={d} className="text-[10px] tracking-widest text-muted-foreground py-2">
+          <div key={d} className="text-xs tracking-wide text-muted-foreground py-2">
             {d}
           </div>
         ))}
@@ -100,7 +100,7 @@ export function BookingCalendar({
               disabled={past}
               onClick={() => selectDay(d)}
               className={cn(
-                "aspect-square rounded-lg text-sm transition-all relative",
+                "aspect-square rounded-lg text-sm font-medium transition-all relative",
                 past && "text-muted-foreground/40 cursor-not-allowed",
                 !past && !sel && "hover:bg-primary/10 text-foreground",
                 sel && "bg-primary text-primary-foreground shadow-glow-cyan font-semibold",
@@ -114,7 +114,7 @@ export function BookingCalendar({
       </div>
 
       <div className="relative mt-5 flex items-center justify-between gap-3 pt-5 border-t border-border">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Clock size={14} className="text-primary" />
           <span>30 min intro call</span>
         </div>
@@ -125,7 +125,7 @@ export function BookingCalendar({
                 // desktop mail client (a bare mailto: silently does nothing when
                 // no mail app is registered).
                 `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                  "orvionstudio.co@gmail.com",
+                  "hello@orviontech.xyz",
                 )}&su=${encodeURIComponent(
                   `30 min intro call — ${monthName} ${selected}, ${view.year}`,
                 )}&body=${encodeURIComponent(
