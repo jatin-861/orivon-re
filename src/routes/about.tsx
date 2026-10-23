@@ -64,7 +64,7 @@ const SKILLS = [
 const TEAM = [
   {
     name: "Saral Banker",
-    designation: "Full-Stack & AI Engineer · Orvion.co",
+    designation: "Full-Stack & AI Engineer · Orviontech",
     quote:
       "If it doesn't run in production, it doesn't count. I design, build, and ship complete systems — database to deployment — not just the demo.",
     src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%231A1A1A'/><text x='50%' y='48%' font-family='Georgia, serif' font-size='120' font-weight='bold' fill='%23FAF7F2' text-anchor='middle' dominant-baseline='middle'>S</text><text x='50%' y='62%' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23C75B3A' text-anchor='middle' letter-spacing='4'>ENGINE</text></svg>",
@@ -174,18 +174,18 @@ function About() {
   return (
     <div className="pt-48 pb-48 px-6 text-foreground transition-colors duration-500 font-sans">
       <SEO
-        title="About — Orvion.co"
-        description="Meet the product engineers behind Orvion.co. We build complete systems — from database to deployment — with production-grade code and real-world client results."
-        canonical="https://orvion.co/about"
-        ogImage="https://orvion.co/og-image.png"
+        title="About Orviontech — Product Engineers in India"
+        description="Meet the engineers behind Orviontech. We design and build websites, apps, automation, and custom software for teams that need a product shipped."
+        canonical="https://orviontech/about"
+        ogImage="https://orviontech/og-image.png"
         schema={[
           {
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Saral Banker",
             jobTitle: "Full-Stack & AI Engineer",
-            worksFor: { "@type": "Organization", name: "Orvion.co", url: "https://orvion.co" },
-            url: "https://orvion.co/about",
+            worksFor: { "@type": "Organization", name: "Orviontech", url: "https://orviontech" },
+            url: "https://orviontech/about",
             sameAs: ["https://github.com/saralbanker"],
           },
           {
@@ -193,8 +193,8 @@ function About() {
             "@type": "Person",
             name: "Jatin Basantani",
             jobTitle: "Frontend & AI Systems Developer",
-            worksFor: { "@type": "Organization", name: "Orvion.co", url: "https://orvion.co" },
-            url: "https://orvion.co/about",
+            worksFor: { "@type": "Organization", name: "Orviontech", url: "https://orviontech" },
+            url: "https://orviontech/about",
             sameAs: ["https://github.com/jatin-861"],
           },
         ]}

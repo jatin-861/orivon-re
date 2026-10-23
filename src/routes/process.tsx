@@ -136,10 +136,10 @@ function Process() {
   return (
     <div className="pt-40 pb-32 px-6 text-foreground transition-colors duration-500">
       <SEO
-        title="Process — Orvion.co"
-        description="How Orvion.co builds. Our engineering process from scoping to deployment — fixed scope, clear milestones, and production-grade delivery every time."
-        canonical="https://orvion.co/process"
-        ogImage="https://orvion.co/og-image.png"
+        title="Software Development Process — Orviontech"
+        description="See how Orviontech scopes, builds, and launches websites and custom software with clear milestones, direct communication, and production-ready delivery."
+        canonical="https://orviontech/process"
+        ogImage="https://orviontech/og-image.png"
         schema={{
           "@context": "https://schema.org",
           "@type": "FAQPage",

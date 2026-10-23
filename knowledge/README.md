@@ -1,6 +1,6 @@
 # Engineering Knowledge Base (EKB)
 
-Permanent session memory for the Orvion.co portfolio repository.  
+Permanent session memory for the Orviontech portfolio repository.  
 **Every Claude Code session must follow the session protocol below before touching any code.**
 
 ---

@@ -56,10 +56,10 @@ function CaseStudy() {
   return (
     <div className="pt-32 pb-24 text-foreground transition-colors duration-500">
       <SEO
-        title={`${p.title} — Orvion.co`}
+        title={`${p.title} — Orviontech`}
         description={p.description}
-        canonical={`https://orvion.co/work/${p.slug}`}
-        ogImage="https://orvion.co/og-image.png"
+        canonical={`https://orviontech/work/${p.slug}`}
+        ogImage="https://orviontech/og-image.png"
         schema={{
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
@@ -69,8 +69,8 @@ function CaseStudy() {
           dateCreated: p.year.split("–")[0],
           creator: {
             "@type": "Organization",
-            name: "Orvion.co",
-            url: "https://orvion.co",
+            name: "Orviontech",
+            url: "https://orviontech",
           },
           ...(p.link ? { url: p.link } : {}),
         }}
@@ -130,7 +130,7 @@ function CaseStudy() {
                 {p.client}
               </h2>
               <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[11px] uppercase tracking-wider opacity-80">
-                <span>Built by Orvion.co</span>
+                <span>Built by Orviontech</span>
                 <span>{p.year}</span>
               </div>
             </div>

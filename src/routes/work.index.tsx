@@ -27,10 +27,10 @@ function WorkPage() {
   return (
     <div className="pb-32 text-foreground transition-colors duration-500">
       <SEO
-        title="Work — Orvion.co"
-        description="Selected projects by Orvion.co — NeuroDashboard, Shade Ledger, Smart Parking, and Carbon Compass. Full case studies with tech stack, scope, and architecture."
-        canonical="https://orvion.co/work"
-        ogImage="https://orvion.co/og-image.png"
+        title="Websites, Apps & Software Projects — Orviontech"
+        description="Explore software built by Orviontech, from AI platforms and billing automation to parking and sustainability apps. Read project case studies and see the technologies used."
+        canonical="https://orviontech/work"
+        ogImage="https://orviontech/og-image.png"
       />
       <HeroGeometric
         badge="Selected Work"

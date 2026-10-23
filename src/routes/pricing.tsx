@@ -50,10 +50,10 @@ function PricingPage() {
   return (
     <div className="relative pt-40 pb-32 px-6 overflow-hidden text-foreground transition-colors duration-500">
       <SEO
-        title="Pricing — Orvion.co"
-        description="Transparent, fixed-fee pricing for website development, mobile apps, and SaaS — benchmarked against India market rates. Download the full pricing PDF."
-        canonical="https://orvion.co/pricing"
-        ogImage="https://orvion.co/og-image.png"
+        title="Website, App & Software Pricing — Orviontech"
+        description="Explore fixed-fee pricing ranges for website development, mobile apps, automation, and custom software, benchmarked against India market rates."
+        canonical="https://orviontech/pricing"
+        ogImage="https://orviontech/og-image.png"
       />
       <div className="absolute inset-0 bg-aurora opacity-40 pointer-events-none" />
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
@@ -64,12 +64,12 @@ function PricingPage() {
           <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)]">
             — India Market Pricing
           </span>
-          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
+          <h1 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
             Fixed fee, <span className="text-[var(--brand-pink)] italic">not hourly.</span>
-          </h2>
+          </h1>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            Every build benchmarked against current India-market rates. Pick a service line below
-            and download the full pricing breakdown for that category.
+            Browse India-market price ranges and delivery windows. We confirm the requirements,
+            included features, and fixed quote before work begins.
           </p>
         </div>
 

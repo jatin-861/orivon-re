@@ -159,7 +159,7 @@ Usage pattern — first child in every route component:
 function CaseStudy() {
   return (
     <div>
-      <SEO title="Project — Orvion.co" description="..." canonical="https://orvion.co/..." schema={...} />
+      <SEO title="Project — Orviontech" description="..." canonical="https://orviontech/..." schema={...} />
       {/* page content */}
     </div>
   );

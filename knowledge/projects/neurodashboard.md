@@ -13,7 +13,7 @@ NeuroDashboard is a multi-module AI platform built and shipped end-to-end by Sar
 **Client:** Independent  
 **Category:** AI Platform  
 **GitHub:** https://github.com/saralbanker/neuro-zenith  
-**Schema creator:** Orvion.co
+**Schema creator:** Orviontech
 
 ---
 

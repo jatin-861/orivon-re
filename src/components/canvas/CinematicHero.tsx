@@ -371,21 +371,18 @@ export const CinematicHero = () => {
 
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
-      {/* Real DOM heading — canvas text is invisible to crawlers */}
-      <h1 className="sr-only">
-        Orvion.co — Product Engineers. Useful over impressive: we build software that solves real
-        problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
-        multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units.
-      </h1>
-
       {/* Top identity bar */}
       <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
-        <div>Orvion.co — Product Engineers, India</div>
+        <div>Orviontech — Product Engineers, India</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
           Open to new projects
         </div>
       </div>
+
+      <h1 className="sr-only">
+        Orviontech designs and builds websites, apps, and custom software.
+      </h1>
 
       {/* Belief statement canvas */}
       <div className="relative h-[42vh] sm:h-[46vh] lg:h-[50vh] w-full">
@@ -399,28 +396,34 @@ export const CinematicHero = () => {
       {/* Identity / Value / CTA / Proof / Product Preview */}
       <div className="relative z-10 px-6 sm:px-12 pb-16 sm:pb-24 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         <div className="lg:col-span-7 hero-element flex flex-col gap-6">
-          <h2
-            className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground"
+          <p
+            className="font-lora text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground"
             style={{ textRendering: "optimizeLegibility" }}
           >
             Hi, we're <ScrambleText text="Saral x Jatin." delay={delayBase + 0.1} />
-          </h2>
+          </p>
 
           <p className="font-sans text-lg sm:text-xl text-foreground/90 font-semibold max-w-xl">
-            We build software that solves real problems.
+            Websites, apps, and custom software.
           </p>
 
           <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-xl">
-            From business automation to AI-powered platforms — we design, build, and ship production
-            systems that people actually use. Database to deployment, no shortcuts.
+            From first brief to production, we build useful digital products with focused scope,
+            direct communication, and fixed-fee options.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mt-2">
             <Link
-              to="/work"
+              to="/contact"
               className="rounded-full bg-foreground text-background hover:bg-[var(--secondary)] hover:text-white px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors"
             >
-              View Projects
+              Start a Project
+            </Link>
+            <Link
+              to="/work"
+              className="text-sm font-semibold tracking-wide uppercase text-muted-foreground transition-colors hover:text-foreground"
+            >
+              See our work
             </Link>
           </div>
         </div>

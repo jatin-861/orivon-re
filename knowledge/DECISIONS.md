@@ -48,7 +48,7 @@ document.documentElement.classList.add("dark"); } })();
 
 ## D-003: Hybrid Authority Identity Architecture
 
-**Decision:** Three canonical entities — Orvion.co (Organization), Saral Banker (Person), Jatin Basantani (Person) — all present on the site. Studio-primary canvas: "we" voice everywhere except individual founder cards.
+**Decision:** Three canonical entities — Orviontech (Organization), Saral Banker (Person), Jatin Basantani (Person) — all present on the site. Studio-primary canvas: "we" voice everywhere except individual founder cards.
 
 **Reason:** The only architecture that survives partnership restructuring AND serves both B2B consulting clients (who hire the studio) and recruiters (who hire individuals).
 

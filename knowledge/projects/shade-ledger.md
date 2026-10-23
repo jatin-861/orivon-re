@@ -6,14 +6,14 @@
 
 ## Executive Summary
 
-Shade Ledger is the highest-trust evidence in the Orvion.co portfolio. It is a real system built for a paying client, running without interruption since 2025, solving a concrete business problem. It is the primary proof point for the studio's "production-first" positioning.
+Shade Ledger is the highest-trust evidence in the Orviontech portfolio. It is a real system built for a paying client, running without interruption since 2025, solving a concrete business problem. It is the primary proof point for the studio's "production-first" positioning.
 
 **Slug:** `shade-ledger`  
 **Year:** 2025–2026  
 **Client:** Confidential (Mumbai, India)  
 **Category:** Automation  
 **GitHub:** Private (client system)  
-**Schema creator:** Orvion.co
+**Schema creator:** Orviontech
 
 ---
 

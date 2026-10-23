@@ -23,7 +23,7 @@
 | FAQPage JSON-LD (process.tsx)                               | Session                      | ✅ Done |
 | Duplicate H1 fix (process.tsx RevealText)                   | Session                      | ✅ Done |
 | Voice fixes: "Things I've" → "Things we've"                 | `fe39447`                    | ✅ Done |
-| Voice fixes: "Built by Saral Banker" → "Built by Orvion.co" | `fe39447`                    | ✅ Done |
+| Voice fixes: "Built by Saral Banker" → "Built by Orviontech" | `fe39447`                    | ✅ Done |
 | Voice fixes: BigCTA "I'd like" → "we'd love"                | `fe39447`                    | ✅ Done |
 | Jatin TEAM designation updated                              | `fe39447`                    | ✅ Done |
 | ProfilePage schema → WebSite schema (index.tsx)             | `fe39447`                    | ✅ Done |

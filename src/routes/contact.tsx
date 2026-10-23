@@ -255,10 +255,10 @@ function Contact() {
   return (
     <div className="pt-40 pb-32 px-6">
       <SEO
-        title="Contact — Orvion.co"
-        description="Start a project with Orvion.co. Tell us what you're building — we'll reply within 48 hours."
-        canonical="https://orvion.co/contact"
-        ogImage="https://orvion.co/og-image.png"
+        title="Start a Software Project — Contact Orviontech"
+        description="Tell Orviontech what you need built. We take on website, app, and custom software projects and reply within 48 hours."
+        canonical="https://orviontech/contact"
+        ogImage="https://orviontech/og-image.png"
       />
       <div className="mx-auto max-w-6xl">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
@@ -396,12 +396,13 @@ function Contact() {
 
               <div>
                 <Label>What's this about?</Label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2" role="group" aria-label="Inquiry type">
                   {REASONS.map((s) => (
                     <button
                       type="button"
                       key={s}
                       onClick={() => toggle(s)}
+                      aria-pressed={selected.includes(s)}
                       className={`rounded-full px-4 py-2 text-sm border transition-all ${
                         selected.includes(s)
                           ? "bg-primary text-primary-foreground border-primary shadow-glow-cyan"
@@ -431,12 +432,17 @@ function Contact() {
                 </p>
               )}
 
+              <p className="text-sm text-muted-foreground">
+                This opens a prefilled email. Your message is sent when you press Send in your email
+                app.
+              </p>
+
               <MagneticButton
                 as="button"
                 type="submit"
                 className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-8 py-4 font-semibold shadow-glow-cyan"
               >
-                Send message <ArrowRight size={18} />
+                Prepare email <ArrowRight size={18} />
               </MagneticButton>
             </form>
           )}

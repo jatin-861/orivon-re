@@ -1,6 +1,6 @@
 # Homepage Execution Report
 
-## Orvion.co — Implementation of Homepage Decision Architecture Blueprint
+## Orviontech — Implementation of Homepage Decision Architecture Blueprint
 
 **Date:** 2026-07-02  
 **Scope:** P0 + P1 + P2 implementation (P3 deferred — see rejections)  
@@ -198,7 +198,7 @@ CinematicHero → StudioManifesto → FeaturedEvidence → ScrollStoryHorizontal
 
 ### Modified recommendations
 
-- **P0-7 bonus:** Also updated Saral TEAM `designation` field in `about.tsx` (`"Product Engineer · Full-Stack & AI Applications"` → `"Full-Stack & AI Engineer · Orvion.co"`) — this is displayed text in `AnimatedTestimonials`, not just JSON-LD.
+- **P0-7 bonus:** Also updated Saral TEAM `designation` field in `about.tsx` (`"Product Engineer · Full-Stack & AI Applications"` → `"Full-Stack & AI Engineer · Orviontech"`) — this is displayed text in `AnimatedTestimonials`, not just JSON-LD.
 - **P0-5 + P1-3 sequencing:** P0-5 wired the realm-btn to `/work` (fixing the trust incident). P1-3 removed StoryTeller from the homepage entirely. Both were needed — P0-5 ensured zero dead-end CTAs in any intermediate build state.
 
 ### Rejected recommendations

@@ -1,7 +1,7 @@
-# Orvion.co — llms.txt
+# Orviontech — llms.txt
 # https://llmstxt.org
 
-# Orvion.co is a product engineering studio based in India.
+# Orviontech is a product engineering studio based in India.
 # Founded by Saral Banker (Full-Stack & AI Engineer) and
 # Jatin Basantani (Frontend & AI Systems Developer).
 # We design, build, and ship complete production systems —
@@ -9,7 +9,7 @@
 
 ## Identity
 
-- Studio: Orvion.co
+- Studio: Orviontech
 - Type: Product Engineering Studio
 - Location: India
 - Contact: orvionstudio.co@gmail.com

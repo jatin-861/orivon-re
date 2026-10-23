@@ -1,4 +1,4 @@
-# Portfolio — orvion.co
+# Portfolio — orviontech
 
 ## This repository
 
@@ -6,10 +6,10 @@
 
 ## Executive Summary
 
-The Orvion.co portfolio website. A production-deployed SPA at `https://orvion.co`. Built with React 19, TanStack Router, Tailwind CSS v4, GSAP, and Framer Motion.
+The Orviontech portfolio website. A production-deployed SPA at `https://orviontech`. Built with React 19, TanStack Router, Tailwind CSS v4, GSAP, and Framer Motion.
 
 **Repository name:** `saral-banker-portfolio` (package.json)  
-**Deployed at:** https://orvion.co  
+**Deployed at:** https://orviontech  
 **Build tool:** Vite  
 **Type:** SPA (no SSR, no SSG currently)
 
@@ -19,7 +19,7 @@ The Orvion.co portfolio website. A production-deployed SPA at `https://orvion.co
 
 Three simultaneous goals:
 
-1. Attract B2B clients for Orvion.co consulting work
+1. Attract B2B clients for Orviontech consulting work
 2. Attract freelance/contract engineering projects
 3. Support individual hiring (recruiter path) for Saral Banker and Jatin Basantani
 

@@ -10,9 +10,9 @@ Three entities, three distinct scopes:
 
 | Entity          | @type        | Canonical URL           | Primary audience            |
 | --------------- | ------------ | ----------------------- | --------------------------- |
-| Orvion.co       | Organization | https://orvion.co       | B2B clients, search engines |
-| Saral Banker    | Person       | https://orvion.co/about | Recruiters, knowledge graph |
-| Jatin Basantani | Person       | https://orvion.co/about | Recruiters, knowledge graph |
+| Orviontech       | Organization | https://orviontech       | B2B clients, search engines |
+| Saral Banker    | Person       | https://orviontech/about | Recruiters, knowledge graph |
+| Jatin Basantani | Person       | https://orviontech/about | Recruiters, knowledge graph |
 
 **Identity architecture decision:** Hybrid Authority with Studio-Primary Canvas (see Decision D-003).
 
@@ -44,13 +44,13 @@ These are the authoritative schemas visible to all crawlers.
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Orvion.co",
-  "url": "https://orvion.co",
+  "name": "Orviontech",
+  "url": "https://orviontech",
   "description": "Product engineering studio that builds complete, production systems — from database to deployment.",
   "publisher": {
     "@type": "Organization",
-    "name": "Orvion.co",
-    "url": "https://orvion.co"
+    "name": "Orviontech",
+    "url": "https://orviontech"
   }
 }
 ```
@@ -61,8 +61,8 @@ These are the authoritative schemas visible to all crawlers.
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Orvion.co",
-  "url": "https://orvion.co",
+  "name": "Orviontech",
+  "url": "https://orviontech",
   "description": "Product engineering studio that designs, builds, and ships complete production systems — from database to deployment.",
   "areaServed": "Worldwide",
   "contactPoint": {
@@ -102,8 +102,8 @@ These are the authoritative schemas visible to all crawlers.
   "@type": "Person",
   "name": "Saral Banker",
   "jobTitle": "Full-Stack & AI Engineer",
-  "worksFor": { "@type": "Organization", "name": "Orvion.co", "url": "https://orvion.co" },
-  "url": "https://orvion.co/about",
+  "worksFor": { "@type": "Organization", "name": "Orviontech", "url": "https://orviontech" },
+  "url": "https://orviontech/about",
   "sameAs": ["https://github.com/saralbanker"]
 }
 ```
@@ -118,8 +118,8 @@ These are the authoritative schemas visible to all crawlers.
   "@type": "Person",
   "name": "Jatin Basantani",
   "jobTitle": "Frontend & AI Systems Developer",
-  "worksFor": { "@type": "Organization", "name": "Orvion.co", "url": "https://orvion.co" },
-  "url": "https://orvion.co/about",
+  "worksFor": { "@type": "Organization", "name": "Orviontech", "url": "https://orviontech" },
+  "url": "https://orviontech/about",
   "sameAs": ["https://github.com/jatin-861"]
 }
 ```
@@ -136,8 +136,8 @@ These are the authoritative schemas visible to all crawlers.
   "dateCreated": "[project.year split on '–'][0]",
   "creator": {
     "@type": "Organization",
-    "name": "Orvion.co",
-    "url": "https://orvion.co"
+    "name": "Orviontech",
+    "url": "https://orviontech"
   },
   "url": "[project.link if exists]"
 }
@@ -189,7 +189,7 @@ Changefreq: `monthly` for homepage/about/work/pricing, `yearly` for case studies
 ## Knowledge Graph Relationships
 
 ```
-Orvion.co (Organization)
+Orviontech (Organization)
   ├── member → Saral Banker (Person)
   │     └── sameAs → github.com/saralbanker
   ├── member → Jatin Basantani (Person)
@@ -199,8 +199,8 @@ Orvion.co (Organization)
   ├── creator → Smart Parking (SoftwareApplication)
   └── creator → Carbon Compass (SoftwareApplication)
 
-WebSite (orvion.co)
-  └── publisher → Orvion.co (Organization)
+WebSite (orviontech)
+  └── publisher → Orviontech (Organization)
 ```
 
 ---
