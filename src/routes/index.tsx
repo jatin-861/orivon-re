@@ -27,8 +27,8 @@ function Index() {
   return (
     <div className="relative text-foreground transition-colors duration-500 font-sans overflow-x-clip">
       <SEO
-        title="Orviontech — Website, App & Custom Software Studio"
-        description="Websites, apps, and custom software built by Orviontech. Fixed-fee options, focused scope, and production-ready delivery from first brief to launch."
+        title="Orviontech — Product Engineering & AI Automation Studio in India"
+        description="Orviontech architects custom software, scalable web applications, and AI-driven business automation. Senior-only engineering, fixed-scope delivery, and production deployment."
         canonical="https://orviontech/"
         ogImage="https://orviontech/og-image.png"
         ogType="website"

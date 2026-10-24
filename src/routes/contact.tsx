@@ -583,7 +583,9 @@ function Info({
         <Icon className="text-primary" size={18} />
       </div>
       <div>
-        <div className="text-sm font-medium uppercase tracking-wide text-muted-foreground mb-1">{label}</div>
+        <div className="text-sm font-medium uppercase tracking-wide text-muted-foreground mb-1">
+          {label}
+        </div>
         {values.map((v) => (
           <div key={v} className="font-display text-xl">
             {v}

@@ -373,7 +373,7 @@ export const CinematicHero = () => {
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
       {/* Top identity bar */}
       <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.12em] font-mono text-foreground/75 uppercase hero-element">
-        <div>Orviontech — Product Engineers, India</div>
+        <div>OVRIONTECH — Product Engineering &amp; AI Automation (India)</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
           Open to new projects
@@ -381,7 +381,7 @@ export const CinematicHero = () => {
       </div>
 
       <h1 className="sr-only">
-        Orviontech designs and builds websites, apps, and custom software.
+        Useful over impressive. Orviontech product engineering and AI automation.
       </h1>
 
       {/* Belief statement canvas */}
@@ -396,20 +396,15 @@ export const CinematicHero = () => {
       {/* Identity / Value / CTA / Proof / Product Preview */}
       <div className="relative z-10 px-6 sm:px-12 pb-16 sm:pb-24 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         <div className="lg:col-span-7 hero-element flex flex-col gap-6">
-          <p
-            className="font-lora text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground"
-            style={{ textRendering: "optimizeLegibility" }}
-          >
-            Hi, we're <ScrambleText text="Saral x Jatin." delay={delayBase + 0.1} />
+          <p className="font-sans text-2xl text-foreground/90 font-semibold max-w-xl">
+            We are a specialized product engineering studio. We architect and build custom software,
+            scalable web applications, and AI-driven business automation for ambitious companies.
           </p>
 
-          <p className="font-sans text-lg sm:text-xl text-foreground/90 font-semibold max-w-xl">
-            Websites, apps, and custom software.
-          </p>
-
-          <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-xl">
-            From first brief to production, we build useful digital products with focused scope,
-            direct communication, and fixed-fee options.
+          <p className="font-sans text-xl text-muted-foreground leading-relaxed max-w-xl">
+            From first technical brief to production deployment, we replace manual workflows with
+            robust digital infrastructure. We operate on a senior-only engineering model—meaning no
+            account managers, no junior hand-offs, and fixed-scope delivery.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mt-2">
@@ -423,7 +418,7 @@ export const CinematicHero = () => {
               to="/work"
               className="text-sm font-semibold tracking-wide uppercase text-muted-foreground transition-colors hover:text-foreground"
             >
-              See our work
+              View Technical Case Studies
             </Link>
           </div>
         </div>
@@ -459,7 +454,9 @@ function ProductPreview() {
       </div>
 
       <div className="p-5 sm:p-6">
-        <p className="text-base text-muted-foreground leading-relaxed mb-5">NeuroDashboard — production snapshot</p>
+        <p className="text-base text-muted-foreground leading-relaxed mb-5">
+          NeuroDashboard — production snapshot
+        </p>
 
         {/* Stat tiles */}
         <div className="grid grid-cols-3 gap-3 mb-6">

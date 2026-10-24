@@ -227,7 +227,9 @@ function CaseStudy() {
                       <h4 className="font-display text-3xl font-bold tracking-tight mb-2 group-hover:underline">
                         {o.title.split(" — ")[0]}
                       </h4>
-                      <p className="text-sm font-medium opacity-80 font-mono">EXPLORE CASE STUDY →</p>
+                      <p className="text-sm font-medium opacity-80 font-mono">
+                        EXPLORE CASE STUDY →
+                      </p>
                     </div>
                   </div>
                 </Link>

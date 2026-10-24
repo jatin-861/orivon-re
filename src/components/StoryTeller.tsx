@@ -290,9 +290,7 @@ export const StoryTeller = () => {
       className="min-h-[100dvh] w-full bg-transparent text-foreground relative py-20 overflow-hidden"
     >
       <div className="flex w-full flex-col items-center pb-24 relative z-10">
-        <p className="font-mono text-xs uppercase tracking-wide text-secondary">
-          THE CORE BELIEF
-        </p>
+        <p className="font-mono text-xs uppercase tracking-wide text-secondary">THE CORE BELIEF</p>
 
         <div className="relative w-full h-full">
           <AnimatedTitle
