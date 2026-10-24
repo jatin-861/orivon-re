@@ -8,20 +8,20 @@
 
 ### Canonical URLs
 
-Every route renders a `<SEO canonical="https://orvion.co/[path]" />` via `src/components/SEO.tsx`.
+Every route renders a `<SEO canonical="https://orviontech/[path]" />` via `src/components/SEO.tsx`.
 
 | Route                | Canonical                             |
 | -------------------- | ------------------------------------- |
-| /                    | https://orvion.co/                    |
-| /about               | https://orvion.co/about               |
-| /work                | https://orvion.co/work                |
-| /work/neurodashboard | https://orvion.co/work/neurodashboard |
-| /work/shade-ledger   | https://orvion.co/work/shade-ledger   |
-| /work/smart-parking  | https://orvion.co/work/smart-parking  |
-| /work/carbon-compass | https://orvion.co/work/carbon-compass |
-| /process             | https://orvion.co/process             |
-| /pricing             | https://orvion.co/pricing             |
-| /contact             | https://orvion.co/contact             |
+| /                    | https://orviontech/                    |
+| /about               | https://orviontech/about               |
+| /work                | https://orviontech/work                |
+| /work/neurodashboard | https://orviontech/work/neurodashboard |
+| /work/shade-ledger   | https://orviontech/work/shade-ledger   |
+| /work/smart-parking  | https://orviontech/work/smart-parking  |
+| /work/carbon-compass | https://orviontech/work/carbon-compass |
+| /process             | https://orviontech/process             |
+| /pricing             | https://orviontech/pricing             |
+| /contact             | https://orviontech/contact             |
 
 ### Open Graph
 
@@ -31,14 +31,14 @@ All pages have:
 - `og:url` = canonical URL (resolved via `ogUrl ?? canonical` in SEO.tsx)
 - `og:title` = page title
 - `og:description` = page description
-- `og:image` = `https://orvion.co/og-image.png` (shared across all pages)
+- `og:image` = `https://orviontech/og-image.png` (shared across all pages)
 
 ### OG Image
 
 - File: `/public/og-image.png`
 - Dimensions: 1200×630
 - Size: 174KB
-- Content: Dark background (#0C0C0C), brand pink (#C75B3A), "ORVION.CO" wordmark, "We build software that _runs_ in production." in serif font
+- Content: Dark background (#0C0C0C), brand pink (#C75B3A), "ORVIONTECH" wordmark, "We build software that _runs_ in production." in serif font
 - Generated via: Playwright screenshot of HTML template
 
 ### Twitter/X Cards
@@ -50,13 +50,13 @@ All pages have:
 
 | Page        | Description                                                                                         |
 | ----------- | --------------------------------------------------------------------------------------------------- |
-| /           | "Orvion.co is a product engineering studio that builds complete, production systems..."             |
-| /about      | "Meet the product engineers behind Orvion.co. We build complete systems..."                         |
-| /work       | "Selected projects by Orvion.co — NeuroDashboard, Shade Ledger, Smart Parking, and Carbon Compass." |
+| /           | "Orviontech is a product engineering studio that builds complete, production systems..."             |
+| /about      | "Meet the product engineers behind Orviontech. We build complete systems..."                         |
+| /work       | "Selected projects by Orviontech — NeuroDashboard, Shade Ledger, Smart Parking, and Carbon Compass." |
 | /work/$slug | Project description from `PROJECTS` data array                                                      |
-| /process    | "How Orvion.co builds. Our engineering process from scoping to deployment..."                       |
+| /process    | "How Orviontech builds. Our engineering process from scoping to deployment..."                       |
 | /pricing    | "Transparent, fixed-fee pricing for website development, mobile apps, and SaaS..."                  |
-| /contact    | "Start a project with Orvion.co. Tell us what you're building..."                                   |
+| /contact    | "Start a project with Orviontech. Tell us what you're building..."                                   |
 
 ### Sitemap
 
@@ -92,7 +92,7 @@ Full schema values: see [`ENTITY_ARCHITECTURE.md`](ENTITY_ARCHITECTURE.md)
 | ----------- | ------------------------------- | --------------------------------------------------- |
 | /           | WebSite                         | Duplicate of static (completeness)                  |
 | /about      | Person (Saral) + Person (Jatin) | jobTitle, worksFor, sameAs GitHub                   |
-| /work/$slug | SoftwareApplication             | name, description, dateCreated, creator (Orvion.co) |
+| /work/$slug | SoftwareApplication             | name, description, dateCreated, creator (Orviontech) |
 | /process    | FAQPage                         | mainEntity from FAQS array (4 Q&A pairs)            |
 
 ### Critical gap
@@ -103,8 +103,8 @@ React-injected schemas are not in the initial HTML payload. Crawlers that don't 
 
 ## Per-Page SEO Titles
 
-Pattern: `"[Page Name] — Orvion.co"` for secondary pages.  
-Homepage title: `"Orvion.co — Product Engineers"` (in `index.html` and SEO component).
+Pattern: `"[Page Name] — Orviontech"` for secondary pages.  
+Homepage title: `"Orviontech — Product Engineers"` (in `index.html` and SEO component).
 
 ---
 

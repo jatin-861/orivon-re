@@ -1,6 +1,6 @@
 # Architecture Knowledge Files
 
-Technical implementation reference for the Orvion.co portfolio repository.
+Technical implementation reference for the Orviontech portfolio repository.
 
 | File                           | What it covers                                                                      |
 | ------------------------------ | ----------------------------------------------------------------------------------- |

@@ -27,10 +27,10 @@ function WorkPage() {
   return (
     <div className="pb-32 text-foreground transition-colors duration-500">
       <SEO
-        title="Work — Orvion.co"
-        description="Selected projects by Orvion.co — NeuroDashboard, Shade Ledger, Smart Parking, and Carbon Compass. Full case studies with tech stack, scope, and architecture."
-        canonical="https://orvion.co/work"
-        ogImage="https://orvion.co/og-image.png"
+        title="Websites, Apps & Software Projects — Orviontech"
+        description="Explore software built by Orviontech, from AI platforms and billing automation to parking and sustainability apps. Read project case studies and see the technologies used."
+        canonical="https://orviontech/work"
+        ogImage="https://orviontech/og-image.png"
       />
       <HeroGeometric
         badge="Selected Work"
@@ -45,7 +45,7 @@ function WorkPage() {
             <button
               key={c}
               onClick={() => setFilter(c)}
-              className={`rounded-full px-4 py-2 text-sm transition-all border ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all border ${
                 filter === c
                   ? "bg-primary text-primary-foreground border-primary shadow-glow-cyan"
                   : "border-border glass hover:border-primary/40 text-foreground"
@@ -131,7 +131,7 @@ function WorkPage() {
             <p className="font-serif text-2xl md:text-3xl font-normal">
               Want to know who built this?
             </p>
-            <p className="text-sm text-muted-foreground mt-1 font-sans">
+            <p className="text-base text-muted-foreground mt-1 font-sans leading-relaxed">
               Two engineers. Every system, end to end.
             </p>
           </div>

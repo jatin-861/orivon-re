@@ -24,32 +24,14 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  // WebSite schema enables sitelinks search and confirms the canonical URL.
-  // The Organization entity lives in index.html (static HTML, visible to all crawlers).
-  const homeSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Orvion.co",
-    url: "https://orvion.co",
-    description:
-      "Product engineering studio that builds complete, production systems — from database to deployment.",
-    publisher: {
-      "@type": "Organization",
-      name: "Orvion.co",
-      url: "https://orvion.co",
-    },
-  };
-
   return (
     <div className="relative text-foreground transition-colors duration-500 font-sans overflow-x-clip">
       <SEO
-        title="Orvion.co — Product Engineers"
-        description="Orvion.co is a product engineering studio that builds complete, production systems — from database to deployment. Built NeuroDashboard, a multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units."
-        canonical="https://orvion.co/"
-        ogImage="https://orvion.co/og-image.png"
-        keywords="product engineer, full-stack developer, AI applications, React, Node.js, software engineer portfolio"
+        title="Orviontech — Product Engineering & AI Automation Studio in India"
+        description="Orviontech architects custom software, scalable web applications, and AI-driven business automation. Senior-only engineering, fixed-scope delivery, and production deployment."
+        canonical="https://orviontech/"
+        ogImage="https://orviontech/og-image.png"
         ogType="website"
-        schema={homeSchema}
       />
       <CinematicHero />
       <div className="animated-divider" />
@@ -136,16 +118,16 @@ function StudioManifesto() {
       >
         {/* Sticky editorial left header */}
         <div className="md:col-span-3 md:sticky md:top-40 select-none">
-          <div className="font-serif text-[7rem] md:text-[10rem] font-bold leading-none text-secondary/15">
+          <div className="font-newsreader text-[7rem] md:text-[10rem] font-bold leading-none text-secondary/15">
             01
           </div>
-          <span className="text-xs text-secondary font-mono tracking-widest uppercase block mt-2">
+          <span className="text-xs text-secondary font-mono tracking-wide uppercase block mt-2">
             — Core Belief
           </span>
         </div>
 
         {/* Right content area */}
-        <div className="md:col-span-9 font-serif text-3xl md:text-5xl lg:text-6xl font-normal leading-relaxed space-y-12 text-foreground">
+        <div className="md:col-span-9 font-newsreader text-3xl md:text-5xl lg:text-6xl font-normal leading-relaxed space-y-12 text-foreground">
           <div data-para-block data-para-speed="-0.3">
             <TextRevealByWord text="Most software stays a demo — a prototype that never reaches a real user." />
           </div>
@@ -191,7 +173,7 @@ function SkillsMarquee() {
       data-cursor-text="STACK"
     >
       <div className="mx-auto max-w-7xl px-6 mb-6">
-        <span className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground">
+        <span className="text-xs font-mono uppercase tracking-[0.12em] text-muted-foreground">
           — Tools we build with
         </span>
       </div>
@@ -268,7 +250,7 @@ function Numbers() {
       <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((s) => (
           <SpotlightCard key={s.l} className="p-6 md:p-8 bg-[var(--card)] border border-border">
-            <div className="font-serif text-5xl md:text-7xl font-normal text-[var(--brand-pink)]">
+            <div className="font-serif text-5xl md:text-7xl font-normal leading-tight text-[var(--brand-pink)]">
               <StatCounter value={s.v} />
             </div>
             <div className="mt-2 text-xs text-muted-foreground font-mono font-medium">{s.l}</div>
@@ -376,7 +358,7 @@ function BigCTA() {
           idea to something running in production.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground font-sans max-w-2xl mx-auto">
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-base text-muted-foreground font-sans max-w-2xl mx-auto">
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] shrink-0" />
             We reply within 48 hours, personally
@@ -402,7 +384,7 @@ function BigCTA() {
           </MagneticButton>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground font-sans">
+        <p className="mt-6 text-base text-muted-foreground font-sans leading-relaxed">
           Fixed-fee pricing available.{" "}
           <Link to="/pricing" className="text-[var(--brand-pink)] hover:underline font-medium">
             See pricing →

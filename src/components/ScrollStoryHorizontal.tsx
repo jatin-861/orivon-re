@@ -175,7 +175,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
         {!onIntro && (
           <div className="absolute top-24 left-6 md:left-12 z-20 flex items-center gap-3">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-mono">
+            <span className="text-xs uppercase tracking-[0.12em] text-muted-foreground font-mono">
               Selected Work
             </span>
           </div>
@@ -183,7 +183,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
 
         {/* Floating Awwwards-style large active counter */}
         {counter && (
-          <div className="absolute bottom-8 md:bottom-12 left-6 md:left-12 z-20 font-mono text-xs md:text-sm tracking-[0.3em] text-muted-foreground uppercase opacity-85 select-none animate-in fade-in slide-in-from-bottom-2 duration-500">
+          <div className="absolute bottom-8 md:bottom-12 left-6 md:left-12 z-20 font-mono text-xs md:text-sm tracking-[0.12em] text-muted-foreground uppercase opacity-85 select-none animate-in fade-in slide-in-from-bottom-2 duration-500">
             PROJECT: <span className="text-foreground font-bold">{counter}</span>
           </div>
         )}
@@ -197,7 +197,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
             data-panel
             className="w-screen h-[100svh] flex-shrink-0 flex flex-col justify-center px-6 md:px-24 max-w-3xl md:max-w-4xl"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-secondary mb-4 block font-mono">
+            <span className="text-sm uppercase tracking-[0.12em] text-secondary mb-4 block font-mono">
               Selected Work
             </span>
             <h2 className="font-display font-bold leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight">
@@ -243,7 +243,7 @@ export function ScrollStoryHorizontal({ projects }: ScrollStoryHorizontalProps) 
                       <h3 className="font-display text-2xl md:text-5xl font-bold leading-[1.05] tracking-tight mb-3 md:mb-4">
                         {p.title.split(" — ")[0]}
                       </h3>
-                      <p className="text-sm md:text-base opacity-80 leading-relaxed mb-4 md:mb-6 line-clamp-3 md:line-clamp-none">
+                      <p className="text-base opacity-80 leading-relaxed mb-4 md:mb-6 line-clamp-3 md:line-clamp-none">
                         {p.description}
                       </p>
 

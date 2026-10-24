@@ -49,6 +49,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-serif: "Bodoni Moda", Georgia, serif;
+  --font-lora: "Lora", Georgia, serif;
+  --font-newsreader: "Newsreader", Georgia, serif;
   --font-display: "Cabinet Grotesk", sans-serif;
   --font-sans: "Cabinet Grotesk", system-ui, sans-serif;
   --font-body: "Cabinet Grotesk", system-ui, sans-serif;
@@ -414,6 +416,14 @@
 
   .font-serif {
     font-family: var(--font-serif);
+  }
+
+  .font-lora {
+    font-family: var(--font-lora);
+  }
+
+  .font-newsreader {
+    font-family: var(--font-newsreader);
   }
 
   .font-sans {

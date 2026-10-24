@@ -29,14 +29,14 @@ export function ProcessSignal() {
       data-cursor-text="PROCESS"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)] mb-8">
+        <div className="text-xs font-mono uppercase tracking-[0.12em] text-[var(--brand-pink)] mb-8">
           — How we work
         </div>
 
-        <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight mb-3">
+        <h2 className="font-serif text-4xl md:text-5xl font-normal leading-[1.05] tracking-tight mb-3">
           From first conversation to running in production.
         </h2>
-        <p className="text-sm md:text-base text-muted-foreground font-sans mb-12">
+        <p className="text-base text-muted-foreground font-sans leading-relaxed mb-12">
           Three steps. Fixed scope. No surprises.
         </p>
 
@@ -58,7 +58,7 @@ export function ProcessSignal() {
                   <h3 className="font-display text-xl font-bold text-foreground mt-4 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed font-sans">
+                  <p className="text-base text-muted-foreground leading-relaxed font-sans">
                     {step.desc}
                   </p>
                 </SpotlightCard>

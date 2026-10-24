@@ -63,7 +63,7 @@ export function NotFoundPage() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-xs uppercase tracking-[0.4em] text-primary mb-6"
+          className="text-xs uppercase tracking-[0.12em] text-primary mb-6"
         >
           Off the map
         </motion.p>
@@ -81,7 +81,7 @@ export function NotFoundPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="font-serif text-3xl md:text-5xl font-normal mt-4"
+          className="font-serif text-3xl md:text-5xl font-normal leading-[1.05] mt-4"
         >
           Page not found.
         </motion.h2>

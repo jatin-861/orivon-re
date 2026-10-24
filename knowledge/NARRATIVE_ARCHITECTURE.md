@@ -39,7 +39,7 @@ The homepage is a sequential trust-building machine. Every section removes exact
 
 **What it must communicate:**
 
-- Who: Orvion.co — two engineers (Saral + Jatin)
+- Who: Orviontech — two engineers (Saral + Jatin)
 - What: We build software that ships (consistent "we" voice — no "I")
 - Canvas: "USEFUL OVER IMPRESSIVE" (positioning signal, pre-verbal)
 - Signal: "Open to new projects"

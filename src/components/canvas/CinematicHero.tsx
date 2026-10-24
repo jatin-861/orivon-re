@@ -371,21 +371,18 @@ export const CinematicHero = () => {
 
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent">
-      {/* Real DOM heading — canvas text is invisible to crawlers */}
-      <h1 className="sr-only">
-        Orvion.co — Product Engineers. Useful over impressive: we build software that solves real
-        problems — from business automation to AI-powered platforms. Built NeuroDashboard, a
-        multi-module AI platform, and Shade Ledger, a billing system running for 220 rental units.
-      </h1>
-
       {/* Top identity bar */}
-      <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.25em] font-mono text-muted-foreground uppercase hero-element">
-        <div>Orvion.co — Product Engineers, India</div>
+      <div className="relative z-10 px-6 sm:px-12 pt-28 pb-2 flex justify-between items-center text-xs tracking-[0.12em] font-mono text-foreground/75 uppercase hero-element">
+        <div>OVRIONTECH — Product Engineering &amp; AI Automation (India)</div>
         <div className="hidden sm:flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-pink)] animate-pulse" />
           Open to new projects
         </div>
       </div>
+
+      <h1 className="sr-only">
+        Useful over impressive. Orviontech product engineering and AI automation.
+      </h1>
 
       {/* Belief statement canvas */}
       <div className="relative h-[42vh] sm:h-[46vh] lg:h-[50vh] w-full">
@@ -399,28 +396,29 @@ export const CinematicHero = () => {
       {/* Identity / Value / CTA / Proof / Product Preview */}
       <div className="relative z-10 px-6 sm:px-12 pb-16 sm:pb-24 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         <div className="lg:col-span-7 hero-element flex flex-col gap-6">
-          <h2
-            className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-medium leading-[1.15] tracking-normal text-foreground"
-            style={{ textRendering: "optimizeLegibility" }}
-          >
-            Hi, we're <ScrambleText text="Saral x Jatin." delay={delayBase + 0.1} />
-          </h2>
-
-          <p className="font-sans text-lg sm:text-xl text-foreground/90 font-semibold max-w-xl">
-            We build software that solves real problems.
+          <p className="font-sans text-2xl text-foreground/90 font-semibold max-w-xl">
+            We are a specialized product engineering studio. We architect and build custom software,
+            scalable web applications, and AI-driven business automation for ambitious companies.
           </p>
 
-          <p className="font-sans text-base text-muted-foreground leading-relaxed max-w-xl">
-            From business automation to AI-powered platforms — we design, build, and ship production
-            systems that people actually use. Database to deployment, no shortcuts.
+          <p className="font-sans text-xl text-muted-foreground leading-relaxed max-w-xl">
+            From first technical brief to production deployment, we replace manual workflows with
+            robust digital infrastructure. We operate on a senior-only engineering model—meaning no
+            account managers, no junior hand-offs, and fixed-scope delivery.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mt-2">
             <Link
-              to="/work"
+              to="/contact"
               className="rounded-full bg-foreground text-background hover:bg-[var(--secondary)] hover:text-white px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors"
             >
-              View Projects
+              Start a Project
+            </Link>
+            <Link
+              to="/work"
+              className="text-sm font-semibold tracking-wide uppercase text-muted-foreground transition-colors hover:text-foreground"
+            >
+              View Technical Case Studies
             </Link>
           </div>
         </div>
@@ -446,17 +444,19 @@ function ProductPreview() {
       <div className="flex items-center justify-between px-5 py-3 border-b border-border">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[var(--brand-pink)]" />
-          <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          <span className="text-xs font-mono uppercase tracking-wide text-foreground/75">
             NeuroDashboard
           </span>
         </div>
-        <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border rounded-full px-2.5 py-1">
+        <span className="text-xs font-mono uppercase tracking-wide text-foreground/75 border border-border rounded-full px-2.5 py-1">
           Currently Building
         </span>
       </div>
 
       <div className="p-5 sm:p-6">
-        <p className="text-sm text-muted-foreground mb-5">NeuroDashboard — production snapshot</p>
+        <p className="text-base text-muted-foreground leading-relaxed mb-5">
+          NeuroDashboard — production snapshot
+        </p>
 
         {/* Stat tiles */}
         <div className="grid grid-cols-3 gap-3 mb-6">
@@ -464,13 +464,13 @@ function ProductPreview() {
             <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">
               12,543
             </div>
-            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <div className="mt-1 text-xs font-mono uppercase tracking-wide text-foreground/70">
               Docs indexed
             </div>
           </div>
           <div className="rounded-xl border border-border p-3">
             <div className="font-serif text-xl sm:text-2xl text-foreground leading-none">1,247</div>
-            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <div className="mt-1 text-xs font-mono uppercase tracking-wide text-foreground/70">
               Queries / day
             </div>
           </div>
@@ -478,7 +478,7 @@ function ProductPreview() {
             <div className="font-serif text-xl sm:text-2xl text-[var(--brand-pink)] leading-none">
               99.6%
             </div>
-            <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <div className="mt-1 text-xs font-mono uppercase tracking-wide text-foreground/70">
               Uptime
             </div>
           </div>
@@ -517,7 +517,7 @@ function ProductPreview() {
               className="flex items-center justify-between text-xs gap-4 border-b border-border/60 pb-2.5 last:border-0 last:pb-0"
             >
               <span className="text-foreground/80">{item.label}</span>
-              <span className="text-[var(--brand-pink)] font-mono shrink-0 text-[10px] border border-[var(--brand-pink)]/30 rounded-full px-2 py-0.5">
+              <span className="text-[var(--brand-pink)] font-mono shrink-0 text-xs border border-[var(--brand-pink)]/30 rounded-full px-2 py-0.5">
                 {item.tag}
               </span>
             </div>

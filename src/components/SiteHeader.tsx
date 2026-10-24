@@ -48,7 +48,7 @@ export const SiteHeader = () => {
           <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 border border-primary/30">
             <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
           </span>
-          <span className="font-display text-xl font-bold tracking-tight">ORVION.CO</span>
+          <span className="font-display text-xl font-bold tracking-tight">ORVIONTECH</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1.5">
@@ -92,7 +92,7 @@ export const SiteHeader = () => {
         <div className="flex items-center gap-3 md:hidden">
           <Link
             to="/contact"
-            className="rounded-full bg-foreground text-background px-4 py-2 text-xs font-semibold tracking-wide"
+            className="rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium tracking-wide"
           >
             Talk →
           </Link>

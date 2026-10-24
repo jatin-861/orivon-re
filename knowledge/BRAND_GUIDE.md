@@ -6,12 +6,12 @@
 
 ## Studio Identity
 
-**Name:** Orvion.co  
+**Name:** Orviontech  
 **Type:** Product engineering studio  
 **Location:** India  
 **Founded by:** Saral Banker + Jatin Basantani  
 **Contact:** orvionstudio.co@gmail.com  
-**Website:** https://orvion.co
+**Website:** https://orviontech
 
 ---
 
@@ -22,7 +22,7 @@
 **Belief:** "If it doesn't run in production, it doesn't count."  
 **Visual signal:** "Useful over impressive." (particle canvas headline in hero)
 
-**What differentiates Orvion.co from other dev shops:**
+**What differentiates Orviontech from other dev shops:**
 Most agencies deliver demos. Orvion delivers running systems. The Shade Ledger case is the primary evidence: a billing system that replaced manual Excel work for 220 rental units in Mumbai, running since 2025, saving 40+ hours monthly. That's the promise made concrete.
 
 ---
@@ -50,7 +50,7 @@ Most agencies deliver demos. Orvion delivers running systems. The Shade Ledger c
 | "Product engineer. I design, build, and ship..." | "Product engineering studio. We design, build, and ship..." |
 | "Tell me more" (contact form label) | "Tell us more" |
 | "I'd like to hear about it" | "We'd love to hear about it" |
-| "Built by Saral Banker" | "Built by Orvion.co" |
+| "Built by Saral Banker" | "Built by Orviontech" |
 
 ---
 
@@ -75,7 +75,7 @@ Most agencies deliver demos. Orvion delivers running systems. The Shade Ledger c
 
 ## Messaging Hierarchy
 
-**Level 1 — Positioning:** What Orvion.co is
+**Level 1 — Positioning:** What Orviontech is
 
 > "A product engineering studio that builds complete, production systems — from database to deployment."
 
@@ -136,7 +136,7 @@ Each level requires the previous to be credible. Never lead with Level 5 without
 
 ## What Should Never Be Written
 
-- "I" in studio voice (Orvion.co is "we")
+- "I" in studio voice (Orviontech is "we")
 - "World-class," "best-in-class," "top-tier," "cutting-edge"
 - Unquantified social proof ("many happy clients")
 - Future-tense capability claims without evidence ("we can build anything")

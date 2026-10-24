@@ -21,7 +21,7 @@ const dockItems = [
     Icon: <Github size={20} />,
   },
   {
-    link: "mailto:orvionstudio.co@gmail.com",
+    link: "mailto:hello@orviontech.xyz",
     external: true,
     label: "Email",
     Icon: <Mail size={20} />,
@@ -45,9 +45,9 @@ export function SiteFooter() {
               <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 border border-primary/30">
                 <span className="h-2 w-2 rounded-full bg-primary shadow-glow-cyan" />
               </span>
-              <span className="font-display text-2xl font-bold tracking-tight">ORVION.CO</span>
+              <span className="font-display text-2xl font-bold tracking-tight">ORVIONTECH</span>
             </Link>
-            <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+            <p className="mt-5 text-base text-muted-foreground leading-relaxed">
               Product engineering studio. We design, build, and ship complete systems — database to
               deployment.
             </p>
@@ -91,10 +91,10 @@ export function SiteFooter() {
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail size={14} className="text-primary" />
                 <a
-                  href="mailto:orvionstudio.co@gmail.com"
+                  href="mailto:hello@orviontech.xyz"
                   className="hover:text-primary transition-colors"
                 >
-                  orvionstudio.co@gmail.com
+                  hello@orviontech.xyz
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -107,7 +107,7 @@ export function SiteFooter() {
         {/* Giant gooey wordmark */}
         <div className="relative mt-12 select-none overflow-hidden h-[clamp(3.5rem,12vw,9rem)]">
           <GooeyText
-            texts={["SARAL", "JATIN", "SARAL X JATIN", "ORVION.CO"]}
+            texts={["SARAL", "JATIN", "SARAL X JATIN", "ORVIONTECH"]}
             morphTime={1.4}
             cooldownTime={1.6}
             className="h-full w-full"
@@ -115,8 +115,8 @@ export function SiteFooter() {
           />
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Orvion.co.</p>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-base text-muted-foreground">
+          <p>© {new Date().getFullYear()} Orviontech.</p>
           <p>If it doesn't run in production, it doesn't count.</p>
         </div>
       </div>

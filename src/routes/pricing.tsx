@@ -50,10 +50,10 @@ function PricingPage() {
   return (
     <div className="relative pt-40 pb-32 px-6 overflow-hidden text-foreground transition-colors duration-500">
       <SEO
-        title="Pricing — Orvion.co"
-        description="Transparent, fixed-fee pricing for website development, mobile apps, and SaaS — benchmarked against India market rates. Download the full pricing PDF."
-        canonical="https://orvion.co/pricing"
-        ogImage="https://orvion.co/og-image.png"
+        title="Website, App & Software Pricing — Orviontech"
+        description="Explore fixed-fee pricing ranges for website development, mobile apps, automation, and custom software, benchmarked against India market rates."
+        canonical="https://orviontech/pricing"
+        ogImage="https://orviontech/og-image.png"
       />
       <div className="absolute inset-0 bg-aurora opacity-40 pointer-events-none" />
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
@@ -61,15 +61,15 @@ function PricingPage() {
       {/* India-market category pricing */}
       <div className="relative mx-auto max-w-7xl">
         <div className="max-w-2xl mb-12">
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)]">
+          <span className="text-sm font-medium font-mono uppercase tracking-[0.12em] text-[var(--brand-pink)]">
             — India Market Pricing
           </span>
-          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
+          <h1 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mt-4">
             Fixed fee, <span className="text-[var(--brand-pink)] italic">not hourly.</span>
-          </h2>
+          </h1>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            Every build benchmarked against current India-market rates. Pick a service line below
-            and download the full pricing breakdown for that category.
+            Browse India-market price ranges and delivery windows. We confirm the requirements,
+            included features, and fixed quote before work begins.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ function PricingPage() {
                 )}
               >
                 {line.badge && (
-                  <span className="absolute -top-3.5 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-[var(--brand-pink)] px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-white font-mono shadow-elegant">
+                  <span className="absolute -top-3.5 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-[var(--brand-pink)] px-4 py-1 text-sm font-bold uppercase tracking-wide text-white font-mono shadow-elegant">
                     {line.badge}
                   </span>
                 )}
@@ -121,7 +121,7 @@ function PricingPage() {
                     <h3 className="font-display text-2xl font-bold text-foreground mt-4">
                       {line.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                    <p className="text-base text-muted-foreground mt-3 leading-relaxed">
                       {line.description}
                     </p>
 
@@ -145,7 +145,7 @@ function PricingPage() {
                     href={line.pdf}
                     download
                     className={cn(
-                      "mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-colors",
+                      "mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide uppercase transition-colors",
                       featured
                         ? "bg-[var(--brand-pink)] text-white hover:bg-[var(--brand-pink)]/90"
                         : "border border-border hover:border-[var(--brand-pink)]/40",
@@ -165,17 +165,17 @@ function PricingPage() {
         <a
           href="/Orvion-Pricing-Intelligence-Report.pdf"
           download
-          className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-pink)]/40 bg-[var(--card)] px-7 py-3 text-xs font-semibold uppercase tracking-widest text-[var(--brand-pink)] font-mono shadow-elegant transition-colors hover:bg-[var(--brand-pink)] hover:text-white"
+          className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[var(--brand-pink)]/40 bg-[var(--card)] px-7 py-3 text-center text-sm font-semibold uppercase tracking-wide text-[var(--brand-pink)] font-mono shadow-elegant transition-colors hover:bg-[var(--brand-pink)] hover:text-white"
         >
           <Download size={14} />
           Download Full Pricing Report (All Sections)
         </a>
-        <p className="text-xs text-muted-foreground font-mono">
+        <p className="text-base text-muted-foreground font-mono leading-relaxed">
           One PDF — Website · Mobile · Automation · SaaS · Add-ons
         </p>
       </div>
 
-      <div className="relative mt-10 text-center text-sm text-muted-foreground font-mono">
+      <div className="relative mt-10 text-center text-base text-muted-foreground font-mono">
         Custom scope?{" "}
         <a href="/contact" className="text-[var(--brand-pink)] hover:underline">
           Tell us about your project →

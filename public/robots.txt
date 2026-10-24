@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-Sitemap: https://orvion.co/sitemap.xml
+Sitemap: https://orviontech/sitemap.xml

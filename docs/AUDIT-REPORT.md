@@ -1,4 +1,4 @@
-# Orvion.co — Engineering Audit Report
+# Orviontech — Engineering Audit Report
 
 > **Project:** `saral-banker-portfolio` (folder: `orivon`)
 > **Type:** Client-only static marketing/portfolio SPA
@@ -128,7 +128,7 @@ But it is **not production-hardened**:
 
 | ID   | Finding                                                                                                                  | Evidence                | Fix                                                                      | Effort      |
 | ---- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------- | ------------------------------------------------------------------------ | ----------- |
-| P2-1 | Relative canonical `"/"` (must be absolute)                                                                              | `index.tsx:59`          | Emit absolute `https://orvion.co/…`                                      | 30 min      |
+| P2-1 | Relative canonical `"/"` (must be absolute)                                                                              | `index.tsx:59`          | Emit absolute `https://orviontech/…`                                      | 30 min      |
 | P2-2 | No `sitemap.xml`; robots doesn't reference one                                                                           | `public/robots.txt`     | Generate sitemap at build + add `Sitemap:` line                          | 1 h         |
 | P2-3 | Brand typo: resume is `Orivon_Team_Resume.pdf` vs brand "Orvion"                                                         | `CinematicHero.tsx:381` | Rename asset + href to `Orvion_…`                                        | 15 min      |
 | P2-4 | Contact form has no real backend; lead lost if popup blocked / no mail client                                            | `contact.tsx:227`       | Add serverless/Formspree/Resend endpoint as primary, compose as fallback | 3–4 h       |

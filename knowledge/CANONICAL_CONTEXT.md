@@ -8,7 +8,7 @@
 
 ## Repository Purpose
 
-This repository is the production portfolio website for **Orvion.co**, a product engineering studio founded by Saral Banker and Jatin Basantani. It is deployed at `https://orvion.co`.
+This repository is the production portfolio website for **Orviontech**, a product engineering studio founded by Saral Banker and Jatin Basantani. It is deployed at `https://orviontech`.
 
 The site serves three business objectives simultaneously:
 
@@ -22,7 +22,7 @@ The site serves three business objectives simultaneously:
 
 ### The studio
 
-**Orvion.co** — a product engineering studio based in India. Two engineers who design, build, and ship complete systems from database to deployment.
+**Orviontech** — a product engineering studio based in India. Two engineers who design, build, and ship complete systems from database to deployment.
 
 ### The founders
 
@@ -33,7 +33,7 @@ The site serves three business objectives simultaneously:
 
 ### Identity architecture
 
-**Hybrid Authority with Studio-Primary Canvas.** Orvion.co accumulates B2B, consulting, and project authority. Saral and Jatin each accumulate individual hiring and technical authority on the same site. Three entities, each sharply defined, each pointing to the others.
+**Hybrid Authority with Studio-Primary Canvas.** Orviontech accumulates B2B, consulting, and project authority. Saral and Jatin each accumulate individual hiring and technical authority on the same site. Three entities, each sharply defined, each pointing to the others.
 
 → See [`ENTITY_ARCHITECTURE.md`](ENTITY_ARCHITECTURE.md) for schema implementation.
 
@@ -47,7 +47,7 @@ The site serves three business objectives simultaneously:
 - Process copy: "We design, build, and ship complete systems."
 - Footer bio: "Product engineering studio. We design, build, and ship complete systems."
 
-The site presents Orvion.co as a duo. Any singular "I" in studio-facing copy is a bug.
+The site presents Orviontech as a duo. Any singular "I" in studio-facing copy is a bug.
 
 Exception: Individual founder cards on `/about` may use "I" (Saral and Jatin speaking in first person about their own work).
 
@@ -65,7 +65,7 @@ The Shade Ledger story is the primary proof: automated billing for 220 rental un
 
 ## Primary Audience
 
-**Founders, business owners, non-technical buyers** evaluating whether to hire Orvion.co.
+**Founders, business owners, non-technical buyers** evaluating whether to hire Orviontech.
 
 They need:
 
@@ -164,7 +164,7 @@ Case study slugs: `neurodashboard`, `shade-ledger`, `smart-parking`, `carbon-com
 2. **Dark mode is default** — `localStorage` theme key; `theme !== "light"` → add `.dark` class
 3. **TanStack Router** — not React Router. All routing decisions use `createFileRoute`, `Link to=`.
 4. **No hardcoded secrets in source** — contact email is composed in `src/lib/mail.ts`
-5. **Hybrid Authority identity** — Orvion.co + two named individuals. Not studio-only, not person-only.
+5. **Hybrid Authority identity** — Orviontech + two named individuals. Not studio-only, not person-only.
 6. **Fixed-fee pricing model** — not hourly. This is a branding decision, not just a pricing decision.
 7. **Production-first evidence** — never claim things that aren't running in production
 
@@ -172,7 +172,7 @@ Case study slugs: `neurodashboard`, `shade-ledger`, `smart-parking`, `carbon-com
 
 ## Current Domain
 
-`https://orvion.co` — canonical URL for all absolute links and schema.org declarations.
+`https://orviontech` — canonical URL for all absolute links and schema.org declarations.
 
 ---
 

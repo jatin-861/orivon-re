@@ -42,7 +42,7 @@ export function Preloader() {
     };
   }, []); // Empty — runs once on mount; alreadySeenRef is stable and never changes
 
-  const brandWords = "ORVION.CO".split("");
+  const brandWords = "ORVIONTECH".split("");
 
   return (
     <AnimatePresence>
@@ -56,15 +56,15 @@ export function Preloader() {
           className="fixed inset-0 z-[99999] flex flex-col justify-between bg-[var(--background)] p-8 md:p-16 text-[var(--foreground)]"
         >
           {/* Top text */}
-          <div className="flex justify-between items-center text-xs font-mono tracking-widest text-muted-foreground uppercase opacity-60">
-            <span>Orvion.co</span>
+          <div className="flex justify-between items-center text-xs font-mono tracking-wide text-foreground/75 uppercase">
+            <span>Orviontech</span>
             <span>Product Engineers</span>
           </div>
 
           {/* Centered Logo Lettering */}
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="overflow-hidden flex gap-[0.1em] text-[clamp(2.5rem,10vw,8rem)] font-serif font-normal leading-none tracking-tight">
-              <span className="sr-only">Orvion.co</span>
+              <span className="sr-only">Orviontech</span>
               <span aria-hidden="true" className="flex gap-[0.1em]">
                 {brandWords.map((letter, i) => (
                   <motion.span
@@ -85,9 +85,9 @@ export function Preloader() {
             </div>
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4 }}
+              animate={{ opacity: 0.8 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="text-xs font-mono tracking-[0.4em] uppercase mt-4 text-[var(--secondary)] font-bold"
+              className="text-xs font-mono tracking-[0.12em] uppercase mt-4 text-[var(--secondary)] font-bold"
             >
               Built To Run In Production
             </motion.p>
@@ -103,7 +103,7 @@ export function Preloader() {
             aria-label="Loading progress"
           >
             <div className="flex justify-between items-end">
-              <span className="text-[10px] font-mono tracking-widest text-muted-foreground opacity-50 uppercase">
+              <span className="text-xs font-mono tracking-wide text-foreground/70 uppercase">
                 Loading
               </span>
               <span className="font-mono text-4xl md:text-6xl font-bold text-[var(--foreground)]/90">

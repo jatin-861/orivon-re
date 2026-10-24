@@ -9,15 +9,15 @@ export function FeaturedEvidence() {
       data-cursor-text="PROOF"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)] mb-8">
+        <div className="text-xs font-mono uppercase tracking-[0.12em] text-[var(--brand-pink)] mb-8">
           — The Work
         </div>
 
         <div className="mb-12">
-          <h2 className="font-serif text-4xl md:text-6xl font-normal tracking-tight mb-2">
+          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-[1.05] tracking-tight mb-2">
             Shade Ledger
           </h2>
-          <p className="font-serif text-4xl md:text-6xl font-normal italic text-[var(--brand-pink)]">
+          <p className="font-serif text-4xl md:text-6xl font-normal italic leading-[1.05] text-[var(--brand-pink)]">
             billing that runs itself.
           </p>
           <p className="text-base md:text-lg text-muted-foreground font-sans mt-6 max-w-2xl leading-relaxed">
@@ -27,29 +27,29 @@ export function FeaturedEvidence() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <SpotlightCard className="bg-[var(--card)] border border-border p-6">
-            <div className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground mb-3">
+            <div className="text-xs font-mono uppercase tracking-[0.12em] text-muted-foreground mb-3">
               Before
             </div>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-base text-foreground leading-relaxed">
               Manual Excel billing and phone calls every month — 40+ hours of admin work.
             </p>
           </SpotlightCard>
 
           <SpotlightCard className="bg-[var(--card)] border border-border p-6">
-            <div className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--brand-pink)] mb-3">
+            <div className="text-xs font-mono uppercase tracking-[0.12em] text-[var(--brand-pink)] mb-3">
               After
             </div>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-base text-foreground leading-relaxed">
               Automatic invoices, WhatsApp reminders, and penalty tracking — every billing cycle,
               without intervention.
             </p>
           </SpotlightCard>
 
           <SpotlightCard className="bg-[var(--card)] border border-border p-6">
-            <div className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground mb-3">
+            <div className="text-xs font-mono uppercase tracking-[0.12em] text-muted-foreground mb-3">
               Live since 2025
             </div>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-base text-foreground leading-relaxed">
               220 rental units in Mumbai. Running without interruption for over a year.
             </p>
           </SpotlightCard>
